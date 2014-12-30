@@ -1,0 +1,23 @@
+#+TITLE:	README for win_dev_conf
+#+AUTHOR:	Jay-23-Peng
+#+EMAIL:	j23.peng@gmail.com
+#+STARTUP:	content
+#+Last Update: 2014-12-30@11:09
+
+* What's this?
+I am a windows user. This is a configuration files set for my portable toolkit. It contains:
+
+  - Windows specific & myself configuration for emacs (.emacs)
+  - Keyboard remapping using AutoHotKey (keymap.ahk)
+  - KeySnail(A firefox extension) configuration (keysnail.js)
+  - GVIM Configuration (_vimrc)
+  - Altrun Configuration (ALTRun.ini)
+
+* History
+
+see also ChangeLog
+
+|------------------+-------------------------------------------------|
+| Date             | Description                                     |
+|------------------+-------------------------------------------------|
+| 2014-12-30@11:28 | Initial version                                 |
