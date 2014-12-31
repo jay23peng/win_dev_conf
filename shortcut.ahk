@@ -7,7 +7,7 @@
 AppsKey::Send {AppsKey}
 
 ;; 1. LCtrl + [ --> Esc
-Capslock &  [::Send {Esc}
+LCtrl &  [::Send {Esc}
 AppsKey  &  `::Send {Esc}
 
 ;; 2. AppsKey + arsw(asdw in colemak) --> Arrow
