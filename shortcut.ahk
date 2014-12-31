@@ -1,4 +1,4 @@
-;; AHK Script 
+;; AHK Script for shortcut on Windows Platform
 ;; It is better that to use Keytweak to do the key remap,
 ;; and use AHK for new shortcut
 
