@@ -34,6 +34,10 @@ AppsKey  &  0:: Send {F10}
 AppsKey  &  -:: Send {F11}
 AppsKey  &  +:: Send {F12}
 
+;; Short cut related with F key
+AppsKey  & !4:: Send {Alt down}{F4}{Alt up}
+
+
 ;; Other functional key that follow hhkb. 
 ;; Note: it is based on colemak so looks strange
 AppsKey  &  [:: Send {Del}
