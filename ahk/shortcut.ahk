@@ -6,17 +6,20 @@
 ;; menu cannot be invoked
 AppsKey::Send {AppsKey}
 
-;; 1. LCtrl + [ --> Esc
+;; LCtrl + [ --> Esc
 LCtrl &  [::Send {Esc}
-AppsKey  &  `::Send {Esc}
 
-;; 2. AppsKey + arsw(asdw in colemak) --> Arrow
+;; Map ` and ~ back with AppsKey + Esc/q
+AppsKey  &  q:: Send (``}
+AppsKey  & Esc::Send {`~}
+
+;; AppsKey + arsw(asdw in colemak) --> Arrow
 AppsKey  &  r:: Send {Down}
 AppsKey  &  s:: Send {Right}
 AppsKey  &  a:: Send {Left}
 AppsKey  &  w:: Send {Up}
 
-;; 3. AppsKey + 1,2,3...+ --> F1 to F12
+;; AppsKey + 1,2,3...+ --> F1 to F12
 AppsKey  &  1:: Send {F1}
 AppsKey  &  2:: Send {F2}
 AppsKey  &  3:: Send {F3}
@@ -30,8 +33,8 @@ AppsKey  &  0:: Send {F10}
 AppsKey  &  -:: Send {F11}
 AppsKey  &  +:: Send {F12}
 
-;; 4. Other functional key that follow hhkb. 
-;;    Note: it is based on colemak so looks strange
+;; Other functional key that follow hhkb. 
+;; Note: it is based on colemak so looks strange
 AppsKey  &  [:: Send {Del}
 AppsKey  &  ]:: Send {BS}
 AppsKey  &  e:: Send {PgUp}

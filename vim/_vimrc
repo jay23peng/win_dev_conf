@@ -1,0 +1,95 @@
+" This is my vim configuration which has been used for 5 years.
+" Last updated: Jan 01 2015
+
+set nocompatible
+source $VIMRUNTIME/vimrc_example.vim
+
+"behave mswin
+"source $VIMRUNTIME/mswin.vim
+
+set encoding=utf-8
+set termencoding=utf-8
+set fileencoding=utf-8
+set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
+set clipboard=unnamed
+
+"set langmenu=zh_CN.utf-8
+"language messages zh_cn.utf-8
+"source $VIMRUNTIME/delmenu.vim
+"source $VIMRUNTIME/menu.vim
+
+set ambiwidth=double
+set guifont=Consolas:h11
+set guifontwide=DotumChe:h11
+set nobackup
+
+set tabstop=4
+set shiftwidth=4
+set expandtab
+retab
+
+" Remap <ESC> to <C-[>
+nnoremap <C-[> <Esc>
+vnoremap <C-[> <Esc>gV
+onoremap <C-[> <Esc>
+inoremap <C-[> <Esc>`^
+
+" Remap k j for colemak
+noremap j k
+noremap k j
+
+" theme
+colorscheme desert
+
+"set fdm=syntax
+
+"Toggle Menu and Toolbar
+set guioptions-=T
+map <silent> <F2> :if &guioptions =~# 'T' <Bar>
+        \set guioptions-=T <bar>
+    \else <Bar>
+        \set guioptions+=T <Bar>
+    \endif<CR>
+
+
+set diffexpr=MyDiff()
+function MyDiff()
+  let opt = '-a --binary '
+  if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
+  if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
+  let arg1 = v:fname_in
+  if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
+  let arg2 = v:fname_new
+  if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
+  let arg3 = v:fname_out
+  if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
+  let eq = ''
+  if $VIMRUNTIME =~ ' '
+    if &sh =~ '\<cmd'
+      let cmd = '""' . $VIMRUNTIME . '\diff"'
+      let eq = '"'
+    else
+      let cmd = substitute($VIMRUNTIME, ' ', '" ', '') . '\diff"'
+    endif
+  else
+    let cmd = $VIMRUNTIME . '\diff'
+  endif
+  silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3 . eq
+endfunction
+
+" Below is enhancement for server mode - a 'Mt' command to move current tab to
+" other vim server
+" Command that move tab from one application (server) to another
+command -nargs=* -complete=custom,GetServerList Mt :call MoveTabToInstance(<f-args>)
+function MoveTabToInstance(var1)
+  let filename = expand('%:p')
+  set ro
+  call remote_send(a:var1, '<ESC>|<ESC>|:tabnew ' . filename . '<CR>')
+  execute 'wq!'
+endfunction
+
+" Helper function to get application (server) list
+function GetServerList(ArgLead, CmdLine, CursorPos)
+  return serverlist()
+endfunction
+
