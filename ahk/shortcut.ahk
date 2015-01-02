@@ -10,7 +10,7 @@ AppsKey::Send {AppsKey}
 LCtrl &  [::Send {Esc}
 
 ;; Map ` and ~ back with AppsKey + Esc/q
-AppsKey  &  q:: Send (``}
+AppsKey  &  q:: Send {``}
 AppsKey  & Esc::Send {`~}
 
 ;; AppsKey + arsw(asdw in colemak) --> Arrow
