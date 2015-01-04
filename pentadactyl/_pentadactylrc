@@ -1,0 +1,64 @@
+"" vimperator cofiguration file
+"" from http://pastebin.com/LXVz4Lfg
+"" last update: Jan 03, 2015
+
+" Remap <ESC> to <C-[>
+"noremap <C-[> <Esc>
+" map -modes caret,<C-[> <Esc>
+
+" Remove dangerous mapping
+map A <Nop>
+map <C-q> <Nop>
+map <C-o> <Nop>
+map <C-i> <Nop>
+map <C-p> <Nop>
+map ZQ <Nop>
+map ZZ <Nop>
+
+" Remap k j for colemak
+map -m v,caret -builtin j k
+map -m v,caret -builtin k j
+map -m n -builtin j <C-u>
+map -m n -builtin k <C-d>
+map -m n l -builtin gT
+map -m n h -builtin <C-n>
+map -m n -builtin y Y
+map -m n -builtin Y y
+
+" c-a, c-c, c-x, c-v的问题
+" pass keys
+map -m n,v,i,c <C-a> <Pass>
+map -m n,v,i,c <C-c> <Pass>
+map -m n,v,i,c <C-v> <Pass>
+map -m n,v,i,c <C-x> <Pass>
+map -m n,v,i,c <C-y> <Pass>
+map -m n,v,i,c <C-k> <Pass>
+map -m n,v,i,c <C-t> <Pass>
+
+" bookmark
+map -m n,v,i,c <C-b> <Pass>
+
+
+" Set hintchar by all left hand chars
+set hintkeys=qwfpgarstdzxcv
+
+" Set next pattern
+set nextpattern='(下|后)一?(页|頁|篇|章|张)|次のページ|次へ','^\bnext\b','\bnext\b','\bsuivant\b','^(>|›)$','^(>>|»)$','^(>|»)','(>|»)$','\bmore\b'
+set previouspattern='(上|前)一?(页|頁|篇|章|张)|前のページ|前へ','^\bprev|previous\b','\bprev|previous\b','\bprécédent\b','^(<|‹)$','^(<<|«)$','^(<|«)','(<|«)$'
+
+" Hide/show toolbar
+map <silent> <F2> :js toggle_bar() <CR>
+
+" Open selected text by t or o directly
+map t -js str=util.domToString(buffer.focusedFrame.getSelection()); str!=""?dactyl.open(str, {where: dactyl.NEW_TAB}):CommandExMode().open("tabopen ")
+map o -js str=util.domToString(buffer.focusedFrame.getSelection()); str!=""?dactyl.open(str, {where: dactyl.CURRENT_TAB}):CommandExMode().open("open ")
+
+" Set editor
+set editor='C:\\Windows\\gvim.bat'
+
+" Set highlight find
+"set hlfind
+
+set titlestring=Mozilla\ Firefox
+set complete=lfbs
+set autocomplete=!.

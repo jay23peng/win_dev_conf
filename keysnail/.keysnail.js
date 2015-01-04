@@ -4,7 +4,9 @@
 // Put all your code except special key, set*key, hook, blacklist.
 // ========================================================================= //
 //{{%PRESERVE%
+
 // Put your codes here
+
 //}}%PRESERVE%
 // ========================================================================= //
 
@@ -48,7 +50,6 @@ hook.setHook('KeyBoardQuit', function (aEvent) {
         key.generateKey(aEvent.originalTarget, KeyEvent.DOM_VK_ESCAPE, true);
     }
 });
-
 
 
 // ============================= Key bindings ============================== //
