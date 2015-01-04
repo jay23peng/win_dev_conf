@@ -62,3 +62,5 @@ set editor='C:\\Windows\\gvim.bat'
 set titlestring=Mozilla\ Firefox
 set complete=lfbs
 set autocomplete=!.
+
+colorscheme desert
