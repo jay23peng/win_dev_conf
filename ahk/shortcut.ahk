@@ -20,6 +20,9 @@ AppsKey  &  s:: Send {Right}
 AppsKey  &  a:: Send {Left}
 AppsKey  &  w:: Send {Up}
 
+;; AppsKey + f --> Everything
+AppsKey  &  f:: Run, "C:\Program Files\Everything\Everything.exe"
+
 ;; AppsKey + 1,2,3...+ --> F1 to F12
 AppsKey  &  1:: Send {F1}
 AppsKey  &  2:: Send {F2}
