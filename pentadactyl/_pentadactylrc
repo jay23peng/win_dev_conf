@@ -16,12 +16,13 @@ map ZQ <Nop>
 map ZZ <Nop>
 
 " Remap k j for colemak
-map -m v,caret -builtin j k
+map -m v,caret -builtin h k
 map -m v,caret -builtin k j
-map -m n -builtin j <C-u>
+map -m v,caret -builtin j h
+map -m n -builtin h <C-u>
 map -m n -builtin k <C-d>
 map -m n l -builtin gT
-map -m n h -builtin <C-n>
+map -m n j -builtin <C-n>
 map -m n -builtin y Y
 map -m n -builtin Y y
 
@@ -63,4 +64,4 @@ set titlestring=Mozilla\ Firefox
 set complete=lfbs
 set autocomplete=!.
 
-colorscheme desert
+colorscheme molokai

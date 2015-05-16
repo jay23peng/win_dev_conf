@@ -19,14 +19,19 @@ set clipboard=unnamed
 "source $VIMRUNTIME/menu.vim
 
 set ambiwidth=double
-set guifont=Consolas:h11
-set guifontwide=DotumChe:h11
+"set guifont=Consolas:h11
+"set guifontwide=DotumChe:h11
+set guifont=Consolas:h15
+set guifontwide=DotumChe:h15
+
 set nobackup
 
 set tabstop=4
 set shiftwidth=4
 set expandtab
 retab
+
+set cc=80
 
 " Remap <ESC> to <C-[>
 nnoremap <C-[> <Esc>
@@ -35,8 +40,9 @@ onoremap <C-[> <Esc>
 inoremap <C-[> <Esc>`^
 
 " Remap k j for colemak
-noremap j k
+noremap h k
 noremap k j
+noremap j h
 
 " theme
 colorscheme desert
