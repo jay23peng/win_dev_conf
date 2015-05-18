@@ -51,8 +51,8 @@ set previouspattern='(上|前)一?(页|頁|篇|章|张)|前のページ|前へ',
 map <silent> <F2> :js toggle_bar() <CR>
 
 " Open selected text by t or o directly
-map t -js str=util.domToString(buffer.focusedFrame.getSelection()); str!=""?dactyl.open(str, {where: dactyl.NEW_TAB}):CommandExMode().open("tabopen ")
-map o -js str=util.domToString(buffer.focusedFrame.getSelection()); str!=""?dactyl.open(str, {where: dactyl.CURRENT_TAB}):CommandExMode().open("open ")
+map t -js str=DOM.stringify(buffer.focusedFrame.getSelection()); str!=""?dactyl.open(str, {where: dactyl.NEW_TAB}):CommandExMode().open("tabopen ")
+map o -js str=DOM.stringify(buffer.focusedFrame.getSelection()); str!=""?dactyl.open(str, {where: dactyl.CURRENT_TAB}):CommandExMode().open("open ")
 
 " Set editor
 set editor='C:\\Windows\\gvim.bat'
