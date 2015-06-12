@@ -58,7 +58,7 @@ map o -js str=DOM.stringify(buffer.focusedFrame.getSelection()); str!=""?dactyl.
 set editor='C:\\Windows\\gvim.bat'
 
 " Set highlight find
-"set hlfind
+set hlfind
 
 set titlestring=Mozilla\ Firefox
 set complete=lfbs
