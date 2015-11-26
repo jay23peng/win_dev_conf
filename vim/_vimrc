@@ -39,6 +39,17 @@ vnoremap <C-[> <Esc>gV
 onoremap <C-[> <Esc>
 inoremap <C-[> <Esc>`^
 
+" Remap buffer switch for colemak
+nmap <silent> <A-l>   :wincmd l<CR>
+nmap <silent> <A-h>   :wincmd k<CR>
+nmap <silent> <A-k>   :wincmd j<CR>
+nmap <silent> <A-j>   :wincmd h<CR>
+nmap <silent> <C-x>0 :hide<CR>
+nmap <silent> <C-x>1 :only<CR>
+nmap <silent> <C-x>2 :sp<CR>
+nmap <silent> <C-x>3 :vsp<CR>
+:nnoremap , :buffers<CR>:buffer<Space>
+
 " Remap k j for colemak
 noremap h k
 noremap k j
@@ -46,17 +57,27 @@ noremap j h
 
 " theme
 colorscheme desert
+"colorscheme delek
 
 "set fdm=syntax
 
 "Toggle Menu and Toolbar
 set guioptions-=T
-map <silent> <F2> :if &guioptions =~# 'T' <Bar>
-        \set guioptions-=T <bar>
+set guioptions-=r
+set guioptions-=L
+set guioptions-=m
+set showtabline=0
+map <silent> <F12> :if &guioptions =~# 'm' <Bar>
+        \set guioptions-=m <bar>
     \else <Bar>
-        \set guioptions+=T <Bar>
+        \set guioptions+=m <Bar>
     \endif<CR>
 
+" Buffer hint plugin
+"nnoremap , :call bufferhint#Popup()<CR>
+"nnoremap . :call bufferhint#LoadPrevious()<CR>
+
+set completeopt=longest,menu
 
 set diffexpr=MyDiff()
 function MyDiff()
