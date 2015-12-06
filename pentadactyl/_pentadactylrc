@@ -40,8 +40,13 @@ map -m n,v,i,c <C-t> <Pass>
 map -m n,v,i,c <C-b> <Pass>
 map -m n -builtin b Bf
 map -m n -builtin B Bb
+
+" delete tab
 map -m n -builtin D :tabo<CR>
 map -m n -builtin d D
+
+"find
+nmap -builtin / /\r
 
 " Set hintchar by all left hand chars
 set hintkeys=qwfpgarstdzxcv
