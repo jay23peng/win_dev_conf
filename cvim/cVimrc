@@ -31,7 +31,12 @@ map i goToLastInput
 map I insertMode
 
 " Copy url of current page to clipboard
+unmap yy
+map y yankHighlight
 map Y yankDocumentUrl
+map Y yankDocumentUrl
+
+map p yankHighlight,openPaste
 
 "autoupdate from gist
 set autoupdategist
@@ -73,4 +78,4 @@ let previouspattern = "((?!last)(((上|前)一?(页|頁|篇|章|张))|prev(ious)
 "map 7 :call switchTab(7)<CR>
 "map 8 :call switchTab(8)<CR>
 "map 9 :call switchTab(9)<CR>
-
+"
