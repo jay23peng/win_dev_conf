@@ -31,6 +31,8 @@ set shiftwidth=4
 set expandtab
 retab
 
+"set nu
+
 set cc=80
 
 " Remap <ESC> to <C-[>
@@ -48,7 +50,8 @@ nmap <silent> <C-x>0 :hide<CR>
 nmap <silent> <C-x>1 :only<CR>
 nmap <silent> <C-x>2 :sp<CR>
 nmap <silent> <C-x>3 :vsp<CR>
-:nnoremap , :buffers<CR>:buffer<Space>
+:nnoremap , :call bufferhint#Popup()<CR>
+:nnoremap . :call bufferhint#LoadPrevious()<CR>
 
 " Remap k j for colemak
 noremap h k
