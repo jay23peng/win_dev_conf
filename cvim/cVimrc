@@ -1,0 +1,76 @@
+"" cvim configuration file
+
+" Remap <ESC> to <C-[>
+"noremap <C-[> <Esc>
+" map -modes caret,<C-[> <Esc>
+
+
+" Remap k j for colemak
+unmap s
+unmap w
+unmap e
+unmap d
+unmap u
+map j previousTab
+map l nextTab
+map h scrollPageUp
+map k scrollPageDown
+
+" Switch between two last used tabs using TAB
+map <C-j> lastUsedTab
+" open last removed tab with u
+map u lastClosedTab
+
+" close tab with D
+map D closeTab
+map dd closeTab
+
+" go to last used input box with i
+map i goToLastInput
+" pass through commands using I
+map I insertMode
+
+" Copy url of current page to clipboard
+map Y yankDocumentUrl
+
+"autoupdate from gist
+set autoupdategist
+
+set nosmoothscroll
+set noautofocus " The opposite of autofocus; this setting stops
+                " sites from focusing on an input box when they load
+set typelinkhints
+
+set showtabindices
+set sortlinkhints
+
+let searchlimit = 30
+"let scrollstep = 90
+
+" only scroll 70% when using the scroll full page command
+let fullpagescrollpercent = 80
+set hud
+set nosmoothscroll
+
+let barposition = "bottom"
+
+" Set hintchar by all left hand chars
+let hintcharacters="qwfpgarstdzxcv"
+
+let blacklists = ["https://mail.google.com/*", "*://mail.google.com/*", "@https://mail.google.com/mail/*"]
+
+let nextmatchpattern = "((?!first)(((下|后)一?(页|頁|篇|章|张))|next|more|>>?|»|›|forward| )+)"
+let previouspattern = "((?!last)(((上|前)一?(页|頁|篇|章|张))|prev(ious)?|back|«|less|<<?|‹| )+)"
+
+" see https://github.com/1995eaton/chromium-vim/issues/321
+"switchTab(n) -> {{ RUNTIME('goToTab', {index: n - 1}); }}
+"map 1 :call switchTab(1)<CR>
+"map 2 :call switchTab(2)<CR>
+"map 3 :call switchTab(3)<CR>
+"map 4 :call switchTab(4)<CR>
+"map 5 :call switchTab(5)<CR>
+"map 6 :call switchTab(6)<CR>
+"map 7 :call switchTab(7)<CR>
+"map 8 :call switchTab(8)<CR>
+"map 9 :call switchTab(9)<CR>
+
