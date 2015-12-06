@@ -38,7 +38,7 @@ map -m n,v,i,c <C-t> <Pass>
 
 " bookmark
 map -m n,v,i,c <C-b> <Pass>
-
+map -m n -builtin b Bb
 
 " Set hintchar by all left hand chars
 set hintkeys=qwfpgarstdzxcv
