@@ -31,7 +31,7 @@ set shiftwidth=4
 set expandtab
 retab
 
-"set nu
+set nu
 
 set cc=80
 
@@ -50,6 +50,7 @@ nmap <silent> <C-x>0 :hide<CR>
 nmap <silent> <C-x>1 :only<CR>
 nmap <silent> <C-x>2 :sp<CR>
 nmap <silent> <C-x>3 :vsp<CR>
+nmap <C-o> :tabnew<SPACE>
 :nnoremap , :call bufferhint#Popup()<CR>
 :nnoremap . :call bufferhint#LoadPrevious()<CR>
 
