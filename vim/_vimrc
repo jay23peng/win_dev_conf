@@ -17,7 +17,7 @@ set clipboard=unnamed
 "language messages zh_cn.utf-8
 "source $VIMRUNTIME/delmenu.vim
 "source $VIMRUNTIME/menu.vim
-
+"
 set ambiwidth=double
 "set guifont=Consolas:h11
 "set guifontwide=DotumChe:h11
@@ -60,7 +60,7 @@ noremap k j
 noremap j h
 
 " theme
-colorscheme desert
+colorscheme desertEx
 "colorscheme delek
 
 "set fdm=syntax
@@ -80,6 +80,10 @@ map <silent> <F12> :if &guioptions =~# 'm' <Bar>
 " Buffer hint plugin
 "nnoremap , :call bufferhint#Popup()<CR>
 "nnoremap . :call bufferhint#LoadPrevious()<CR>
+
+" __tag_list__ --> setup Tlist_Ctags_Cmd
+let g:tagbar_ctags_bin = 'D:\workdir\TOOLBOX\wntx64\Ctags\5.8\ctags.exe'
+map <silent> <F9> :TagbarToggle<cr> 
 
 set completeopt=longest,menu
 
