@@ -3,6 +3,7 @@
 
 set nocompatible
 source $VIMRUNTIME/vimrc_example.vim
+set runtimepath^=$VIMRUNTIME/bundle/ctrlp.vim
 
 "behave mswin
 "source $VIMRUNTIME/mswin.vim
@@ -71,7 +72,7 @@ set guioptions-=r
 set guioptions-=L
 set guioptions-=m
 set showtabline=0
-map <silent> <F12> :if &guioptions =~# 'm' <Bar>
+map <silent> <F11> :if &guioptions =~# 'm' <Bar>
         \set guioptions-=m <bar>
     \else <Bar>
         \set guioptions+=m <Bar>
@@ -83,7 +84,23 @@ map <silent> <F12> :if &guioptions =~# 'm' <Bar>
 
 " __tag_list__ --> setup Tlist_Ctags_Cmd
 let g:tagbar_ctags_bin = 'D:\workdir\TOOLBOX\wntx64\Ctags\5.8\ctags.exe'
+"let g:tagbar_ctags_bin = 'D:\pengw\software\emacs\bin\ctags.exe'
 map <silent> <F9> :TagbarToggle<cr> 
+
+" ctags
+set shell=C:\windows\system32\cmd.exe
+set tags=tags,$ROOT/tags;
+set autochdir
+map <F12> :silent! execute "!ctags -R ".$ROOT."/src"<CR><CR>
+
+"Ctrl+P settings
+nmap t :CtrlP $ROOT<CR>
+let g:ctrlp_max_files = 0
+let g:ctrlp_custom_ignore = {
+    \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+    \ 'file': '\v\.(exe|so|lib|dll|obj|pdb|qxw)$',
+    \ 'link': 'SOME_BAD_SYMBOLIC_LINKS',
+    \ }
 
 set completeopt=longest,menu
 

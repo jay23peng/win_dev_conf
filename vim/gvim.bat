@@ -11,38 +11,15 @@ echo "%VIM_EXE_DIR%\gvim.exe" not found
 goto eof
 
 :havevim
-rem collect the arguments in VIMARGS for Win95
-set VIMARGS=
-set VIMNOFORK=
-:loopstart
-if .%1==. goto loopend
-if NOT .%1==.-f goto noforkarg
-set VIMNOFORK=1
-:noforkarg
-set VIMARGS=%VIMARGS% %1
-shift
-goto loopstart
-:loopend
+if .%1==. goto noarg
+if not .%1==. goto witharg 
 
-if .%OS%==.Windows_NT goto ntaction
-
-if .%VIMNOFORK%==.1 goto nofork
-start "%VIM_EXE_DIR%\gvim.exe" --servername GVIM --remote-tab-silent %VIMARGS%
+:noarg
+start "dummy" /b "%VIM_EXE_DIR%\gvim.exe" --servername GVIM 
 goto eof
 
-:nofork
-start /w "%VIM_EXE_DIR%\gvim.exe" --servername GVIM --remote-tab-silent %VIMARGS%
-goto eof
-
-:ntaction
-rem for WinNT we can use %*
-if .%VIMNOFORK%==.1 goto noforknt
+:witharg
 start "dummy" /b "%VIM_EXE_DIR%\gvim.exe" --servername GVIM --remote-tab-silent %*
 goto eof
 
-:noforknt
-start "dummy" /b /wait "%VIM_EXE_DIR%\gvim.exe" --servername GVIM --remote-tab-silent %*
-
 :eof
-set VIMARGS=
-set VIMNOFORK=
