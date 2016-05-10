@@ -1,0 +1,148 @@
+" This is my vim configuration which has been used for 5 years.
+" Last updated: Jan 01 2015
+
+set nocompatible
+source $VIMRUNTIME/vimrc_example.vim
+set runtimepath^=$VIMRUNTIME/bundle/ctrlp.vim
+
+"behave mswin
+"source $VIMRUNTIME/mswin.vim
+
+set encoding=utf-8
+set termencoding=utf-8
+set fileencoding=utf-8
+set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
+set clipboard=unnamed
+
+"set langmenu=zh_CN.utf-8
+"language messages zh_cn.utf-8
+"source $VIMRUNTIME/delmenu.vim
+"source $VIMRUNTIME/menu.vim
+"
+set ambiwidth=double
+"set guifont=Consolas:h11
+"set guifontwide=DotumChe:h11
+set guifont=Consolas:h15
+set guifontwide=DotumChe:h15
+
+set nobackup
+
+set tabstop=4
+set shiftwidth=4
+set expandtab
+retab
+
+set nu
+
+set cc=80
+
+" Remap <ESC> to <C-[>
+nnoremap <C-[> <Esc>
+vnoremap <C-[> <Esc>gV
+onoremap <C-[> <Esc>
+inoremap <C-[> <Esc>`^
+
+" Remap buffer switch for colemak
+nmap <silent> <A-l>   :wincmd l<CR>
+nmap <silent> <A-h>   :wincmd k<CR>
+nmap <silent> <A-k>   :wincmd j<CR>
+nmap <silent> <A-j>   :wincmd h<CR>
+nmap <silent> <C-x>0 :hide<CR>
+nmap <silent> <C-x>1 :only<CR>
+nmap <silent> <C-x>2 :sp<CR>
+nmap <silent> <C-x>3 :vsp<CR>
+"nmap <C-o> :tabnew<SPACE>
+:nnoremap , :call bufferhint#Popup()<CR>
+:nnoremap . :call bufferhint#LoadPrevious()<CR>
+
+" Remap k j for colemak
+noremap h k
+noremap k j
+noremap j h
+
+" theme
+colorscheme desertEx
+"colorscheme delek
+
+"set fdm=syntax
+
+"Toggle Menu and Toolbar
+set guioptions-=T
+set guioptions-=r
+set guioptions-=L
+set guioptions-=m
+set showtabline=0
+map <silent> <F11> :if &guioptions =~# 'm' <Bar>
+        \set guioptions-=m <bar>
+    \else <Bar>
+        \set guioptions+=m <Bar>
+    \endif<CR>
+
+" Buffer hint plugin
+"nnoremap , :call bufferhint#Popup()<CR>
+"nnoremap . :call bufferhint#LoadPrevious()<CR>
+
+" __tag_list__ --> setup Tlist_Ctags_Cmd
+let g:tagbar_ctags_bin = 'D:\workdir\TOOLBOX\wntx64\Ctags\5.8\ctags.exe'
+"let g:tagbar_ctags_bin = 'D:\pengw\software\emacs\bin\ctags.exe'
+map <silent> <F9> :TagbarToggle<cr> 
+
+" ctags
+set shell=C:/windows/system32/cmd.exe
+set tags=tags,$ROOT/tags;
+set autochdir
+map <silent> <F12> :silent! execute "!ctags -R ".$ROOT."/src"<CR><CR>
+
+let g:bufferhint_BufferName = '~buffers~'
+"Ctrl+P settings
+nmap t :CtrlP $ROOT<CR>
+let g:ctrlp_max_files = 0
+let g:ctrlp_custom_ignore = {
+    \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+    \ 'file': '\v\.(exe|so|lib|dll|obj|pdb|qxw)$',
+    \ 'link': 'SOME_BAD_SYMBOLIC_LINKS',
+    \ }
+
+set completeopt=longest,menu
+
+set diffexpr=MyDiff()
+function MyDiff()
+  let opt = '-a --binary '
+  if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
+  if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
+  let arg1 = v:fname_in
+  if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
+  let arg2 = v:fname_new
+  if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
+  let arg3 = v:fname_out
+  if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
+  let eq = ''
+  if $VIMRUNTIME =~ ' '
+    if &sh =~ '\<cmd'
+      let cmd = '""' . $VIMRUNTIME . '\diff"'
+      let eq = '"'
+    else
+      let cmd = substitute($VIMRUNTIME, ' ', '" ', '') . '\diff"'
+    endif
+  else
+    let cmd = $VIMRUNTIME . '\diff'
+  endif
+  silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3 . eq
+endfunction
+
+" Below is enhancement for server mode - a 'Mt' command to move current tab to
+" other vim server
+" Command that move tab from one application (server) to another
+command -nargs=* -complete=custom,GetServerList Mt :call MoveTabToInstance(<f-args>)
+function MoveTabToInstance(var1)
+  let filename = expand('%:p')
+  set ro
+  call remote_send(a:var1, '<ESC>|<ESC>|:tabnew ' . filename . '<CR>')
+  execute 'wq!'
+endfunction
+
+" Helper function to get application (server) list
+function GetServerList(ArgLead, CmdLine, CursorPos)
+  return serverlist()
+endfunction
+
