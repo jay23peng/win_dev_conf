@@ -20,8 +20,8 @@ retab
 filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
-set rtp+=$GITHUB_HOME/vim_plugins/Vundle.vim
-call vundle#begin($GITHUB_HOME.'/vim_plugins')
+set rtp+=$VIM_HOME/Vundle.vim
+call vundle#begin($VIM_HOME)
 
 " plugin in Github
 Plugin 'VundleVim/Vundle.vim'
@@ -103,7 +103,6 @@ let g:bufferhint_BufferName = '~buffers~'
 nnoremap <silent> <C-l> :call bufferhint#Popup()<CR>
 
 " ctags
-"set shell=C:/windows/system32/cmd.exe
 set tags=tags,$ROOT/tags;
 set autochdir
 map <silent> <F12> :silent! execute "!ctags -R ".$ROOT."/src"<CR><CR>
@@ -118,9 +117,7 @@ let g:ctrlp_custom_ignore = {
     \ 'link': 'SOME_BAD_SYMBOLIC_LINKS',
     \ }
 
-
 " tagbar
-"let g:tagbar_ctags_bin = 'D:\workdir\TOOLBOX\wntx64\Ctags\5.8\ctags.exe'
 map <silent> <F9> :TagbarToggle<cr> 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
