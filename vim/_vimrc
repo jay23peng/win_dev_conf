@@ -20,7 +20,7 @@ retab
 filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
-set rtp+=$GITHUB_HOME/vundle
+set rtp+=$GITHUB_HOME/vim_plugins/vundle
 call vundle#begin($GITHUB_HOME.'/vim_plugins')
 
 " plugin in Github
