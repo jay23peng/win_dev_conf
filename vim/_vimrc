@@ -20,7 +20,7 @@ retab
 filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
-set rtp+=$GITHUB_HOME/vim_plugins/vundle
+set rtp+=$GITHUB_HOME/vim_plugins/Vundle.vim
 call vundle#begin($GITHUB_HOME.'/vim_plugins')
 
 " plugin in Github
@@ -32,6 +32,7 @@ Plugin 'majutsushi/tagbar'
 " plugin in http://vim-scripts.org/vim/scripts.html
 Plugin 'largeFile'
 Plugin 'molokai'
+Plugin 'desertEx'
 Plugin 'revolutions.vim'
 
 " Git plugin not hosted on GitHub
@@ -157,7 +158,7 @@ map <silent> <F11> :if &guioptions =~# 'm' <Bar>
 " Display Setting
 set nu
 set cc=80
-colorscheme desert
+colorscheme desertEx
 
 " auto-complete
 set completeopt=longest,menu
