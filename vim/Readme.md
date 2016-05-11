@@ -16,4 +16,6 @@
 
 7. Invoke vim, run ``PluginInstall``
 
+8. Copy and overwrite gvim.bat
+
 
