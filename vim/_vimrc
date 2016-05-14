@@ -28,6 +28,8 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'jesse23/bufferhint'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'majutsushi/tagbar'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 
 " plugin in http://vim-scripts.org/vim/scripts.html
 Plugin 'largeFile'
@@ -100,16 +102,19 @@ noremap j h
 " bufferhint
 let g:bufferhint_MaxWidth = 40
 let g:bufferhint_BufferName = '~buffers~'
-nnoremap <silent> <C-l> :call bufferhint#Popup()<CR>
+nnoremap <silent> , :call bufferhint#Popup()<CR>
 
 " ctags
+"set shell=C:/windows/system32/cmd.exe
 set tags=tags,$ROOT/tags;
 set autochdir
 map <silent> <F12> :silent! execute "!ctags -R ".$ROOT."/src"<CR><CR>
 
-" ctrlp
+" ctrlP
 nmap t :CtrlP $ROOT<CR>
+nnoremap <silent> <C-l> :CtrlPBuffer<CR>
 let g:ctrlp_map = 'T'
+let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_max_files = 0
 let g:ctrlp_custom_ignore = {
     \ 'dir':  '\v[\/]\.(git|hg|svn)$',
@@ -117,8 +122,17 @@ let g:ctrlp_custom_ignore = {
     \ 'link': 'SOME_BAD_SYMBOLIC_LINKS',
     \ }
 
+
 " tagbar
+"let g:tagbar_ctags_bin = 'D:\workdir\TOOLBOX\wntx64\Ctags\5.8\ctags.exe'
 map <silent> <F9> :TagbarToggle<cr> 
+
+" airline
+" let g:airline#extensions#tabline#enabled = 0
+" let g:airline#extensions#tabline#show_buffers = 0
+" let g:airline#extensions#tabline#show_tabs = 0
+" let g:airline_theme='bubblegum'
+set laststatus=2
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Singleton VIM

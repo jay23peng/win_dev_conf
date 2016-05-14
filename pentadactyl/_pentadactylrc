@@ -28,18 +28,18 @@ map -m n -builtin Y y
 
 " c-a, c-c, c-x, c-v的问题
 " pass keys
-"map -m n,v,i,c <C-a> <Pass>
-"map -m n,v,i,c <C-c> <Pass>
-"map -m n,v,i,c <C-v> <Pass>
-"map -m n,v,i,c <C-x> <Pass>
-"map -m n,v,i,c <C-y> <Pass>
-"map -m n,v,i,c <C-k> <Pass>
-"map -m n,v,i,c <C-t> <Pass>
+map -m n,v,i,c <C-a> <Pass>
+map -m n,v,i,c <C-c> <Pass>
+map -m n,v,i,c <C-v> <Pass>
+map -m n,v,i,c <C-x> <Pass>
+map -m n,v,i,c <C-y> <Pass>
+map -m n,v,i,c <C-k> <Pass>
+map -m n,v,i,c <C-t> <Pass>
 
 " bookmark
 map -m n,v,i,c <C-b> <Pass>
-map -m n -builtin , Bf
-map -m n -builtin b Bb
+map -m n -builtin ,  Bf
+map -m n,v,i,c <C-l> Bb
 
 " delete tab
 map -m n -builtin D :tabo<CR>
