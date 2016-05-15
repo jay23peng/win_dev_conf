@@ -5,8 +5,6 @@ rem -- Run Vim --
 :: fix for shell pref in emacs
 SET SHELL=
 
-SET VIM_HOME=::<The place you want to put vim plugin>
-
 SET HOME=%USERPROFILE%
 set VIM_EXE_DIR=C:\Program Files (x86)\Vim\vim74
 if exist "%VIM%\vim74\gvim.exe" set VIM_EXE_DIR=%VIM%\vim74

@@ -38,8 +38,8 @@ map -m n,v,i,c <C-t> <Pass>
 
 " bookmark
 map -m n,v,i,c <C-b> <Pass>
-map -m n -builtin ,  Bf
-map -m n,v,i,c <C-l> Bb
+map -m n -builtin .  Bf
+map -m n,v,i,c <A-.> Bb
 
 " delete tab
 map -m n -builtin D :tabo<CR>

@@ -7,7 +7,7 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set nocompatible
 source $VIMRUNTIME/vimrc_example.vim
-set clipboard=unnamed
+set clipboard+=unnamed
 set nobackup
 set tabstop=4
 set shiftwidth=4
@@ -20,16 +20,15 @@ retab
 filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
-set rtp+=$VIM_HOME/Vundle.vim
-call vundle#begin($VIM_HOME)
+set rtp+=$HOME/vim_home/Vundle.vim
+call vundle#begin($HOME."/vim_home")
 
 " plugin in Github
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'jesse23/bufferhint'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'majutsushi/tagbar'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
+Plugin 'octol/vim-cpp-enhanced-highlight'
 
 " plugin in http://vim-scripts.org/vim/scripts.html
 Plugin 'largeFile'
@@ -100,19 +99,18 @@ noremap j h
 " Plugins
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " bufferhint
-let g:bufferhint_MaxWidth = 40
+let g:bufferhint_MaxWidth = 30
 let g:bufferhint_BufferName = '~buffers~'
-nnoremap <silent> , :call bufferhint#Popup()<CR>
+nnoremap <silent> . :call bufferhint#Popup()<CR>
 
 " ctags
-"set shell=C:/windows/system32/cmd.exe
 set tags=tags,$ROOT/tags;
 set autochdir
 map <silent> <F12> :silent! execute "!ctags -R ".$ROOT."/src"<CR><CR>
 
 " ctrlP
 nmap t :CtrlP $ROOT<CR>
-nnoremap <silent> <C-l> :CtrlPBuffer<CR>
+nnoremap <silent> <A-.> :CtrlPBuffer<CR>
 let g:ctrlp_map = 'T'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_max_files = 0
@@ -127,12 +125,9 @@ let g:ctrlp_custom_ignore = {
 "let g:tagbar_ctags_bin = 'D:\workdir\TOOLBOX\wntx64\Ctags\5.8\ctags.exe'
 map <silent> <F9> :TagbarToggle<cr> 
 
-" airline
-" let g:airline#extensions#tabline#enabled = 0
-" let g:airline#extensions#tabline#show_buffers = 0
-" let g:airline#extensions#tabline#show_tabs = 0
-" let g:airline_theme='bubblegum'
-set laststatus=2
+" vim-cpp-enhanced-highlight
+let g:cpp_class_scope_highlight = 1
+let g:cpp_experimental_template_highlight = 1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Singleton VIM
