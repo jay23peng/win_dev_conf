@@ -30,6 +30,14 @@ My personal development environment configuration.
 
 9. Copy and overwrite ``gvim.bat`` to ``c:\windows``.
 
+10. Modify context menu to add or modify item ``Edit with VIM``: 
+
+    ```shell
+    "C:\Windows\gvim.bat" "%1"
+    ```
+
+    ​
+
 
 ### OSX
 
