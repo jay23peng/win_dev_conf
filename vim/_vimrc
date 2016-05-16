@@ -20,8 +20,8 @@ retab
 filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
-set rtp+=$HOME/vim_home/Vundle.vim
-call vundle#begin($HOME."/vim_home")
+set rtp+=$HOME/.vim_home/Vundle.vim
+call vundle#begin($HOME."/.vim_home")
 
 " plugin in Github
 Plugin 'VundleVim/Vundle.vim'
@@ -64,11 +64,14 @@ set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
 "source $VIMRUNTIME/menu.vim
 "
 set ambiwidth=double
-"set guifont=Consolas:h11
-"set guifontwide=DotumChe:h11
-set guifont=Consolas:h15
-set guifontwide=DotumChe:h15
-
+if has("win32")
+  set guifont=Consolas:h15
+  set guifontwide=DotumChe:h15
+elseif has('mac')
+  set guifont=Monaco:h14
+else
+  "linux
+endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Key Remapping
