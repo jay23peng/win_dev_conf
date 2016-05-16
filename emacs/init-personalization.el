@@ -34,13 +34,6 @@
 (define-key evil-normal-state-map ( kbd "M-." ) 'ace-jump-buffer )
 (define-key evil-normal-state-map ( kbd "." ) 'ace-jump-buffer )
 
-;; emacs server ( singleton mode )
-(require 'server)
-(and (>= emacs-major-version 23)
-     (defun server-ensure-safe-dir (dir) "Noop" t))
-(setq server-auth-dir "~/server")  ;;Server file location
-(setq server-name "main_server")   ;;Server mutex file name
-(server-start)
 
 ;;  sqlplus-mode:
 (require-package 'sqlplus)
@@ -112,6 +105,14 @@
   ;; try to improve slow performance on windows.
   (setq w32-get-true-file-attributes nil)
   (set-face-attribute 'default nil :height 150)
+
+  ;; emacs server ( singleton mode )
+  (require 'server)
+  (and (>= emacs-major-version 23)
+     (defun server-ensure-safe-dir (dir) "Noop" t))
+  (setq server-auth-dir "~/server")  ;;Server file location
+  (setq server-name "main_server")   ;;Server mutex file name
+  (server-start)
 
   ;; browser
   (setq browse-url-browser-function 'browse-url-default-windows-browser)
