@@ -40,6 +40,7 @@ map -m n,v,i,c <C-t> <Pass>
 map -m n,v,i,c <C-b> <Pass>
 map -m n -builtin .  Bf
 map -m n,v,i,c <A-.> b<Tab><S-Tab>
+map -m n -builtin b  b<Tab><S-Tab>
 
 " delete tab
 map -m n -builtin D :tabo<CR>
