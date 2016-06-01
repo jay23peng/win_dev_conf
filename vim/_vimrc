@@ -20,19 +20,21 @@ retab
 filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
-set rtp+=$HOME/.vim_home/Vundle.vim
-call vundle#begin($HOME."/.vim_home")
+set rtp+=D:/pengw/.vim_home/Vundle.vim
+call vundle#begin("D:/pengw/.vim_home")
 
 " plugin in Github
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'jesse23/bufferhint'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'majutsushi/tagbar'
+Plugin 'sickill/vim-monokai'
+Plugin 'altercation/vim-colors-solarized'
 Plugin 'octol/vim-cpp-enhanced-highlight'
+Plugin 'scrooloose/nerdcommenter'
 
 " plugin in http://vim-scripts.org/vim/scripts.html
 Plugin 'largeFile'
-Plugin 'molokai'
 Plugin 'desertEx'
 Plugin 'revolutions.vim'
 
@@ -65,10 +67,10 @@ set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
 "
 set ambiwidth=double
 if has("win32")
-  set guifont=Consolas:h14
-  set guifontwide=DotumChe:h14
+  set guifont=Consolas:h15
+  set guifontwide=DotumChe:h15
 elseif has('mac')
-  set guifont=Monaco:h14
+  set guifont=Monaco:h15
 else
   "linux
 endif
@@ -122,6 +124,18 @@ let g:ctrlp_custom_ignore = {
     \ 'file': '\v\.(exe|so|lib|dll|obj|pdb|qxw)$',
     \ 'link': 'SOME_BAD_SYMBOLIC_LINKS',
     \ }
+
+let g:ctrlp_prompt_mappings = {
+\ 'PrtExit()':   ['<c-[>', '<esc>'],
+\ 'PrtSelectMove("k")': ['<c-h>', '<up>'],
+\ 'PrtSelectMove("j")': ['<c-k>', '<down>'],
+\ 'PrtBS()': ['<bs>'],
+\ 'ToggleByFname()': [''],
+\ 'PrtCurRight()': ['<c-l>'],
+\ 'PrtCurLeft()': ['<c-j>'],
+\ 'PrtClearCache()': ['<F5>'],
+\ 'PrtInsert("c")': ['<c-y>'],
+\}
 
 
 " tagbar
