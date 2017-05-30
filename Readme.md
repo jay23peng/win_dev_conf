@@ -85,6 +85,7 @@ My personal development environment configuration.
 1. Install firefox/waterfox.
 2. Download [Pentadactyl](http://5digits.org/pentadactyl). After 50.0, use [Signed Version](https://github.com/willsALMANJ/pentadactyl-signed/releases)
 3. Copy ``_pentadactylrc`` and ``pentadactyl`` to ``~/``.
+4. For Windows Mac Type, Use ``Noto Sans CJK SC DemiLight`` and preference from [here](https://github.com/renkun-ken/MacType.Decency). For 53 version, also need ``gfx.content.azure.backends;direct2d1.1,cairo,skia``
 
 ## OSX Specific
 
