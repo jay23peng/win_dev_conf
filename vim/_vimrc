@@ -32,6 +32,7 @@ Plugin 'sickill/vim-monokai'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'octol/vim-cpp-enhanced-highlight'
 Plugin 'scrooloose/nerdcommenter'
+Plugin 'scrooloose/nerdtree'
 
 " plugin in http://vim-scripts.org/vim/scripts.html
 Plugin 'largeFile'
@@ -95,6 +96,10 @@ nmap <silent> <C-x>2 :sp<CR>
 nmap <silent> <C-x>3 :vsp<CR>
 "nmap <C-o> :tabnew<SPACE>
 
+" Diable mouse middle button paste
+map <MiddleMouse> <Nop>
+imap <MiddleMouse> <Nop>
+
 " Remap k j for colemak
 noremap h k
 noremap k j
@@ -146,6 +151,13 @@ map <silent> <F9> :TagbarToggle<cr>
 let g:cpp_class_scope_highlight = 1
 let g:cpp_experimental_template_highlight = 1
 
+" large file
+let g:LargeFile = 1000
+
+ " NERDTree config
+ map <C-B> :NERDTreeToggle<CR>
+ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") &&b:NERDTreeType == "primary") | q | endif
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Singleton VIM
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -180,7 +192,7 @@ map <silent> <F11> :if &guioptions =~# 'm' <Bar>
 
 " Display Setting
 set nu
-set cc=80
+set cc=73
 colorscheme desertEx
 
 " auto-complete

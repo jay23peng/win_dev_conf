@@ -21,8 +21,8 @@ map -m v,caret -builtin k j
 map -m v,caret -builtin j h
 map -m n -builtin h <C-u>
 map -m n -builtin k <C-d>
-map -m n l -builtin gT
-map -m n j -builtin <C-n>
+map -m n l -builtin <C-n>
+map -m n j -builtin gT
 map -m n -builtin y Y
 map -m n -builtin Y y
 
@@ -38,8 +38,8 @@ map -m n,v,i,c <C-t> <Pass>
 
 " bookmark
 map -m n,v,i,c <C-b> <Pass>
-map -m n -builtin .  b<Tab><S-Tab>
-map -m n,v,i,c <A-.> b<Tab><S-Tab>
+map -m n -builtin . -js if (gBrowser.treeStyleTab.tabbarShown) {gBrowser.treeStyleTab.hideTabbar();} else {gBrowser.treeStyleTab.showTabbar();}
+map -m n -builtin <A-.> b<Tab><S-Tab>
 map -m n -builtin b  b<Tab><S-Tab>
 
 " delete tab

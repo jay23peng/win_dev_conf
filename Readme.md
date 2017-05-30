@@ -36,9 +36,6 @@ My personal development environment configuration.
     "C:\Windows\gvim.bat" "%1"
     ```
 
-    ​
-
-
 ### OSX
 
 1. Install ``Xcode Command Line Tools``.
@@ -83,13 +80,17 @@ My personal development environment configuration.
 1. Download emacs and install.
 2. Do step 5 - 8 in windows.
 
-## Firefox
+## Waterfox(53.0)
 
 1. Install firefox/waterfox.
-2. Download [Pentadactyl](http://5digits.org/pentadactyl).
+2. Download [Pentadactyl](http://5digits.org/pentadactyl). After 50.0, use [Signed Version](https://github.com/willsALMANJ/pentadactyl-signed/releases)
 3. Copy ``_pentadactylrc`` and ``pentadactyl`` to ``~/``.
 
+## OSX Specific
 
+### ThinkPad Compact Bluetooth Keyboard with TrackPoint
+1. Install [USB OverDrive](http://www.usboverdrive.com/USBOverdrive/News.html) to disable mouse mid-click.
+2. Run [tpkb](https://github.com/unknownzerx/tpkb/releases) to switch the Fn Key.
 
 
 
