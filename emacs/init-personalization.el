@@ -116,6 +116,11 @@
 
   ;; browser
   (setq browse-url-browser-function 'browse-url-default-windows-browser)
+
+  ;; external ls
+  (setq ls-lisp-use-insert-directory-program t)      ;; use external ls
+     (setq insert-directory-program "c:/cygwin64/bin/ls") ;; ls program name
+
 )
 
 ;; truncate from a sub-shell automatically
@@ -162,5 +167,29 @@
 (require-package 'solarized-theme)
 (setq darkokai-mode-line-padding 1)
 (load-theme 'darkokai t)
+
+;; dired-quick-sort
+(require-package 'dired-quick-sort)
+(require 'dired-quick-sort) 
+(defun cycle-dired-quick-sort-js (*n)
+  "Cycle background color among a preset list. If `universal-argument' is called first, cycle n steps. Default is 1 step. URL `http://ergoemacs.org/emacs/elisp_toggle_command.html' Version 2015-12-17"
+  (interactive "p")
+  (let* (
+         (-values ["none" "time" "size" "version" "extension"])
+         (-index-before
+          (if (get 'cycle-dired-quick-sort-js 'state)
+              (get 'cycle-dired-quick-sort-js 'state)
+            0))
+         (-index-after (% (+ -index-before (length -values) *n) (length -values)))
+         (-next-value (aref -values -index-after)))
+
+    (put 'cycle-dired-quick-sort-js 'state -index-after)
+
+    (dired-quick-sort -next-value nil ?y nil)
+    (dired-quick-sort--sort-by-last -next-value)
+    (message "sort by %s" -next-value)))
+
+(define-key dired-mode-map "s" 'cycle-dired-quick-sort-js)
+(define-key dired-mode-map "S" 'cycle-dired-quick-sort-js)
 
 (provide 'init-personalization)
