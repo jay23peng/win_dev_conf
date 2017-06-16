@@ -28,11 +28,150 @@
 ;; hide menubar
 (menu-bar-mode -1) 
 
+;; NOTE: evil setting should come first for overwrite everything
+;; evil clipbord workaround
+;; NOTE: There is still a limitation in paste that, if copy from emacs, the
+;; paste command from clipboard ("+/"*) is not going to work.
+(fset 'evil-visual-update-x-selection 'ignore)
+
+;; workaround for org link. Or else default setting will load w3m
+(ad-disable-advice 'org-open-at-point 'around 'org-open-at-point-choose-browser )
+(ad-activate 'org-open-at-point )
+
+;; overwrite evil setting with colemak key mapping
+;; NOTE: default unname register in evil is "
+(define-key evil-normal-state-map (kbd "h") 'evil-previous-visual-line)
+(define-key evil-motion-state-map "h" 'evil-previous-line)
+(define-key evil-window-map "h" 'evil-window-up)
+
+(define-key evil-normal-state-map (kbd "k") 'evil-next-visual-line)
+(define-key evil-motion-state-map "k" 'evil-next-line)
+(define-key evil-window-map "k" 'evil-window-down)
+
+(define-key evil-normal-state-map (kbd "j") 'evil-backward-char)
+(define-key evil-motion-state-map "j" 'evil-backward-char)
+(define-key evil-window-map "j" 'evil-window-left)
+
+(define-key evil-normal-state-map (kbd "l") 'evil-forward-char)
+(define-key evil-window-map "l" 'evil-window-right)
+(define-key evil-motion-state-map "l" 'evil-forward-char)
+
 ;; ace-jump-buffer
 (require-package 'ace-jump-buffer)
 (global-set-key (kbd "M-.") 'ace-jump-buffer) 
 (define-key evil-normal-state-map ( kbd "M-." ) 'ace-jump-buffer )
 (define-key evil-normal-state-map ( kbd "." ) 'ace-jump-buffer )
+
+
+;; dired-quick-sort
+(require-package 'dired-quick-sort)
+(require 'dired-quick-sort) 
+(defun cycle-dired-quick-sort-js (*n)
+  "Cycle background color among a preset list. If `universal-argument' is called first, cycle n steps. Default is 1 step. URL `http://ergoemacs.org/emacs/elisp_toggle_command.html' Version 2015-12-17"
+  (interactive "p")
+  (let* (
+         (-values ["version" "time" "size" "version" "extension"])
+         (-index-before
+          (if (get 'cycle-dired-quick-sort-js 'state)
+              (get 'cycle-dired-quick-sort-js 'state)
+            0))
+         (-index-after (% (+ -index-before (length -values) *n) (length -values)))
+         (-next-value (aref -values -index-after)))
+
+    (put 'cycle-dired-quick-sort-js 'state -index-after)
+
+    (dired-quick-sort -next-value nil ?y nil)
+    (dired-quick-sort--sort-by-last -next-value)
+    (message "sort by %s" -next-value)))
+
+;; my settings for dired mode 
+(require 'dired+)
+  ;;(toggle-diredp-find-file-reuse-dir 1)
+  (diredp-toggle-find-file-reuse-dir 1)
+  (setq diredp-hide-details-initially-flag nil)
+  (setq diredp-hide-details-propagate-flag nil)
+  (evil-set-initial-state 'dired-mode 'normal)
+
+(defun xah-open-in-external-app ()
+  "Open the current file or dired marked files in external app.
+The app is chosen from your OS's preference.
+URL `http://ergoemacs.org/emacs/emacs_dired_open_file_in_ext_apps.html'
+Version 2016-10-15"
+  (interactive)
+  (let* (
+         (-file-list
+          (if (string-equal major-mode "dired-mode")
+              (dired-get-marked-files)
+            (list (buffer-file-name))))
+         (-do-it-p (if (<= (length -file-list) 5)
+                       t
+                     (y-or-n-p "Open more than 5 files? "))))
+    (when -do-it-p
+      (cond
+       ((string-equal system-type "windows-nt")
+        (mapc
+         (lambda (-fpath)
+           (w32-shell-execute "open" (replace-regexp-in-string "/" "\\" -fpath t t))) -file-list))
+       ((string-equal system-type "darwin")
+        (mapc
+         (lambda (-fpath)
+           (shell-command
+            (concat "open " (shell-quote-argument -fpath))))  -file-list))
+       ((string-equal system-type "gnu/linux")
+        (mapc
+         (lambda (-fpath) (let ((process-connection-type nil))
+                            (start-process "" nil "xdg-open" -fpath))) -file-list))))))
+
+(defun xah-open-in-gvim ()
+  "Open the current file or dired marked files in external app.
+The app is chosen from your OS's preference.
+URL `http://ergoemacs.org/emacs/emacs_dired_open_file_in_ext_apps.html'
+Version 2016-10-15"
+  (interactive)
+  (let* (
+         (-file-list
+          (if (string-equal major-mode "dired-mode")
+              (dired-get-marked-files)
+            (list (buffer-file-name))))
+         (-do-it-p (if (<= (length -file-list) 5)
+                       t
+                     (y-or-n-p "Open more than 5 files? "))))
+    (when -do-it-p
+      (cond
+       ((string-equal system-type "windows-nt")
+        (mapc
+         (lambda (-fpath)
+           (shell-command ( concat "gvim " (replace-regexp-in-string "/" "\\" -fpath t t)))) -file-list))
+       ((string-equal system-type "darwin")
+        (mapc
+         (lambda (-fpath)
+           (shell-command
+            (concat "gvim " (shell-quote-argument -fpath))))  -file-list))
+       ((string-equal system-type "gnu/linux")
+        (mapc
+         (lambda (-fpath) (let ((process-connection-type nil))
+                            (start-process "" nil "gvim" -fpath))) -file-list))))))
+
+(add-hook 'dired-mode-hook
+ (lambda ()
+  (define-key dired-mode-map (kbd "^")
+    (lambda () (interactive) (find-alternate-file "..")))
+  (define-key dired-mode-map (kbd "H")
+    (lambda () (interactive) (find-alternate-file "..")))
+  (define-key dired-mode-map (kbd "s") 
+    'cycle-dired-quick-sort-js)
+  (define-key dired-mode-map (kbd "S") 
+    'cycle-dired-quick-sort-js)
+  (define-key dired-mode-map (kbd "o") 
+    'xah-open-in-external-app)
+  (define-key dired-mode-map (kbd "v") 
+    'xah-open-in-gvim)
+  (define-key dired-mode-map (kbd ".") 
+    'ace-jump-buffer)
+  (define-key dired-mode-map (kbd "<mouse-2>") 
+    'diredp-mouse-find-file)
+  ; was dired-up-directory
+ ))
 
 
 ;;  sqlplus-mode:
@@ -41,16 +180,6 @@
   (add-to-list 'auto-mode-alist '("\\.sqp\\'" . sqlplus-mode))
   (setq  sql-oracle-program "Z:/scripts/run_sqlplus10.bat")
   (setq  sqlplus-command "Z:/scripts/run_sqlplus10.bat")
-
-;;  reuse buffer in dired mode
-(require 'dired+)
-  (toggle-diredp-find-file-reuse-dir 1)
-(add-hook 'dired-mode-hook
- (lambda ()
-  (define-key dired-mode-map (kbd "^")
-    (lambda () (interactive) (find-alternate-file "..")))
-  ; was dired-up-directory
- ))
 
 ;; cdb-gud
 ;;(load "cdb-gud")
@@ -130,33 +259,6 @@
 (put 'narrow-to-region 'disabled nil)
 (put 'erase-buffer 'disabled nil)
 
-;; evil clipbord workaround
-;; NOTE: There is still a limitation in paste that, if copy from emacs, the
-;; paste command from clipboard ("+/"*) is not going to work.
-(fset 'evil-visual-update-x-selection 'ignore)
-
-;; workaround for org link. Or else default setting will load w3m
-(ad-disable-advice 'org-open-at-point 'around 'org-open-at-point-choose-browser )
-(ad-activate 'org-open-at-point )
-
-;; overwrite evil setting with colemak key mapping
-;; NOTE: default unname register in evil is "
-(define-key evil-normal-state-map (kbd "h") 'evil-previous-visual-line)
-(define-key evil-motion-state-map "h" 'evil-previous-line)
-(define-key evil-window-map "h" 'evil-window-up)
-
-(define-key evil-normal-state-map (kbd "k") 'evil-next-visual-line)
-(define-key evil-motion-state-map "k" 'evil-next-line)
-(define-key evil-window-map "k" 'evil-window-down)
-
-(define-key evil-normal-state-map (kbd "j") 'evil-backward-char)
-(define-key evil-motion-state-map "j" 'evil-backward-char)
-(define-key evil-window-map "j" 'evil-window-left)
-
-(define-key evil-normal-state-map (kbd "l") 'evil-forward-char)
-(define-key evil-window-map "l" 'evil-window-right)
-(define-key evil-motion-state-map "l" 'evil-forward-char)
-
 ;; theme
 ;;(require-package 'color-theme-modern)
 (require-package 'tangotango-theme)
@@ -168,28 +270,5 @@
 (setq darkokai-mode-line-padding 1)
 (load-theme 'darkokai t)
 
-;; dired-quick-sort
-(require-package 'dired-quick-sort)
-(require 'dired-quick-sort) 
-(defun cycle-dired-quick-sort-js (*n)
-  "Cycle background color among a preset list. If `universal-argument' is called first, cycle n steps. Default is 1 step. URL `http://ergoemacs.org/emacs/elisp_toggle_command.html' Version 2015-12-17"
-  (interactive "p")
-  (let* (
-         (-values ["none" "time" "size" "version" "extension"])
-         (-index-before
-          (if (get 'cycle-dired-quick-sort-js 'state)
-              (get 'cycle-dired-quick-sort-js 'state)
-            0))
-         (-index-after (% (+ -index-before (length -values) *n) (length -values)))
-         (-next-value (aref -values -index-after)))
-
-    (put 'cycle-dired-quick-sort-js 'state -index-after)
-
-    (dired-quick-sort -next-value nil ?y nil)
-    (dired-quick-sort--sort-by-last -next-value)
-    (message "sort by %s" -next-value)))
-
-(define-key dired-mode-map "s" 'cycle-dired-quick-sort-js)
-(define-key dired-mode-map "S" 'cycle-dired-quick-sort-js)
 
 (provide 'init-personalization)
