@@ -76,10 +76,14 @@ My personal development environment configuration.
 9. Copy ``emacs.bat`` to ``C:\windows``.
 
 ### OSX
-
 1. Download emacs and install.
 2. Do step 5 - 8 in windows.
 
+
+## SPACEMACS
+1. Install emacs firstly.
+2. Get [SPACEMACS](http://spacemacs.org/) and extract it to ``emacs_home``.
+3. Get ``.spacemacs`` and put it to ``emacs_home``.
 ## Waterfox(53.0)
 
 1. Install firefox/waterfox.
