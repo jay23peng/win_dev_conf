@@ -50,7 +50,7 @@ values."
 
      semantic
      (shell :variables
-            shell-default-shell  'shell 
+             shell-default-shell  'shell 
              shell-default-height 30
              shell-default-position 'bottom)
      (spell-checking :variables spell-checking-enable-by-default nil)
@@ -388,8 +388,6 @@ you should place your code here."
    ((string-equal system-type "windows-nt")
     (setq ls-lisp-use-insert-directory-program t)      ;; use external ls
     (setq insert-directory-program "c:/cygwin64/bin/ls") ;; ls program name
-    ;; for emacs shell
-    ;; (setenv "LANG" "zh_CN.UTF-8") ;; for emacs shell
     ))
 
   ;; my settings for dired mode 
@@ -510,6 +508,7 @@ Version 2016-10-15"
   (global-set-key (kbd "M-.") 'ace-jump-buffer) 
   (define-key evil-normal-state-map ( kbd "M-." ) 'ace-jump-buffer )
   (define-key evil-normal-state-map ( kbd "." ) 'ace-jump-buffer )
+  (define-key evil-normal-state-map ( kbd "." ) 'ace-jump-buffer )
 
   ;;  sqlplus-mode:
   (require 'sqlplus)
@@ -522,11 +521,13 @@ Version 2016-10-15"
   (setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
   (setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
 
+  ;; emacs shell
   ;; 2017-06-20: fix shell-popup issue for windows shell
   (push (cons "\\*shell\\*" display-buffer--same-window-action) display-buffer-alist)
   ;; Don't make shell to be read only
   (setq comint-prompt-read-only nil)
   (define-key shell-mode-map ( kbd "C-l" ) 'comint-clear-buffer)
+  (evil-set-initial-state 'shell-mode 'emacs)
 
   ;; evil :q
   ;;(evil-ex-define-cmd "q[uit]" 'evil-quit)
@@ -534,6 +535,8 @@ Version 2016-10-15"
   ;; split window get focus
   (global-set-key "\C-x2" 'split-window-below-and-focus)
   (global-set-key "\C-x3" 'split-window-right-and-focus)
+  (global-set-key (kbd "C-x C-m") 'helm-M-x)
+  (global-set-key (kbd "M-<SPC>") 'helm-M-x)
   (spacemacs/set-leader-keys "ws" 'split-window-below-and-focus)
   (spacemacs/set-leader-keys "wS" 'split-window-below)
   (spacemacs/set-leader-keys "wv" 'split-window-right-and-focus)
