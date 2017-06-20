@@ -38,18 +38,23 @@ values."
      ;; ----------------------------------------------------------------
      auto-completion
      ;; better-defaults
-     emacs-lisp
-     markdown
      helm
-     semantic
+     emacs-lisp
      ;; git
-     org
+     javascript 
+     markdown
+
+     ;; NOTE: org will confilict with auto-completion, makes company-complete
+     ;; not working in emacs shell mode in w32
+     ;; org
+
+     semantic
      (shell :variables
             shell-default-shell  'shell 
-            shell-default-height 30
-            shell-default-position 'bottom)
-     ;; spell-checking
-     syntax-checking
+             shell-default-height 30
+             shell-default-position 'bottom)
+     (spell-checking :variables spell-checking-enable-by-default nil)
+      syntax-checking
      ;; version-control
      )
    ;; List of additional packages that will be installed without being
@@ -140,8 +145,8 @@ values."
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
-   dotspacemacs-default-font '("Soruce Code Pro"
-                               :size 12
+   dotspacemacs-default-font '("Source Code Pro"
+                               :size 16
                                :weight normal
                                :width normal
                                :powerline-scale 1.1)
@@ -299,8 +304,7 @@ values."
    ;; delete only whitespace for changed lines or `nil' to disable cleanup.
    ;; (default nil)
    dotspacemacs-whitespace-cleanup nil
-   )
-  )
+   ))
 
 (defun dotspacemacs/user-init ()
   "Initialization function for user code.
@@ -310,29 +314,29 @@ executes.
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
  ;; Default font setting
- (cond
-       ((string-equal system-type "windows-nt")
-        (setq-default dotspacemacs-default-font 
-                      '("YaHei Consolas Hybrid"
-                         :size 18
-                         :weight normal
-                         :width normal
-                         :powerline-scale 1.0)))
-       ((string-equal system-type "darwin")
-        (setq-default dotspacemacs-default-font 
-                      '("Monaco"
-                         :size 14
-                         :weight normal
-                         :width normal
-                         :powerline-scale 1.0)))
-       ((string-equal system-type "gnu/linux")
-        (setq-default dotspacemacs-default-font 
-                      '("Mono"
-                         :size 14
-                         :weight normal
-                         :width normal
-                         :powerline-scale 1.0))))
-)
+  (cond
+   ((string-equal system-type "windows-nt")
+    (setq-default dotspacemacs-default-font 
+                  '("YaHei Consolas Hybrid"
+                    :size 18
+                    :weight normal
+                    :width normal
+                    :powerline-scale 1.0)))
+   ((string-equal system-type "darwin")
+    (setq-default dotspacemacs-default-font 
+                  '("Monaco"
+                    :size 14
+                    :weight normal
+                    :width normal
+                    :powerline-scale 1.0)))
+   ((string-equal system-type "gnu/linux")
+    (setq-default dotspacemacs-default-font 
+                  '("Mono"
+                    :size 14
+                    :weight normal
+                    :width normal
+                    :powerline-scale 1.0))))
+  )
 
 (defun dotspacemacs/user-config ()
   "Configuration function for user code.
@@ -342,186 +346,199 @@ This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
 
- (global-company-mode t)
- (setq company-show-numbers t)
-;;Short key to truncate
- (global-set-key [f2] 'rename-buffer)
- (global-set-key [f3] 'company-complete)
- (global-set-key [f4] 'kill-this-buffer)
- (global-set-key [f5] 'untabify)
- (global-set-key [f11] 'toggle-menu-bar-mode-from-frame)
- (global-set-key [f12] 'toggle-truncate-lines)
+  ;; Company mode
+  (global-company-mode t)
+  (setq company-show-numbers t)
+  (setq company-dabbrev-downcase nil)
+  (setq company-dabbrev-ignore-case nil)
+  (setq company-clang-insert-arguments nil)
+  (setq company-require-match nil)
+  (setq company-etags-ignore-case t)
+  (setq company-auto-complete nil)
+  (setq company-idle-delay 0.2)
 
-(require 'dired-quick-sort) 
-(defun cycle-dired-quick-sort-js (*n)
-  "Cycle background color among a preset list. If `universal-argument' is called first, cycle n steps. Default is 1 step. URL `http://ergoemacs.org/emacs/elisp_toggle_command.html' Version 2015-12-17"
-  (interactive "p")
-  (let* (
-         (-values ["version" "time" "size" "version" "extension"])
-         (-index-before
-          (if (get 'cycle-dired-quick-sort-js 'state)
-              (get 'cycle-dired-quick-sort-js 'state)
-            0))
-         (-index-after (% (+ -index-before (length -values) *n) (length -values)))
-         (-next-value (aref -values -index-after)))
+  ;;Short key to truncate
+  (global-set-key [f2] 'rename-buffer)
+  (global-set-key [f3] 'company-complete)
+  (global-set-key [f4] 'kill-this-buffer)
+  (global-set-key [f5] 'untabify)
+  (global-set-key [f11] 'toggle-menu-bar-mode-from-frame)
+  (global-set-key [f12] 'toggle-truncate-lines)
 
-    (put 'cycle-dired-quick-sort-js 'state -index-after)
+  (require 'dired-quick-sort) 
+  (defun cycle-dired-quick-sort-js (*n)
+    "Cycle background color among a preset list. If `universal-argument' is called first, cycle n steps. Default is 1 step. URL `http://ergoemacs.org/emacs/elisp_toggle_command.html' Version 2015-12-17"
+    (interactive "p")
+    (let* (
+           (-values ["version" "time" "size" "version" "extension"])
+           (-index-before
+            (if (get 'cycle-dired-quick-sort-js 'state)
+                (get 'cycle-dired-quick-sort-js 'state)
+              0))
+           (-index-after (% (+ -index-before (length -values) *n) (length -values)))
+           (-next-value (aref -values -index-after)))
 
-    (dired-quick-sort -next-value nil ?y nil)
-    (dired-quick-sort--sort-by-last -next-value)
-    (message "sort by %s" -next-value)))
+      (put 'cycle-dired-quick-sort-js 'state -index-after)
 
-(cond
- ((string-equal system-type "windows-nt")
-  (setq ls-lisp-use-insert-directory-program t)      ;; use external ls
-  (setq insert-directory-program "c:/cygwin64/bin/ls") ;; ls program name
-  ;; for emacs shell
-  ;; (setenv "LANG" "zh_CN.UTF-8") ;; for emacs shell
-     ))
+      (dired-quick-sort -next-value nil ?y nil)
+      (dired-quick-sort--sort-by-last -next-value)
+      (message "sort by %s" -next-value)))
 
-;; my settings for dired mode 
-(require 'dired+)
+  (cond
+   ((string-equal system-type "windows-nt")
+    (setq ls-lisp-use-insert-directory-program t)      ;; use external ls
+    (setq insert-directory-program "c:/cygwin64/bin/ls") ;; ls program name
+    ;; for emacs shell
+    ;; (setenv "LANG" "zh_CN.UTF-8") ;; for emacs shell
+    ))
+
+  ;; my settings for dired mode 
+  (require 'dired+)
   ;;(toggle-diredp-find-file-reuse-dir 1)
   (diredp-toggle-find-file-reuse-dir 1)
   (setq diredp-hide-details-initially-flag nil)
   (setq diredp-hide-details-propagate-flag nil)
   ;;(evil-set-initial-state 'dired-mode 'normal)
 
-(defun xah-open-in-external-app ()
-  "Open the current file or dired marked files in external app.
+  (defun xah-open-in-external-app ()
+    "Open the current file or dired marked files in external app.
 The app is chosen from your OS's preference.
 URL `http://ergoemacs.org/emacs/emacs_dired_open_file_in_ext_apps.html'
 Version 2016-10-15"
-  (interactive)
-  (let* (
-         (-file-list
-          (if (string-equal major-mode "dired-mode")
-              (dired-get-marked-files)
-            (list (buffer-file-name))))
-         (-do-it-p (if (<= (length -file-list) 5)
-                       t
-                     (y-or-n-p "Open more than 5 files? "))))
-    (when -do-it-p
-      (cond
-       ((string-equal system-type "windows-nt")
-        (mapc
-         (lambda (-fpath)
-           (w32-shell-execute "open" (replace-regexp-in-string "/" "\\" -fpath t t))) -file-list))
-       ((string-equal system-type "darwin")
-        (mapc
-         (lambda (-fpath)
-           (shell-command
-            (concat "open " (shell-quote-argument -fpath))))  -file-list))
-       ((string-equal system-type "gnu/linux")
-        (mapc
-         (lambda (-fpath) (let ((process-connection-type nil))
-                            (start-process "" nil "xdg-open" -fpath))) -file-list))))))
+    (interactive)
+    (let* (
+           (-file-list
+            (if (string-equal major-mode "dired-mode")
+                (dired-get-marked-files)
+              (list (buffer-file-name))))
+           (-do-it-p (if (<= (length -file-list) 5)
+                         t
+                       (y-or-n-p "Open more than 5 files? "))))
+      (when -do-it-p
+        (cond
+         ((string-equal system-type "windows-nt")
+          (mapc
+           (lambda (-fpath)
+             (w32-shell-execute "open" (replace-regexp-in-string "/" "\\" -fpath t t))) -file-list))
+         ((string-equal system-type "darwin")
+          (mapc
+           (lambda (-fpath)
+             (shell-command
+              (concat "open " (shell-quote-argument -fpath))))  -file-list))
+         ((string-equal system-type "gnu/linux")
+          (mapc
+           (lambda (-fpath) (let ((process-connection-type nil))
+                              (start-process "" nil "xdg-open" -fpath))) -file-list))))))
 
-(defun xah-open-in-gvim ()
-  "Open the current file or dired marked files in external app.
+  (defun xah-open-in-gvim ()
+    "Open the current file or dired marked files in external app.
 The app is chosen from your OS's preference.
 URL `http://ergoemacs.org/emacs/emacs_dired_open_file_in_ext_apps.html'
 Version 2016-10-15"
-  (interactive)
-  (let* (
-         (-file-list
-          (if (string-equal major-mode "dired-mode")
-              (dired-get-marked-files)
-            (list (buffer-file-name))))
-         (-do-it-p (if (<= (length -file-list) 5)
-                       t
-                     (y-or-n-p "Open more than 5 files? "))))
-    (when -do-it-p
-      (cond
-       ((string-equal system-type "windows-nt")
-        (mapc
-         (lambda (-fpath)
-           (start-process "gvim" nil "gvim" (replace-regexp-in-string "/" "\\" -fpath t t))) -file-list))
-       ((string-equal system-type "darwin")
-        (mapc
-         (lambda (-fpath)
-           (shell-command
-            (concat "gvim " (shell-quote-argument -fpath))))  -file-list))
-       ((string-equal system-type "gnu/linux")
-        (mapc
-         (lambda (-fpath) (let ((process-connection-type nil))
-                            (start-process "" nil "gvim" -fpath))) -file-list))))))
+    (interactive)
+    (let* (
+           (-file-list
+            (if (string-equal major-mode "dired-mode")
+                (dired-get-marked-files)
+              (list (buffer-file-name))))
+           (-do-it-p (if (<= (length -file-list) 5)
+                         t
+                       (y-or-n-p "Open more than 5 files? "))))
+      (when -do-it-p
+        (cond
+         ((string-equal system-type "windows-nt")
+          (mapc
+           (lambda (-fpath)
+             (start-process "gvim" nil "gvim" (replace-regexp-in-string "/" "\\" -fpath t t))) -file-list))
+         ((string-equal system-type "darwin")
+          (mapc
+           (lambda (-fpath)
+             (shell-command
+              (concat "gvim " (shell-quote-argument -fpath))))  -file-list))
+         ((string-equal system-type "gnu/linux")
+          (mapc
+           (lambda (-fpath) (let ((process-connection-type nil))
+                              (start-process "" nil "gvim" -fpath))) -file-list))))))
 
-(defun dired-back-to-top ()
-  (interactive)
-  (beginning-of-buffer)
-(dired-next-line 2))
+  (defun dired-back-to-top ()
+    (interactive)
+    (beginning-of-buffer)
+    (dired-next-line 2))
 
-(defun dired-jump-to-bottom ()
-  (interactive)
-  (end-of-buffer)
-(dired-next-line -1))
+  (defun dired-jump-to-bottom ()
+    (interactive)
+    (end-of-buffer)
+    (dired-next-line -1))
 
-(evilified-state-evilify dired-mode dired-mode-map
-             "k"  'evil-next-line
-             "^"  (lambda () (interactive) (find-alternate-file ".."))
-             "H"  (lambda () (interactive) (find-alternate-file ".."))
-             "s"  'cycle-dired-quick-sort-js
-             "S"  'cycle-dired-quick-sort-js
-             "t"  'xah-open-in-external-app
-             "e"  'xah-open-in-gvim
-             "."  'ace-jump-buffer
-             "h"  'evil-previous-line
-             "j"  'evil-backward-char
-             "l"  'evil-forward-char
-       [mouse-2]  'diredp-mouse-find-file
-             "$"  'evil-end-of-line
-             "gg" 'dired-back-to-top
-             "G"  'dired-jump-to-bottom
-             )
+  (evilified-state-evilify dired-mode dired-mode-map
+    "k"  'evil-next-line
+    "^"  (lambda () (interactive) (find-alternate-file ".."))
+    "H"  (lambda () (interactive) (find-alternate-file ".."))
+    "s"  'cycle-dired-quick-sort-js
+    "S"  'cycle-dired-quick-sort-js
+    "t"  'xah-open-in-external-app
+    "e"  'xah-open-in-gvim
+    "."  'ace-jump-buffer
+    "h"  'evil-previous-line
+    "j"  'evil-backward-char
+    "l"  'evil-forward-char
+    [mouse-2]  'diredp-mouse-find-file
+    "$"  'evil-end-of-line
+    "gg" 'dired-back-to-top
+    "G"  'dired-jump-to-bottom
+    )
 
 
-;; overwrite evil setting with colemak key mapping
-(define-key evil-normal-state-map (kbd "h") 'evil-previous-visual-line)
-(define-key evil-motion-state-map "h" 'evil-previous-line)
-(define-key evil-window-map "h" 'evil-window-up)
+  ;; overwrite evil setting with colemak key mapping
+  (define-key evil-normal-state-map (kbd "h") 'evil-previous-visual-line)
+  (define-key evil-motion-state-map "h" 'evil-previous-line)
+  (define-key evil-window-map "h" 'evil-window-up)
 
-(define-key evil-normal-state-map (kbd "k") 'evil-next-visual-line)
-(define-key evil-motion-state-map "k" 'evil-next-line)
-(define-key evil-window-map "k" 'evil-window-down)
+  (define-key evil-normal-state-map (kbd "k") 'evil-next-visual-line)
+  (define-key evil-motion-state-map "k" 'evil-next-line)
+  (define-key evil-window-map "k" 'evil-window-down)
 
-(define-key evil-normal-state-map (kbd "j") 'evil-backward-char)
-(define-key evil-motion-state-map "j" 'evil-backward-char)
-(define-key evil-window-map "j" 'evil-window-left)
+  (define-key evil-normal-state-map (kbd "j") 'evil-backward-char)
+  (define-key evil-motion-state-map "j" 'evil-backward-char)
+  (define-key evil-window-map "j" 'evil-window-left)
 
-(define-key evil-normal-state-map (kbd "l") 'evil-forward-char)
-(define-key evil-window-map "l" 'evil-window-right)
-(define-key evil-motion-state-map "l" 'evil-forward-char)
+  (define-key evil-normal-state-map (kbd "l") 'evil-forward-char)
+  (define-key evil-window-map "l" 'evil-window-right)
+  (define-key evil-motion-state-map "l" 'evil-forward-char)
 
-;; ace-jump-buffer
-(global-set-key (kbd "M-.") 'ace-jump-buffer) 
-(define-key evil-normal-state-map ( kbd "M-." ) 'ace-jump-buffer )
-(define-key evil-normal-state-map ( kbd "." ) 'ace-jump-buffer )
+  ;; ace-jump-buffer
+  (global-set-key (kbd "M-.") 'ace-jump-buffer) 
+  (define-key evil-normal-state-map ( kbd "M-." ) 'ace-jump-buffer )
+  (define-key evil-normal-state-map ( kbd "." ) 'ace-jump-buffer )
 
-;;  sqlplus-mode:
-(require 'sqlplus)
-(add-to-list 'auto-mode-alist '("\\.sqp\\'" . sqlplus-mode))
-(setq  sql-oracle-program "Z:/scripts/run_sqlplus10.bat")
-(setq  sqlplus-command "Z:/scripts/run_sqlplus10.bat")
+  ;;  sqlplus-mode:
+  (require 'sqlplus)
+  (add-to-list 'auto-mode-alist '("\\.sqp\\'" . sqlplus-mode))
+  (setq  sql-oracle-program "Z:/scripts/run_sqlplus10.bat")
+  (setq  sqlplus-command "Z:/scripts/run_sqlplus10.bat")
 
 ;;; scroll one line at a time (less "jumpy" than defaults)
-(setq mouse-wheel-scroll-amount '(3 ((shift) . 1))) ;; two lines at a time
-(setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
-(setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
+  (setq mouse-wheel-scroll-amount '(3 ((shift) . 1))) ;; two lines at a time
+  (setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
+  (setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
 
-;; split window get focus
-(global-set-key "\C-x2" 'split-window-below-and-focus)
-(global-set-key "\C-x3" 'split-window-right-and-focus)
-(spacemacs/set-leader-keys "ws" 'split-window-below-and-focus)
-(spacemacs/set-leader-keys "wS" 'split-window-below)
-(spacemacs/set-leader-keys "wv" 'split-window-right-and-focus)
-(spacemacs/set-leader-keys "wV" 'split-window-right)
+  ;; 2017-06-20: fix shell-popup issue for windows shell
+  (push (cons "\\*shell\\*" display-buffer--same-window-action) display-buffer-alist)
+  ;; Don't make shell to be read only
+  (setq comint-prompt-read-only nil)
+  (define-key shell-mode-map ( kbd "C-l" ) 'comint-clear-buffer)
 
+  ;; evil :q
+  ;;(evil-ex-define-cmd "q[uit]" 'evil-quit)
 
-;; 2017-06-20: fix shell-popup issue for windows shell
-(push (cons "\\*shell\\*" display-buffer--same-window-action) display-buffer-alist)
-
-)
+  ;; split window get focus
+  (global-set-key "\C-x2" 'split-window-below-and-focus)
+  (global-set-key "\C-x3" 'split-window-right-and-focus)
+  (spacemacs/set-leader-keys "ws" 'split-window-below-and-focus)
+  (spacemacs/set-leader-keys "wS" 'split-window-below)
+  (spacemacs/set-leader-keys "wv" 'split-window-right-and-focus)
+  (spacemacs/set-leader-keys "wV" 'split-window-right)
+  )
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
@@ -532,7 +549,7 @@ Version 2016-10-15"
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (flyspell-correct-helm flyspell-correct flycheck-pos-tip pos-tip flycheck auto-dictionary xterm-color shell-pop org-projectile org-present org-pomodoro alert log4e gntp org-download multi-term htmlize gnuplot eshell-z eshell-prompt-extras esh-help stickyfunc-enhance srefactor mmm-mode markdown-toc markdown-mode gh-md ace-jump-buffer evil-unimpaired helm-company helm-c-yasnippet fuzzy company-statistics company auto-yasnippet yasnippet ac-ispell auto-complete sqlplus dired-quick-sort dired+ ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint info+ indent-guide hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight elisp-slime-nav dumb-jump f s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed dash aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async))))
+    (web-beautify livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc company-tern dash-functional tern coffee-mode stickyfunc-enhance srefactor flyspell-correct-helm flyspell-correct auto-dictionary org-projectile org-present org-pomodoro alert log4e gntp org-download htmlize gnuplot mmm-mode markdown-toc markdown-mode gh-md ace-jump-buffer xterm-color shell-pop multi-term flycheck-pos-tip pos-tip flycheck eshell-z eshell-prompt-extras esh-help helm-company helm-c-yasnippet fuzzy company-statistics company auto-yasnippet yasnippet ac-ispell auto-complete sqlplus dired-quick-sort dired+ ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint info+ indent-guide hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight elisp-slime-nav dumb-jump f s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed dash aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

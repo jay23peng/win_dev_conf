@@ -32,9 +32,9 @@ My personal development environment configuration.
 
 10. Modify context menu to add or modify item ``Edit with VIM``: 
 
-   ```shell
-   "C:\Windows\gvim.bat" "%1"
-   ```
+  ```shell
+  "C:\Windows\gvim.bat" "%1"
+  ```
 
 ### OSX
 
@@ -84,10 +84,16 @@ My personal development environment configuration.
 
 ## SPACEMACS
 1. Install emacs firstly.
+
 2. Get [SPACEMACS](http://spacemacs.org/) and extract it to ``emacs_home``.
+
 3. Get ``.spacemacs`` and put it to ``emacs_home``.
+
 4. Copy ``emacs.bat`` to ``C:\windows``.
+
 5. For resolving code-page issues, copy ``init_cmdproxy.exe.sh`` to ``.emacs.d``.
+
+   **NOTE** For cleaning SPACEMACS, not only clean elpa folder, but also remove auto-gen var in ``.spacemacs``.
 ## Waterfox(53.0)
 
 1. Install firefox/waterfox.
