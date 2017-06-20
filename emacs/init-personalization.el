@@ -141,7 +141,7 @@ Version 2016-10-15"
        ((string-equal system-type "windows-nt")
         (mapc
          (lambda (-fpath)
-           (shell-command ( concat "gvim " (replace-regexp-in-string "/" "\\" -fpath t t)))) -file-list))
+           (start-process "gvim" nil "gvim" (replace-regexp-in-string "/" "\\" -fpath t t))) -file-list))
        ((string-equal system-type "darwin")
         (mapc
          (lambda (-fpath)
@@ -151,6 +151,20 @@ Version 2016-10-15"
         (mapc
          (lambda (-fpath) (let ((process-connection-type nil))
                             (start-process "" nil "gvim" -fpath))) -file-list))))))
+
+(defun dired-back-to-top ()
+  (interactive)
+  (beginning-of-buffer)
+(dired-next-line 2))
+
+(defun dired-jump-to-bottom ()
+  (interactive)
+  (end-of-buffer)
+(dired-next-line -1))
+
+(defun dired-back-to-start-of-files ()
+  (interactive)
+(backward-char (- (current-column) 2)))
 
 (add-hook 'dired-mode-hook
  (lambda ()
@@ -162,17 +176,30 @@ Version 2016-10-15"
     'cycle-dired-quick-sort-js)
   (define-key dired-mode-map (kbd "S") 
     'cycle-dired-quick-sort-js)
-  (define-key dired-mode-map (kbd "o") 
+  (define-key dired-mode-map (kbd "t") 
     'xah-open-in-external-app)
-  (define-key dired-mode-map (kbd "v") 
+  (define-key dired-mode-map (kbd "e") 
     'xah-open-in-gvim)
   (define-key dired-mode-map (kbd ".") 
     'ace-jump-buffer)
+  (define-key dired-mode-map (kbd "n") 
+    'evil-search-next)
+  (define-key dired-mode-map (kbd "N") 
+    'evil-search-previous)
+  (define-key dired-mode-map (kbd "/") 
+    'evil-search-forward)
   (define-key dired-mode-map (kbd "<mouse-2>") 
     'diredp-mouse-find-file)
+  (define-key dired-mode-map (kbd "G") 
+    'dired-jump-to-bottom )
+  (define-key dired-mode-map (kbd "g") 
+    nil )
+  (define-key dired-mode-map (kbd "gg") 
+    'dired-back-to-top )
+  (define-key dired-mode-map (kbd "$") 
+    'evil-end-of-line )
   ; was dired-up-directory
  ))
-
 
 ;;  sqlplus-mode:
 (require-package 'sqlplus)
@@ -249,7 +276,6 @@ Version 2016-10-15"
   ;; external ls
   (setq ls-lisp-use-insert-directory-program t)      ;; use external ls
      (setq insert-directory-program "c:/cygwin64/bin/ls") ;; ls program name
-
 )
 
 ;; truncate from a sub-shell automatically
