@@ -36,18 +36,20 @@ values."
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
-     helm
      auto-completion
      ;; better-defaults
      emacs-lisp
+     markdown
+     helm
+     semantic
      ;; git
-     ;; markdown
-     ;; org
-     ;; (shell :variables
-     ;;        shell-default-height 30
-     ;;        shell-default-position 'bottom)
+     org
+     (shell :variables
+            shell-default-shell  'shell 
+            shell-default-height 30
+            shell-default-position 'bottom)
      ;; spell-checking
-     ;; syntax-checking
+     syntax-checking
      ;; version-control
      )
    ;; List of additional packages that will be installed without being
@@ -138,11 +140,11 @@ values."
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
-   dotspacemacs-default-font '("YaHei Consolas Hybrid"
-                               :size 18
+   dotspacemacs-default-font '("Soruce Code Pro"
+                               :size 12
                                :weight normal
                                :width normal
-                               :powerline-scale 1.0)
+                               :powerline-scale 1.1)
    ;; The leader key
    dotspacemacs-leader-key "SPC"
    ;; The key used for Emacs commands (M-x) (after pressing on the leader key).
@@ -297,7 +299,8 @@ values."
    ;; delete only whitespace for changed lines or `nil' to disable cleanup.
    ;; (default nil)
    dotspacemacs-whitespace-cleanup nil
-   ))
+   )
+  )
 
 (defun dotspacemacs/user-init ()
   "Initialization function for user code.
@@ -306,7 +309,29 @@ executes.
  This function is mostly useful for variables that need to be set
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
-
+ ;; Default font setting
+ (cond
+       ((string-equal system-type "windows-nt")
+        (setq-default dotspacemacs-default-font 
+                      '("YaHei Consolas Hybrid"
+                         :size 18
+                         :weight normal
+                         :width normal
+                         :powerline-scale 1.0)))
+       ((string-equal system-type "darwin")
+        (setq-default dotspacemacs-default-font 
+                      '("Monaco"
+                         :size 14
+                         :weight normal
+                         :width normal
+                         :powerline-scale 1.0)))
+       ((string-equal system-type "gnu/linux")
+        (setq-default dotspacemacs-default-font 
+                      '("Mono"
+                         :size 14
+                         :weight normal
+                         :width normal
+                         :powerline-scale 1.0))))
 )
 
 (defun dotspacemacs/user-config ()
@@ -320,12 +345,12 @@ you should place your code here."
  (global-company-mode t)
  (setq company-show-numbers t)
 ;;Short key to truncate
-(global-set-key [f2] 'rename-buffer)
-(global-set-key [f3] 'company-complete)
-(global-set-key [f4] 'kill-this-buffer)
-(global-set-key [f5] 'untabify)
-(global-set-key [f11] 'toggle-menu-bar-mode-from-frame)
-(global-set-key [f12] 'toggle-truncate-lines)
+ (global-set-key [f2] 'rename-buffer)
+ (global-set-key [f3] 'company-complete)
+ (global-set-key [f4] 'kill-this-buffer)
+ (global-set-key [f5] 'untabify)
+ (global-set-key [f11] 'toggle-menu-bar-mode-from-frame)
+ (global-set-key [f12] 'toggle-truncate-lines)
 
 (require 'dired-quick-sort) 
 (defun cycle-dired-quick-sort-js (*n)
@@ -346,8 +371,13 @@ you should place your code here."
     (dired-quick-sort--sort-by-last -next-value)
     (message "sort by %s" -next-value)))
 
+(cond
+ ((string-equal system-type "windows-nt")
   (setq ls-lisp-use-insert-directory-program t)      ;; use external ls
-     (setq insert-directory-program "c:/cygwin64/bin/ls") ;; ls program name
+  (setq insert-directory-program "c:/cygwin64/bin/ls") ;; ls program name
+  ;; for emacs shell
+  ;; (setenv "LANG" "zh_CN.UTF-8") ;; for emacs shell
+     ))
 
 ;; my settings for dired mode 
 (require 'dired+)
@@ -355,7 +385,7 @@ you should place your code here."
   (diredp-toggle-find-file-reuse-dir 1)
   (setq diredp-hide-details-initially-flag nil)
   (setq diredp-hide-details-propagate-flag nil)
-  (evil-set-initial-state 'dired-mode 'normal)
+  ;;(evil-set-initial-state 'dired-mode 'normal)
 
 (defun xah-open-in-external-app ()
   "Open the current file or dired marked files in external app.
@@ -445,6 +475,7 @@ Version 2016-10-15"
              "G"  'dired-jump-to-bottom
              )
 
+
 ;; overwrite evil setting with colemak key mapping
 (define-key evil-normal-state-map (kbd "h") 'evil-previous-visual-line)
 (define-key evil-motion-state-map "h" 'evil-previous-line)
@@ -469,11 +500,28 @@ Version 2016-10-15"
 
 ;;  sqlplus-mode:
 (require 'sqlplus)
-  (add-to-list 'auto-mode-alist '("\\.sqp\\'" . sqlplus-mode))
-  (setq  sql-oracle-program "Z:/scripts/run_sqlplus10.bat")
-  (setq  sqlplus-command "Z:/scripts/run_sqlplus10.bat")
+(add-to-list 'auto-mode-alist '("\\.sqp\\'" . sqlplus-mode))
+(setq  sql-oracle-program "Z:/scripts/run_sqlplus10.bat")
+(setq  sqlplus-command "Z:/scripts/run_sqlplus10.bat")
 
-  )
+;;; scroll one line at a time (less "jumpy" than defaults)
+(setq mouse-wheel-scroll-amount '(3 ((shift) . 1))) ;; two lines at a time
+(setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
+(setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
+
+;; split window get focus
+(global-set-key "\C-x2" 'split-window-below-and-focus)
+(global-set-key "\C-x3" 'split-window-right-and-focus)
+(spacemacs/set-leader-keys "ws" 'split-window-below-and-focus)
+(spacemacs/set-leader-keys "wS" 'split-window-below)
+(spacemacs/set-leader-keys "wv" 'split-window-right-and-focus)
+(spacemacs/set-leader-keys "wV" 'split-window-right)
+
+
+;; 2017-06-20: fix shell-popup issue for windows shell
+(push (cons "\\*shell\\*" display-buffer--same-window-action) display-buffer-alist)
+
+)
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
@@ -484,10 +532,10 @@ Version 2016-10-15"
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (ace-jump-buffer evil-unimpaired helm-company helm-c-yasnippet fuzzy company-statistics company auto-yasnippet yasnippet ac-ispell auto-complete sqlplus dired-quick-sort dired+ ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint info+ indent-guide hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight elisp-slime-nav dumb-jump f s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed dash aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async))))
+    (flyspell-correct-helm flyspell-correct flycheck-pos-tip pos-tip flycheck auto-dictionary xterm-color shell-pop org-projectile org-present org-pomodoro alert log4e gntp org-download multi-term htmlize gnuplot eshell-z eshell-prompt-extras esh-help stickyfunc-enhance srefactor mmm-mode markdown-toc markdown-mode gh-md ace-jump-buffer evil-unimpaired helm-company helm-c-yasnippet fuzzy company-statistics company auto-yasnippet yasnippet ac-ispell auto-complete sqlplus dired-quick-sort dired+ ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint info+ indent-guide hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight elisp-slime-nav dumb-jump f s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed dash aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(default ((((class color) (min-colors 257)) (:foreground "#f8fbfc" :background "#242728")) (((class color) (min-colors 89)) (:foreground "#F5F5F5" :background "#1B1E1C")))))
