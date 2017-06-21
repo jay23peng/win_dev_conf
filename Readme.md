@@ -45,9 +45,7 @@ My personal development environment configuration.
 5. Copy ``gvim`` script to ``/local/usr/bin`` or any path in ``$PATH``.
 
 ## EMACS
-
 ### Windows
-
 1. Download ``emacs`` or  ``emacsw64``.
 
 2. Run ``<emacs>/bin/addpm.exe`` to register/install the package.
@@ -56,44 +54,32 @@ My personal development environment configuration.
 
 4. Create folder ``<emacs_home>/server``.
 
-5. Pull [redguardtoo/emacs.d](https://github.com/redguardtoo/emacs.d) to $EMACS_HOME.
+5. Get [SPACEMACS](http://spacemacs.org/) and extract it to ``emacs_home``.
+``u
 
-   ```shell
-   git clone https://github.com/redguardtoo/emacs.d.git <emacs_home>/.emacs.d
-   ```
+6. Get ``.spacemacs`` and put it to ``emacs_home``.
 
-6. Open init.el, comment line below:
+7. Copy ``emacs.bat`` to ``C:\windows``.
 
-   ```lisp
-    ;; comment below line if you want to setup color theme in your own way  
-    (if (or (display-graphic-p) (string-match-p "256color"(getenv "TERM"))) (require 'init-color-theme))
-   ```
+8. For resolving code-page issues, copy ``init_cmdproxy.exe.sh`` to ``.emacs.d``.
 
-7. Copy ``.custom.el`` to ``<emacs_home>``.
+   **NOTE** For cleaning SPACEMACS, not only clean elpa folder, but also remove auto-gen var in ``.spacemacs``.
 
-8. Invoke emacs. select all encoding to ``utf8``, answer all killing request to ``n``. Wait a couple of minutes. Make sure no compile error.
-
-9. Copy ``emacs.bat`` to ``C:\windows``.
-
-10. For resolving code-page issues, copy ``init_cmdproxy.exe.sh`` to ``.emacs.d``.
 
 ### OSX
-1. Download emacs and install.
-2. Do step 5 - 8 in windows setup.
-
-
-## SPACEMACS
-1. Install emacs firstly.
+1. Get emacs from Homebrew.
+   ```shell
+    brew cask install emacs
+   ```
 
 2. Get [SPACEMACS](http://spacemacs.org/) and extract it to ``emacs_home``.
 
 3. Get ``.spacemacs`` and put it to ``emacs_home``.
 
-4. Copy ``emacs.bat`` to ``C:\windows``.
-
-5. For resolving code-page issues, copy ``init_cmdproxy.exe.sh`` to ``.emacs.d``.
+4. Run emacs
 
    **NOTE** For cleaning SPACEMACS, not only clean elpa folder, but also remove auto-gen var in ``.spacemacs``.
+
 ## Waterfox(53.0)
 
 1. Install firefox/waterfox.
@@ -107,5 +93,12 @@ My personal development environment configuration.
 1. Install [USB OverDrive](http://www.usboverdrive.com/USBOverdrive/News.html) to disable mouse mid-click.
 2. Run [tpkb](https://github.com/unknownzerx/tpkb/releases) to switch the Fn Key.
 
+### HomeBrew
+    ```shell
+    brew list
+    brew cask list
+    brew install <package>
+    brew uninstall <package>
+    ``` 
 
 

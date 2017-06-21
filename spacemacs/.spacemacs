@@ -96,9 +96,11 @@ values."
    ;; This variable has no effect if Emacs is launched with the parameter
    ;; `--insecure' which forces the value of this variable to nil.
    ;; (default t)
-   dotspacemacs-elpa-https t
+   ;; for mac we need insecure
+   dotspacemacs-elpa-https nil
    ;; Maximum allowed time in seconds to contact an ELPA repository.
-   dotspacemacs-elpa-timeout 5
+   ;; Set to 30 for avoid file-error "Cannot open load file" "No such file or directory" "bind-map"
+   dotspacemacs-elpa-timeout 30
    ;; If non nil then spacemacs will check for updates at startup
    ;; when the current branch is not `develop'. Note that checking for
    ;; new versions works via git commands, thus it calls GitHub services
@@ -324,7 +326,8 @@ before packages are loaded. If you are unsure, you should try in setting them in
                     :powerline-scale 1.0)))
    ((string-equal system-type "darwin")
     (setq-default dotspacemacs-default-font 
-                  '("Monaco"
+                    '("Monaco"
+                  ;;'("YaHei Consolas Hybrid"
                     :size 14
                     :weight normal
                     :width normal
@@ -526,8 +529,9 @@ Version 2016-10-15"
   (push (cons "\\*shell\\*" display-buffer--same-window-action) display-buffer-alist)
   ;; Don't make shell to be read only
   (setq comint-prompt-read-only nil)
-  (define-key shell-mode-map ( kbd "C-l" ) 'comint-clear-buffer)
   (evil-set-initial-state 'shell-mode 'emacs)
+  (eval-after-load "shell-mode"
+    '(define-key shell-mode-map ( kbd "C-l" ) 'comint-clear-buffer))
 
   ;; evil :q
   ;;(evil-ex-define-cmd "q[uit]" 'evil-quit)
