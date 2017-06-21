@@ -326,9 +326,9 @@ before packages are loaded. If you are unsure, you should try in setting them in
                     :powerline-scale 1.0)))
    ((string-equal system-type "darwin")
     (setq-default dotspacemacs-default-font 
-                    '("Monaco"
-                  ;;'("YaHei Consolas Hybrid"
-                    :size 14
+                  ;;'("Monaco"
+                  '("YaHei Consolas Hybrid"
+                    :size 15
                     :weight normal
                     :width normal
                     :powerline-scale 1.0)))
@@ -545,6 +545,9 @@ Version 2016-10-15"
   (spacemacs/set-leader-keys "wS" 'split-window-below)
   (spacemacs/set-leader-keys "wv" 'split-window-right-and-focus)
   (spacemacs/set-leader-keys "wV" 'split-window-right)
+
+  ;; Disable dialog box
+  (setq use-dialog-box nil)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
