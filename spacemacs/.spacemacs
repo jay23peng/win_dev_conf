@@ -530,8 +530,13 @@ Version 2016-10-15"
   ;; Don't make shell to be read only
   (setq comint-prompt-read-only nil)
   (evil-set-initial-state 'shell-mode 'emacs)
-  (eval-after-load "shell-mode"
-    '(define-key shell-mode-map ( kbd "C-l" ) 'comint-clear-buffer))
+  (eval-after-load 'shell
+    '(progn
+        (define-key shell-mode-map ( kbd "C-l" ) 'comint-clear-buffer)
+        (evil-define-key 'insert shell-mode-map ( kbd "C-d" ) #'delete-region)
+        (evil-define-key 'visual shell-mode-map ( kbd "C-d" ) #'delete-region)
+     )
+  )
 
   ;; evil :q
   ;;(evil-ex-define-cmd "q[uit]" 'evil-quit)
