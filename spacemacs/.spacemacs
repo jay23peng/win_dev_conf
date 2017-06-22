@@ -545,11 +545,30 @@ Version 2016-10-15"
   (global-set-key "\C-x2" 'split-window-below-and-focus)
   (global-set-key "\C-x3" 'split-window-right-and-focus)
   (global-set-key (kbd "C-x C-m") 'helm-M-x)
+  (global-set-key (kbd "C-c C-m") 'helm-M-x)
   (global-set-key (kbd "M-<SPC>") 'helm-M-x)
+  (global-set-key (kbd "M-x") 'helm-M-x)
   (spacemacs/set-leader-keys "ws" 'split-window-below-and-focus)
   (spacemacs/set-leader-keys "wS" 'split-window-below)
   (spacemacs/set-leader-keys "wv" 'split-window-right-and-focus)
   (spacemacs/set-leader-keys "wV" 'split-window-right)
+
+  ;; remap <ESC>
+  (define-key evil-emacs-state-map (kbd "<ESC>") 'keyboard-quit)
+  ;;(define-key helm-map (kbd "<ESC>") 'keyboard-quit)
+  (define-key evil-emacs-state-map (kbd "C-[") 'keyboard-quit)
+  (define-key company-active-map (kbd "C-[") 'company-abort)
+  (define-key company-active-map (kbd "<ESC>") 'company-abort)
+
+  (eval-after-load 'company
+    '(progn
+        (define-key company-active-map (kbd "C-[") 'company-abort)
+        (define-key company-active-map (kbd "<ESC>") 'company-abort)
+     )
+  )
+
+  (eval-after-load 'helm-command
+    '(bind-key "M-x" #'helm-keyboard-quit helm-M-x-map))
 
   ;; Disable dialog box
   (setq use-dialog-box nil)
