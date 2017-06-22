@@ -597,15 +597,14 @@ Version 2016-10-15"
 
   (eval-after-load 'company
     '(progn
-        (bind-key "C-[" #'company-abort company-active-map)
-        (bind-key "<escape>" #'company-abort company-active-map)
+        (bind-key "<ESC><ESC>" #'company-abort company-active-map)
      )
   )
 
   (eval-after-load 'helm-command
     '(progn
        (bind-key "M-x" #'helm-keyboard-quit helm-M-x-map)
-       (bind-key "<escape>" #'helm-keyboard-quit helm-M-x-map)
+       (bind-key "<ESC><ESC>" #'helm-keyboard-quit helm-M-x-map)
      )
   )
 
