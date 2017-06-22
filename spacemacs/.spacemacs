@@ -538,8 +538,46 @@ Version 2016-10-15"
      )
   )
 
-  ;; evil :q
-  ;;(evil-ex-define-cmd "q[uit]" 'evil-quit)
+  ;; redefine quit
+  (defun xah-close-current-buffer ()
+  "Close the current buffer with save check.
+   URL `http://ergoemacs.org/emacs/elisp_close_buffer_open_last_closed.html'
+   Version 2016-06-19"
+    (interactive)
+    (let (-emacs-buff-p
+           (-org-p (string-match "^*Org Src" (buffer-name))))
+    
+      (setq -emacs-buff-p (if (string-match "^*" (buffer-name)) t nil))
+    
+      (if (string= major-mode "minibuffer-inactive-mode")
+          (minibuffer-keyboard-quit) ; if the buffer is minibuffer
+        (progn
+          ;; offer to save buffers that are non-empty and modified, even for non-file visiting buffer. (because kill-buffer does not offer to save buffers that are not associated with files)
+          (when (and (buffer-modified-p)
+                     (not -emacs-buff-p)
+                     (not (string-equal major-mode "dired-mode"))
+                     (if (equal (buffer-file-name) nil)
+                         (if (string-equal "" (save-restriction (widen) (buffer-string))) nil t)
+                       t))
+            (if (y-or-n-p (format "Buffer %s modified; Do you want to save? " (buffer-name)))
+                (save-buffer)
+                (set-buffer-modified-p nil)))
+          (when (and (buffer-modified-p)
+                     -org-p)
+            (if (y-or-n-p (format "Buffer %s modified; Do you want to save? " (buffer-name)))
+                (org-edit-src-save)
+              (set-buffer-modified-p nil)))
+
+          ;; close
+          (spacemacs/kill-this-buffer (current-buffer))))))
+
+  (defun xah-write-close-current-buffer ()
+    (interactive)
+    (save-buffer)
+    (spacemacs/kill-this-buffer))
+
+  (evil-ex-define-cmd "q" 'xah-close-current-buffer)
+  (evil-ex-define-cmd "wq" 'xah-write-close-current-buffer)
 
   ;; split window get focus
   (global-set-key "\C-x2" 'split-window-below-and-focus)
@@ -547,31 +585,35 @@ Version 2016-10-15"
   (global-set-key (kbd "C-x C-m") 'helm-M-x)
   (global-set-key (kbd "C-c C-m") 'helm-M-x)
   (global-set-key (kbd "M-<SPC>") 'helm-M-x)
-  (global-set-key (kbd "M-x") 'helm-M-x)
   (spacemacs/set-leader-keys "ws" 'split-window-below-and-focus)
   (spacemacs/set-leader-keys "wS" 'split-window-below)
   (spacemacs/set-leader-keys "wv" 'split-window-right-and-focus)
   (spacemacs/set-leader-keys "wV" 'split-window-right)
 
-  ;; remap <ESC>
-  (define-key evil-emacs-state-map (kbd "<ESC>") 'keyboard-quit)
-  ;;(define-key helm-map (kbd "<ESC>") 'keyboard-quit)
-  (define-key evil-emacs-state-map (kbd "C-[") 'keyboard-quit)
-  (define-key company-active-map (kbd "C-[") 'company-abort)
-  (define-key company-active-map (kbd "<ESC>") 'company-abort)
+  ;; remap <ESC> and C-[. 
+  ;; Use single <ESC> here will cause Alt-Meta problem
+  (define-key evil-emacs-state-map (kbd "<ESC><ESC>") 'keyboard-quit)
+  ;;(define-key evil-emacs-state-map (kbd "C-[") 'keyboard-quit)
 
   (eval-after-load 'company
     '(progn
-        (define-key company-active-map (kbd "C-[") 'company-abort)
-        (define-key company-active-map (kbd "<ESC>") 'company-abort)
+        (bind-key "C-[" #'company-abort company-active-map)
+        (bind-key "<escape>" #'company-abort company-active-map)
      )
   )
 
   (eval-after-load 'helm-command
-    '(bind-key "M-x" #'helm-keyboard-quit helm-M-x-map))
+    '(progn
+       (bind-key "M-x" #'helm-keyboard-quit helm-M-x-map)
+       (bind-key "<escape>" #'helm-keyboard-quit helm-M-x-map)
+     )
+  )
 
   ;; Disable dialog box
   (setq use-dialog-box nil)
+
+  ;; Truncate lines on
+  (setq truncate-lines t)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
