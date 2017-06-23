@@ -33,6 +33,7 @@ Plugin 'altercation/vim-colors-solarized'
 Plugin 'octol/vim-cpp-enhanced-highlight'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
+Plugin 'nblock/vim-dokuwiki'
 
 " plugin in http://vim-scripts.org/vim/scripts.html
 Plugin 'largeFile'
@@ -157,6 +158,12 @@ let g:LargeFile = 1000
  " NERDTree config
  map <C-B> :NERDTreeToggle<CR>
  autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") &&b:NERDTreeType == "primary") | q | endif
+
+" dokuwiki
+let dokuwiki_comment=1
+let g:dokuwiki_fenced_languages = ['ruby', 'xml', 'bash', 'shell', 'sh', 'c', 'c++', 'perl', 'csv' ]
+au BufRead,BufNewFile *.dokuwiki set filetype=dokuwiki
+set foldlevel=2
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Singleton VIM
