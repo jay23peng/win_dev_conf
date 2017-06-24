@@ -501,6 +501,7 @@ Version 2016-10-15"
     "y"        'pengw/copy-file-name
     "Y"        'pengw/copy-full-file-name
     "r"        'dired-do-rename
+    "d"        'dired-do-delete
     "D"        'dired-do-delete
     "e"        'xah-open-in-gvim
     "."        'ace-jump-buffer
