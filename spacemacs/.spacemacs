@@ -391,15 +391,20 @@ you should place your code here."
    ((string-equal system-type "windows-nt")
     (setq ls-lisp-use-insert-directory-program t)      ;; use external ls
     (setq insert-directory-program "c:/cygwin64/bin/ls") ;; ls program name
-    ))
+    )
+   ((string-equal system-type "darwin")
+    (setq ls-lisp-use-insert-directory-program t)      ;; use external ls
+    (setq insert-directory-program "/usr/local/bin/gls") ;; ls program name
+    )
+  )
 
   ;; my settings for dired mode 
   (require 'dired+)
-  ;;(toggle-diredp-find-file-reuse-dir 1)
   (diredp-toggle-find-file-reuse-dir 1)
   (setq diredp-hide-details-initially-flag nil)
   (setq diredp-hide-details-propagate-flag nil)
-  ;;(evil-set-initial-state 'dired-mode 'normal)
+  (setq dired-recursive-copies 'always )
+  (setq dired-recursive-deletes 'always )
 
   (defun xah-open-in-external-app ()
     "Open the current file or dired marked files in external app.
@@ -471,22 +476,42 @@ Version 2016-10-15"
     (end-of-buffer)
     (dired-next-line -1))
 
+  (defun pengw/copy-file-name ()
+    (interactive)
+    (let ((temp-msg (dired-copy-filename-as-kill)))  
+      (progn (dired-unmark-all-marks) 
+             ( message temp-msg ))))
+
+  (defun pengw/copy-full-file-name ()
+    (interactive)
+    (let ((temp-msg (dired-copy-filename-as-kill 0)))  
+      (progn (dired-unmark-all-marks) 
+             ( message temp-msg ))))
+
   (evilified-state-evilify dired-mode dired-mode-map
-    "k"  'evil-next-line
-    "^"  (lambda () (interactive) (find-alternate-file ".."))
-    "H"  (lambda () (interactive) (find-alternate-file ".."))
-    "s"  'cycle-dired-quick-sort-js
-    "S"  'cycle-dired-quick-sort-js
-    "t"  'xah-open-in-external-app
-    "e"  'xah-open-in-gvim
-    "."  'ace-jump-buffer
-    "h"  'evil-previous-line
-    "j"  'evil-backward-char
-    "l"  'evil-forward-char
+    "k"        'evil-next-line
+    "^"        (lambda () (interactive) (find-alternate-file ".."))
+    "H"        (lambda () (interactive) (find-alternate-file ".."))
+    "s"        'cycle-dired-quick-sort-js
+    "S"        'cycle-dired-quick-sort-js
+    "o"        'diredp-find-file-reuse-dir-buffer
+    "O"        'xah-open-in-external-app
+    "c"        'dired-do-copy
+    "C"        'dired-do-compress-to
+    "y"        'pengw/copy-file-name
+    "Y"        'pengw/copy-full-file-name
+    "r"        'dired-do-rename
+    "D"        'dired-do-delete
+    "e"        'xah-open-in-gvim
+    "."        'ace-jump-buffer
+    "h"        'evil-previous-line
+    "j"        'evil-backward-char
+    "l"        'evil-forward-char
     [mouse-2]  'diredp-mouse-find-file
-    "$"  'evil-end-of-line
-    "gg" 'dired-back-to-top
-    "G"  'dired-jump-to-bottom
+    "$"        'evil-end-of-line
+    "gg"       'dired-back-to-top
+    "G"        'dired-jump-to-bottom
+    "f"        'make-directory
     )
 
 
@@ -589,6 +614,10 @@ Version 2016-10-15"
   (spacemacs/set-leader-keys "wS" 'split-window-below)
   (spacemacs/set-leader-keys "wv" 'split-window-right-and-focus)
   (spacemacs/set-leader-keys "wV" 'split-window-right)
+  (spacemacs/set-leader-keys "w2" 'split-window-below-and-focus)
+  (spacemacs/set-leader-keys "w3" 'split-window-right-and-focus)
+  (spacemacs/set-leader-keys "w0" 'delete-window)
+  (spacemacs/set-leader-keys "w1" 'maximize-window)
 
   ;; remap <ESC> and C-[. 
   ;; Use single <ESC> here will cause Alt-Meta problem

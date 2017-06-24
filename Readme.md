@@ -63,11 +63,14 @@ My personal development environment configuration.
 
 8. For resolving code-page issues, copy ``init_cmdproxy.exe.sh`` to ``.emacs.d``.
 
+9. For dired-quick-sort, ``ls`` is needed from cygwin.
+
    **NOTE** For cleaning SPACEMACS, not only clean elpa folder, but also remove auto-gen var in ``.spacemacs``.
 
 
 ### OSX
 1. Get emacs from Homebrew.
+
    ```shell
     brew cask install emacs
    ```
@@ -76,7 +79,11 @@ My personal development environment configuration.
 
 3. Get ``.spacemacs`` and put it to ``emacs_home``.
 
-4. Run emacs
+4. For dired-quick-sort, ``gls`` is needed from ``coreutils``.
+
+   ```shell
+   brew install coreutils
+   ``` 
 
    **NOTE** For cleaning SPACEMACS, not only clean elpa folder, but also remove auto-gen var in ``.spacemacs``.
 
@@ -94,6 +101,7 @@ My personal development environment configuration.
 2. Run [tpkb](https://github.com/unknownzerx/tpkb/releases) to switch the Fn Key.
 
 ### HomeBrew
+
     ```shell
     brew list
     brew cask list
