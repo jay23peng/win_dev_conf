@@ -66,7 +66,7 @@ values."
      dired+
      dired-quick-sort
      sqlplus
-     ace-jump-buffer
+     ;; ace-jump-buffer
      )
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -488,6 +488,13 @@ Version 2016-10-15"
       (progn (dired-unmark-all-marks) 
              ( message temp-msg ))))
 
+;;  (add-hook 'dired-mode-hook 'ensure-buffer-name-ends-in-slash)
+;;  (defun ensure-buffer-name-ends-in-slash ()
+;;    "change buffer name to end with slash"
+;;    (let ((name (buffer-name)))
+;;      (if (not (string-match "/$" name))
+;;          (rename-buffer (concat name "/") t))))
+
   (evilified-state-evilify dired-mode dired-mode-map
     "k"        'evil-next-line
     "^"        (lambda () (interactive) (find-alternate-file ".."))
@@ -504,7 +511,8 @@ Version 2016-10-15"
     "d"        'dired-do-delete
     "D"        'dired-do-delete
     "e"        'xah-open-in-gvim
-    "."        'ace-jump-buffer
+    ;;"."        'ace-jump-buffer
+    "."        'helm-buffers-list
     "h"        'evil-previous-line
     "j"        'evil-backward-char
     "l"        'evil-forward-char
@@ -530,22 +538,21 @@ Version 2016-10-15"
   (define-key evil-window-map "j" 'evil-window-left)
 
   (define-key evil-normal-state-map (kbd "l") 'evil-forward-char)
-  (define-key evil-window-map "l" 'evil-window-right)
   (define-key evil-motion-state-map "l" 'evil-forward-char)
+  (define-key evil-window-map "l" 'evil-window-right)
 
   ;; ace-jump-buffer
-  (global-set-key (kbd "M-.") 'ace-jump-buffer) 
-  (define-key evil-normal-state-map ( kbd "M-." ) 'ace-jump-buffer )
-  (define-key evil-normal-state-map ( kbd "." ) 'ace-jump-buffer )
-  (define-key evil-normal-state-map ( kbd "." ) 'ace-jump-buffer )
+  ;;(global-set-key (kbd "M-.") 'ace-jump-buffer) 
+  ;;(define-key evil-normal-state-map ( kbd "M-." ) 'ace-jump-buffer )
+  ;;(define-key evil-normal-state-map ( kbd "." ) 'ace-jump-buffer )
 
-  ;;  sqlplus-mode:
+  ;;  sqlplus-mode
   (require 'sqlplus)
   (add-to-list 'auto-mode-alist '("\\.sqp\\'" . sqlplus-mode))
   (setq  sql-oracle-program "Z:/scripts/run_sqlplus10.bat")
   (setq  sqlplus-command "Z:/scripts/run_sqlplus10.bat")
 
-;;; scroll one line at a time (less "jumpy" than defaults)
+  ;;; scroll one line at a time (less "jumpy" than defaults)
   (setq mouse-wheel-scroll-amount '(3 ((shift) . 1))) ;; two lines at a time
   (setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
   (setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
@@ -637,6 +644,26 @@ Version 2016-10-15"
        (bind-key "<ESC><ESC>" #'helm-keyboard-quit helm-M-x-map)
      )
   )
+
+  (require 'helm-buffers)
+  (bind-key "<ESC><ESC>" #'helm-keyboard-quit helm-buffer-map)
+  (bind-key "M-1" #'(lambda () (interactive) (helm-execute-selection-action-at-nth 1)) helm-buffer-map)
+  (bind-key "M-2" #'(lambda () (interactive) (helm-execute-selection-action-at-nth 2)) helm-buffer-map)
+  (bind-key "M-3" #'(lambda () (interactive) (helm-execute-selection-action-at-nth 3)) helm-buffer-map)
+  (bind-key "M-4" #'(lambda () (interactive) (helm-execute-selection-action-at-nth 4)) helm-buffer-map)
+  (bind-key "M-5" #'(lambda () (interactive) (helm-execute-selection-action-at-nth 5)) helm-buffer-map)
+  (bind-key "M-6" #'(lambda () (interactive) (helm-execute-selection-action-at-nth 6)) helm-buffer-map)
+  (bind-key "M-7" #'(lambda () (interactive) (helm-execute-selection-action-at-nth 7)) helm-buffer-map)
+  (bind-key "M-8" #'(lambda () (interactive) (helm-execute-selection-action-at-nth 8)) helm-buffer-map)
+  (bind-key "M-9" #'(lambda () (interactive) (helm-execute-selection-action-at-nth 9)) helm-buffer-map)
+
+  (global-set-key (kbd "M-.") 'helm-buffers-list) 
+  (define-key evil-normal-state-map ( kbd "M-." ) 'helm-buffers-list )
+  (define-key evil-motion-state-map ( kbd "M-." ) 'helm-buffers-list )
+  (define-key evil-normal-state-map ( kbd "." ) 'helm-buffers-list )
+  (define-key evil-motion-state-map ( kbd "." ) 'helm-buffers-list )
+
+  (helm-linum-relative-mode 1)
 
   ;; Disable dialog box
   (setq use-dialog-box nil)
