@@ -642,35 +642,33 @@ Version 2016-10-15"
     '(progn
        (bind-key "M-x" #'helm-keyboard-quit helm-M-x-map)
        (bind-key "<ESC><ESC>" #'helm-keyboard-quit helm-M-x-map)
+       (bind-key "<ESC><ESC>" #'helm-keyboard-quit helm-buffer-map)
      )
   )
 
-  (require 'helm-buffers)
-  (bind-key "<ESC><ESC>" #'helm-keyboard-quit helm-buffer-map)
-  (bind-key "M-1" #'(lambda () (interactive) (helm-execute-selection-action-at-nth 1)) helm-buffer-map)
-  (bind-key "M-2" #'(lambda () (interactive) (helm-execute-selection-action-at-nth 2)) helm-buffer-map)
-  (bind-key "M-3" #'(lambda () (interactive) (helm-execute-selection-action-at-nth 3)) helm-buffer-map)
-  (bind-key "M-4" #'(lambda () (interactive) (helm-execute-selection-action-at-nth 4)) helm-buffer-map)
-  (bind-key "M-5" #'(lambda () (interactive) (helm-execute-selection-action-at-nth 5)) helm-buffer-map)
-  (bind-key "M-6" #'(lambda () (interactive) (helm-execute-selection-action-at-nth 6)) helm-buffer-map)
-  (bind-key "M-7" #'(lambda () (interactive) (helm-execute-selection-action-at-nth 7)) helm-buffer-map)
-  (bind-key "M-8" #'(lambda () (interactive) (helm-execute-selection-action-at-nth 8)) helm-buffer-map)
-  (bind-key "M-9" #'(lambda () (interactive) (helm-execute-selection-action-at-nth 9)) helm-buffer-map)
-
-  (global-set-key (kbd "M-.") 'helm-buffers-list) 
-  (define-key evil-normal-state-map ( kbd "M-." ) 'helm-buffers-list )
-  (define-key evil-motion-state-map ( kbd "M-." ) 'helm-buffers-list )
-  (define-key evil-normal-state-map ( kbd "." ) 'helm-buffers-list )
-  (define-key evil-motion-state-map ( kbd "." ) 'helm-buffers-list )
-
-  (helm-linum-relative-mode 1)
+  ;; buffer switch
+  (global-set-key (kbd "M-.") 'helm-mini) 
+  (define-key evil-normal-state-map ( kbd "M-." ) 'helm-mini )
+  (define-key evil-motion-state-map ( kbd "M-." ) 'helm-mini )
+  (define-key evil-normal-state-map ( kbd "." ) 'helm-mini )
+  (define-key evil-motion-state-map ( kbd "." ) 'helm-mini )
+  (eval-after-load "helm"
+    '(define-key helm-map (kbd "M-,") 'ace-jump-helm-line))
+  (setq ace-jump-helm-line-style 'pre)
+  (setq ace-jump-helm-line-default-action 'select)
+  (ace-jump-helm-line-idle-exec-add 'helm-mini)
+  (setq avy-keys (append "arstdqwfpgzxcv" nil))
 
   ;; Disable dialog box
   (setq use-dialog-box nil)
 
   ;; Truncate lines on
-  (setq truncate-lines t)
-  )
+  (spacemacs/toggle-truncate-lines-on)
+  ;; virsual lne navigation for textual modes
+  ;; (add-hook 'text-mode-hook 'spacemacs/toogle-line-on)
+  ;;(add-hook 'text-mode-hook 'spacemacs/toogle-visual-line-navigation-on)
+  ;;(setq org-startup-truncated t)
+)
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
