@@ -38,8 +38,8 @@ map -m n,v,i,c <C-t> <Pass>
 
 " bookmark
 map -m n,v,i,c <C-b> <Pass>
-map -m n -builtin . -js if (gBrowser.treeStyleTab.tabbarShown) {gBrowser.treeStyleTab.hideTabbar();} else {gBrowser.treeStyleTab.showTabbar();}
-map -m n -builtin <A-.> b<Tab><S-Tab>
+map -m n -builtin B -js if (gBrowser.treeStyleTab.tabbarShown) {gBrowser.treeStyleTab.hideTabbar();} else {gBrowser.treeStyleTab.showTabbar();}
+map -m n -builtin .  :buffers<CR>f
 map -m n -builtin b  b<Tab><S-Tab>
 
 " delete tab
@@ -50,7 +50,7 @@ map -m n -builtin d D
 nmap -builtin / /\r
 
 " Set hintchar by all left hand chars
-set hintkeys=qwfpgarstdzxcv
+set hintkeys=barstdqwfpgzxcv
 
 " Set next pattern
 set nextpattern='(下|后)一?(页|頁|篇|章|张)|次のページ|次へ','^\bnext\b','\bnext\b','\bsuivant\b','^(>|›)$','^(>>|»)$','^(>|»)','(>|»)$','\bmore\b'
