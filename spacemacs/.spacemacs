@@ -375,7 +375,7 @@ you should place your code here."
     "Cycle background color among a preset list. If `universal-argument' is called first, cycle n steps. Default is 1 step. URL `http://ergoemacs.org/emacs/elisp_toggle_command.html' Version 2015-12-17"
     (interactive "p")
     (let* (
-           (-values ["version" "time" "size" "version" "extension"])
+           (-values ["time" "size" "extension" "version"])
            (-index-before
             (if (get 'cycle-dired-quick-sort-js 'state)
                 (get 'cycle-dired-quick-sort-js 'state)
