@@ -42,9 +42,9 @@ map -m n,v,i,c <C-t> <Pass>
 
 " bookmark
 map -m n,v,i,c <C-b> <Pass>
-map -m n -builtin B -js if (gBrowser.treeStyleTab.tabbarShown) {gBrowser.treeStyleTab.hideTabbar();} else {gBrowser.treeStyleTab.showTabbar();}
-map -m n -builtin .  :buffers<CR>f
-map -m n -builtin b  b<Tab><S-Tab>
+map -m n -builtin b -js if (gBrowser.treeStyleTab.tabbarShown) {gBrowser.treeStyleTab.hideTabbar();} else {gBrowser.treeStyleTab.showTabbar();}
+map -m n -builtin B  :buffers<CR>f
+map -m n -builtin .  b<Tab><S-Tab>
 
 " delete tab
 map -m n -builtin D :tabo<CR>
