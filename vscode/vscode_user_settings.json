@@ -1,0 +1,21 @@
+// Place your settings in this file to overwrite the default settings
+{
+    "vim.disableAnnoyingNeovimMessage": true,
+    "vim.useSystemClipboard": true,
+    "vim.hlsearch": true,
+    "vim.otherModesKeyBindingsNonRecursive": [
+        {
+            "before": ["h"],
+            "after": ["k"]
+        },
+        {
+            "before": ["k"],
+            "after": ["j"]
+        },
+        {
+            "before": ["j"],
+            "after": ["h"]
+        }
+    ],
+    "vim.leader": "<space>"
+}
