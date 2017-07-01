@@ -375,7 +375,7 @@ you should place your code here."
     "Cycle background color among a preset list. If `universal-argument' is called first, cycle n steps. Default is 1 step. URL `http://ergoemacs.org/emacs/elisp_toggle_command.html' Version 2015-12-17"
     (interactive "p")
     (let* (
-           (-values ["time" "size" "extension" "version"])
+           (-values ["version" "time" "extension" "size"])
            (-index-before
             (if (get 'cycle-dired-quick-sort-js 'state)
                 (get 'cycle-dired-quick-sort-js 'state)
@@ -407,6 +407,10 @@ you should place your code here."
   (setq diredp-hide-details-propagate-flag nil)
   (setq dired-recursive-copies 'always )
   (setq dired-recursive-deletes 'always )
+
+  (add-hook 'dired-mode-hook ( 
+    lambda () (dired-quick-sort "version" nil ?y nil)
+  ))
 
   (defun xah-open-in-external-app ()
     "Open the current file or dired marked files in external app.
