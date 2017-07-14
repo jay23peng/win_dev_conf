@@ -393,6 +393,7 @@ you should place your code here."
    ((string-equal system-type "windows-nt")
     (setq ls-lisp-use-insert-directory-program t)      ;; use external ls
     (setq insert-directory-program "c:/cygwin64/bin/ls") ;; ls program name
+    (setq find-program "C:/cygwin64/bin/find")
     )
    ((string-equal system-type "darwin")
     (setq ls-lisp-use-insert-directory-program t)      ;; use external ls
