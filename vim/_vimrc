@@ -156,7 +156,7 @@ let g:cpp_experimental_template_highlight = 1
 let g:LargeFile = 1000
 
  " NERDTree config
- map <C-B> :NERDTreeToggle<CR>
+ map <A-,> :NERDTreeToggle<CR>
  autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") &&b:NERDTreeType == "primary") | q | endif
 
 " dokuwiki

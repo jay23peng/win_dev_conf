@@ -40,6 +40,7 @@ values."
      auto-completion
      ;; better-defaults
      helm
+     html
      emacs-lisp
      gtags
      ;; git
@@ -69,7 +70,6 @@ values."
      dired+
      dired-quick-sort
      sqlplus
-     ;; ace-jump-buffer
      )
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -518,7 +518,6 @@ Version 2016-10-15"
     "d"        'dired-do-delete
     "D"        'make-directory
     "e"        'xah-open-in-gvim
-    ;;"."        'ace-jump-buffer
     "."        'helm-buffers-list
     "h"        'evil-previous-line
     "j"        'evil-backward-char
@@ -546,11 +545,6 @@ Version 2016-10-15"
   (define-key evil-normal-state-map (kbd "l") 'evil-forward-char)
   (define-key evil-motion-state-map "l" 'evil-forward-char)
   (define-key evil-window-map "l" 'evil-window-right)
-
-  ;; ace-jump-buffer
-  ;;(global-set-key (kbd "M-.") 'ace-jump-buffer) 
-  ;;(define-key evil-normal-state-map ( kbd "M-." ) 'ace-jump-buffer )
-  ;;(define-key evil-normal-state-map ( kbd "." ) 'ace-jump-buffer )
 
   ;;  sqlplus-mode
   (require 'sqlplus)
@@ -694,6 +688,45 @@ Version 2016-10-15"
    )
   )
 
+  ;; neotree
+(defun pengw/neotree-smart-toogle ()
+  (interactive)
+  (if (neo-global--window-exists-p)
+      (neotree-hide)
+    (let ((origin-buffer-file-name (buffer-file-name)))
+      (cond
+        ((projectile-project-p)
+           (neotree-find (projectile-project-root))
+           (neotree-find origin-buffer-file-name)
+        )
+        (t
+          (neotree-show)
+        )
+      )
+    )
+  )
+)
+
+  (global-set-key (kbd "M-,") 'pengw/neotree-smart-toogle) 
+  (with-eval-after-load 'neotree
+    (evil-define-key 'evilified neotree-mode-map (kbd "h") 'neotree-previous-line)
+    (evil-define-key 'evilified neotree-mode-map (kbd "H") 'neotree-select-up-node)
+    (evil-define-key 'evilified neotree-mode-map (kbd "j") 'spacemacs/neotree-collapse-or-up)
+    (evil-define-key 'evilified neotree-mode-map (kbd "J") 'neotree-select-previous-sibling-node)
+    (evil-define-key 'evilified neotree-mode-map (kbd "k") 'neotree-next-line)
+    (evil-define-key 'evilified neotree-mode-map (kbd "K") 'neotree-select-down-node)
+    (evil-define-key 'evilified neotree-mode-map (kbd "<ESC><ESC>") 'pengw/neotree-smart-toogle)
+  )
+
+  ;; ggtags
+  (add-to-list 'exec-path "d:/pengw/software/glo656wb/bin")
+  (eval-after-load "helm-gtags"
+    '(progn
+       (bind-key "M-," #'pengw/neotree-smart-toogle ggtags-mode-map)
+     )
+  )
+
+  ;; End of the dotspacemacs/user-config, be careful
 )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -705,7 +738,7 @@ Version 2016-10-15"
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (helm-gtags ggtags csv-mode vimrc-mode dactyl-mode web-beautify livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc company-tern dash-functional tern coffee-mode stickyfunc-enhance srefactor flyspell-correct-helm flyspell-correct auto-dictionary org-projectile org-present org-pomodoro alert log4e gntp org-download htmlize gnuplot mmm-mode markdown-toc markdown-mode gh-md ace-jump-buffer xterm-color shell-pop multi-term flycheck-pos-tip pos-tip flycheck eshell-z eshell-prompt-extras esh-help helm-company helm-c-yasnippet fuzzy company-statistics company auto-yasnippet yasnippet ac-ispell auto-complete sqlplus dired-quick-sort dired+ ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint info+ indent-guide hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight elisp-slime-nav dumb-jump f s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed dash aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async))))
+    (web-mode tagedit slim-mode scss-mode sass-mode pug-mode less-css-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data helm-gtags ggtags csv-mode vimrc-mode dactyl-mode web-beautify livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc company-tern dash-functional tern coffee-mode stickyfunc-enhance srefactor flyspell-correct-helm flyspell-correct auto-dictionary org-projectile org-present org-pomodoro alert log4e gntp org-download htmlize gnuplot mmm-mode markdown-toc markdown-mode gh-md xterm-color shell-pop multi-term flycheck-pos-tip pos-tip flycheck eshell-z eshell-prompt-extras esh-help helm-company helm-c-yasnippet fuzzy company-statistics company auto-yasnippet yasnippet ac-ispell auto-complete sqlplus dired-quick-sort dired+ ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint info+ indent-guide hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight elisp-slime-nav dumb-jump f s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed dash aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
