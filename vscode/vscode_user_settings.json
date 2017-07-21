@@ -17,5 +17,9 @@
             "after": ["h"]
         }
     ],
-    "vim.leader": "<space>"
+    "vim.leader": "<space>",
+    "workbench.iconTheme": null,
+    "terminal.integrated.shell.windows": "C:\\windows\\Sysnative\\cmd.exe",
+    "editor.fontSize": 16,
+    "editor.fontFamily": "'YaHei Consolas Hybrid'"
 }

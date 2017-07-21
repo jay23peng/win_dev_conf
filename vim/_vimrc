@@ -161,7 +161,7 @@ let g:LargeFile = 1000
 
 " dokuwiki
 let dokuwiki_comment=1
-let g:dokuwiki_fenced_languages = ['ruby', 'xml', 'bash', 'shell', 'sh', 'c', 'c++', 'perl', 'csv' ]
+let g:dokuwiki_fenced_languages = ['ruby', 'xml', 'sh', 'c', 'perl' ]
 au BufRead,BufNewFile *.dokuwiki set filetype=dokuwiki
 set foldlevel=2
 
