@@ -157,6 +157,7 @@ let g:LargeFile = 1000
 
  " NERDTree config
  map <A-,> :NERDTreeToggle<CR>
+nnoremap <silent> , :NERDTreeToggle<CR>
  autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") &&b:NERDTreeType == "primary") | q | endif
 
 " dokuwiki
