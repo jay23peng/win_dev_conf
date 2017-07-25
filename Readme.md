@@ -109,4 +109,9 @@ My personal development environment configuration.
     brew uninstall <package>
     ``` 
 
+## Chrome
+To Start Chrome for debug, use command line below to re-direct the usr-dir:
+"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" --user-data-dir=/dev/null
+```shell
 
+```
