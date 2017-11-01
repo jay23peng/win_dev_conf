@@ -11,6 +11,7 @@ set clipboard+=unnamed
 set nobackup
 set tabstop=4
 set shiftwidth=4
+set noundofile
 set expandtab
 retab
 
@@ -25,7 +26,7 @@ call vundle#begin("D:/pengw/.vim_home")
 
 " plugin in Github
 Plugin 'VundleVim/Vundle.vim'
-Plugin 'jesse23/bufferhint'
+Plugin 'bsdelf/bufferhint'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'majutsushi/tagbar'
 Plugin 'sickill/vim-monokai'
@@ -35,10 +36,20 @@ Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
 Plugin 'nblock/vim-dokuwiki'
 
+Plugin 'junegunn/fzf'
+Plugin 'junegunn/fzf.vim'
+Plugin 'hsitz/VimOrganizer'
+Plugin 'w0rp/ale'
+Plugin 'itchyny/lightline.vim'
+Plugin 'ajh17/Spacegray.vim'
+Plugin 'morhetz/gruvbox'
+Plugin 'mbbill/desertEx'
+Plugin 'maksimr/vim-jsbeautify'
+
 " plugin in http://vim-scripts.org/vim/scripts.html
 Plugin 'largeFile'
-Plugin 'desertEx'
 Plugin 'revolutions.vim'
+Plugin 'dbext.vim'
 
 " Git plugin not hosted on GitHub
 " Plugin 'git://git.wincent.com/command-t.git'
@@ -82,29 +93,40 @@ endif
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Remap <ESC> to <C-[>
 nnoremap <C-[> <Esc>
+nnoremap <C-[> <Esc>
 vnoremap <C-[> <Esc>gV
 onoremap <C-[> <Esc>
 inoremap <C-[> <Esc>`^
 
 " Remap buffer switch for colemak
 nmap <silent> <A-l>   :wincmd l<CR>
-nmap <silent> <A-h>   :wincmd k<CR>
-nmap <silent> <A-k>   :wincmd j<CR>
-nmap <silent> <A-j>   :wincmd h<CR>
+nmap <silent> <A-h>   :wincmd h<CR>
+nmap <silent> <A-k>   :wincmd k<CR>
+nmap <silent> <A-j>   :wincmd j<CR>
 nmap <silent> <C-x>0 :hide<CR>
 nmap <silent> <C-x>1 :only<CR>
 nmap <silent> <C-x>2 :sp<CR>
 nmap <silent> <C-x>3 :vsp<CR>
+
+inoremap <A-h> <C-o>h
+inoremap <A-j> <C-o>j
+inoremap <A-k> <C-o>k
+inoremap <A-l> <C-o>l
+inoremap <A-b> <C-o>b
+inoremap <A-f> <C-o>w
 "nmap <C-o> :tabnew<SPACE>
+
+map <silent> <C-j> 20j
+map <silent> <C-k> 20k
 
 " Diable mouse middle button paste
 map <MiddleMouse> <Nop>
 imap <MiddleMouse> <Nop>
 
 " Remap k j for colemak
-noremap h k
-noremap k j
-noremap j h
+" noremap h k
+" noremap k j
+" noremap j h
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins
@@ -121,6 +143,7 @@ map <silent> <F12> :silent! execute "!ctags -R ".$ROOT."/src"<CR><CR>
 
 " ctrlP
 nmap t :CtrlP $ROOT<CR>
+nmap T :CtrlP<CR>
 nnoremap <silent> <A-.> :CtrlPBuffer<CR>
 let g:ctrlp_map = 'T'
 let g:ctrlp_cmd = 'CtrlP'
@@ -157,7 +180,6 @@ let g:LargeFile = 1000
 
  " NERDTree config
  map <A-,> :NERDTreeToggle<CR>
-nnoremap <silent> , :NERDTreeToggle<CR>
  autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") &&b:NERDTreeType == "primary") | q | endif
 
 " dokuwiki
@@ -198,13 +220,127 @@ map <silent> <F11> :if &guioptions =~# 'm' <Bar>
         \set guioptions+=m <Bar>
     \endif<CR>
 
+
 " Display Setting
 set nu
 set cc=73
-colorscheme desertEx
+" let g:spacegray_underline_search = 1
+"let g:spacegray_italicize_comments = 1
+colorscheme gruvbox
+let g:gruvbox_contrast_dark='hard'
+
+" theme in conEmu
+if !has("gui_running")
+    set bg=dark
+    colorscheme gruvbox
+    highlight Comment cterm=italic
+    let $HOME='C:\Users\pengw'
+    set term=xterm
+    set t_Co=256
+    let &t_AB="\e[48;5;%dm"
+    let &t_AF="\e[38;5;%dm"     
+
+    nmap <ESC>oA k
+    nmap <ESC>oB j
+    nmap <ESC>oC l
+    nmap <ESC>oD h    
+
+    imap <ESC>oA <C-o>k
+    imap <ESC>oB <C-o>j
+    imap <ESC>oC <C-o>l
+    imap <ESC>oD <C-o>h    
+    vnoremap <ESC><ESC> <ESC>
+    inoremap <Char-0x07F> <BS>
+    nnoremap <Char-0x07F> <BS>
+    set mouse=a
+endif
 
 " auto-complete
 set completeopt=longest,menu
+
+" VimOrganizer
+let g:org_command_for_emacsclient = 'C:\msys64\usr\bin\emacsclient.exe'
+let g:org_todo_setup='TODO WAIT | DONE CANCELED'
+
+let g:ft_ignore_pat = '\.org'
+filetype plugin indent on
+" and then put these lines in vimrc somewhere after the line above
+au! BufRead,BufWrite,BufWritePost,BufNewFile *.org 
+au BufEnter *.org            call org#SetOrgFileType()
+" let g:org_capture_file = '~/org_files/mycaptures.org'
+command! OrgCapture :call org#CaptureBuffer()
+command! OrgCaptureFile :call org#OpenCaptureFile()
+syntax on
+
+" Disable HL for folded
+hi Folded guibg=NONE ctermbg=NONE
+
+" Ale
+" Put this in vimrc or a plugin file of your own.
+" After this is configured, :ALEFix will try and fix your JS code with ESLint.
+let g:ale_fixers = {
+\   'javascript': ['eslint'],
+\   'json':       ['jsonlint'],
+\}
+
+" Enable completion where available.
+let g:ale_completion_enabled = 1
+
+" Set this. Airline will handle the rest.
+let g:airline#extensions#ale#enabled = 1
+
+nmap <silent> <C-e> <Plug>(ale_next_wrap)
+
+" This is regular lightline configuration, we just added
+" 'linter_warnings', 'linter_errors' and 'linter_ok' to
+" the active right panel. Feel free to move it anywhere.
+" `component_expand' and `component_type' are required.
+"
+" For more info on how this works, see lightline documentation.
+set laststatus=2
+let g:lightline = {
+      \ 'colorscheme': 'jellybeans',
+      \ 'active': {
+      \   'right': [ [ 'lineinfo' ],
+      \              [ 'percent' ],
+      \              [ 'linter_warnings', 'linter_errors', 'linter_ok' ],
+      \              [ 'fileformat', 'fileencoding', 'filetype' ] ]
+      \ },
+      \ 'component_expand': {
+      \   'linter_warnings': 'LightlineLinterWarnings',
+      \   'linter_errors': 'LightlineLinterErrors',
+      \   'linter_ok': 'LightlineLinterOK'
+      \ },
+      \ 'component_type': {
+      \   'linter_warnings': 'warning',
+      \   'linter_errors': 'error',
+      \   'linter_ok': 'ok'
+      \ },
+      \ }
+
+autocmd User ALELint call lightline#update()
+
+" ale + lightline
+function! LightlineLinterWarnings() abort
+  let l:counts = ale#statusline#Count(bufnr(''))
+  let l:all_errors = l:counts.error + l:counts.style_error
+  let l:all_non_errors = l:counts.total - l:all_errors
+  return l:counts.total == 0 ? '' : printf('%d --', all_non_errors)
+endfunction
+
+function! LightlineLinterErrors() abort
+  let l:counts = ale#statusline#Count(bufnr(''))
+  let l:all_errors = l:counts.error + l:counts.style_error
+  let l:all_non_errors = l:counts.total - l:all_errors
+  return l:counts.total == 0 ? '' : printf('%d >>', all_errors)
+endfunction
+
+function! LightlineLinterOK() abort
+  let l:counts = ale#statusline#Count(bufnr(''))
+  let l:all_errors = l:counts.error + l:counts.style_error
+  let l:all_non_errors = l:counts.total - l:all_errors
+  return l:counts.total == 0 ? '✓' : ''
+endfunction
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " OOTB Vim config for vimdiff

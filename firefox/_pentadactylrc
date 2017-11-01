@@ -16,17 +16,17 @@ map ZQ <Nop>
 map ZZ <Nop>
 
 " Remap k j for colemak
-map -m v,caret -builtin h k
-map -m v,caret -builtin k j
-map -m v,caret -builtin j h
+" map -m v,caret -builtin h k
+" map -m v,caret -builtin k j
+" map -m v,caret -builtin j h
 
 " Remap h and k to scroll half page.
 " note:O use <C-u> will cause hide-tree-style-tab useless. Use 20<Up> 
 " instead
-map -m n -builtin h 25<Up>
-map -m n -builtin k 25<Down>
+map -m n -builtin k 25<Up>
+map -m n -builtin j 25<Down>
 map -m n l -builtin <C-n>
-map -m n j -builtin gT
+map -m n h -builtin gT
 map -m n -builtin y Y
 map -m n -builtin Y y
 

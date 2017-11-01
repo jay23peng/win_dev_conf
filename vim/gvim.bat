@@ -6,8 +6,8 @@ rem -- Run Vim --
 SET SHELL=
 
 SET HOME=%USERPROFILE%
-set VIM_EXE_DIR=C:\Program Files (x86)\Vim\vim74
-if exist "%VIM%\vim74\gvim.exe" set VIM_EXE_DIR=%VIM%\vim74
+set VIM_EXE_DIR=C:\Program Files (x86)\Vim\vim80
+if exist "%VIM%\vim80\gvim.exe" set VIM_EXE_DIR=%VIM%\vim80
 if exist "%VIMRUNTIME%\gvim.exe" set VIM_EXE_DIR=%VIMRUNTIME%
 
 if exist "%VIM_EXE_DIR%\gvim.exe" goto havevim

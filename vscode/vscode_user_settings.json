@@ -1,29 +1,26 @@
-// Place your settings in this file to overwrite the default settings
 {
     "vim.disableAnnoyingNeovimMessage": true,
     "vim.useSystemClipboard": true,
     "vim.hlsearch": true,
-    "vim.otherModesKeyBindingsNonRecursive": [
-        {
-            "before": ["h"],
-            "after": ["k"]
-        },
-        {
-            "before": ["k"],
-            "after": ["j"]
-        },
-        {
-            "before": ["j"],
-            "after": ["h"]
-        }
-    ],
     "vim.leader": "<space>",
-    "workbench.iconTheme": null,
+    "workbench.iconTheme": "vscode-icons",
     "terminal.integrated.shell.windows": "C:\\windows\\Sysnative\\cmd.exe",
     "editor.fontSize": 16,
     "editor.fontFamily": "'YaHei Consolas Hybrid'",
     "window.zoomLevel": 0,
     "editor.minimap.enabled": false,
     "editor.renderControlCharacters": true,
-    "workbench.editor.enablePreview": false
+    "workbench.editor.enablePreview": false,
+    "sync.gist": "26d8a83e1b13330887508e21ff6be4ac",
+    "sync.lastUpload": "2017-10-16T15:23:54.841Z",
+    "sync.autoDownload": false,
+    "sync.autoUpload": false,
+    "sync.lastDownload": "",
+    "sync.forceDownload": false,
+    "sync.anonymousGist": false,
+    "sync.host": "",
+    "sync.pathPrefix": "",
+    "sync.quietSync": false,
+    "sync.askGistName": false,
+    "vsicons.projectDetection.autoReload": true
 }

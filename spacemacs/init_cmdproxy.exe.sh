@@ -1,2 +1,3 @@
 chcp 65001
 set LANG=
+set UDUNOSPAWN=TRUE

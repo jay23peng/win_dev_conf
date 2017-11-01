@@ -55,7 +55,7 @@ My personal development environment configuration.
 4. Create folder ``<emacs_home>/server``.
 
 5. Get [SPACEMACS](http://spacemacs.org/) and extract it to ``emacs_home``.
-``u
+  ``u
 
 6. Get ``.spacemacs`` and put it to ``emacs_home``.
 
@@ -83,16 +83,25 @@ My personal development environment configuration.
 
    ```shell
    brew install coreutils
-   ``` 
+   ```
 
    **NOTE** For cleaning SPACEMACS, not only clean elpa folder, but also remove auto-gen var in ``.spacemacs``.
 
-## Waterfox(53.0)
+## Waterfox(55.0)
+
+The top version you can use for now is 55.0.
 
 1. Install firefox/waterfox.
 2. Download [Pentadactyl](http://5digits.org/pentadactyl). After 50.0, use [Signed Version](https://github.com/willsALMANJ/pentadactyl-signed/releases)
 3. Copy ``_pentadactylrc`` and ``pentadactyl`` to ``~/``.
 4. For Windows Mac Type, Use ``Noto Sans CJK SC DemiLight`` and preference from [here](https://github.com/renkun-ken/MacType.Decency). For 53 version, also need ``gfx.content.azure.backends;direct2d1.1,cairo,skia``
+
+## MISC
+
+All misc utils just download and put it to `/bin` or `C:\windows`.
+
+* [FZF](https://github.com/junegunn/fzf)
+* [ripgrip](https://github.com/BurntSushi/ripgrep)
 
 ## OSX Specific
 
@@ -102,16 +111,36 @@ My personal development environment configuration.
 
 ### HomeBrew
 
-    ```shell
-    brew list
-    brew cask list
-    brew install <package>
-    brew uninstall <package>
-    ``` 
+```shell
+brew list
+brew cask list
+brew install <package>
+brew uninstall <package>
+```
+
+## ConEmu
+
+It is for windows specific, just download the latest and overwrite `conEmu.xml`.
+
+For `cygwin emacs` support, need to use latest alpha version, download the latest `conemu-msys2-64.exe` to `C:\msys64\usr\bin`.
+
+## msys2
+
+http://www.msys2.org/
+
+Use `pacman -Ss <pack-name>` to search package.
+
+Use `pacman -S <pack-name>` to install.
+
+Use `pacman -R <pack-name>` to remove.
+
+`msys2 emacs` works perfect with `conEmu`.
 
 ## Chrome
-To Start Chrome for debug, use command line below to re-direct the usr-dir:
-"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" --user-data-dir=/dev/null
-```shell
 
+To Start Chrome for debug, use command line below to re-direct the usr-dir:
+
+```sh
+C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" --user-data-dir=/dev/null
 ```
+
