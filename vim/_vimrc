@@ -223,7 +223,9 @@ map <silent> <F11> :if &guioptions =~# 'm' <Bar>
 
 " Display Setting
 set nu
-set cc=73
+set tw=0
+set wrap
+" set cc=73
 " let g:spacegray_underline_search = 1
 "let g:spacegray_italicize_comments = 1
 colorscheme gruvbox
