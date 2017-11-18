@@ -21,8 +21,25 @@ retab
 filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
-set rtp+=D:/pengw/.vim_home/Vundle.vim
-call vundle#begin("D:/pengw/.vim_home")
+if has("win32")
+  set rtp+=D:/pengw/.vim_home/Vundle.vim
+  call vundle#begin("D:/pengw/.vim_home")
+elseif has('mac')
+  set rtp+=~/.vim_home/Vundle.vim
+  set rtp+=/usr/local/opt/fzf
+  call vundle#begin("~/.vim_home")
+else
+  let s:uname = system("uname -s")
+  if s:uname == "Darwin\n"
+      " mac terminal
+      set rtp+=~/.vim_home/Vundle.vim
+      set rtp+=/usr/local/opt/fzf
+      call vundle#begin("~/.vim_home")
+  else
+      "linux
+  endif
+endif
+
 
 " plugin in Github
 Plugin 'VundleVim/Vundle.vim'
@@ -85,7 +102,12 @@ if has("win32")
 elseif has('mac')
   set guifont=Monaco:h15
 else
-  "linux
+  let s:uname = system("uname -s")
+  if s:uname == "Darwin\n"
+    set guifont=Monaco:h15
+  else
+    "linux
+  endif
 endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -228,12 +250,12 @@ set wrap
 " set cc=73
 " let g:spacegray_underline_search = 1
 "let g:spacegray_italicize_comments = 1
+set bg=dark
 colorscheme gruvbox
 let g:gruvbox_contrast_dark='hard'
 
 " theme in conEmu
 if !has("gui_running")
-    set bg=dark
     colorscheme gruvbox
     highlight Comment cterm=italic
     let $HOME='C:\Users\pengw'
