@@ -2,9 +2,35 @@
 
 My personal development environment configuration.
 
-## VIM
+Generally, `tumx + vim + zsh` is the best practice for a development environment. In different platform we use different software to achieve the same practice.
 
-### Windows
+## Windows
+
+### ConEmu
+
+1.  Get the latest [ConEmu](https://conemu.github.io/).
+2. Copy `ConEmu.xml` from repo and overwrite the `C:\Program Files\ConEmu`.
+
+For `cygwin emacs` support, need to use latest alpha version, download the latest `conemu-msys2-64.exe` to `C:\msys64\usr\bin`.
+
+### MSYS2
+
+http://www.msys2.org/
+
+Use `pacman -Ss <pack-name>` to search package.
+
+Use `pacman -S <pack-name>` to install.
+
+Use `pacman -R <pack-name>` to remove.
+
+#### Emacs
+
+`msys2 emacs` works perfect with `conEmu`.
+
+1. Install emacs by `paceman -S msys2 emacs`.
+2. Get [SPACEMACS](http://spacemacs.org/) and  ``.spacemacs`` from repo extract it to home folder `C:\msys64\home\<username>`.
+
+### Gvim
 
 1. Install Git for windows.
 
@@ -30,45 +56,62 @@ My personal development environment configuration.
 
 9. Copy and overwrite ``gvim.bat`` to ``c:\windows``.
 
-10. Modify context menu to add or modify item ``Edit with VIM``: 
+10. `$HOME` can be redefined to:
 
-  ```shell
-  "C:\Windows\gvim.bat" "%1"
-  ```
+    ```properties
+    let $HOME='C:\Users\pengw'
+    ```
 
-### OSX
+### Zsh
 
-1. Install ``Xcode Command Line Tools``.
-2. Install ``Homebrew``. (Optional)
-3. Do step 4 to 8 in windows.
-4. Add applescript ``edit_with_vim_apple_script``.
-5. Copy ``gvim`` script to ``/local/usr/bin`` or any path in ``$PATH``.
+TBD
 
-## EMACS
-### Windows
-1. Download ``emacs`` or  ``emacsw64``.
+### MISC
 
-2. Run ``<emacs>/bin/addpm.exe`` to register/install the package.
+Other software that used on Windows Platform:
 
-3. Modify ``reg_home_and_server.reg`` and import to windows.
+* [ALTRun](https://github.com/etworker/ALTRun)
+* [KeePass](https://keepass.info/)
+* [mactype](https://github.com/snowie2000/mactype)
+* [MultiDesk](http://www.syvik.com/multidesk/index_chs.htm)
+* [Unlocker](https://unlocker.en.softonic.com/)
+* [XMing](https://sourceforge.net/projects/xming/)
 
-4. Create folder ``<emacs_home>/server``.
+## macOS
 
-5. Get [SPACEMACS](http://spacemacs.org/) and extract it to ``emacs_home``.
-  ``u
+### Keyboard
 
-6. Get ``.spacemacs`` and put it to ``emacs_home``.
+I use `ThinkPad Compact Bluetooth Keyboard with TrackPoint`. 2 steps below needed for make if work proper.
 
-7. Copy ``emacs.bat`` to ``C:\windows``.
+1. Install [USB OverDrive](http://www.usboverdrive.com/USBOverdrive/News.html) to disable mouse mid-click.
+2. Run [tpkb](https://github.com/unknownzerx/tpkb/releases) to switch the Fn Key.
+3. Switch `Ctrl` and `cap lock` key by Mac's system preference.
 
-8. For resolving code-page issues, copy ``init_cmdproxy.exe.sh`` to ``.emacs.d``.
+### HomeBrew
 
-9. For dired-quick-sort, ``ls`` is needed from cygwin.
+```shell
+brew list
+brew cask list
+brew install <package>
+brew uninstall <package>
+```
 
-   **NOTE** For cleaning SPACEMACS, not only clean elpa folder, but also remove auto-gen var in ``.spacemacs``.
+### iTerm2
 
+`iTerm2` is the most public choice in macOS as console emulator. Install it by:
 
-### OSX
+```bash
+brew cask install iterm2
+```
+
+### Tmux
+
+`brew install tux`
+
+### Emacs
+
+Emacs is mainly used for support `VimOrganizer` for `orgmode` currently.
+
 1. Get emacs from Homebrew.
 
    ```shell
@@ -87,60 +130,48 @@ My personal development environment configuration.
 
    **NOTE** For cleaning SPACEMACS, not only clean elpa folder, but also remove auto-gen var in ``.spacemacs``.
 
-## Waterfox(55.0)
+### MacVim
 
-The top version you can use for now is 55.0.
+1. Install VIM by `brew cask intall macvim`.
+2. Get Vundle by either download or git pull.
+3. Put ``_vimrc`` to ``$HOME``.
+4. Invoke vim, run ``PluginInstall``.
+
+### MISC
+
+* [amethyst](https://github.com/ianyh/Amethyst)
+* [kdiff3](http://kdiff3.sourceforge.net/)
+* [macpass](https://github.com/mstarke/MacPass)
+
+## Cross Platform Software
+
+### Waterfox
+
+Because firefox is deprecating old extension, the latest availble version of Waterfox is `54.0.1`.
 
 1. Install firefox/waterfox.
 2. Download [Pentadactyl](http://5digits.org/pentadactyl). After 50.0, use [Signed Version](https://github.com/willsALMANJ/pentadactyl-signed/releases)
 3. Copy ``_pentadactylrc`` and ``pentadactyl`` to ``~/``.
 4. For Windows Mac Type, Use ``Noto Sans CJK SC DemiLight`` and preference from [here](https://github.com/renkun-ken/MacType.Decency). For 53 version, also need ``gfx.content.azure.backends;direct2d1.1,cairo,skia``
 
-## MISC
-
-All misc utils just download and put it to `/bin` or `C:\windows`.
-
-* [FZF](https://github.com/junegunn/fzf)
-* [ripgrip](https://github.com/BurntSushi/ripgrep)
-
-## OSX Specific
-
-### ThinkPad Compact Bluetooth Keyboard with TrackPoint
-1. Install [USB OverDrive](http://www.usboverdrive.com/USBOverdrive/News.html) to disable mouse mid-click.
-2. Run [tpkb](https://github.com/unknownzerx/tpkb/releases) to switch the Fn Key.
-
-### HomeBrew
-
-```shell
-brew list
-brew cask list
-brew install <package>
-brew uninstall <package>
-```
-
-## ConEmu
-
-It is for windows specific, just download the latest and overwrite `conEmu.xml`.
-
-For `cygwin emacs` support, need to use latest alpha version, download the latest `conemu-msys2-64.exe` to `C:\msys64\usr\bin`.
-
-## msys2
-
-http://www.msys2.org/
-
-Use `pacman -Ss <pack-name>` to search package.
-
-Use `pacman -S <pack-name>` to install.
-
-Use `pacman -R <pack-name>` to remove.
-
-`msys2 emacs` works perfect with `conEmu`.
-
-## Chrome
+###Chrome
 
 To Start Chrome for debug, use command line below to re-direct the usr-dir:
 
 ```sh
 C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" --user-data-dir=/dev/null
 ```
+
+### Visual Studio Code
+
+1. Use [Insiders](https://code.visualstudio.com/insiders/) version.
+2. Get [Settings Sync](https://marketplace.visualstudio.com/items?itemName=Shan.code-settings-sync) Extension and sync Settings.
+
+### Utilities
+
+* [BeyondCompare](https://www.scootersoftware.com/index.php)
+* [Divvy](http://mizage.com/divvy/)
+* [FZF](https://github.com/junegunn/fzf)
+* [ripgrip](https://github.com/BurntSushi/ripgrep)
+* [SourceTree](https://www.sourcetreeapp.com/)
 
