@@ -24,10 +24,12 @@ filetype off                  " required
 if has("win32")
   set rtp+=D:/pengw/.vim_home/Vundle.vim
   call vundle#begin("D:/pengw/.vim_home")
+  let $HOME='D:/pengw/.vim_home'
 elseif has('mac')
   set rtp+=~/.vim_home/Vundle.vim
   set rtp+=/usr/local/opt/fzf
   call vundle#begin("~/.vim_home")
+  let $HOME='.vim_home'
 else
   let s:uname = system("uname -s")
   if s:uname == "Darwin\n"
@@ -35,6 +37,7 @@ else
       set rtp+=~/.vim_home/Vundle.vim
       set rtp+=/usr/local/opt/fzf
       call vundle#begin("~/.vim_home")
+      let $HOME=".vim_home"
   else
       "linux
   endif
@@ -258,7 +261,6 @@ let g:gruvbox_contrast_dark='hard'
 if !has("gui_running")
     colorscheme gruvbox
     highlight Comment cterm=italic
-    let $HOME='C:\Users\pengw'
     set term=xterm
     set t_Co=256
     let &t_AB="\e[48;5;%dm"
