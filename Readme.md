@@ -9,7 +9,7 @@ Generally, `tumx + vim + zsh` is the best practice for a development environment
 ### ConEmu
 
 1.  Get the latest [ConEmu](https://conemu.github.io/).
-2. Copy `ConEmu.xml` from repo and overwrite the `C:\Program Files\ConEmu`.
+2.  Copy `ConEmu.xml` from repo and overwrite the `C:\Program Files\ConEmu`.
 
 For `cygwin emacs` support, need to use latest alpha version, download the latest `conemu-msys2-64.exe` to `C:\msys64\usr\bin`.
 
@@ -58,9 +58,9 @@ Use `pacman -R <pack-name>` to remove.
 
 10. `$HOME` can be redefined to:
 
-    ```properties
-    let $HOME='C:\Users\pengw'
-    ```
+   ```properties
+   let $HOME='C:\Users\pengw'
+   ```
 
 ### Zsh
 
@@ -104,9 +104,21 @@ brew uninstall <package>
 brew cask install iterm2
 ```
 
+### zsh
+
+1. `brew install zsh`
+2. Set `iterm2` default command to `zsh`. Restart `iterm2` to make sure it works. Set `zsh` as default will pollute other application like `VS Code`, so this apprach will be better.
+3. Insall pip by `sudo easy_install pip`.
+4. Intall power-line by `pip install powline-status`.
+5. Install fonts from [here](https://github.com/powerline/fonts).
+6. Select a font end with `power-line`.
+7. run `vim ~/.zshrc`, change the theme to `agnoster`.
+
 ### Tmux
 
-`brew install tux`
+iTerm2 has split and tab function already, did not use Tmux for now.
+
+`brew install tmux`
 
 ### Emacs
 
@@ -136,6 +148,16 @@ Emacs is mainly used for support `VimOrganizer` for `orgmode` currently.
 2. Get Vundle by either download or git pull.
 3. Put ``_vimrc`` to ``$HOME``.
 4. Invoke vim, run ``PluginInstall``.
+
+###Change Machine Name
+
+```bash
+sudo scutil --set ComputerName "newname"
+sudo scutil --set LocalHostName "newname"
+sudo scutil --set HostName "newname"
+```
+
+
 
 ### MISC
 
