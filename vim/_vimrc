@@ -20,34 +20,31 @@ retab
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 filetype off                  " required
 
-" set the runtime path to include Vundle and initialize
+" Bootstrap for starting with Vundle
 if has("win32")
-  set rtp+=D:/pengw/.vim_home/Vundle.vim
-  call vundle#begin("D:/pengw/.vim_home")
-  let $HOME='D:/pengw/.vim_home'
-elseif has('mac')
-  set rtp+=~/.vim_home/Vundle.vim
-  set rtp+=/usr/local/opt/fzf
-  call vundle#begin("~/.vim_home")
-  let $HOME='.vim_home'
+  let $HOME='C:/msys64/home/'.$USERNAME
+" elseif has('mac')
+"   set rtp+=~/.vim_home/Vundle.vim
+"   set rtp+=/usr/local/opt/fzf
+"   call vundle#begin("~/.vim_home")
 else
-  let s:uname = system("uname -s")
-  if s:uname == "Darwin\n"
+  " let s:uname = system("uname -s")
+  " if s:uname == "Darwin\n"
       " mac terminal
-      set rtp+=~/.vim_home/Vundle.vim
       set rtp+=/usr/local/opt/fzf
-      call vundle#begin("~/.vim_home")
-      let $HOME=".vim_home"
-  else
+  " else
       "linux
-  endif
+  " endif
 endif
+let $VundleHome = $HOME.'/.vim'
+set rtp+=$VundleHome/Vundle.vim
+call vundle#begin($VundleHome)
 
 
 " plugin in Github
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'bsdelf/bufferhint'
-Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'Yggdroot/LeaderF'
 Plugin 'majutsushi/tagbar'
 Plugin 'sickill/vim-monokai'
 Plugin 'altercation/vim-colors-solarized'
@@ -56,8 +53,6 @@ Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
 Plugin 'nblock/vim-dokuwiki'
 
-Plugin 'junegunn/fzf'
-Plugin 'junegunn/fzf.vim'
 Plugin 'hsitz/VimOrganizer'
 Plugin 'w0rp/ale'
 Plugin 'itchyny/lightline.vim'
@@ -70,17 +65,6 @@ Plugin 'maksimr/vim-jsbeautify'
 Plugin 'largeFile'
 Plugin 'revolutions.vim'
 Plugin 'dbext.vim'
-
-" Git plugin not hosted on GitHub
-" Plugin 'git://git.wincent.com/command-t.git'
-" git repos on your local machine (i.e. when working on your own plugin)
-" Plugin 'file:///home/gmarik/path/to/plugin'
-" The sparkup vim script is in a subdirectory of this repo called vim.
-" Pass the path to set the runtimepath properly.
-" Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-" Install L9 and avoid a Naming conflict if you've already installed a
-" different version somewhere else.
-" Plugin 'ascenator/L9', {'name': 'newL9'}
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -98,24 +82,16 @@ set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
 "source $VIMRUNTIME/delmenu.vim
 "source $VIMRUNTIME/menu.vim
 "
-set ambiwidth=double
-if has("win32")
-  set guifont=Consolas:h15
-  set guifontwide=DotumChe:h15
-elseif has('mac')
-  set guifont=Monaco:h15
-else
-  let s:uname = system("uname -s")
-  if s:uname == "Darwin\n"
-    set guifont=Monaco:h15
-  else
-    "linux
-  endif
-endif
+" set ambiwidth=double
+set guifont=Source_Code_Pro_for_Powerline:h14
+set guifontwide=Source_Code_Pro_for_Powerline:h14
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Key Remapping
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" leader key
+let mapleader = " "
+
 " Remap <ESC> to <C-[>
 nnoremap <C-[> <Esc>
 nnoremap <C-[> <Esc>
@@ -123,31 +99,34 @@ vnoremap <C-[> <Esc>gV
 onoremap <C-[> <Esc>
 inoremap <C-[> <Esc>`^
 
-" Remap buffer switch for colemak
-nmap <silent> <A-l>   :wincmd l<CR>
-nmap <silent> <A-h>   :wincmd h<CR>
-nmap <silent> <A-k>   :wincmd k<CR>
-nmap <silent> <A-j>   :wincmd j<CR>
+" Remap buffer switch 
+nmap <silent> <C-x>l :wincmd l<CR>
+nmap <silent> <C-x>h :wincmd h<CR>
+nmap <silent> <C-x>k :wincmd k<CR>
+nmap <silent> <C-x>j :wincmd j<CR>
+" nmap <silent> <C-x>t :tabnew<CR>
 nmap <silent> <C-x>0 :hide<CR>
 nmap <silent> <C-x>1 :only<CR>
 nmap <silent> <C-x>2 :sp<CR>
 nmap <silent> <C-x>3 :vsp<CR>
 
+" Move cursor at input mode
 inoremap <A-h> <C-o>h
 inoremap <A-j> <C-o>j
 inoremap <A-k> <C-o>k
 inoremap <A-l> <C-o>l
 inoremap <A-b> <C-o>b
 inoremap <A-f> <C-o>w
-"nmap <C-o> :tabnew<SPACE>
 
-map <silent> <C-j> 20j
-map <silent> <C-k> 20k
+nmap <silent> <C-j> 20j
+nmap <silent> <C-k> 20k
 
 " Diable mouse middle button paste
 map <MiddleMouse> <Nop>
 imap <MiddleMouse> <Nop>
 
+" Sync mapping with Firefox
+nnoremap t :tabnew<space>
 " Remap k j for colemak
 " noremap h k
 " noremap k j
@@ -157,7 +136,7 @@ imap <MiddleMouse> <Nop>
 " Plugins
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " bufferhint
-let g:bufferhint_MaxWidth = 30
+let g:bufferhint_MaxWidth = 50
 let g:bufferhint_BufferName = '~buffers~'
 nnoremap <silent> . :call bufferhint#Popup()<CR>
 
@@ -166,31 +145,131 @@ set tags=tags,$ROOT/tags;
 set autochdir
 map <silent> <F12> :silent! execute "!ctags -R ".$ROOT."/src"<CR><CR>
 
-" ctrlP
-nmap t :CtrlP $ROOT<CR>
-nmap T :CtrlP<CR>
-nnoremap <silent> <A-.> :CtrlPBuffer<CR>
-let g:ctrlp_map = 'T'
-let g:ctrlp_cmd = 'CtrlP'
-let g:ctrlp_max_files = 0
-let g:ctrlp_custom_ignore = {
-    \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-    \ 'file': '\v\.(exe|so|lib|dll|obj|pdb|qxw)$',
-    \ 'link': 'SOME_BAD_SYMBOLIC_LINKS',
-    \ }
+" leaderF
+let g:Lf_ShortcutF = '<leader>s'
+nnoremap <silent> f :LeaderfLine<cr>
+nnoremap <silent> F :LeaderfLineAll<CR>
+nnoremap <leader>* :LeaderfLineCword<cr>
+nnoremap <leader>S :LeaderfFile<SPACE>
+nnoremap <leader>h :LeaderfMru<cr>
+nnoremap <leader>H :LeaderfHistorySearch<cr>
+nnoremap <leader>j :LeaderfFunction<cr>
+nnoremap <leader>J :LeaderfBufFunctionAll<cr>
+" nnoremap <silent> . :LeaderfBufferAll<CR>
+let g:Lf_StlSeparator = { 'left': "\ue0b0", 'right': "\ue0b2" }
 
-let g:ctrlp_prompt_mappings = {
-\ 'PrtExit()':   ['<c-[>', '<esc>'],
-\ 'PrtSelectMove("k")': ['<c-h>', '<up>'],
-\ 'PrtSelectMove("j")': ['<c-k>', '<down>'],
-\ 'PrtBS()': ['<bs>'],
-\ 'ToggleByFname()': [''],
-\ 'PrtCurRight()': ['<c-l>'],
-\ 'PrtCurLeft()': ['<c-j>'],
-\ 'PrtClearCache()': ['<F5>'],
-\ 'PrtInsert("c")': ['<c-y>'],
-\}
+" color theme for leaderF
+let s:normal_font_color = [ '#30302c', 236 ]
+let s:normal_color = [ '#8197bf', 103 ]
+let s:replace_font_color = [ '#30302c', 236 ]
+let s:replace_color = [ '#cf6a4c', 167 ]
+let s:visual_font_color = [ '#30302c', 236 ]
+let s:visual_color = [ '#f0a0c0', 217 ]
+let s:insert_font_color = [ '#30302c', 236 ]
+let s:insert_color = [ '#99ad6a', 107 ]
+let s:warning_font_color = [ '#30302c', 236 ]
+let s:warning_color = [ '#ffb964', 215 ]
+let s:inactive_font_color = [ '#808070', 244 ]
+let s:inactive_color = [ '#30302c ', 236 ]
+let s:tabline_left_font_color = [ '#e8e8d3', 253 ]
+let s:tabline_left_color = [ '#666656', 242 ]
+let s:tabline_right_font_color = [ '#30302c', 236 ]
+let s:tabline_right_color = [ '#949484', 246 ]
+let s:tabline_right_font_color_1 = [ '#a8a897', 248 ]
+let s:tabline_right_color_1 = [ '#4e4e43', 239 ]
 
+let g:Lf_StlPalette = {
+        \   'stlName': {
+        \       'gui': 'bold',
+        \       'font': 'NONE',
+        \       'guifg': s:normal_font_color[0],
+        \       'guibg': s:normal_color[0],
+        \       'cterm': 'bold',
+        \       'ctermfg': s:normal_font_color[1],
+        \       'ctermbg': s:normal_color[1]
+        \   },
+        \   'stlCategory': {
+        \       'gui': 'NONE',
+        \       'font': 'NONE',
+        \       'guifg': s:replace_font_color[0],
+        \       'guibg': s:replace_color[0],
+        \       'cterm': 'NONE',
+        \       'ctermfg': s:replace_font_color[1],
+        \       'ctermbg': s:replace_color[1]
+        \   },
+        \   'stlNameOnlyMode': {
+        \       'gui': 'NONE',
+        \       'font': 'NONE',
+        \       'guifg': s:warning_font_color[0],
+        \       'guibg': s:warning_color[0],
+        \       'cterm': 'NONE',
+        \       'ctermfg': s:warning_font_color[1],
+        \       'ctermbg': s:warning_color[1]
+        \   },
+        \   'stlFullPathMode': {
+        \       'gui': 'NONE',
+        \       'font': 'NONE',
+        \       'guifg': s:visual_font_color[0],
+        \       'guibg': s:visual_color[0],
+        \       'cterm': 'NONE',
+        \       'ctermfg': s:visual_font_color[1],
+        \       'ctermbg': s:visual_color[1]
+        \   },
+        \   'stlFuzzyMode': {
+        \       'gui': 'NONE',
+        \       'font': 'NONE',
+        \       'guifg': s:warning_font_color[0],
+        \       'guibg': s:warning_color[0],
+        \       'cterm': 'NONE',
+        \       'ctermfg': s:warning_font_color[1],
+        \       'ctermbg': s:warning_color[1]
+        \   },
+        \   'stlRegexMode': {
+        \       'gui': 'NONE',
+        \       'font': 'NONE',
+        \       'guifg': s:insert_font_color[0],
+        \       'guibg': s:insert_color[0],
+        \       'cterm': 'NONE',
+        \       'ctermfg': s:insert_font_color[1],
+        \       'ctermbg': s:insert_color[1]
+        \   },
+        \   'stlCwd': {
+        \       'gui': 'NONE',
+        \       'font': 'NONE',
+        \       'guifg': s:tabline_left_font_color[0],
+        \       'guibg': s:tabline_left_color[0],
+        \       'cterm': 'NONE',
+        \       'ctermfg': s:tabline_left_font_color[1],
+        \       'ctermbg': s:tabline_left_color[1]
+        \   },
+        \   'stlBlank': {
+        \       'gui': 'NONE',
+        \       'font': 'NONE',
+        \       'guifg': 'NONE',
+        \       'guibg': s:inactive_color[0],
+        \       'cterm': 'NONE',
+        \       'ctermfg': 'NONE',
+        \       'ctermbg': s:inactive_color[1]
+        \   },
+        \   'stlLineInfo': {
+        \       'gui': 'NONE',
+        \       'font': 'NONE',
+        \       'guifg': s:tabline_right_font_color[0],
+        \       'guibg': s:tabline_right_color[0],
+        \       'cterm': 'NONE',
+        \       'ctermfg': s:tabline_right_font_color[1],
+        \       'ctermbg': s:tabline_right_color[1]
+        \   },
+        \   'stlTotal': {
+        \       'gui': 'NONE',
+        \       'font': 'NONE',
+        \       'guifg': s:tabline_right_font_color_1[0],
+        \       'guibg': s:tabline_right_color_1[0],
+        \       'cterm': 'NONE',
+        \       'ctermfg': s:tabline_right_font_color_1[1],
+        \       'ctermbg': s:tabline_right_color_1[1]
+        \   }
+\ }
 
 " tagbar
 "let g:tagbar_ctags_bin = 'D:\workdir\TOOLBOX\wntx64\Ctags\5.8\ctags.exe'
@@ -201,11 +280,13 @@ let g:cpp_class_scope_highlight = 1
 let g:cpp_experimental_template_highlight = 1
 
 " large file
-let g:LargeFile = 1000
+let g:LargeFile = 2000
 
- " NERDTree config
- map <A-,> :NERDTreeToggle<CR>
- autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") &&b:NERDTreeType == "primary") | q | endif
+" NERDTree config
+nnoremap <silent> , :NERDTreeToggle<CR>
+map <A-,> :NERDTreeToggle<CR>
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
 
 " dokuwiki
 let dokuwiki_comment=1
@@ -213,79 +294,12 @@ let g:dokuwiki_fenced_languages = ['ruby', 'xml', 'sh', 'c', 'perl' ]
 au BufRead,BufNewFile *.dokuwiki set filetype=dokuwiki
 set foldlevel=2
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Singleton VIM
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" note: work with my gvim.bat
-command -nargs=* -complete=custom,GetServerList Mt :call MoveTabToInstance(<f-args>)
-function MoveTabToInstance(var1)
-  let filename = expand('%:p')
-  set ro
-  call remote_send(a:var1, '<ESC>|<ESC>|:tabnew ' . filename . '<CR>')
-  execute 'wq!'
-endfunction
-
-" Helper function to get application (server) list
-function GetServerList(ArgLead, CmdLine, CursorPos)
-  return serverlist()
-endfunction
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Misc
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"Toggle Menu and Toolbar
-set guioptions-=T
-set guioptions-=r
-set guioptions-=L
-set guioptions-=m
-set showtabline=0
-map <silent> <F11> :if &guioptions =~# 'm' <Bar>
-        \set guioptions-=m <bar>
-    \else <Bar>
-        \set guioptions+=m <Bar>
-    \endif<CR>
-
-
-" Display Setting
-set nu
-set tw=0
-set wrap
-" set cc=73
-" let g:spacegray_underline_search = 1
-"let g:spacegray_italicize_comments = 1
-set bg=dark
-colorscheme gruvbox
-let g:gruvbox_contrast_dark='hard'
-
-" theme in conEmu
-if !has("gui_running")
-    colorscheme gruvbox
-    highlight Comment cterm=italic
-    set term=xterm
-    set t_Co=256
-    let &t_AB="\e[48;5;%dm"
-    let &t_AF="\e[38;5;%dm"     
-
-    nmap <ESC>oA k
-    nmap <ESC>oB j
-    nmap <ESC>oC l
-    nmap <ESC>oD h    
-
-    imap <ESC>oA <C-o>k
-    imap <ESC>oB <C-o>j
-    imap <ESC>oC <C-o>l
-    imap <ESC>oD <C-o>h    
-    vnoremap <ESC><ESC> <ESC>
-    inoremap <Char-0x07F> <BS>
-    nnoremap <Char-0x07F> <BS>
-    set mouse=a
-endif
-
-" auto-complete
-set completeopt=longest,menu
-
 " VimOrganizer
-let g:org_command_for_emacsclient = 'C:\msys64\usr\bin\emacsclient.exe'
+if has("win32")
+    let g:org_command_for_emacsclient = 'C:\msys64\usr\bin\emacsclient.exe'
+else
+    let g:org_command_for_emacsclient = '/usr/bin/emacsclient'
+endif
 let g:org_todo_setup='TODO WAIT | DONE CANCELED'
 
 let g:ft_ignore_pat = '\.org'
@@ -297,9 +311,6 @@ au BufEnter *.org            call org#SetOrgFileType()
 command! OrgCapture :call org#CaptureBuffer()
 command! OrgCaptureFile :call org#OpenCaptureFile()
 syntax on
-
-" Disable HL for folded
-hi Folded guibg=NONE ctermbg=NONE
 
 " Ale
 " Put this in vimrc or a plugin file of your own.
@@ -342,6 +353,8 @@ let g:lightline = {
       \   'linter_errors': 'error',
       \   'linter_ok': 'ok'
       \ },
+      \ 'separator': { 'left': "\ue0b0", 'right': "\ue0b2" },
+      \ 'subseparator': { 'left': "\ue0b1", 'right': "\ue0b3" }
       \ }
 
 autocmd User ALELint call lightline#update()
@@ -367,6 +380,82 @@ function! LightlineLinterOK() abort
   let l:all_non_errors = l:counts.total - l:all_errors
   return l:counts.total == 0 ? '✓' : ''
 endfunction
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Singleton VIM
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" note: work with my gvim.bat
+" command -nargs=* -complete=custom,GetServerList Mt :call MoveTabToInstance(<f-args>)
+" function MoveTabToInstance(var1)
+"   let filename = expand('%:p')
+"   set ro
+"   call remote_send(a:var1, '<ESC>|<ESC>|:tabnew ' . filename . '<CR>')
+"   execute 'wq!'
+" endfunction
+" 
+" " Helper function to get application (server) list
+" function GetServerList(ArgLead, CmdLine, CursorPos)
+"   return serverlist()
+" endfunction
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Misc
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"Toggle Menu and Toolbar
+set guioptions-=T
+set guioptions-=r
+set guioptions-=L
+set guioptions-=m
+set showtabline=0
+map <silent> <F11> :if &guioptions =~# 'm' <Bar>
+        \set guioptions-=m <bar>
+    \else <Bar>
+        \set guioptions+=m <Bar>
+    \endif<CR>
+
+
+" Display Setting
+set nu
+set tw=0
+set wrap
+" set cc=73
+" let g:spacegray_underline_search = 1
+"let g:spacegray_italicize_comments = 1
+set bg=dark
+let g:gruvbox_contrast_dark='hard'
+colorscheme gruvbox
+
+" theme in conEmu
+if !has("gui_running")
+    " colorscheme gruvbox
+    highlight Comment cterm=italic
+    set term=xterm
+    set t_Co=256
+    let &t_AB="\e[48;5;%dm"
+    let &t_AF="\e[38;5;%dm"     
+
+    nmap <ESC>oA k
+    nmap <ESC>oB j
+    nmap <ESC>oC l
+    nmap <ESC>oD h    
+
+    imap <ESC>oA <C-o>k
+    imap <ESC>oB <C-o>j
+    imap <ESC>oC <C-o>l
+    imap <ESC>oD <C-o>h    
+    vnoremap <ESC><ESC> <ESC>
+    inoremap <Char-0x07F> <BS>
+    nnoremap <Char-0x07F> <BS>
+    set mouse=a
+endif
+
+" auto-complete
+set completeopt=longest,menu
+
+
+" Disable HL for folded
+hi Folded guibg=NONE ctermbg=NONE
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " OOTB Vim config for vimdiff

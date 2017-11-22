@@ -16,6 +16,7 @@ map ZQ <Nop>
 map ZZ <Nop>
 
 " Remap k j for colemak
+" Deprecated for not modify it everywhere
 " map -m v,caret -builtin h k
 " map -m v,caret -builtin k j
 " map -m v,caret -builtin j h
@@ -30,8 +31,7 @@ map -m n h -builtin gT
 map -m n -builtin y Y
 map -m n -builtin Y y
 
-" c-a, c-c, c-x, c-v的问题
-" pass keys
+" bypass c-a, c-c, c-x, c-v
 map -m n,v,i,c <C-a> <Pass>
 map -m n,v,i,c <C-c> <Pass>
 map -m n,v,i,c <C-v> <Pass>
@@ -40,13 +40,14 @@ map -m n,v,i,c <C-y> <Pass>
 map -m n,v,i,c <C-k> <Pass>
 map -m n,v,i,c <C-t> <Pass>
 
-" bookmark
+" key function mapping
 map -m n,v,i,c <C-b> <Pass>
-map -m n -builtin b -js if (gBrowser.treeStyleTab.tabbarShown) {gBrowser.treeStyleTab.hideTabbar();} else {gBrowser.treeStyleTab.showTabbar();}
-map -m n -builtin <A-,> -js if (gBrowser.treeStyleTab.tabbarShown) {gBrowser.treeStyleTab.hideTabbar();} else {gBrowser.treeStyleTab.showTabbar();}
+map -m n -builtin . -js if (gBrowser.treeStyleTab.tabbarShown) {gBrowser.treeStyleTab.hideTabbar();} else {gBrowser.treeStyleTab.showTabbar();}
+map -m n -builtin <A-.>  -js if (gBrowser.treeStyleTab.tabbarShown) {gBrowser.treeStyleTab.hideTabbar();} else {gBrowser.treeStyleTab.showTabbar();}
+map -m n -builtin , <C-b>
+map -m n -builtin <A-,> <C-h>
 map -m n -builtin B  :buffers<CR>f
-map -m n -builtin .  b<Tab><S-Tab>
-map -m n -builtin <A-.>  b<Tab><S-Tab>
+map -m n -builtin b  b<Tab><S-Tab>
 
 " delete tab
 map -m n -builtin D :tabo<CR>
@@ -63,14 +64,15 @@ set nextpattern='(下|后)一?(页|頁|篇|章|张)|次のページ|次へ','^\b
 set previouspattern='(上|前)一?(页|頁|篇|章|张)|前のページ|前へ','^\bprev|previous\b','\bprev|previous\b','\bprécédent\b','^(<|‹)$','^(<<|«)$','^(<|«)','(<|«)$'
 
 " Hide/show toolbar
-map <silent> <F2> :js toggle_bar() <CR>
+" NOTE: this function is not there already in laters
+" map <silent> <F2> :js toggle_bar() <CR>
 
 " Open selected text by t or o directly
 map t -js str=DOM.stringify(buffer.focusedFrame.getSelection()); str!=""?dactyl.open(str, {where: dactyl.NEW_TAB}):CommandExMode().open("tabopen ")
 map o -js str=DOM.stringify(buffer.focusedFrame.getSelection()); str!=""?dactyl.open(str, {where: dactyl.CURRENT_TAB}):CommandExMode().open("open ")
 
 " Set editor
-set editor='C:\\Windows\\gvim.bat'
+set editor='C:\\Windows\\vim.bat'
 
 " Set highlight find
 set hlfind

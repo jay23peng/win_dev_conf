@@ -1,0 +1,3 @@
+#!/bin/sh
+# Fake a rg command
+exec ag "$@"

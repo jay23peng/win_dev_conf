@@ -11,62 +11,40 @@ Generally, `tumx + vim + zsh` is the best practice for a development environment
 1.  Get the latest [ConEmu](https://conemu.github.io/).
 2.  Copy `ConEmu.xml` from repo and overwrite the `C:\Program Files\ConEmu`.
 
-For `cygwin emacs` support, need to use latest alpha version, download the latest `conemu-msys2-64.exe` to `C:\msys64\usr\bin`.
+### Python
 
-### MSYS2
+For matching with current `vim8`, install [python3.5.2](https://www.python.org/downloads/release/python-352/)(actually 3.x should be fine) as dependency of [LeaderF](https://github.com/Yggdroot/LeaderF). Restart machine after installation is done to make sure path is setting up correctly.
 
-http://www.msys2.org/
+### Git
 
-Use `pacman -Ss <pack-name>` to search package.
+Either [Git for windows](https://git-for-windows.github.io/) or Embedded git inside [Source Tree](https://www.sourcetreeapp.com/) should be fine.
 
-Use `pacman -S <pack-name>` to install.
-
-Use `pacman -R <pack-name>` to remove.
-
-#### Emacs
-
-`msys2 emacs` works perfect with `conEmu`.
-
-1. Install emacs by `paceman -S msys2 emacs`.
-2. Get [SPACEMACS](http://spacemacs.org/) and  ``.spacemacs`` from repo extract it to home folder `C:\msys64\home\<username>`.
 
 ### Gvim
 
-1. Install Git for windows.
+1. Use this [Vim](https://github.com/vim/vim-win32-installer) for python support.
 
-   https://git-for-windows.github.io/
+2. Extract to any location and run `install.exe`
 
-2. Install ctags and configure it to the ``$PATH``.
+3. The `vim.bat` is missing for current package, copy it from repo.
 
-3. copy ``curl.cmd`` to ``<git>/cmd``.
-
-4. Install VIM.
-
-5. Restart the machine to make the ``$PATH`` work.
-
-6. Install Vundle
+4. Install Vundle by git:
 
    ```shell
-   git clone https://github.com/gmarik/vundle.git "<your vim home>/Vundle.vim"
+   git clone https://github.com/gmarik/vundle.git "<your vim home>/.vim/Vundle.vim"
    ```
+   Or download and copy to `<your vim home>/.vim/Vundle.vim`.
 
-7. Put ``_vimrc`` to ``$HOME``.
+5. Put ``_vimrc`` to your Vim Installation folder. ( May need [powerline-fonts](https://github.com/powerline/fonts) )
 
-8. Invoke vim, run ``PluginInstall``
+6. Invoke vim, run ``PluginInstall``.
 
-9. Copy and overwrite ``gvim.bat`` to ``c:\windows``.
+### FZF
 
-10. `$HOME` can be redefined to:
+1. Get package from [here](https://github.com/junegunn/fzf) and extract to `c:\windows`.
+2. Copy `windows/with.bat` in repo to `c:\windows`.
 
-   ```properties
-   let $HOME='C:\Users\pengw'
-   ```
-
-### Zsh
-
-TBD
-
-### MISC
+###MISC
 
 Other software that used on Windows Platform:
 
@@ -77,7 +55,109 @@ Other software that used on Windows Platform:
 * [Unlocker](https://unlocker.en.softonic.com/)
 * [XMing](https://sourceforge.net/projects/xming/)
 
-## macOS
+##MSYS2
+
+[MSYS2](http://www.msys2.org) is a simplify version of [cygwin](https://www.cygwin.com/).
+
+###Installation
+
+1. Get binary from http://www.msys2.org/ and install.
+
+2. Download the latest [conemu-msys2-64.exe](https://github.com/Maximus5/cygwin-connector/releases) to `C:\msys64\usr\bin`.
+
+3. Invoke bash, run `pacman-Syu` couple of times to upgrade to latest.
+
+4. Common `pacman` commands:
+
+   ```bash
+   pacman -Syu             # Update package DB and core package
+   pacman -Su              # Restart msys and run this after Syu
+   pacman -Q               # List all packages
+   pacman -Ss <keyword>    # Seach available packages
+   pacman -S <package>     # Install package
+   pacman -R <package>     # Remove package
+   pacman -U <file>        # Install old version downloaded from repo.msys2.org
+   ```
+
+###Git
+
+Since `msys-git` is very slow, we can use either [Git for Windows](https://git-for-windows.github.io/) or embedded git in `Source Tree` by add git dependency in `~/.bashrc`:
+
+```bash
+export PATH='/c/Program Files/Git/cmd':$PATH
+```
+
+###Emacs
+
+1. Install emacs by `paceman -S msys/emacs`.
+2. Get [SPACEMACS](http://spacemacs.org/) and  ``.spacemacs`` from repo extract it to home folder `C:\msys64\home\<username>`.
+
+###Vim
+
+1. `pacman -S msys/vim`.
+2. Copy `_vimrc` to `C:\msys64\home\<username>`.
+3. Get [Vundle](https://github.com/VundleVim/Vundle.vim) and put it into `C:\msys64\home\<username>\.vim_home\Vundle.vim`. ( not required if share with `Gvim`)
+4. Login to vim and run `PluginInstall`.
+
+###Zsh
+
+1. `pacman -S msys/zsh`.
+
+2. Install [powerline](https://github.com/powerline/powerline):
+
+   ```bash
+   pacman -S msys/python3-pip
+   pip install powerline-status
+   ```
+
+3. Install powerline fonts from [here](https://github.com/powerline/fonts). Manual Install is required on Windows and set it in conEmu properly.
+
+4. Install [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh):
+
+   ```bash
+   sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
+   ```
+
+5. Modify `~/.zshrc` to change theme to `agnoster`.
+
+6. Modify `~/.bashrc` to change default shell to zsh by appending line below:
+
+   ```bash
+   exec zsh
+   ```
+
+7. For accelerate git, run command below:
+
+   ```bash
+   git config --global core.preloadindex true
+   git config --global core.fscache true
+   git config --global gc.auto 256
+   ```
+
+8. For debug zsh, use `zsh -xv`.
+
+9. If zsh is slow when access to large git project, run command below:
+
+   ```shell
+   git config --add oh-my-zsh.hide-dirty 1
+   git config --add oh-my-zsh.hide-status 1
+   ```
+
+
+
+###The Silver Searcher(Ag)
+
+`ripgrip` does not exist in `msys2` yet because of go support, use [the_silver_searcher](https://github.com/ggreer/the_silver_searcher) as replacement:
+
+```bas
+pacman -S mingw64/mingw-w64-x86_64-ag
+```
+
+### Fuzzy Finder
+
+For now I don't find a proper fuzzy finder solution for `msys`.
+
+## MacOS
 
 ### Keyboard
 
@@ -107,12 +187,26 @@ brew cask install iterm2
 ### zsh
 
 1. `brew install zsh`
+
 2. Set `iterm2` default command to `zsh`. Restart `iterm2` to make sure it works. Set `zsh` as default will pollute other application like `VS Code`, so this apprach will be better.
+
 3. Insall pip by `sudo easy_install pip`.
+
 4. Intall power-line by `pip install powline-status`.
+
 5. Install fonts from [here](https://github.com/powerline/fonts).
+
 6. Select a font end with `power-line`.
-7. run `vim ~/.zshrc`, change the theme to `agnoster`.
+
+7. Install `oh-my-zsh`:
+
+   ```bash
+   sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
+   ```
+
+8. run `vim ~/.zshrc`, change the theme to `agnoster`.
+
+9. For debug zsh, use `zsh -xv`.
 
 ### Tmux
 
@@ -193,6 +287,7 @@ C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" --user-data-dir=/de
 
 * [BeyondCompare](https://www.scootersoftware.com/index.php)
 * [Divvy](http://mizage.com/divvy/)
+* [fd](https://github.com/sharkdp/fd)
 * [FZF](https://github.com/junegunn/fzf)
 * [ripgrip](https://github.com/BurntSushi/ripgrep)
 * [SourceTree](https://www.sourcetreeapp.com/)
