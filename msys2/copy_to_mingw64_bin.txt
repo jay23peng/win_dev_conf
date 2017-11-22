@@ -1,0 +1,2 @@
+1. Copy all script to C:\msys64\mingw64\bin\open.
+2. Copy all rc to ~

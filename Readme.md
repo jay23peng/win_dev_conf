@@ -149,6 +149,13 @@ git config --global core.editor /usr/bin/vim
    git config --add oh-my-zsh.hide-status 1
    ```
 
+10. For command wrapper, better to use script below than alias - looks the completion for alias in `zsh` needs to configure separately:
+
+   ```bash
+   exec <your-command> "$@"
+   ```
+
+   ​
 
 
 ###The Silver Searcher(Ag)
