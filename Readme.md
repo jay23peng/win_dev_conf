@@ -87,6 +87,12 @@ Since `msys-git` is very slow, we can use either [Git for Windows](https://git-f
 export PATH='/c/Program Files/Git/cmd':$PATH
 ```
 
+Add config below to redirect `vim` properly:
+
+```bash
+git config --global core.editor /usr/bin/vim
+```
+
 ###Emacs
 
 1. Install emacs by `paceman -S msys/emacs`.

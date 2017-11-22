@@ -44,8 +44,8 @@ map -m n,v,i,c <C-t> <Pass>
 map -m n,v,i,c <C-b> <Pass>
 map -m n -builtin . -js if (gBrowser.treeStyleTab.tabbarShown) {gBrowser.treeStyleTab.hideTabbar();} else {gBrowser.treeStyleTab.showTabbar();}
 map -m n -builtin <A-.>  -js if (gBrowser.treeStyleTab.tabbarShown) {gBrowser.treeStyleTab.hideTabbar();} else {gBrowser.treeStyleTab.showTabbar();}
-map -m n -builtin , <C-b>
-map -m n -builtin <A-,> <C-h>
+map -m n -builtin , :bmarks<CR>
+map -m n -builtin <A-,> :history<CR>
 map -m n -builtin B  :buffers<CR>f
 map -m n -builtin b  b<Tab><S-Tab>
 
