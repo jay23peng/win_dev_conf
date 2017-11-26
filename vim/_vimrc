@@ -290,7 +290,10 @@ map <A-,> :NERDTreeToggle<CR>
 " autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
 
 " Open nerd tree as main
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") &&b:NERDTreeType == "primary") | q | endif
+" autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") &&b:NERDTreeType == "primary") | q | endif
+" autocmd StdinReadPre * let s:std_in=1
+" autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | q | endif
+
 
 " dokuwiki
 let dokuwiki_comment=1
@@ -419,24 +422,18 @@ map <silent> <F11> :if &guioptions =~# 'm' <Bar>
 
 
 " Display Setting
-set nu
-set tw=0
-set wrap
-" set cc=73
-" let g:spacegray_underline_search = 1
-"let g:spacegray_italicize_comments = 1
-set bg=dark
-let g:gruvbox_contrast_dark='hard'
-colorscheme gruvbox
-
-" theme in conEmu
+"" theme in conEmu
 if !has("gui_running")
-    " colorscheme gruvbox
-    highlight Comment cterm=italic
-    set term=xterm
-    set t_Co=256
-    let &t_AB="\e[48;5;%dm"
-    let &t_AF="\e[38;5;%dm"     
+"    highlight Comment cterm=italic
+"    highlight Comment term=italic
+
+    " NOTE: Only for conEmu and non-cygwin case
+    if !empty($ConEmuHWND) && empty($MSYSTEM) && !has('win32unix')
+      set term=xterm
+      set t_Co=256
+      let &t_AB="\e[48;5;%dm"
+      let &t_AF="\e[38;5;%dm"
+    endif   
 
     nmap <ESC>oA k
     nmap <ESC>oB j
@@ -452,6 +449,16 @@ if !has("gui_running")
     nnoremap <Char-0x07F> <BS>
     set mouse=a
 endif
+
+set nu
+set tw=0
+set wrap
+" set cc=73
+" let g:spacegray_underline_search = 1
+let g:spacegray_italicize_comments = 1
+set bg=dark
+let g:gruvbox_contrast_dark='hard'
+colorscheme gruvbox
 
 " auto-complete
 set completeopt=longest,menu
