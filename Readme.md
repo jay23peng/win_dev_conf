@@ -33,7 +33,7 @@ Either [Git for windows](https://git-for-windows.github.io/) or Embedded git ins
    ```
    Or download and copy to `<your vim home>/.vim/Vundle.vim`.
 
-4. Put ``_vimrc`` to your Vim Installation folder. ( May need [powerline-fonts](https://github.com/ryanoasis/nerd-fonts) )
+4. Put ``_vimrc`` to your Vim Installation folder. ( May need [powerline-fonts](https://github.com/powerline/fonts) )
 
 5. Invoke vim, run ``PluginInstall``.
 
@@ -120,7 +120,7 @@ git config --global core.editor /usr/bin/vim
    pip install powerline-status
    ```
 
-3. Install powerline fonts from [here](https://github.com/ryanoasis/nerd-fonts). Manual Install is required on Windows and set it in conEmu properly.
+3. Install powerline fonts from [here](https://github.com/powerline/fonts). Manual Install is required on Windows and set it in conEmu properly.
 
 4. Install [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh):
 
@@ -309,3 +309,9 @@ C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" --user-data-dir=/de
 * [ripgrip](https://github.com/BurntSushi/ripgrep)
 * [SourceTree](https://www.sourcetreeapp.com/)
 
+
+### Nerd Fonts
+
+Nerd fonts provide extra symbol when compare with power-line fonts. For now for avoiding any side effect, I am still using power-line fonts:
+
+https://github.com/powerline/fonts
