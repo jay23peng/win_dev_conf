@@ -37,10 +37,9 @@ Either [Git for windows](https://git-for-windows.github.io/) or Embedded git ins
 
 5. Invoke vim, run ``PluginInstall``.
 
-### FZF
+### FZF(With)
 
-1. Get package from [here](https://github.com/junegunn/fzf) and extract to `c:\windows`.
-2. Copy `windows/with.bat` in repo to `c:\windows`.
+Get [with](https://github.com/jesse23/with) and install it manually.
 
 ### MISC
 
@@ -58,6 +57,16 @@ Other software that used on Windows Platform:
 #### "Unknown Publisher" Warning
 
 https://blogs.msdn.microsoft.com/askie/2009/06/19/how-to-bypass-the-security-warning-unknown-publisher-with-the-checkbox-always-ask-before-opening-this-file/
+
+### VIM Starts very slow
+
+If your `$HOME` is a remote location, starting `vim` will be very slow. As a hack, you can reset the `HOME` folder in `gvim.bat` and `vim.bat`:
+
+```shell
+set HOME=C:\xxxxx
+```
+
+
 
 ## MSYS2
 
