@@ -392,18 +392,18 @@ endfunction
 " Singleton VIM
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " note: work with my gvim.bat
-" command -nargs=* -complete=custom,GetServerList Mt :call MoveTabToInstance(<f-args>)
-" function MoveTabToInstance(var1)
-"   let filename = expand('%:p')
-"   set ro
-"   call remote_send(a:var1, '<ESC>|<ESC>|:tabnew ' . filename . '<CR>')
-"   execute 'wq!'
-" endfunction
-" 
-" " Helper function to get application (server) list
-" function GetServerList(ArgLead, CmdLine, CursorPos)
-"   return serverlist()
-" endfunction
+command -nargs=* -complete=custom,GetServerList Mt :call MoveTabToInstance(<f-args>)
+function MoveTabToInstance(var1)
+  let filename = expand('%:p')
+  set ro
+  call remote_send(a:var1, '<ESC>|<ESC>|:tabnew ' . filename . '<CR>')
+  execute 'wq!'
+endfunction
+
+" Helper function to get application (server) list
+function GetServerList(ArgLead, CmdLine, CursorPos)
+  return serverlist()
+endfunction
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Misc

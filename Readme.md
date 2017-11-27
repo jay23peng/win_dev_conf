@@ -6,6 +6,10 @@ Generally, `tumx + vim + zsh` is the best practice for a development environment
 
 ## Windows
 
+### Adjust Font Size
+
+For windows 7, Go to `personalize->Window Color->Item`, change every font size of Item to `Microsoft Yahei UI, 10`.
+
 ### ConEmu
 
 1.  Get the latest [ConEmu](https://conemu.github.io/).
@@ -37,6 +41,8 @@ Either [Git for windows](https://git-for-windows.github.io/) or Embedded git ins
 
 5. Invoke vim, run ``PluginInstall``.
 
+6. The `open in exist vim` function in `Gvim` is incomplete. For now, copy `gvim.bat` to `C:\windows` for overwriting the default. Change the context menu to use this script too.
+
 ### FZF(With)
 
 Get [with](https://github.com/jesse23/with) and install it manually.
@@ -65,8 +71,6 @@ If your `$HOME` is a remote location, starting `vim` will be very slow. As a hac
 ```shell
 set HOME=C:\xxxxx
 ```
-
-
 
 ## MSYS2
 
