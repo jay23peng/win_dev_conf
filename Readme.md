@@ -22,22 +22,20 @@ Either [Git for windows](https://git-for-windows.github.io/) or Embedded git ins
 
 ### Gvim
 
-1. Use this [Vim](https://github.com/vim/vim-win32-installer) for python support.
+1. 64-bit vim is incomplete installer, so as 1st step, get formal `Gvim` installer from [here](ftp://ftp.vim.org/pub/vim/pc/gvim80-586.exe), and install it.
 
-2. Extract to any location and run `install.exe`
+2. For python support, Get [Vim](https://github.com/vim/vim-win32-installer) and overwrite the files in former installation.
 
-3. The `vim.bat` is missing for current package, copy it from repo.
-
-4. Install Vundle by git:
+3. Install Vundle by git:
 
    ```shell
    git clone https://github.com/gmarik/vundle.git "<your vim home>/.vim/Vundle.vim"
    ```
    Or download and copy to `<your vim home>/.vim/Vundle.vim`.
 
-5. Put ``_vimrc`` to your Vim Installation folder. ( May need [powerline-fonts](https://github.com/powerline/fonts) )
+4. Put ``_vimrc`` to your Vim Installation folder. ( May need [powerline-fonts](https://github.com/ryanoasis/nerd-fonts) )
 
-6. Invoke vim, run ``PluginInstall``.
+5. Invoke vim, run ``PluginInstall``.
 
 ### FZF
 
@@ -54,6 +52,12 @@ Other software that used on Windows Platform:
 * [MultiDesk](http://www.syvik.com/multidesk/index_chs.htm)
 * [Unlocker](https://unlocker.en.softonic.com/)
 * [XMing](https://sourceforge.net/projects/xming/)
+
+### Trouble Shoot
+
+#### "Unknown Publisher" Warning
+
+https://blogs.msdn.microsoft.com/askie/2009/06/19/how-to-bypass-the-security-warning-unknown-publisher-with-the-checkbox-always-ask-before-opening-this-file/
 
 ## MSYS2
 
@@ -116,7 +120,7 @@ git config --global core.editor /usr/bin/vim
    pip install powerline-status
    ```
 
-3. Install powerline fonts from [here](https://github.com/powerline/fonts). Manual Install is required on Windows and set it in conEmu properly.
+3. Install powerline fonts from [here](https://github.com/ryanoasis/nerd-fonts). Manual Install is required on Windows and set it in conEmu properly.
 
 4. Install [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh):
 
@@ -151,11 +155,11 @@ git config --global core.editor /usr/bin/vim
 
 10. For command wrapper, better to use script below than alias - looks the completion for alias in `zsh` needs to configure separately:
 
-   ```bash
-   exec <your-command> "$@"
-   ```
+  ```bash
+  exec <your-command> "$@"
+  ```
 
-   ​
+  ​
 
 
 ### The Silver Searcher(Ag)
