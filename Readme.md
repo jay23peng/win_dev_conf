@@ -44,7 +44,7 @@ Either [Git for windows](https://git-for-windows.github.io/) or Embedded git ins
 1. Get package from [here](https://github.com/junegunn/fzf) and extract to `c:\windows`.
 2. Copy `windows/with.bat` in repo to `c:\windows`.
 
-###MISC
+### MISC
 
 Other software that used on Windows Platform:
 
@@ -55,17 +55,17 @@ Other software that used on Windows Platform:
 * [Unlocker](https://unlocker.en.softonic.com/)
 * [XMing](https://sourceforge.net/projects/xming/)
 
-##MSYS2
+## MSYS2
 
 [MSYS2](http://www.msys2.org) is a simplify version of [cygwin](https://www.cygwin.com/).
 
-###Installation
+### Installation
 
 1. Get binary from http://www.msys2.org/ and install.
 
 2. Download the latest [conemu-msys2-64.exe](https://github.com/Maximus5/cygwin-connector/releases) to `C:\msys64\usr\bin`.
 
-3. Invoke bash, run `pacman-Syu` couple of times to upgrade to latest.
+3. Invoke bash, run `pacman -Syu` couple of times to upgrade to latest.
 
 4. Common `pacman` commands:
 
@@ -79,7 +79,7 @@ Other software that used on Windows Platform:
    pacman -U <file>        # Install old version downloaded from repo.msys2.org
    ```
 
-###Git
+### Git
 
 Since `msys-git` is very slow, we can use either [Git for Windows](https://git-for-windows.github.io/) or embedded git in `Source Tree` by add git dependency in `~/.bashrc`:
 
@@ -93,19 +93,19 @@ Add config below to redirect `vim` properly:
 git config --global core.editor /usr/bin/vim
 ```
 
-###Emacs
+### Emacs
 
 1. Install emacs by `paceman -S msys/emacs`.
 2. Get [SPACEMACS](http://spacemacs.org/) and  ``.spacemacs`` from repo extract it to home folder `C:\msys64\home\<username>`.
 
-###Vim
+### Vim
 
 1. `pacman -S msys/vim`.
 2. Copy `_vimrc` to `C:\msys64\home\<username>`.
 3. Get [Vundle](https://github.com/VundleVim/Vundle.vim) and put it into `C:\msys64\home\<username>\.vim_home\Vundle.vim`. ( not required if share with `Gvim`)
 4. Login to vim and run `PluginInstall`.
 
-###Zsh
+### Zsh
 
 1. `pacman -S msys/zsh`.
 
@@ -158,7 +158,7 @@ git config --global core.editor /usr/bin/vim
    ​
 
 
-###The Silver Searcher(Ag)
+### The Silver Searcher(Ag)
 
 `ripgrip` does not exist in `msys2` yet because of go support, use [the_silver_searcher](https://github.com/ggreer/the_silver_searcher) as replacement:
 
@@ -256,7 +256,7 @@ Emacs is mainly used for support `VimOrganizer` for `orgmode` currently.
 3. Put ``_vimrc`` to ``$HOME``.
 4. Invoke vim, run ``PluginInstall``.
 
-###Change Machine Name
+### Change Machine Name
 
 ```bash
 sudo scutil --set ComputerName "newname"
@@ -283,7 +283,7 @@ Because firefox is deprecating old extension, the latest availble version of Wat
 3. Copy ``_pentadactylrc`` and ``pentadactyl`` to ``~/``.
 4. For Windows Mac Type, Use ``Noto Sans CJK SC DemiLight`` and preference from [here](https://github.com/renkun-ken/MacType.Decency). For 53 version, also need ``gfx.content.azure.backends;direct2d1.1,cairo,skia``
 
-###Chrome
+### Chrome
 
 To Start Chrome for debug, use command line below to re-direct the usr-dir:
 
