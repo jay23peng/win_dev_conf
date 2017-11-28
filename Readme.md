@@ -57,6 +57,7 @@ Other software that used on Windows Platform:
 * [KeePass](https://keepass.info/)
 * [mactype](https://github.com/snowie2000/mactype)
 * [MultiDesk](http://www.syvik.com/multidesk/index_chs.htm)
+* [Q-dir](https://www.softwareok.com/?seite=Freeware/Q-Dir)
 * [Unlocker](https://unlocker.en.softonic.com/)
 * [XMing](https://sourceforge.net/projects/xming/)
 
@@ -114,15 +115,16 @@ git config --global core.editor /usr/bin/vim
 
 ### Emacs
 
-1. Install emacs by `paceman -S msys/emacs`.
+1. Install emacs by `pacman -S msys/emacs`.
 2. Get [SPACEMACS](http://spacemacs.org/) and  ``.spacemacs`` from repo extract it to home folder `C:\msys64\home\<username>`.
 
 ### Vim
 
 1. `pacman -S msys/vim`.
-2. Copy `_vimrc` to `C:\msys64\home\<username>`.
-3. Get [Vundle](https://github.com/VundleVim/Vundle.vim) and put it into `C:\msys64\home\<username>\.vim_home\Vundle.vim`. ( not required if share with `Gvim`)
-4. Login to vim and run `PluginInstall`.
+2. Install `python3` by `pacman -s python3`.
+3. Copy `_vimrc` to `C:\msys64\home\<username>`.
+4. Get [Vundle](https://github.com/VundleVim/Vundle.vim) and put it into `C:\msys64\home\<username>\.vim_home\Vundle.vim`. ( not required if share with `Gvim`)
+5. Login to vim and run `PluginInstall`.
 
 ### Zsh
 
@@ -174,7 +176,6 @@ git config --global core.editor /usr/bin/vim
   exec <your-command> "$@"
   ```
 
-  ​
 
 
 ### The Silver Searcher(Ag)
