@@ -217,6 +217,8 @@ brew uninstall <package>
 brew cask install iterm2
 ```
 
+**TODO** Save `iterm2` preference.
+
 ### zsh
 
 1. `brew install zsh`
@@ -240,6 +242,8 @@ brew cask install iterm2
 8. run `vim ~/.zshrc`, change the theme to `agnoster`.
 
 9. For debug zsh, use `zsh -xv`.
+
+**TODO** Save `.zshrc`.
 
 ### Tmux
 
@@ -274,7 +278,10 @@ Emacs is mainly used for support `VimOrganizer` for `orgmode` currently.
 1. Install VIM by `brew cask intall macvim`.
 2. Get Vundle by either download or git pull.
 3. Put ``_vimrc`` to ``$HOME``.
-4. Invoke vim, run ``PluginInstall``.
+4. Get `Vundle` and put it to `~/.vim/Vundle.vim`.
+5. Invoke vim, run ``PluginInstall``.
+
+**TODO** Cannot access mac clipboard in `vim`.
 
 ### Change Machine Name
 
@@ -284,7 +291,39 @@ sudo scutil --set LocalHostName "newname"
 sudo scutil --set HostName "newname"
 ```
 
+### FZF
 
+1. Install fd:
+
+   ```bash
+   brew install fd
+   ```
+
+2. Install fzf:
+
+   ```bash
+   brew install fzf
+   ```
+
+3. Add fzf setting below to `.bashrc`:
+
+   ```bash
+   export FZF_DEFAULT_COMMAND='fd -a -j 4'
+   ```
+
+### Exa
+
+1. Install exa:
+
+   ```bash
+   brew install exa
+   ```
+
+2. At the end of `.zshrc` add line below:
+
+   ```bash
+   alias ls="exa"
+   ```
 
 ### MISC
 
