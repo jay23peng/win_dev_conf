@@ -1,0 +1,64 @@
+* Git
+  http://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html
+  https://github.com/robbyrussell/oh-my-zsh/blob/master/plugins/git/git.plugin.zsh
+** Common command
+   git add *
+   git add -u
+   git commit
+   git push
+   git pull
+** Add user
+   git config user.name "jesse23"
+   git config user.email "pengwenjia@gmail.com"
+
+   git config --global user.name "jesse23"
+   git config --global user.email "pengwenjia@gmail.com"
+
+* NodeJS
+** Update NodeJS ( n part not working for windows )
+   node -v
+   npm cache clean -f  
+   npm install -g n
+   n 6.10.0
+   npm update npm@3.10.10 -g
+   
+   NOTE: for windows, just download the specific version of node and do overwrite
+*** Install latest stable
+    n stable
+   npm update npm@latest -g
+** Update Global Package
+   npm outdated -g --depth=0
+   npm update -g <global-package-name>
+** List Package
+   npm list -g --depth=0
+** Check version for curent latest
+   npm update --dry-run --depth==0
+** Get dependency try
+   npm install --dry-run > output.txt
+** Install nodeJs on linux
+https://github.com/dmrub/portable-node
+wget https://raw.github.com/dmrub/portable-node/master/bin/install-node.sh
+chmod +x ./install-node.sh
+export OSTYPE=linux-gnu
+./install-node.sh --version=6.10.3
+export JAVA_HOME=/plm/trnas/tc_ref/TOOLBOX/lnx64/JDK/jdk1.8.0_102
+export PATH=$PATH:/tc_work/pengw/bash-node-v6.10.3-linux-x64:$JAVA_HOME/bin
+** Global package list
+   chromedriver@2.31.0
+   chromeos-apk@4.0.2
+   eslint@4.3.0
+   tern@0.21.0
+   typings@2.1.1
+   yarn@0.27.5
+** Registry
+http://registry.npmjs.org/
+https://artifacts.industrysoftware.automation.siemens.com/repository/npm-group/
+https://artifacts.industrysoftware.automation.siemens.com/repository/npm-public/
+** yarn 
+   yarn install --pure-lockfile --ignore-optional --ignore-engines --verbose
+   yarn add electron-builder --verbose --ignore-engines
+   yarn cache clean
+** Use other node version
+   set NODE_HOME=D:\ugs\node-v6.11.3-win-x64
+   set PATH=%NODE_HOME%;%NODE_HOME%\node_modules\npm\bin\node-gyp-bin;%PATH%
+
