@@ -61,4 +61,15 @@ https://artifacts.industrysoftware.automation.siemens.com/repository/npm-public/
 ** Use other node version
    set NODE_HOME=D:\ugs\node-v6.11.3-win-x64
    set PATH=%NODE_HOME%;%NODE_HOME%\node_modules\npm\bin\node-gyp-bin;%PATH%
+* Buyers
+  https://gitlab.com/jesse23/buyer-what
+  git -c http.sslVerify=false clone https://gitlab.com/jesse23/buyer-what D:\views\buyer-what
+* Plot Scale
+** Gitlab
+   https://gitlab.com/jesse23/plot-scale
+   git -c http.sslVerify=false clone https://gitlab.com/jesse23/plot-scale D:\views\plot-scale
+** Trello
+   https://trello.com/b/w5CQgyin/plot-scale
+** Github
+   https://github.com/jesse23/plot_scale
 
