@@ -6,6 +6,8 @@ Generally, `tumx + vim + zsh` is the best practice for a development environment
 
 ## Windows
 
+On windows, for now the practice is `conEmu + vim + msys2 + zsh`.
+
 ### Adjust Font Size
 
 For windows 7, Go to `personalize->Window Color->Item`, change every font size of Item to `Microsoft Yahei UI, 10`.
@@ -192,6 +194,8 @@ For now I don't find a proper fuzzy finder solution for `msys`.
 
 ## MacOS
 
+On Mac it is `iTerm2 + vim + zsh`
+
 ### Keyboard
 
 I use `ThinkPad Compact Bluetooth Keyboard with TrackPoint`. 2 steps below needed for make if work proper.
@@ -217,7 +221,7 @@ brew uninstall <package>
 brew cask install iterm2
 ```
 
-**TODO** Save `iterm2` preference.
+Go to menu `iTerm2->Preference->Load Preferences from a custom folder or URL`, change it to your local repo or github location.
 
 ### zsh
 
@@ -241,9 +245,9 @@ brew cask install iterm2
 
 8. run `vim ~/.zshrc`, change the theme to `agnoster`.
 
-9. For debug zsh, use `zsh -xv`.
+9. Copy `.zshrc` in repo and overwrite the `~/.zshrc`.
 
-**TODO** Save `.zshrc`.
+10. For debug zsh, use `zsh -xv`.
 
 ### Tmux
 
@@ -273,15 +277,15 @@ Emacs is mainly used for support `VimOrganizer` for `orgmode` currently.
 
    **NOTE** For cleaning SPACEMACS, not only clean elpa folder, but also remove auto-gen var in ``.spacemacs``.
 
-### MacVim
+### Vim
 
 1. Install VIM by `brew cask intall macvim`.
-2. Get Vundle by either download or git pull.
-3. Put ``_vimrc`` to ``$HOME``.
-4. Get `Vundle` and put it to `~/.vim/Vundle.vim`.
-5. Invoke vim, run ``PluginInstall``.
-
-**TODO** Cannot access mac clipboard in `vim`.
+2. Install `Command Line Tools` by `xcode-select —install`.
+3. Since default `vim` does not have clipboad function, install `vim` with `brew install vim`.
+4. Get Vundle by either download or git pull.
+5. Put ``_vimrc`` to ``$HOME``.
+6. Get `Vundle` and put it to `~/.vim/Vundle.vim`.
+7. Invoke vim, run ``PluginInstall``.
 
 ### Change Machine Name
 
