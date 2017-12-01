@@ -76,6 +76,6 @@ else
     if [ -z "$1" ]; then
 	    exec "$binary" $opts --servername GVIM
     else
-	    exec "$binary" $opts --servername GVIM --remote-tab-silent ${1:+"$@"}
+	    exec "$binary" $opts --servername GVIM --remote-silent ${1:+"$@"}
     fi
 fi

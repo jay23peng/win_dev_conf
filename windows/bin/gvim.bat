@@ -18,7 +18,7 @@ start "dummy" /b "%VIM_EXE_DIR%\gvim.exe" --servername GVIM
 goto eof
 
 :witharg
-start "dummy" /b "%VIM_EXE_DIR%\gvim.exe" --servername GVIM --remote-tab-silent %*
+start "dummy" /b "%VIM_EXE_DIR%\gvim.exe" --servername GVIM --remote-silent %*
 goto eof
 
 :eof
