@@ -13,7 +13,8 @@
 
    git config --global user.name "jesse23"
    git config --global user.email "pengwenjia@gmail.com"
-
+** Roll back one commit
+   git reset HEAD~
 * NodeJS
 ** Update NodeJS ( n part not working for windows )
    node -v
