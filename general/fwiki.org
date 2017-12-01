@@ -63,7 +63,7 @@ https://artifacts.industrysoftware.automation.siemens.com/repository/npm-public/
    set PATH=%NODE_HOME%;%NODE_HOME%\node_modules\npm\bin\node-gyp-bin;%PATH%
 * Buyers
   https://gitlab.com/jesse23/buyer-what
-  git -c http.sslVerify=false clone https://gitlab.com/jesse23/buyer-what D:\views\buyer-what
+  git -c http.sslVerify=false clone https://gitlab.com/jesse23/buyer-what ~/Project/buyer-what
 * Plot Scale
 ** Gitlab
    https://gitlab.com/jesse23/plot-scale
