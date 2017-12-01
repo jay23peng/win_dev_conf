@@ -43,9 +43,7 @@ Either [Git for windows](https://git-for-windows.github.io/) or Embedded git ins
 
 5. Invoke vim, run ``PluginInstall``.
 
-6. The `open in exist vim` function in `Gvim` is incomplete. For now, copy `gvim.bat` to `C:\windows` for overwriting the default. Change the context menu to use this script too.
-
-7. When open multiple files in one `Gvim` through vim server, there is a bug that the height of status bar will be calculated into window size. The best practice for now, is auto hide the status bar at left or right side and use large icon.
+6. When open multiple files in one `Gvim` through vim server, there is a bug that the height of status bar will be calculated into window size. The best practice for now, is auto hide the status bar at left or right side and use large icon.
 
 ### FZF(With)
 
