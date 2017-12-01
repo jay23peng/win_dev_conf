@@ -28,22 +28,20 @@ Either [Git for windows](https://git-for-windows.github.io/) or Embedded git ins
 
 ### Gvim
 
-1. 64-bit vim is incomplete installer, so as 1st step, get formal `Gvim` installer from [here](ftp://ftp.vim.org/pub/vim/pc/gvim80-586.exe), and install it.
+1. For python support, Get [Vim](https://github.com/vim/vim-win32-installer) and overwrite the files in former installation.
 
-2. For python support, Get [Vim](https://github.com/vim/vim-win32-installer) and overwrite the files in former installation.
-
-3. Install Vundle by git:
+2. Install Vundle by git:
 
    ```shell
    git clone https://github.com/gmarik/vundle.git "<your vim home>/.vim/Vundle.vim"
    ```
    Or download and copy to `<your vim home>/.vim/Vundle.vim`.
 
-4. Put ``_vimrc`` to your Vim Installation folder. ( May need [powerline-fonts](https://github.com/powerline/fonts) )
+3. Put ``_vimrc`` to your Vim Installation folder. ( May need [powerline-fonts](https://github.com/powerline/fonts) )
 
-5. Invoke vim, run ``PluginInstall``.
+4. Invoke vim, run ``PluginInstall``.
 
-6. When open multiple files in one `Gvim` through vim server, there is a bug that the height of status bar will be calculated into window size. The best practice for now, is auto hide the status bar at left or right side and use large icon.
+5. When open multiple files in one `Gvim` through vim server, there is a bug that the height of status bar will be calculated into window size. The best practice for now, is auto hide the status bar at left or right side and use large icon.
 
 ### FZF(With)
 

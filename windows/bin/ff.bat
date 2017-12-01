@@ -1,3 +1,3 @@
 @echo off
-cmd /c start /min cmd /c "C:\Program Files\Waterfox\waterfox.exe" %*
+start "dummy" "C:\Program Files\Waterfox\waterfox.exe" %*
 
