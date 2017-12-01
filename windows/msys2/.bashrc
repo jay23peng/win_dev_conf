@@ -16,7 +16,7 @@
 # User dependent .bashrc file
 
 # If not running interactively, don't do anything
-export PATH='/c/Program Files/Git/cmd':$PATH
+export PATH=/d/views/with/bin:/d/views/dev_home/windows/msys2:'/c/Program Files/Git/cmd':$PATH
 [[ "$-" != *i* ]] && return
 exec zsh
 
