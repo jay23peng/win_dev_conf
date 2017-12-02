@@ -12,6 +12,10 @@ On windows, for now the practice is `conEmu + vim + msys2 + zsh`.
 
 For windows 7, Go to `personalize->Window Color->Item`, change every font size of Item to `Microsoft Yahei UI, 10`.
 
+### Custom Script Path
+
+Add `<repo>/windows/bin` at the front of `%PATH%`.
+
 ### ConEmu
 
 1.  Get the latest [ConEmu](https://conemu.github.io/).
@@ -110,6 +114,10 @@ Add config below to redirect `vim` properly:
 ```bash
 git config --global core.editor /usr/bin/vim
 ```
+
+### Custom Script Path
+
+Add `<repo>/windows/msys2` to the front of `$PATH` in `~/.bashrc`.
 
 ### Emacs
 
@@ -244,6 +252,10 @@ Go to menu `iTerm2->Preference->Load Preferences from a custom folder or URL`, c
 9. Copy `.zshrc` in repo and overwrite the `~/.zshrc`.
 
 10. For debug zsh, use `zsh -xv`.
+
+### Custom Script Path
+
+Add `<repo>/macOS/bin` to the front of `$PATH` in `~/.zshrc`.
 
 ### Tmux
 
