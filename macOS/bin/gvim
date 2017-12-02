@@ -67,9 +67,9 @@ if [ "$gui" ]; then
 	# But if you use open instead, you will need to fully qualify the
 	# path names for any filenames you specify, which is hard.
     if [ -z "$1" ]; then
-	    exec "$binary" -g $opts --servername GVIM &
+	    exec "$binary" -g $opts --servername GVIM
     else
-	    exec "$binary" -g $opts --servername GVIM --remote-tab-silent ${1:+"$@"} &
+	    exec "$binary" -g $opts --servername GVIM --remote-silent ${1:+"$@"} &
     fi
     exit
 else
