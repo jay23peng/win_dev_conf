@@ -17,6 +17,9 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+# Vim swp file
+*.swp
+
 # =========================
 # Operating System Files
 # =========================

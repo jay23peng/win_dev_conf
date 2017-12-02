@@ -8,7 +8,7 @@
    git push
    git pull
 ** Add user
-   git config user.name "jesse23"
+   git config user.name "jesse23" \\
    git config user.email "pengwenjia@gmail.com"
 
    git config --global user.name "jesse23"
