@@ -1,13 +1,19 @@
 #+OPTIONS: \n:t
+Note: 'OPTIONS' is not working on site like github :noexport:
+
 * Git
-  http://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html
-  https://github.com/robbyrussell/oh-my-zsh/blob/master/plugins/git/git.plugin.zsh
+** Help
+   http://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html
+
+   https://github.com/robbyrussell/oh-my-zsh/blob/master/plugins/git/git.plugin.zsh
 ** Common command
+#+BEGIN_SRC sh
    git add *
    git add -u
    git commit
    git push
    git pull
+#+END_SRC
 ** Add user
    git config user.name "jesse23" \\
    git config user.email "pengwenjia@gmail.com"
