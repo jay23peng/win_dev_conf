@@ -1,7 +1,7 @@
 #+OPTIONS: \n:t
 # Note: Above OPTION is not working on site like github
 * Git
-** Help
+** Guide
    http://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html
 
    https://github.com/robbyrussell/oh-my-zsh/blob/master/plugins/git/git.plugin.zsh
