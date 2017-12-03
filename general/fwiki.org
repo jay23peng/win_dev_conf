@@ -2,7 +2,8 @@
 # Note: Above OPTION is not working on site like github
 * Git
 ** Help
-   http://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html    \\
+   http://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html
+
    https://github.com/robbyrussell/oh-my-zsh/blob/master/plugins/git/git.plugin.zsh
 ** Common command
 #+BEGIN_SRC sh
@@ -35,50 +36,74 @@
 #+END_SRC
    NOTE: for windows, just download the specific version of node and do overwrite
 *** Install latest stable
+#+BEGIN_SRC sh
     n stable
-   npm update npm@latest -g
+    npm update npm@latest -g
+#+END_SRC
 ** Update Global Package
+#+BEGIN_SRC sh
    npm outdated -g --depth=0
    npm update -g <global-package-name>
+#+END_SRC
 ** List Package
+#+BEGIN_SRC sh
    npm list -g --depth=0
+#+END_SRC
 ** Check version for curent latest
+#+BEGIN_SRC sh
    npm update --dry-run --depth==0
+#+END_SRC
 ** Get dependency try
+#+BEGIN_SRC sh
    npm install --dry-run > output.txt
+#+END_SRC
 ** Install nodeJs on linux
-https://github.com/dmrub/portable-node
-wget https://raw.github.com/dmrub/portable-node/master/bin/install-node.sh
-chmod +x ./install-node.sh
-export OSTYPE=linux-gnu
-./install-node.sh --version=6.10.3
-export JAVA_HOME=/plm/trnas/tc_ref/TOOLBOX/lnx64/JDK/jdk1.8.0_102
-export PATH=$PATH:/tc_work/pengw/bash-node-v6.10.3-linux-x64:$JAVA_HOME/bin
+   https://github.com/dmrub/portable-node
+#+BEGIN_SRC sh
+   wget https://raw.github.com/dmrub/portable-node/master/bin/install-node.sh
+   chmod +x ./install-node.sh
+   export OSTYPE=linux-gnu
+   ./install-node.sh --version=6.10.3
+   export JAVA_HOME=/xxx/JDK/jdk1.8.0_102
+   export PATH=/Project/bash-node-v6.10.3-linux-x64:$JAVA_HOME/bin:$PATH
+#+END_SRC
 ** Global package list
+#+BEGIN_SRC
    chromedriver@2.31.0
    chromeos-apk@4.0.2
    eslint@4.3.0
    tern@0.21.0
    typings@2.1.1
    yarn@0.27.5
+#+END_SRC
 ** Registry
-http://registry.npmjs.org/
-https://artifacts.industrysoftware.automation.siemens.com/repository/npm-group/
-https://artifacts.industrysoftware.automation.siemens.com/repository/npm-public/
+   http://registry.npmjs.org/
+
+   https://artifacts.industrysoftware.automation.siemens.com/repository/npm-group/
+
+   https://artifacts.industrysoftware.automation.siemens.com/repository/npm-public/
 ** yarn 
+#+BEGIN_SRC sh
    yarn install --pure-lockfile --ignore-optional --ignore-engines --verbose
    yarn add electron-builder --verbose --ignore-engines
    yarn cache clean
+#+END_SRC
 ** Use other node version
+#+BEGIN_SRC shell
    set NODE_HOME=D:\ugs\node-v6.11.3-win-x64
    set PATH=%NODE_HOME%;%NODE_HOME%\node_modules\npm\bin\node-gyp-bin;%PATH%
+#+END_SRC
 * Buyers
   https://gitlab.com/jesse23/buyer-what
+#+BEGIN_SRC sh
   git -c http.sslVerify=false clone https://gitlab.com/jesse23/buyer-what ~/Project/buyer-what
+#+END_SRC
 * Plot Scale
 ** Gitlab
    https://gitlab.com/jesse23/plot-scale
+#+BEGIN_SRC sh
    git -c http.sslVerify=false clone https://gitlab.com/jesse23/plot-scale D:\views\plot-scale
+#+END_SRC
 ** Trello
    https://trello.com/b/w5CQgyin/plot-scale
 ** Github
