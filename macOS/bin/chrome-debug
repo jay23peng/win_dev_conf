@@ -1,0 +1,6 @@
+#!/bin/sh
+#
+# This shell script starts chrome in debug mode
+# APP_DIR=/Applications
+exec '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' 
+# --user-data-dir=/tmp
