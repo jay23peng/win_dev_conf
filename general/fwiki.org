@@ -1,10 +1,8 @@
 #+OPTIONS: \n:t
-Note: 'OPTIONS' is not working on site like github :noexport:
-
+# Note: Above OPTION is not working on site like github
 * Git
 ** Help
-   http://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html
-
+   http://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html    \\
    https://github.com/robbyrussell/oh-my-zsh/blob/master/plugins/git/git.plugin.zsh
 ** Common command
 #+BEGIN_SRC sh
@@ -15,21 +13,26 @@ Note: 'OPTIONS' is not working on site like github :noexport:
    git pull
 #+END_SRC
 ** Add user
-   git config user.name "jesse23" \\
+#+BEGIN_SRC sh
+   git config user.name "jesse23"
    git config user.email "pengwenjia@gmail.com"
 
    git config --global user.name "jesse23"
    git config --global user.email "pengwenjia@gmail.com"
+#+END_SRC
 ** Roll back one commit
+#+BEGIN_SRC sh
    git reset HEAD~
+#+END_SRC
 * NodeJS
 ** Update NodeJS ( n part not working for windows )
+#+BEGIN_SRC sh
    node -v
    npm cache clean -f  
    npm install -g n
    n 6.10.0
    npm update npm@3.10.10 -g
-   
+#+END_SRC
    NOTE: for windows, just download the specific version of node and do overwrite
 *** Install latest stable
     n stable
