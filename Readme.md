@@ -380,6 +380,28 @@ sudo scutil --set HostName "newname"
    alias ls="exa"
    ```
 
+### Patch Monitor
+
+On non-retina external monitor, macOS will show a bad font display. Workaround for fixing this issue:
+
+1. Restart Mac and Press `Win + R` to go to recover mode.
+
+2. Go to `utilities->terminal`, execute `csrutil disable` to disable System Integrity Protection.
+
+3. Resatrt Mac.
+
+4. Run `<repo>/macOS/monitor/patch-edit.rb`. It will generates a new folder `DisplayVendorID-xxxx`.
+
+5. Use this folder to overwrite system setting:
+
+   ```sh
+   sudo cp -R ./DisplayVendorID-1e6d /System/Library/Displays/Contents/Resources/Overrides
+   ```
+
+   ​
+
+6. Plug out and plug in your monitor again and the font display should be better.
+
 ### MISC
 
 * [amethyst](https://github.com/ianyh/Amethyst)
