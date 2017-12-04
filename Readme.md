@@ -200,15 +200,19 @@ For now I don't find a proper fuzzy finder solution for `msys`.
 
 On Mac it is `iTerm2 + vim + zsh`
 
-### Keyboard
+### OneDrive
 
-I use `ThinkPad Compact Bluetooth Keyboard with TrackPoint`. 2 steps below needed for make if work proper.
-
-1. Install [USB OverDrive](http://www.usboverdrive.com/USBOverdrive/News.html) to disable mouse mid-click.
-2. Run [tpkb](https://github.com/unknownzerx/tpkb/releases) to switch the Fn Key.
-3. Switch `Ctrl` and `cap lock` key by Mac's system preference.
+oneDrive on MAC is not compatible with case sensitive partition. An extra partition is needed through `Disk Utility` for using oneDrive.
 
 ### HomeBrew
+
+Use command below to install homebrew:
+
+```sh
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+```
+
+Common homebrew command:
 
 ```shell
 brew list
@@ -217,15 +221,28 @@ brew install <package>
 brew uninstall <package>
 ```
 
-### iTerm2
+### Keyboard
 
-`iTerm2` is the most public choice in macOS as console emulator. Install it by:
+User `karabiner-elements` for disable middle mouse click in ``ThinkPad Compact Bluetooth Keyboard with TrackPoint` and switch the `Capslocks` key.
 
-```bash
-brew cask install iterm2
+```sh
+brew cask install karabiner-elements
 ```
 
-Go to menu `iTerm2->Preference->Load Preferences from a custom folder or URL`, change it to your local repo or github location.
+### Powerline fonts
+
+[Powerline fonts](https://github.com/powerline/fonts) is required for my term setting. For installation:
+
+```sh
+# clone
+git clone https://github.com/powerline/fonts.git --depth=1
+# install
+cd fonts
+./install.sh
+# clean-up a bit
+cd ..
+rm -rf fonts
+```
 
 ### zsh
 
@@ -257,6 +274,16 @@ Go to menu `iTerm2->Preference->Load Preferences from a custom folder or URL`, c
 
 Add `<repo>/macOS/bin` to the front of `$PATH` in `~/.zshrc`.
 
+### iTerm2
+
+`iTerm2` is the most public choice in macOS as console emulator. Install it by:
+
+```bash
+brew cask install iterm2
+```
+
+Go to menu `iTerm2->Preference->Load Preferences from a custom folder or URL`, change it to your local repo or github location. Restart iTerm2.
+
 ### Tmux
 
 iTerm2 has split and tab function already, did not use Tmux for now.
@@ -273,11 +300,17 @@ Emacs is mainly used for support `VimOrganizer` for `orgmode` currently.
     brew cask install emacs
    ```
 
-2. Get [SPACEMACS](http://spacemacs.org/) and extract it to ``emacs_home``.
+2. Get [SPACEMACS](http://spacemacs.org/):
 
-3. Get ``.spacemacs`` and put it to ``emacs_home``.
+   ```sh
+   git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d 
+   ```
 
-4. For dired-quick-sort, ``gls`` is needed from ``coreutils``.
+3. Start emacs one time and exit.
+
+4. Get ``.spacemacs`` and copy it to `~/`.
+
+5. For dired-quick-sort, ``gls`` is needed from ``coreutils``.
 
    ```shell
    brew install coreutils
@@ -288,11 +321,21 @@ Emacs is mainly used for support `VimOrganizer` for `orgmode` currently.
 ### Vim
 
 1. Install VIM by `brew cask intall macvim`.
+
 2. Install `Command Line Tools` by `xcode-select —install`.
+
 3. Since default `vim` does not have clipboad function, install `vim` with `brew install vim`.
+
 4. Get Vundle by either download or git pull.
+
 5. Put ``_vimrc`` to ``$HOME``.
-6. Get `Vundle` and put it to `~/.vim/Vundle.vim`.
+
+6. Get `Vundle` and put it to `~/.vim/Vundle.vim`:
+
+   ```sh
+   git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+   ```
+
 7. Invoke vim, run ``PluginInstall``.
 
 ### Change Machine Name
@@ -347,7 +390,7 @@ sudo scutil --set HostName "newname"
 
 ### Waterfox
 
-Because firefox is deprecating old extension, the latest availble version of Waterfox is `54.0.1`.
+Because firefox is deprecating old extension, for sync cross-platform, now I am using `52 ESR`.
 
 1. Install firefox/waterfox.
 2. Download [Pentadactyl](http://5digits.org/pentadactyl). After 50.0, use [Signed Version](https://github.com/willsALMANJ/pentadactyl-signed/releases)
@@ -375,6 +418,7 @@ C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" --user-data-dir=/de
 * [FZF](https://github.com/junegunn/fzf)
 * [ripgrip](https://github.com/BurntSushi/ripgrep)
 * [SourceTree](https://www.sourcetreeapp.com/)
+* [typora](https://typora.io/)
 
 
 ### Nerd Fonts

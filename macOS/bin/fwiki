@@ -1,3 +1,3 @@
 #!/bin/ksh
-exec vim ~/Project/dev_home/general/fwiki.org
+exec vim ~/Projects/dev_home/general/fwiki.org
 
