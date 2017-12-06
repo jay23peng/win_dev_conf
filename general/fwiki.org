@@ -93,10 +93,10 @@
    set NODE_HOME=D:\ugs\node-v6.11.3-win-x64
    set PATH=%NODE_HOME%;%NODE_HOME%\node_modules\npm\bin\node-gyp-bin;%PATH%
 #+END_SRC
-* Buyers
-  https://gitlab.com/jesse23/buyer-what
-#+BEGIN_SRC sh
-  git -c http.sslVerify=false clone https://gitlab.com/jesse23/buyer-what ~/Project/buyer-what
+* MacOS
+** Get current IP
+#+BEGIN_SRC shell
+  ifconfig |grep inet
 #+END_SRC
 * Plot Scale
 ** Gitlab
