@@ -93,6 +93,11 @@
    set NODE_HOME=D:\ugs\node-v6.11.3-win-x64
    set PATH=%NODE_HOME%;%NODE_HOME%\node_modules\npm\bin\node-gyp-bin;%PATH%
 #+END_SRC
+* MacOS
+** Get current IP
+#+BEGIN_SRC shell
+  ifconfig |grep inet
+#+END_SRC
 * IONIC
 ** i18n
    http://ionicframework.com/docs/developer-resources/ng2-translate/
