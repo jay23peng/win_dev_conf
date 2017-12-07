@@ -93,11 +93,10 @@
    set NODE_HOME=D:\ugs\node-v6.11.3-win-x64
    set PATH=%NODE_HOME%;%NODE_HOME%\node_modules\npm\bin\node-gyp-bin;%PATH%
 #+END_SRC
-* Buyers
-  https://gitlab.com/jesse23/buyer-what
-#+BEGIN_SRC sh
-  git -c http.sslVerify=false clone https://gitlab.com/jesse23/buyer-what ~/Project/buyer-what
-#+END_SRC
+* IONIC
+** i18n
+   http://ionicframework.com/docs/developer-resources/ng2-translate/
+   https://segmentfault.com/a/1190000008657804
 * Plot Scale
 ** Gitlab
    https://gitlab.com/jesse23/plot-scale
