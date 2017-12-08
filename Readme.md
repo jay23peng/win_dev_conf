@@ -448,3 +448,56 @@ C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" --user-data-dir=/de
 Nerd fonts provide extra symbol when compare with power-line fonts. For now for avoiding any side effect, I am still using power-line fonts:
 
 https://github.com/powerline/fonts
+
+## Xiaomi MIX
+
+1. Unlock the phone.
+
+2. Download [TWRP](https://forum.xda-developers.com/mi-mix/development/recovery-official-twrp-xiaomi-mi-mix-t3498960), [RR-ROM](https://forum.xda-developers.com/mi-mix/development/rom-resurrection-remix-04-09-2017-t3587049) and [GAPPS](http://opengapps.org/?arch=arm64&api=7.1)(Arm 64 & Android 7.1, nano)
+
+3. Boot to flashboot mode, Flash TWRP:
+
+   ```sh
+   fastboot flash recovery twrp.img
+   fastboot boot twrp.img
+   ```
+
+4. If TWRP ask for password, do workaround below:
+
+   ```
+   1. CANCEL WHEN TWRP ASK FOR PASSWORD
+   2. GOTO WIPE
+   3. SLIDE TO WIPE
+   4. BACK TO MAIN TWRP MENU
+   5. REBOOT TO RECOVERY AGAIN
+   ```
+
+5. Wipe your phone with:
+
+   ```
+   1. Advance Wipe
+        Dalvik Cache
+        System
+        Data
+        Cache
+   2. Format Data
+   ```
+
+6. Flash ROM and Gapps, restart.
+
+7. Update embedded Magisk.
+
+8. Update ROM.
+
+9. Install [Google Camera](https://www.xda-developers.com/google-camera-hdr-customization-raw-support/).
+
+10. Update all softwares.
+
+11. Use `Magisk Hide` to mask required APPs.
+
+12. Wipe `TWRP for linage OS`.
+
+### Useful Link
+
+* [Baidu IME Colemak Geek](https://github.com/TsFreddie/BaiduIME-Skin-Colemak-Geek)
+* [Google Camera](https://www.xda-developers.com/google-camera-hdr-customization-raw-support)
