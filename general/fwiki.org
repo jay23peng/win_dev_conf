@@ -98,6 +98,13 @@
 #+BEGIN_SRC shell
   ifconfig |grep inet
 #+END_SRC
+* IONIC
+** i18n
+   http://ionicframework.com/docs/developer-resources/ng2-translate/
+   https://segmentfault.com/a/1190000008657804
+* Windows
+** Check port status
+   netstat –ano
 * Plot Scale
 ** Gitlab
    https://gitlab.com/jesse23/plot-scale
