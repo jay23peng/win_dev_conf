@@ -102,6 +102,9 @@
 ** i18n
    http://ionicframework.com/docs/developer-resources/ng2-translate/
    https://segmentfault.com/a/1190000008657804
+** Test
+   http://localhost:8100/?ionicplatform=android
+   http://localhost:8100/?ionicplatform=ios
 * Windows
 ** Check port status
    netstat –ano
@@ -116,3 +119,9 @@
 ** Github
    https://github.com/jesse23/plot_scale
 
+* Docker
+** How to debug docker process
+   - Install Docker.
+   - Login to docker site by "docker login" if required.
+   - docker run --name myname -it doker_image_name:master /bin/bash
+   - Thek do whatever you want
