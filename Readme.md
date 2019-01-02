@@ -4,7 +4,116 @@ My personal development environment configuration.
 
 Generally, `tumx + vim + zsh` is the best practice for a development environment. In different platform we use different software to achieve the same practice.
 
-## Windows
+## Windows 10 RS3 (Surface)
+
+### Windows Update
+
+Always update windows to latest firstly.
+
+### VPN Related
+
+Install VPN Client 5.8 and try to launch it in IE11. Note that Edge is not working fine.
+
+### Thinkpad Bluetooth Keyboard with Trackpoint
+
+- Install Lenovo Driver.
+- Check `Thinkpad Scroll` at last tab.
+- The reverse scroll direction is not achievable for now
+
+### MacType
+
+- Use [this version](sky.candy.moe/2017/11/24/mactype-20170628/) for best effect.
+- The install batch may have problem in non BIG5 environment, we can do manual install by:
+  - Copy folder to `C:\Program Files\MacType`.
+  - Install Fonts Manually.
+  - Run corresponding registry file manually.
+
+### Powerline fonts
+
+[Powerline fonts](https://github.com/powerline/fonts) is required for my term setting. Just install SourceCodePro manually should be enough.
+
+### ConEmu
+
+- Get the latest [ConEmu](https://conemu.github.io/).
+
+- Copy `ConEmu.xml` from repo and overwrite the `C:\Program Files\ConEmu`.
+
+### WSL (Arch)
+
+- Add WSL Feature in Control Panel.
+- Get Arch Installer from [here](https://github.com/yuk7/ArchWSL).
+- Extract it to `C:\Program Files\Arch`.
+- Install by command line.
+
+### Arch Setup
+
+Refer to [Arch Linux](#Arch-Linux).
+
+### Git
+
+* Git is required for `Vundle` in `VIM`.
+* I use embedded git inside `SourceTree`. It is at `C:\Users\pengw\AppData\Local\Atlassian\SourceTree\git_local\cmd`.
+
+### Vim
+
+1. For python support, Get [Vim](https://github.com/vim/vim-win32-installer) and overwrite the files in former installation.
+
+2. Install Vundle by git:
+
+   ```shell
+   git clone https://github.com/gmarik/vundle.git "<your vim home>/.vim/Vundle.vim"
+   ```
+
+   Or download and copy to `<your vim home>/.vim/Vundle.vim`.
+
+3. Put ``_vimrc`` to your Vim Installation folder. ( May need [powerline-fonts](https://github.com/powerline/fonts) )
+
+4. Invoke vim, run ``PluginInstall``.
+
+**NOTE** emacs is not needed for `vimOrganizer` if export to PDF/HTML function is not needed.
+
+## Arch Linux
+
+```bash
+# Init
+pacman-key --init
+pacman-key --populate
+pacman -Syu
+
+# Change Root Password
+passwd root
+
+# Setup User
+useradd -m your_user
+passwd your_user
+```
+
+Then open `visudo` file by:
+
+```bash
+EDITOR=vim visudo
+```
+
+Look for the line that says `root   ALL=(ALL) ALL` and add your user right on the next line like this:
+
+```bash
+your_user   ALL=(ALL) ALL
+```
+
+Finally, we should login as this user:
+
+```bash
+su your_user
+```
+
+Install fakeroot to bypass a WSL bug:
+
+```bash
+wget https://github.com/yuk7/arch-prebuilt/releases/download/17121600/fakeroot-tcp-1.22-1-x86_64.pkg.tar.xz
+sudo pacman -U fakeroot-tcp-1.22-1-x86_64.pkg.tar.xz
+```
+
+## Windows ( Win10 RTM and before )
 
 On windows, for now the practice is `conEmu + vim + msys2 + zsh`.
 
@@ -15,11 +124,6 @@ For windows 7, Go to `personalize->Window Color->Item`, change every font size o
 ### Custom Script Path
 
 Add `<repo>/windows/bin` at the front of `%PATH%`.
-
-### ConEmu
-
-1.  Get the latest [ConEmu](https://conemu.github.io/).
-2.  Copy `ConEmu.xml` from repo and overwrite the `C:\Program Files\ConEmu`.
 
 ### Python
 
@@ -397,8 +501,6 @@ On non-retina external monitor, macOS will show a bad font display. Workaround f
    ```sh
    sudo cp -R ./DisplayVendorID-1e6d /System/Library/Displays/Contents/Resources/Overrides
    ```
-
-   ​
 
 6. Plug out and plug in your monitor again and the font display should be better.
 

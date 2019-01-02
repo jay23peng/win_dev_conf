@@ -23,7 +23,7 @@ filetype off                  " required
 
 " Bootstrap for starting with Vundle
 if has("win32")
-  let $HOME='C:/msys64/home/'.$USERNAME
+"  let $HOME='C:/msys64/home/'.$USERNAME
 " elseif has('mac')
 "   set rtp+=~/.vim_home/Vundle.vim
 "   set rtp+=/usr/local/opt/fzf
