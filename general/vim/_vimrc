@@ -1,4 +1,6 @@
 " This is my vim configuration which has been used from 2010.
+" NOTE: if unix error with ^M, try to convert CRLF by:
+" :set ff=unix
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " General Setting
