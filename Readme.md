@@ -24,9 +24,21 @@ Install VPN Client 5.8 and try to launch it in IE11. Note that Edge is not worki
 
 - Use [this version](sky.candy.moe/2017/11/24/mactype-20170628/) for best effect.
 - The install batch may have problem in non BIG5 environment, we can do manual install by:
+  - Uninstall all former mac type
+
   - Copy folder to `C:\Program Files\MacType`.
+
   - Install Fonts Manually.
+
   - Run corresponding registry file manually.
+
+    ```
+    _10_x64_font_link.reg
+    _Services_install.reg
+    NotoGothic.reg (or other fonts you like)
+    ```
+
+  - Run [System Font Size Changer](https://www.wintools.info/index.php/system-font-size-changer) to change all fonts back to 1.
 
 ### Powerline fonts
 
