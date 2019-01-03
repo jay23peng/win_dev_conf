@@ -140,7 +140,7 @@ sudo pacman -S community/fzf
 sudo pacman -S community/ripgrep
 sudo pacman -S community/fd
 sudo pacman -S community/exa
-sudo pacman -S community/tmux
+
 ```
 
 ### Python3
@@ -165,6 +165,20 @@ sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/to
    ```bash
    exec zsh
    ```
+
+### tmux
+
+```bash
+sudo pacman -S community/tmux
+```
+
+create `~/.tmux.conf` with:
+
+```bash
+set -g default-terminal "screen-256color"
+```
+
+
 
 ## Windows ( Win10 RTM and before )
 
