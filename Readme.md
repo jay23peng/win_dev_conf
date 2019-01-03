@@ -50,10 +50,10 @@ Install VPN Client 5.8 and try to launch it in IE11. Note that Edge is not worki
 
 - Copy `ConEmu.xml` from repo and overwrite the `C:\Program Files\ConEmu`.
 
-### WSL (Arch)
+### WSL (Artix/Arch)
 
 - Add WSL Feature in Control Panel.
-- Get Arch Installer from [here](https://github.com/yuk7/ArchWSL).
+- Get Arch Installer from [here](https://github.com/hdk5/ArtixWSL).
 - Extract it to `C:\Program Files\Arch`.
 - Install by command line.
 
@@ -121,7 +121,9 @@ su your_user
 Then go back to windows console, use command below to set default user:
 
 ```bash
-Arch config --default-user pengw
+Artix config --default-user pengw
+sc stop LxssManager
+sc start LxssManager
 ```
 
 By restarting your console ( conEmu or cmd.exe), you should be able to login as 
@@ -504,7 +506,7 @@ Emacs is mainly used for support `VimOrganizer` for `orgmode` currently.
 6. Get `Vundle` and put it to `~/.vim/Vundle.vim`:
 
    ```sh
-   git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+   git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/Vundle.vim
    ```
 
 7. Invoke vim, run ``PluginInstall``.
