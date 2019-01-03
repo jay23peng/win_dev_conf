@@ -118,12 +118,52 @@ Finally, we should login as this user:
 su your_user
 ```
 
+Then go back to windows console, use command below to set default user:
+
+```bash
+Arch config --default-user pengw
+```
+
+By restarting your console ( conEmu or cmd.exe), you should be able to login as 
+
 Install fakeroot to bypass a WSL bug:
 
 ```bash
 wget https://github.com/yuk7/arch-prebuilt/releases/download/17121600/fakeroot-tcp-1.22-1-x86_64.pkg.tar.xz
 sudo pacman -U fakeroot-tcp-1.22-1-x86_64.pkg.tar.xz
 ```
+
+### Utilities
+
+```bash
+sudo pacman -S community/fzf
+sudo pacman -Ss community/ripgrep
+sudo pacman -S community/fd
+sudo pacman -S community/exa
+```
+
+### Python3
+
+```bash
+sudo pacman -S extra/python3
+sudo pacman -S python-pip
+```
+
+### zsh
+
+```bash
+sudo pip install powerline-status
+sudo pacman -S extra/zsh
+sudo sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
+```
+
+1. Modify `~/.zshrc` to change theme to `agnoster`.
+
+2. Modify `~/.bashrc` to change default shell to zsh by appending line below:
+
+   ```bash
+   exec zsh
+   ```
 
 ## Windows ( Win10 RTM and before )
 
