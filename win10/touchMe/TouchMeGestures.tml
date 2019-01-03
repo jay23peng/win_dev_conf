@@ -16,5 +16,7 @@
     <Map numFingers="2" gestureType="SWIPE" gestureDirection="RIGHT" threshold="250" continuous="True" actionType="FUNCTION" actionDescription="MouseWheelLeft" displayString="Mouse: Wheel Left" />
     <Map numFingers="2" gestureType="TIP_TAP" gestureDirection="RIGHT" threshold="1" continuous="True" actionType="FUNCTION" actionDescription="UnhideTaskBar" displayString="General: Unhide the TaskBar (from AutoHide)" />
     <Map numFingers="2" gestureType="ROTATION" gestureDirection="COUNTER_CLOCKWISE" threshold="3800" continuous="False" actionType="FUNCTION" actionDescription="InvokeKeyboard" displayString="Touch Keyboard: Show" />
+    <Map numFingers="3" gestureType="SWIPE" gestureDirection="LEFT" threshold="2000" continuous="False" actionType="SHORTCUT" actionDescription="{VK_LWIN}{VK_LEFT}" displayString="App: Snap Left" />
+    <Map numFingers="3" gestureType="SWIPE" gestureDirection="RIGHT" threshold="2000" continuous="False" actionType="SHORTCUT" actionDescription="{VK_LWIN}{VK_RIGHT}" displayString="App: Snap Right" />
   </Mappings>
 </TouchMe>
