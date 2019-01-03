@@ -137,9 +137,10 @@ sudo pacman -U fakeroot-tcp-1.22-1-x86_64.pkg.tar.xz
 
 ```bash
 sudo pacman -S community/fzf
-sudo pacman -Ss community/ripgrep
+sudo pacman -S community/ripgrep
 sudo pacman -S community/fd
 sudo pacman -S community/exa
+sudo pacman -S community/tmux
 ```
 
 ### Python3
@@ -154,7 +155,7 @@ sudo pacman -S python-pip
 ```bash
 sudo pip install powerline-status
 sudo pacman -S extra/zsh
-sudo sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
+sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
 ```
 
 1. Modify `~/.zshrc` to change theme to `agnoster`.
