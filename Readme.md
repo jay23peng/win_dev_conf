@@ -46,24 +46,21 @@ Install VPN Client 5.8 and try to launch it in IE11. Note that Edge is not worki
 
 ### ConEmu
 
-- Get the latest [ConEmu](https://conemu.github.io/).
+- Get the latest [ConEmu](https://conemu.github.io/). (**Preview or Alpha Version**)
 
 - Copy `ConEmu.xml` from repo and overwrite the `C:\Program Files\ConEmu`.
 
-### WSL (Alpine)
+### WSL
 
 - Add WSL Feature in Control Panel.
-- Get [AlpineWSL](https://github.com/yuk7/AlpineWSL).
-- Extra it to `C:\Program Files\AlpineWSL` and run `Alpine.exe` to install.
-
-### WSL Setup
-
-Refer to [Alpine Linux Setup](#Alpine-Linux-Setup).
+- Get [a distribution](https://github.com/sirredbeard/Awesome-WSL).
+- Set it up based on different instruction.
+- For now (20190104) only Ubuntu can support Docker in WSL on latest win10 easily. 
 
 ### Git
 
 * Git is required for `Vundle` in `VIM`.
-* I use embedded git inside `SourceTree`. It is at `C:\Users\pengw\AppData\Local\Atlassian\SourceTree\git_local\cmd`.
+* I use embedded git inside `SourceTree`. It is at `C:\Users\xxxx\AppData\Local\Atlassian\SourceTree\git_local\cmd`.
 
 ### Vim
 
@@ -72,7 +69,7 @@ Refer to [Alpine Linux Setup](#Alpine-Linux-Setup).
 2. Install Vundle by git:
 
    ```shell
-   git clone https://github.com/gmarik/vundle.git "<your vim home>/.vim/Vundle.vim"
+   git clone https://github.com/gmarik/vundle.git <your vim home>/.vim/Vundle.vim
    ```
 
    Or download and copy to `<your vim home>/.vim/Vundle.vim`.
@@ -83,7 +80,9 @@ Refer to [Alpine Linux Setup](#Alpine-Linux-Setup).
 
 **NOTE** emacs is not needed for `vimOrganizer` if export to PDF/HTML function is not needed.
 
-### Docker
+## Docker VM
+
+boot2docker has several limitation and so we build one from scratch
 
 * Install latest VirtualBox.
 
@@ -147,7 +146,125 @@ Refer to [Alpine Linux Setup](#Alpine-Linux-Setup).
 
 * (TBD) docker-compose, it should be installed at WSL, refer to [here](https://nickjanetakis.com/blog/setting-up-docker-for-windows-and-wsl-to-work-flawlessly).
 
-## Alpine Linux Setup
+
+
+## Ubuntu-18.04
+
+[WSL Repo](https://docs.microsoft.com/en-us/windows/wsl/install-manual)
+
+```bash
+# set root password
+sudo passwd
+
+# upgrade to latest
+sudo apt update
+sudo apt upgrade
+```
+
+### Utilities
+
+```bash
+# fzf
+export FZF_VERSION=0.17.5
+wget https://github.com/junegunn/fzf-bin/releases/download/${FZF_VERSION}/fzf-${FZF_VERSION}-linux_amd64.tgz
+tar xzf fzf-${FZF_VERSION}-linux_amd64.tgz
+sudo mv fzf /usr/local/bin
+
+#ripgrep
+export RG_VERSION=0.10.0
+curl -LO https://github.com/BurntSushi/ripgrep/releases/download/${RG_VERSION}/ripgrep_${RG_VERSION}_amd64.deb
+sudo dpkg -i ripgrep_${RG_VERSION}_amd64.deb
+
+#fd
+export FD_VERSION=7.2.0
+curl -LO https://github.com/sharkdp/fd/releases/download/v${FD_VERSION}/fd_${FD_VERSION}_amd64.deb
+sudo dpkg -i fd_${FD_VERSION}_amd64.deb
+
+#exa
+sudo apt install unzip
+export EXA_VERSION=0.8.0
+wget https://github.com/ogham/exa/releases/download/v${EXA_VERSION}/exa-linux-x86_64-${EXA_VERSION}.zip
+unzip exa-linux-x86_64-${EXA_VERSION}.zip
+sudo mv exa-linux-x86_64 /usr/local/bin/exa
+
+# universal-ctags
+# https://launchpad.net/ubuntu/+source/universal-ctags
+# for now let us not enable launchpad source
+sudo apt install libjansson4
+export CTAGS_VERSION=20181215-1
+curl -LO https://launchpad.net/ubuntu/+archive/primary/+files/universal-ctags_0+git${CTAGS_VERSION}_amd64.deb
+sudo dpkg -i universal-ctags_0+git${CTAGS_VERSION}_amd64.deb
+```
+
+### Python3
+
+Python3 is installed by default. Only thing missing is pip:
+
+```bash
+sudo apt install python3-pip
+# don't use pip to upgrade pip for now, there is a workaround if you need to do that
+```
+
+### Zsh
+
+```bash
+# power line
+pip3 install powerline-status # no sudo here...
+sudo apt install zsh
+sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
+```
+
+1. Modify `~/.zshrc` to change theme to `agnoster`.
+
+2. Create `~/.profile` to execute zsh:
+
+   ```bash
+   exec zsh
+   ```
+
+### Tmux
+
+```bash
+sudo apt install tmux
+git clone https://github.com/jimeh/tmux-themepack.git ~/.tmux-themepack
+```
+
+create `~/.tmux.conf` with:
+
+```bash
+set -g default-terminal "screen-256color"
+source-file ${HOME}/.tmux-themepack/powerline/double/yellow.tmuxtheme
+```
+
+### Docker client
+
+```bash
+sudo apt install docker.io
+```
+
+put below to `~/.profile`:
+
+```bash
+# set PATH so it includes custom wsl batch
+if [ -d "/mnt/d/xxx/dev_home/win10/bin" ] ; then
+    PATH="/mnt/d/xxx/dev_home/win10/bin:$PATH"
+fi
+
+#docker
+export DOCKER_HOST=tcp://wsl-docker:2375
+```
+
+Then you can start/stop docker-vm by:
+
+```bash
+dockervm_start
+docker version
+dockervm_stop
+```
+
+## Alpine Linux
+
+* [WSL Repo](https://github.com/yuk7/AlpineWSL)
 
 ```bash
 apk update
@@ -242,25 +359,25 @@ sudo apk add python3
 sudo pip3 install --upgrade pip
 ```
 
-### zsh
+### Zsh
 
 ```bash
 # power line
-sudo pip3 install powerline-status
+pip3 install powerline-status
 sudo apk add zsh
 sudo apk add git
 sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
 ```
 
-1. Modify `~/.zshrc` to change theme to `agnoster`.
+* Modify `~/.zshrc` to change theme to `agnoster`.
 
-2. Create `~/.profile` to execute zsh:
+* Create `~/.profile` to execute zsh:
 
-   ```bash
-   exec zsh
-   ```
+```bash
+exec zsh
+```
 
-### tmux
+### Tmux
 
 ```bash
 sudo apk add tmux
@@ -272,17 +389,110 @@ create `~/.tmux.conf` with:
 set -g default-terminal "screen-256color"
 ```
 
-### docker client
+### Docker Client
 
 ```bash
 sudo apk add docker
 # sudo apk add openrc
 # sudo rc-update add docker boot
-# service docker start
+# service docker start <-- not working in WSL for now
+```
+
+## Arch Linux
+
+[WSL Repo](https://github.com/yuk7/ArchWSL)
+
+```bash
+# Init
+pacman-key --init
+pacman-key --populate
+pacman -Syu
+
+# Change Root Password
+passwd root
+
+# Setup User
+useradd -m your_user
+passwd your_user
+```
+
+Then open `visudo` file by:
+
+```bash
+EDITOR=vim visudo
+```
+
+Look for the line that says `root   ALL=(ALL) ALL` and add your user right on the next line like this:
+
+```bash
+your_user   ALL=(ALL) ALL
+```
+
+Finally, we should login as this user:
+
+```bash
+su your_user
+```
+
+Then go back to windows console, use command below to set default user:
+
+```bash
+Arch config --default-user pengw
+```
+
+By restarting your console ( conEmu or cmd.exe), you should be able to login as 
+
+Install fakeroot to bypass a WSL bug:
+
+```bash
+wget https://github.com/yuk7/arch-prebuilt/releases/download/17121600/fakeroot-tcp-1.22-1-x86_64.pkg.tar.xz
+sudo pacman -U fakeroot-tcp-1.22-1-x86_64.pkg.tar.xz
+```
+
+### utilities
+
+```bash
+sudo pacman -S community/fzf
+sudo pacman -S community/ripgrep
+sudo pacman -S community/fd
+sudo pacman -S community/exa
 
 ```
 
+### python3
 
+```bash
+sudo pacman -S extra/python3
+sudo pacman -S python-pip
+```
+
+### zsh
+
+```bash
+sudo pip install powerline-status
+sudo pacman -S extra/zsh
+sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
+```
+
+1. Modify `~/.zshrc` to change theme to `agnoster`.
+
+2. Modify `~/.bashrc` to change default shell to zsh by appending line below:
+
+   ```bash
+   exec zsh
+   ```
+
+### tmux
+
+```bash
+sudo pacman -S community/tmux
+```
+
+create `~/.tmux.conf` with:
+
+```bash
+set -g default-terminal "screen-256color"
+```
 
 ## Windows ( Win10 RTM and before )
 
@@ -394,12 +604,12 @@ git config --global core.editor /usr/bin/vim
 
 Add `<repo>/windows/msys2` to the front of `$PATH` in `~/.bashrc`.
 
-### Emacs
+### emacs
 
 1. Install emacs by `pacman -S msys/emacs`.
 2. Get [SPACEMACS](http://spacemacs.org/) and  ``.spacemacs`` from repo extract it to home folder `C:\msys64\home\<username>`.
 
-### Vim
+### vim
 
 1. `pacman -S msys/vim`.
 2. Install `python3` by `pacman -s python3`.
@@ -407,7 +617,7 @@ Add `<repo>/windows/msys2` to the front of `$PATH` in `~/.bashrc`.
 4. Get [Vundle](https://github.com/VundleVim/Vundle.vim) and put it into `C:\msys64\home\<username>\.vim_home\Vundle.vim`. ( not required if share with `Gvim`)
 5. Login to vim and run `PluginInstall`.
 
-### Zsh
+### zsh
 
 1. `pacman -S msys/zsh`.
 
@@ -457,7 +667,9 @@ Add `<repo>/windows/msys2` to the front of `$PATH` in `~/.bashrc`.
   exec <your-command> "$@"
   ```
 
+### FZF(With)
 
+Get [with](https://github.com/jesse23/with) and install it manually.
 
 ### The Silver Searcher(Ag)
 
@@ -466,10 +678,6 @@ Add `<repo>/windows/msys2` to the front of `$PATH` in `~/.bashrc`.
 ```bas
 pacman -S mingw64/mingw-w64-x86_64-ag
 ```
-
-### Fuzzy Finder
-
-For now I don't find a proper fuzzy finder solution for `msys`.
 
 ## MacOS
 
@@ -685,12 +893,7 @@ On non-retina external monitor, macOS will show a bad font display. Workaround f
 
 ### Waterfox
 
-Because firefox is deprecating old extension, for sync cross-platform, now I am using `52 ESR`.
-
-1. Install firefox/waterfox.
-2. Download [Pentadactyl](http://5digits.org/pentadactyl). After 50.0, use [Signed Version](https://github.com/willsALMANJ/pentadactyl-signed/releases)
-3. Copy ``_pentadactylrc`` and ``pentadactyl`` to ``~/``.
-4. For Windows Mac Type, Use ``Noto Sans CJK SC DemiLight`` and preference from [here](https://github.com/renkun-ken/MacType.Decency). For 53 version, also need ``gfx.content.azure.backends;direct2d1.1,cairo,skia``
+`FireFox 54.0.1` is completely out of date including extension. For now use a local copy saved in my OneDrive.
 
 ### Chrome
 
@@ -721,54 +924,6 @@ C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" --user-data-dir=/de
 Nerd fonts provide extra symbol when compare with power-line fonts. For now for avoiding any side effect, I am still using power-line fonts:
 
 https://github.com/powerline/fonts
-
-## Xiaomi MIX
-
-1. Unlock the phone.
-
-2. Download [TWRP](https://forum.xda-developers.com/mi-mix/development/recovery-official-twrp-xiaomi-mi-mix-t3498960), [RR-ROM](https://forum.xda-developers.com/mi-mix/development/rom-resurrection-remix-04-09-2017-t3587049) and [GAPPS](http://opengapps.org/?arch=arm64&api=7.1)(Arm 64 & Android 7.1, nano)
-
-3. Boot to flashboot mode, Flash TWRP:
-
-   ```sh
-   fastboot flash recovery twrp.img
-   fastboot boot twrp.img
-   ```
-
-4. If TWRP ask for password, do workaround below:
-
-   ```
-   1. CANCEL WHEN TWRP ASK FOR PASSWORD
-   2. GOTO WIPE
-   3. SLIDE TO WIPE
-   4. BACK TO MAIN TWRP MENU
-   5. REBOOT TO RECOVERY AGAIN
-   ```
-
-5. Wipe your phone with:
-
-   ```
-   1. Advance Wipe
-        Dalvik Cache
-        System
-        Data
-        Cache
-   2. Format Data
-   ```
-
-6. Flash ROM and Gapps, restart.
-
-7. Update embedded Magisk.
-
-8. Update ROM.
-
-9. Install [Google Camera](https://www.xda-developers.com/google-camera-hdr-customization-raw-support/).
-
-10. Update all softwares.
-
-11. Use `Magisk Hide` to mask required APPs.
-
-12. Wipe `TWRP for linage OS`.
 
 ### Useful Link
 
