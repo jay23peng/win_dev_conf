@@ -50,16 +50,15 @@ Install VPN Client 5.8 and try to launch it in IE11. Note that Edge is not worki
 
 - Copy `ConEmu.xml` from repo and overwrite the `C:\Program Files\ConEmu`.
 
-### WSL (Artix/Arch)
+### WSL (Alpine)
 
 - Add WSL Feature in Control Panel.
-- Get Arch Installer from [here](https://github.com/hdk5/ArtixWSL).
-- Extract it to `C:\Program Files\Arch`.
-- Install by command line.
+- Get [AlpineWSL](https://github.com/yuk7/AlpineWSL).
+- Extra it to `C:\Program Files\AlpineWSL` and run `Alpine.exe` to install.
 
-### Arch Setup
+### WSL Setup
 
-Refer to [Arch Linux](#Arch-Linux).
+Refer to [Alpine Linux Setup](#Alpine-Linux-Setup).
 
 ### Git
 
@@ -84,26 +83,98 @@ Refer to [Arch Linux](#Arch-Linux).
 
 **NOTE** emacs is not needed for `vimOrganizer` if export to PDF/HTML function is not needed.
 
-## Arch Linux
+### Docker
+
+* Install latest VirtualBox.
+
+* Create VM by `Linux 2.6 / 3.x /4.x (64-bit)`, default memory and disk is fine. Setup proper CPU and system setting, make sure network is bridge so that you can ssh to it
+
+* Download [Alpine ISO For VM](https://wiki.alpinelinux.org/wiki/Install_Alpine_on_VirtualBox).
+
+* Install by default with `setup-alpine`. Only selection is `sda/sys`. machine name can be `wsl-docker`.
+
+* Reboot
+
+* Edit `/etc/apk/repositories` to enable community repositories.
+
+* `apk update` and `apk upgrade`.
+
+* Setup non root user as [below](#Alpine-Linux). Or just add line below to `/etc/ssh/sshd_config` since it is a simple docker machine:
+
+  ```bash
+  PermitRootLogin yes
+  ```
+
+* Install [Virtualbox additions](https://wiki.alpinelinux.org/wiki/VirtualBox_shared_folders):
+
+  ```bash
+  apk add virtualbox-guest-additions virtualbox-guest-modules-virt
+  reboot
+  modprobe -a vboxsf 
+  mount -t vboxsf vbox_shared /mnt/outside
+  ```
+
+* Edit `/etc/fstab` to mount share folder by default:
+
+  ```bash
+  workspace /workspace vboxsf defaults 0 0
+  # or do below manually
+  # mount -t vboxsf vbox_shared /mnt/outside
+  ```
+
+* Install [docker](https://wiki.alpinelinux.org/wiki/Docker):
+
+  ```bash
+  apk add docker
+  rc-update add docker boot
+  service docker start
+  docker version
+  docker run --rm hello-world
+  ```
+
+* Expose docker deamon for WSL in `/etc/conf.d/docker`:
+
+  ```bash
+  DOCKER_OPTS="-H tcp://0.0.0.0:2375`
+  ```
+
+* Reboot and try to connect from WSL:
+
+  ```bash
+  export DOCKER_HOST=tcp://wsl-docker:2375
+  docker version
+  ```
+
+* (TBD) docker-compose, it should be installed at WSL, refer to [here](https://nickjanetakis.com/blog/setting-up-docker-for-windows-and-wsl-to-work-flawlessly).
+
+## Alpine Linux Setup
 
 ```bash
-# Init
-pacman-key --init
-pacman-key --populate
-pacman -Syu
+apk update
+apk upgrade
 
 # Change Root Password
 passwd root
 
+# Setup Group if not
+addgroup -g 1000 -S app
+
 # Setup User
-useradd -m your_user
+adduser -u 1000 -S your_user -G app
 passwd your_user
+
+# Change default bash
+vi /etc/passwd
+## your_user:x:1000:1000:Linux User,,,:/home/your_user:/bin/ash ##
+
+# Install sudo
+apk add sudo
 ```
 
 Then open `visudo` file by:
 
 ```bash
-EDITOR=vim visudo
+EDITOR=vi visudo
 ```
 
 Look for the line that says `root   ALL=(ALL) ALL` and add your user right on the next line like this:
@@ -118,51 +189,72 @@ Finally, we should login as this user:
 su your_user
 ```
 
-Then go back to windows console, use command below to set default user:
+(for WSL)Then go back to windows console, use command below to set default user:
 
 ```bash
-Artix config --default-user pengw
+Alpine config --default-user pengw
 sc stop LxssManager
 sc start LxssManager
 ```
 
-By restarting your console ( conEmu or cmd.exe), you should be able to login as 
+By restarting your console ( conEmu or cmd.exe), you should be able to login as your user.
 
-Install fakeroot to bypass a WSL bug:
+### Basic apk command
 
 ```bash
-wget https://github.com/yuk7/arch-prebuilt/releases/download/17121600/fakeroot-tcp-1.22-1-x86_64.pkg.tar.xz
-sudo pacman -U fakeroot-tcp-1.22-1-x86_64.pkg.tar.xz
+apk add sudo
+apk search pkgName
+apk search -v xxx # search and display description
+apk search -v 'php7*' #search with wildcards
+apk info # show installed package
+apk info -a zlib # show full package info
+apk info --who-owns /sbin/lbu # show which package owns that file
+apk update # update package list
+apk version -v -l '<' # show available updates
+apk upgrade -U -a # upgrade all packaegs
 ```
 
-### Utilities
+### Extra Utilities
 
 ```bash
-sudo pacman -S community/fzf
-sudo pacman -S community/ripgrep
-sudo pacman -S community/fd
-sudo pacman -S community/exa
+# FZF
+sudo apk add fzf
 
+# ripgrep
+set -x
+export RG_VERSION=0.10.0
+wget https://github.com/BurntSushi/ripgrep/releases/download/${RG_VERSION}/ripgrep-${RG_VERSION}-x86_64-unknown-linux-musl.tar.gz
+tar xzf ripgrep-${RG_VERSION}-x86_64-unknown-linux-musl.tar.gz
+sudo mv ripgrep-${RG_VERSION}-x86_64-unknown-linux-musl/rg /usr/local/bin/
+
+# fd
+set -x
+export FD_VERSION=v7.2.0
+wget https://github.com/sharkdp/fd/releases/download/${FD_VERSION}/fd-${FD_VERSION}-x86_64-unknown-linux-musl.tar.gz
+tar xzf fd-${FD_VERSION}-x86_64-unknown-linux-musl.tar.gz
+sudo mv fd-${FD_VERSION}-x86_64-unknown-linux-musl/fd /usr/local/bin/
 ```
 
 ### Python3
 
 ```bash
-sudo pacman -S extra/python3
-sudo pacman -S python-pip
+sudo apk add python3
+sudo pip3 install --upgrade pip
 ```
 
 ### zsh
 
 ```bash
-sudo pip install powerline-status
-sudo pacman -S extra/zsh
+# power line
+sudo pip3 install powerline-status
+sudo apk add zsh
+sudo apk add git
 sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
 ```
 
 1. Modify `~/.zshrc` to change theme to `agnoster`.
 
-2. Modify `~/.bashrc` to change default shell to zsh by appending line below:
+2. Create `~/.profile` to execute zsh:
 
    ```bash
    exec zsh
@@ -171,13 +263,23 @@ sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/to
 ### tmux
 
 ```bash
-sudo pacman -S community/tmux
+sudo apk add tmux
 ```
 
 create `~/.tmux.conf` with:
 
 ```bash
 set -g default-terminal "screen-256color"
+```
+
+### docker client
+
+```bash
+sudo apk add docker
+# sudo apk add openrc
+# sudo rc-update add docker boot
+# service docker start
+
 ```
 
 
