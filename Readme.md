@@ -240,6 +240,7 @@ source-file ${HOME}/.tmux-themepack/powerline/double/yellow.tmuxtheme
 
 ```bash
 sudo apt install docker.io
+sudo usermod -aG docker $USER
 ```
 
 put below to `~/.profile`:
@@ -253,6 +254,30 @@ fi
 #docker
 export DOCKER_HOST=tcp://wsl-docker:2375
 ```
+
+#### WSL Docker Service
+
+After win10 1803, with Ubuntu, docker is able to run inside WSL.
+
+* In admin console, run command below to start docker-deamon:
+
+  ```bash
+  sudo cgroupfs-mount
+  sudo service docker start
+  docker version
+  sudo service docker stop
+  ```
+
+* In dev_home it has been wrapped to script:
+
+  ```bash
+  dockersvc_start
+  docker version
+  dockersvc_stop
+  ```
+
+
+#### Docker VM
 
 Then you can start/stop docker-vm by:
 
