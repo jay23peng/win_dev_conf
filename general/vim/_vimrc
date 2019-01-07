@@ -12,6 +12,8 @@ set nobackup
 set tabstop=4
 set shiftwidth=4
 set tw=0
+" set cc=73
+set wrap
 set noundofile
 set expandtab
 retab
@@ -41,34 +43,41 @@ let $VundleHome = $HOME.'/.vim'
 set rtp+=$VundleHome/Vundle.vim
 call vundle#begin($VundleHome)
 
-
 " plugin in Github
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'bsdelf/bufferhint'
-Plugin 'majutsushi/tagbar'
-Plugin 'sickill/vim-monokai'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'octol/vim-cpp-enhanced-highlight'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'scrooloose/nerdtree'
-Plugin 'nblock/vim-dokuwiki'
-
-Plugin 'hsitz/VimOrganizer'
 Plugin 'w0rp/ale'
-Plugin 'itchyny/lightline.vim'
-Plugin 'ajh17/Spacegray.vim'
-Plugin 'morhetz/gruvbox'
-Plugin 'mbbill/desertEx'
+Plugin 'majutsushi/tagbar'
+Plugin 'bsdelf/bufferhint'
+Plugin 'hsitz/VimOrganizer'
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/nerdcommenter'
+
+" note: this plugin supports editorConfig already
 Plugin 'maksimr/vim-jsbeautify'
 
+" fuzzy finder
 Plugin 'junegunn/fzf',  { 'dir': '~/.fzf' }
 Plugin 'junegunn/fzf.vim'
 
+" syntax highlight
+Plugin 'nblock/vim-dokuwiki'
+Plugin 'pangloss/vim-javascript'
+Plugin 'crusoexia/vim-javascript-lib'
+Plugin 'octol/vim-cpp-enhanced-highlight'
+
+" theme
+Plugin 'mbbill/desertEx'
+Plugin 'morhetz/gruvbox'
+Plugin 'ajh17/Spacegray.vim'
+Plugin 'sickill/vim-monokai'
+Plugin 'itchyny/lightline.vim'
+Plugin 'altercation/vim-colors-solarized'
+
 " plugin in http://vim-scripts.org/vim/scripts.html
+Plugin 'utl.vim'
+Plugin 'dbext.vim'
 Plugin 'largeFile'
 Plugin 'revolutions.vim'
-Plugin 'dbext.vim'
-Plugin 'utl.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -171,6 +180,24 @@ command! -nargs=+ Qw call fzf#run({
   \ 'options': '+m',
   \ 'tmux_height': '60%'
 \ })
+
+" fzf for Fd command - origin file is not that good
+function! FdHandler(line)
+  execute 'e '. s:escape(a:line)
+  normal! zz
+endfunction
+
+command! -nargs=* Fd call fzf#run({
+  \ 'source': 'fd -a -j 4 <args>',
+  \ 'sink': function('FdHandler'),
+  \ 'options': '+m',
+  \ 'tmux_height': '60%'
+\ })
+
+
+" Likewise, Files command with preview window
+command! -bang -nargs=? -complete=dir Files
+  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 
 " tagbar
 "let g:tagbar_ctags_bin = 'D:\workdir\TOOLBOX\wntx64\Ctags\5.8\ctags.exe'
@@ -352,9 +379,6 @@ if !has("gui_running")
 endif
 
 set nu
-set tw=0
-set wrap
-" set cc=73
 " let g:spacegray_underline_search = 1
 let g:spacegray_italicize_comments = 1
 set bg=dark

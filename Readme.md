@@ -276,6 +276,7 @@ After win10 1803, with Ubuntu, docker is able to run inside WSL.
   dockersvc_stop
   ```
 
+**NOTE** Till 20190104, the docker in WSL still have many side effects. See [here](https://www.reddit.com/r/bashonubuntuonwindows/comments/8cvr27/docker_is_running_natively_on_wsl/) if you see an issue.
 
 #### Docker VM
 
