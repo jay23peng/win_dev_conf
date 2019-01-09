@@ -116,9 +116,10 @@ boot2docker has several limitation and so we build one from scratch
 * Edit `/etc/fstab` to mount share folder by default:
 
   ```bash
-  workspace /workspace vboxsf defaults 0 0
+  # mount it same as wsl so that u can use it seamlessly
+  D_DRIVE /mnt/d vboxsf defaults 0 0
   # or do below manually
-  # mount -t vboxsf vbox_shared /mnt/outside
+  # sudo mount -t vboxsf D_DRIVE /mnt/d
   ```
 
 * Install [docker](https://wiki.alpinelinux.org/wiki/Docker):
@@ -287,6 +288,23 @@ dockervm_start
 docker version
 dockervm_stop
 ```
+
+### NodeJs
+
+```bash
+export VERSION=v8.12.0
+export DISTRO=linux-x64
+sudo mkdir /usr/local/lib/nodejs
+curl -LO https://nodejs.org/dist/$VERSION/node-$VERSION-$DISTRO.tar.xz
+sudo tar -xJvf node-$VERSION-$DISTRO.tar.xz -C /usr/local/lib/nodejs 
+sudo mv /usr/local/lib/nodejs/node-$VERSION-$DISTRO /usr/local/lib/nodejs/node-$VERSION
+
+# export every time or set it to ~/.profile
+export NODEJS_HOME=/usr/local/lib/nodejs/node-$VERSION/bin
+export PATH=$NODEJS_HOME:$PATH
+```
+
+
 
 ## Alpine Linux
 
