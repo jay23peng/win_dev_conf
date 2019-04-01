@@ -116,9 +116,10 @@ boot2docker has several limitation and so we build one from scratch
 * Edit `/etc/fstab` to mount share folder by default:
 
   ```bash
-  workspace /workspace vboxsf defaults 0 0
+  # mount it same as wsl so that u can use it seamlessly
+  D_DRIVE /mnt/d vboxsf defaults 0 0
   # or do below manually
-  # mount -t vboxsf vbox_shared /mnt/outside
+  # sudo mount -t vboxsf D_DRIVE /mnt/d
   ```
 
 * Install [docker](https://wiki.alpinelinux.org/wiki/Docker):
@@ -276,6 +277,7 @@ After win10 1803, with Ubuntu, docker is able to run inside WSL.
   dockersvc_stop
   ```
 
+**NOTE** Till 20190104, the docker in WSL still have many side effects. See [here](https://www.reddit.com/r/bashonubuntuonwindows/comments/8cvr27/docker_is_running_natively_on_wsl/) if you see an issue.
 
 #### Docker VM
 
@@ -286,6 +288,41 @@ dockervm_start
 docker version
 dockervm_stop
 ```
+
+### git
+
+```bash
+# setup user/email
+git config --global user.name "xxxx"
+git config --global user.email "xxxx@siemens.com"
+
+# setup vim
+git config --global diff.tool vimdiff
+git config --global difftool.prompt false
+git config --global alias.d difftool
+git config --global core.editor "vim"
+git config --global difftool.trustExitCode true
+
+# one WA for diff
+sudo ln -s /usr/bin/diff /usr/share/vim/vim80diff
+```
+
+### NodeJs
+
+```bash
+export VERSION=v8.12.0
+export DISTRO=linux-x64
+sudo mkdir /usr/local/lib/nodejs
+curl -LO https://nodejs.org/dist/$VERSION/node-$VERSION-$DISTRO.tar.xz
+sudo tar -xJvf node-$VERSION-$DISTRO.tar.xz -C /usr/local/lib/nodejs 
+sudo mv /usr/local/lib/nodejs/node-$VERSION-$DISTRO /usr/local/lib/nodejs/node-$VERSION
+
+# export every time or set it to ~/.profile
+export NODEJS_HOME=/usr/local/lib/nodejs/node-$VERSION/bin
+export PATH=$NODEJS_HOME:$PATH
+```
+
+
 
 ## Alpine Linux
 
