@@ -112,7 +112,7 @@
 ** Gitlab
    https://gitlab.com/jesse23/plot-scale
 #+BEGIN_SRC sh
-   git -c http.sslVerify=false clone https://gitlab.com/jesse23/plot-scale D:\views\plot-scale
+   git -c http.sslVerify=false clone https://github.com/jesse23/graphql_practice C:\pengw\work\graphql_practice
 #+END_SRC
 ** Trello
    https://trello.com/b/w5CQgyin/plot-scale
