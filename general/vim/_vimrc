@@ -16,6 +16,7 @@ set tw=0
 set wrap
 set noundofile
 set expandtab
+set splitbelow
 retab
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -58,6 +59,10 @@ Plugin 'maksimr/vim-jsbeautify'
 " fuzzy finder
 Plugin 'junegunn/fzf',  { 'dir': '~/.fzf' }
 Plugin 'junegunn/fzf.vim'
+
+" git
+Plugin 'tpope/vim-fugitive'
+Plugin 'junegunn/gv.vim'
 
 " syntax highlight
 Plugin 'nblock/vim-dokuwiki'
@@ -151,7 +156,7 @@ nnoremap <silent> . :call bufferhint#Popup()<CR>
 
 " ctags
 set tags=tags,$ROOT/tags;
-set autochdir
+" set autochdir
 map <silent> <F12> :silent! execute "!ctags -R ".$ROOT."/src"<CR><CR>
 
 " fzf
@@ -273,10 +278,15 @@ set laststatus=2
 let g:lightline = {
       \ 'colorscheme': 'jellybeans',
       \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ],
       \   'right': [ [ 'lineinfo' ],
       \              [ 'percent' ],
       \              [ 'linter_warnings', 'linter_errors', 'linter_ok' ],
       \              [ 'fileformat', 'fileencoding', 'filetype' ] ]
+      \ },
+      \ 'component_function': {
+      \   'gitbranch': 'fugitive#head'
       \ },
       \ 'component_expand': {
       \   'linter_warnings': 'LightlineLinterWarnings',
@@ -367,8 +377,8 @@ if !has("gui_running")
       map [B <DOWN>
       map [D <LEFT>
       map [C <RIGHT>
-      set nocompatible
     endif   
+
 
     nmap <ESC>oA k
     nmap <ESC>oB j

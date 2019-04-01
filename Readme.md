@@ -289,6 +289,24 @@ docker version
 dockervm_stop
 ```
 
+### git
+
+```bash
+# setup user/email
+git config --global user.name "xxxx"
+git config --global user.email "xxxx@siemens.com"
+
+# setup vim
+git config --global diff.tool vimdiff
+git config --global difftool.prompt false
+git config --global alias.d difftool
+git config --global core.editor "vim"
+git config --global difftool.trustExitCode true
+
+# one WA for diff
+sudo ln -s /usr/bin/diff /usr/share/vim/vim80diff
+```
+
 ### NodeJs
 
 ```bash
