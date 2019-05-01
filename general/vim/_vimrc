@@ -163,6 +163,19 @@ map <silent> <F12> :silent! execute "!ctags -R ".$ROOT."/src"<CR><CR>
 let $FZF_DEFAULT_COMMAND='fd -a -j 4'
 nnoremap <silent> <C-p> :Files<CR>
 
+" fzf for Fd command - origin file is not that good
+function! FdHandler(line)
+  execute 'e '. s:escape(a:line)
+  normal! zz
+endfunction
+
+command! -nargs=* Fd call fzf#run({
+  \ 'source': 'fd -a -j 4 <args>',
+  \ 'sink': function('FdHandler'),
+  \ 'options': '+m',
+  \ 'tmux_height': '60%'
+\ })
+
 " fzf for qw command
 " Also an example for all other open pattern
 function! s:escape(path)
@@ -186,19 +199,28 @@ command! -nargs=+ Qw call fzf#run({
   \ 'tmux_height': '60%'
 \ })
 
-" fzf for Fd command - origin file is not that good
-function! FdHandler(line)
-  execute 'e '. s:escape(a:line)
-  normal! zz
-endfunction
-
-command! -nargs=* Fd call fzf#run({
-  \ 'source': 'fd -a -j 4 <args>',
+" fzf for qwhere command
+command! -nargs=+ Qwhere call fzf#run({
+  \ 'source': 'qwhere "<args>"',
   \ 'sink': function('FdHandler'),
   \ 'options': '+m',
   \ 'tmux_height': '60%'
 \ })
 
+" fzf for qtype command
+function! QtypeHandler(line)
+  let parts = split(a:line, ' ')
+  let [fn, rest_part] = parts[0 : 1]
+  execute 'e '. s:escape(fn)
+  normal! zz
+endfunction
+
+command! -nargs=+ Qtype call fzf#run({
+  \ 'source': 'qtype "<args>"',
+  \ 'sink': function('QtypeHandler'),
+  \ 'options': '+m',
+  \ 'tmux_height': '60%'
+\ })
 
 " Likewise, Files command with preview window
 command! -bang -nargs=? -complete=dir Files
