@@ -4,17 +4,16 @@
 "noremap <C-[> <Esc>
 " map -modes caret,<C-[> <Esc>
 
-
 " Remap k j for colemak
 unmap s
 unmap w
 unmap e
 unmap d
 unmap u
-map j previousTab
+map h previousTab
 map l nextTab
-map h scrollPageUp
-map k scrollPageDown
+map k scrollPageUp
+map j scrollPageDown
 
 " Switch between two last used tabs using TAB
 map <C-j> lastUsedTab

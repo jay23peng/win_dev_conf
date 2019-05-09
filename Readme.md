@@ -953,6 +953,12 @@ On non-retina external monitor, macOS will show a bad font display. Workaround f
 
 ## Cross Platform Software
 
+### Vivaldi
+
+Finally we have a chromium based which can hide address bar and show side tab! [Link](https://vivaldi.com/)
+
+With [SurfingKeys](https://github.com/brookhong/Surfingkeys) It is same as FireFox solution which is aging.
+
 ### Waterfox
 
 `FireFox 54.0.1` is completely out of date including extension. For now use a local copy saved in my OneDrive.
