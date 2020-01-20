@@ -71,6 +71,12 @@ sudo tpkb
 ```
 MButton::Return
 ```
+### Mouse Speed
+Drag mouse speed to max 5. 
+Use command below to set it higher:
+```
+defaults write -g com.apple.mouse.scaling  12.0
+```
 
 ### OneDrive
 If u are using default APFS disk format u can ignore this.
