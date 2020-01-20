@@ -4,7 +4,242 @@ My personal development environment configuration.
 
 Generally, `tumx + vim + zsh` is the best practice for a development environment. In different platform we use different software to achieve the same practice.
 
-## Windows 10 RS3 (Surface)
+## MacOS (Catalina)
+
+### Basic setup
+- Install the system correctly.
+
+### HomeBrew
+Homebrew will be the only source for 3rd party software
+```sh
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+```
+
+Common homebrew command:
+
+```shell
+brew list
+brew cask list
+brew install <package>
+brew uninstall <package>
+```
+
+### Windows VM
+- For now windows VM is required in my practice.
+- At Jan 2020, VirtualBox is trying to upgrade their video driver to VBoxSVGA, which is causing lot of display issues. So there are two options:
+  - Use VirtualBox 5 verision.
+  - Buy commercial product. 
+  For now I am using VMWare Fusion 11.5.
+
+### Keyboard Mapping
+MacOS use `Cmd` key as equivalent setup as `Ctrl` key in windows/linux. It is very inconvenient since it is so different with common dev tool chain.
+
+At this moment, before I know any better I approach, the principle I follow is:
+- Use native configuration as much as possible, use patch software as less as possible.
+- Pay effort as less as possible
+- As soon as we don't use ctrl key in vim too much, we can choose to remap that
+
+So:
+#### Mac Side
+- Go to Mac Keyboard setting, do mapping below:
+  - Set keyboard layout as Colmak.
+  - Change modifier key mapping as:
+```
+Capslock => Command
+Control  => Capslock
+Command  => Control
+```
+
+#### Windows VM Side
+- Go to windows, use software `KeyTweak`:
+  - Load preset colmak in my windows keymap setup.
+  - Reset the 3 function key, then do:
+```
+LControl => LWindows
+LWindows => LControl
+```
+
+#### ThinkPad Compact Bluetooth Keyboard
+2 things needs to be resolved: F1-F12 and Mouse Key 3.
+- On Mac, load `tpkb` on start:
+```bash
+brew cask install tpkb
+# Run code below after restart
+sudo tpkb
+```
+- On Windows VM (and maybe remote machine), write a small AHK script to disable mouse middle click:
+```
+MButton::Return
+```
+
+### OneDrive
+If u are using default APFS disk format u can ignore this.
+oneDrive on MAC is not compatible with case sensitive partition. An extra partition is needed through `Disk Utility` for using oneDrive.
+
+
+### Powerline fonts
+[Powerline fonts](https://github.com/powerline/fonts) is required for my term setting. For installation:
+```sh
+# clone
+git clone https://github.com/powerline/fonts.git --depth=1
+# install
+cd fonts
+./install.sh
+# clean-up a bit
+cd ..
+rm -rf fonts
+```
+
+### VSCode
+- vscode installation can also be done by brew.
+- After install and load setting sync,
+- Go to `Perference: Open Keyboard Shortcuts`, modify 2 key mappings:
+```
+Extension.vim_ctrl+r => Cmd + R
+Extension.vim_ctrl+[ => Cmd + [
+```
+
+### zsh
+1. `brew install zsh`
+
+3. Insall pip by `sudo easy_install pip`.
+
+4. Intall power-line by `pip install powline-status`.
+
+5. Install fonts from [here](https://github.com/powerline/fonts).
+
+6. Select a font end with `power-line`.
+
+7. Install `oh-my-zsh`:
+
+   ```bash
+   sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
+   ```
+
+8. run `vim ~/.zshrc`, change the theme to `agnoster`.
+
+9. Copy `.zshrc` in repo and overwrite the `~/.zshrc`.
+
+10. For debug zsh, use `zsh -xv`.
+
+### Custom Script Path
+Add `<repo>/macOS/bin` to the front of `$PATH` in `~/.zshrc`.
+
+### iTerm2
+`iTerm2` is the most public choice in macOS as console emulator. Install it by:
+
+```bash
+brew cask install iterm2
+```
+
+Go to menu `iTerm2->Preference->Load Preferences from a custom folder or URL`, change it to your local repo or my github location. Restart iTerm2.
+
+*Note: For now in iTerms2 we map cmd back to ctrl which will make vim flow better also not conflict with iterms2 shortcut. I will see if I can find any better solution later.*
+
+### Tmux
+
+iTerm2 has split and tab function already, did not use Tmux for now.
+
+`brew install tmux`
+
+### Vim
+
+1. Install VIM by `brew cask intall macvim`.
+
+2. Install `Command Line Tools` by `xcode-select —install`.
+
+3. Since default `vim` does not have clipboad function, install `vim` with `brew install vim`.
+
+4. Get Vundle by either download or git pull.
+
+5. Put ``_vimrc`` to ``$HOME``.
+
+6. Get `Vundle` and put it to `~/.vim/Vundle.vim`:
+
+   ```sh
+   git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/Vundle.vim
+   ```
+
+7. Invoke vim, run ``PluginInstall``.
+
+### Emacs (deprecated)
+I use vim for org for a long time already...may revisit this topic once I switch back to Emacs
+
+Emacs is mainly used for support `VimOrganizer` for `orgmode` currently.
+
+1. Get emacs from Homebrew.
+
+   ```shell
+    brew cask install emacs
+   ```
+
+2. Get [SPACEMACS](http://spacemacs.org/):
+
+   ```sh
+   git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d 
+   ```
+
+3. Start emacs one time and exit.
+
+4. Get ``.spacemacs`` and copy it to `~/`.
+
+5. For dired-quick-sort, ``gls`` is needed from ``coreutils``.
+
+   ```shell
+   brew install coreutils
+   ```
+
+   **NOTE** For cleaning SPACEMACS, not only clean elpa folder, but also remove auto-gen var in ``.spacemacs``.
+
+### Change Machine Name
+
+```bash
+sudo scutil --set ComputerName "newname"
+sudo scutil --set LocalHostName "newname"
+sudo scutil --set HostName "newname"
+```
+
+### FZF
+
+1. Install fd:
+
+   ```bash
+   brew install fd
+   ```
+
+2. Install fzf:
+
+   ```bash
+   brew install fzf
+   ```
+
+3. Add fzf setting below to `.bashrc`:
+
+   ```bash
+   export FZF_DEFAULT_COMMAND='fd -a -j 4'
+   ```
+
+### Exa
+
+1. Install exa:
+
+   ```bash
+   brew install exa
+   ```
+
+2. At the end of `.zshrc` add line below:
+
+   ```bash
+   alias ls="exa"
+   ```
+
+### MISC
+
+* [amethyst](https://github.com/ianyh/Amethyst)
+* [kdiff3](http://kdiff3.sourceforge.net/)
+* [macpass](https://github.com/mstarke/MacPass)
+
+## Windows 10 (Surface)
 
 ### Windows Update
 
@@ -740,216 +975,6 @@ Get [with](https://github.com/jesse23/with) and install it manually.
 ```bas
 pacman -S mingw64/mingw-w64-x86_64-ag
 ```
-
-## MacOS
-
-On Mac it is `iTerm2 + vim + zsh`
-
-### OneDrive
-
-oneDrive on MAC is not compatible with case sensitive partition. An extra partition is needed through `Disk Utility` for using oneDrive.
-
-### HomeBrew
-
-Use command below to install homebrew:
-
-```sh
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-```
-
-Common homebrew command:
-
-```shell
-brew list
-brew cask list
-brew install <package>
-brew uninstall <package>
-```
-
-### Keyboard
-
-User `karabiner-elements` for disable middle mouse click in ``ThinkPad Compact Bluetooth Keyboard with TrackPoint` and switch the `Capslocks` key.
-
-```sh
-brew cask install karabiner-elements
-```
-
-### Powerline fonts
-
-[Powerline fonts](https://github.com/powerline/fonts) is required for my term setting. For installation:
-
-```sh
-# clone
-git clone https://github.com/powerline/fonts.git --depth=1
-# install
-cd fonts
-./install.sh
-# clean-up a bit
-cd ..
-rm -rf fonts
-```
-
-### zsh
-
-1. `brew install zsh`
-
-2. Set `iterm2` default command to `zsh`. Restart `iterm2` to make sure it works. Set `zsh` as default will pollute other application like `VS Code`, so this apprach will be better.
-
-3. Insall pip by `sudo easy_install pip`.
-
-4. Intall power-line by `pip install powline-status`.
-
-5. Install fonts from [here](https://github.com/powerline/fonts).
-
-6. Select a font end with `power-line`.
-
-7. Install `oh-my-zsh`:
-
-   ```bash
-   sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
-   ```
-
-8. run `vim ~/.zshrc`, change the theme to `agnoster`.
-
-9. Copy `.zshrc` in repo and overwrite the `~/.zshrc`.
-
-10. For debug zsh, use `zsh -xv`.
-
-### Custom Script Path
-
-Add `<repo>/macOS/bin` to the front of `$PATH` in `~/.zshrc`.
-
-### iTerm2
-
-`iTerm2` is the most public choice in macOS as console emulator. Install it by:
-
-```bash
-brew cask install iterm2
-```
-
-Go to menu `iTerm2->Preference->Load Preferences from a custom folder or URL`, change it to your local repo or github location. Restart iTerm2.
-
-### Tmux
-
-iTerm2 has split and tab function already, did not use Tmux for now.
-
-`brew install tmux`
-
-### Emacs
-
-Emacs is mainly used for support `VimOrganizer` for `orgmode` currently.
-
-1. Get emacs from Homebrew.
-
-   ```shell
-    brew cask install emacs
-   ```
-
-2. Get [SPACEMACS](http://spacemacs.org/):
-
-   ```sh
-   git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d 
-   ```
-
-3. Start emacs one time and exit.
-
-4. Get ``.spacemacs`` and copy it to `~/`.
-
-5. For dired-quick-sort, ``gls`` is needed from ``coreutils``.
-
-   ```shell
-   brew install coreutils
-   ```
-
-   **NOTE** For cleaning SPACEMACS, not only clean elpa folder, but also remove auto-gen var in ``.spacemacs``.
-
-### Vim
-
-1. Install VIM by `brew cask intall macvim`.
-
-2. Install `Command Line Tools` by `xcode-select —install`.
-
-3. Since default `vim` does not have clipboad function, install `vim` with `brew install vim`.
-
-4. Get Vundle by either download or git pull.
-
-5. Put ``_vimrc`` to ``$HOME``.
-
-6. Get `Vundle` and put it to `~/.vim/Vundle.vim`:
-
-   ```sh
-   git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/Vundle.vim
-   ```
-
-7. Invoke vim, run ``PluginInstall``.
-
-### Change Machine Name
-
-```bash
-sudo scutil --set ComputerName "newname"
-sudo scutil --set LocalHostName "newname"
-sudo scutil --set HostName "newname"
-```
-
-### FZF
-
-1. Install fd:
-
-   ```bash
-   brew install fd
-   ```
-
-2. Install fzf:
-
-   ```bash
-   brew install fzf
-   ```
-
-3. Add fzf setting below to `.bashrc`:
-
-   ```bash
-   export FZF_DEFAULT_COMMAND='fd -a -j 4'
-   ```
-
-### Exa
-
-1. Install exa:
-
-   ```bash
-   brew install exa
-   ```
-
-2. At the end of `.zshrc` add line below:
-
-   ```bash
-   alias ls="exa"
-   ```
-
-### Patch Monitor
-
-On non-retina external monitor, macOS will show a bad font display. Workaround for fixing this issue:
-
-1. Restart Mac and Press `Win + R` to go to recover mode.
-
-2. Go to `utilities->terminal`, execute `csrutil disable` to disable System Integrity Protection.
-
-3. Resatrt Mac.
-
-4. Run `<repo>/macOS/monitor/patch-edit.rb`. It will generates a new folder `DisplayVendorID-xxxx`.
-
-5. Use this folder to overwrite system setting:
-
-   ```sh
-   sudo cp -R ./DisplayVendorID-1e6d /System/Library/Displays/Contents/Resources/Overrides
-   ```
-
-6. Plug out and plug in your monitor again and the font display should be better.
-
-### MISC
-
-* [amethyst](https://github.com/ianyh/Amethyst)
-* [kdiff3](http://kdiff3.sourceforge.net/)
-* [macpass](https://github.com/mstarke/MacPass)
 
 ## Cross Platform Software
 
