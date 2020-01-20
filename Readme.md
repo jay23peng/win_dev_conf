@@ -238,6 +238,7 @@ sudo scutil --set HostName "newname"
 * [amethyst](https://github.com/ianyh/Amethyst)
 * [kdiff3](http://kdiff3.sourceforge.net/)
 * [macpass](https://github.com/mstarke/MacPass)
+* Wallpaper path: `/System/Library/Desktop Pictures`
 
 ## Windows 10 (Surface)
 
