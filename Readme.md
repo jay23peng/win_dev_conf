@@ -4,6 +4,40 @@ My personal development environment configuration.
 
 Generally, `tumx + vim + zsh` is the best practice for a development environment. In different platform we use different software to achieve the same practice.
 
+## Manjaro 20.01(i3wm)
+### Which DE
+- Under MacOS Vmware Env, Manjaro Budgie has 30% cpu constant cost by xorg and preview-loader...
+- Manjaro i3wm version is cool for vm env usage
+
+### vmware-tools
+```sh
+subo pacman -R open-vm-tools
+git clone https://github.com/rasa/vmware-tools-patches.git
+cd vmware-tools-patches
+sudo ./patched-open-vm-tools.sh
+```
+- [See here](https://medium.com/@ribomo42/install-official-vmware-tools-on-arch-linux-15afd5b848ed)
+
+### HiDPI
+- Create/Edit `~/.Xresources` with the
+```sh
+Xft.dpi: 192
+URxvt.font: xft:FiraMono-Regular:size=10
+Xft.autohint: 0
+Xft.lcdfilter:  lcddefault
+Xft.hintstyle:  hintfull
+Xft.hinting: 1
+Xft.antialias: 1
+Xft.rgba: rgb
+```
+
+- Create/Edit `~/.profile` with the
+```sh
+export GDK_SCALE=2
+export GDK_DPI_SCALE=0.5
+export QT_AUTO_SCREEN_SCALE_FACTOR=1
+```
+
 ## MacOS (Catalina)
 
 ### Basic setup
