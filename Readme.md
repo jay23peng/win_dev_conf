@@ -4,39 +4,313 @@ My personal development environment configuration.
 
 Generally, `tumx + vim + zsh` is the best practice for a development environment. In different platform we use different software to achieve the same practice.
 
-## Manjaro 20.01(i3wm)
-### Which DE
-- Under MacOS Vmware Env, Manjaro Budgie has 30% cpu constant cost by xorg and preview-loader...
-- Manjaro i3wm version is cool for vm env usage
+# adi1090x/CustomArch
+OOTB UI Experience is more imoprtant:) Manjaro is good but still needs too much tunings
+### Bootstrap
+- [Installation](https://github.com/adi1090x/CustomArch/blob/master/images/Installer/README.md)
+- [I3 Intruduction](https://github.com/adi1090x/CustomArch/blob/master/images/i3/README.md)
+
+### Keyboard Layout Round 1
+```sh
+# run command below at bash directly to enable colemak manully 1stly
+# Before `Keyboard Layout Round 2` we need to run command above manually for every reboot
+setxkbmap us -variant colemak &
+```
+
+### Update Mirror List
+```sh
+# https://wiki.archlinux.org/index.php/Mirrors
+
+# Install rankmirrors
+sudo pacman -S pacman-contrib
+
+# No matter what u did, do a backup!
+cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
+
+curl -s "https://www.archlinux.org/mirrorlist/?country=FR&country=GB&protocol=https&use_mirror_status=on" | sed -e 's/^#Server/Server/' -e '/^#/d' | rankmirrors -n 6 -
+
+# then copy the result to /etc/pacman.d/mirror list
+
+# then update
+sudo pacman -Syyu
+
+# remeber to reboot since maybe the coar has been updated
+sudo systemctl reboot
+```
 
 ### vmware-tools
+OOTB open-vm-tools is flaky while working with vmware15.5. Also the clipboard function is not working. Use step below to reset the vmware-tools:
 ```sh
-subo pacman -R open-vm-tools
+sudo pacman -R open-vm-tools
 git clone https://github.com/rasa/vmware-tools-patches.git
 cd vmware-tools-patches
 sudo ./patched-open-vm-tools.sh
-```
-- [See here](https://medium.com/@ribomo42/install-official-vmware-tools-on-arch-linux-15afd5b848ed)
 
-### HiDPI
+# support copy paste
+# also for adi1090x/CustomArch need to install xf86-video-vmware
+sudo pacman -Syu gtkmm3 xf86-video-vmware
+
+# remove OOTB auto start
+sudo rm /etc/xdg/autostart/vmware-user.desktop
+
+# add below to ~/.xprofile
+# initialize vmware-tools
+vmware-user &
+
+# if still not working check 'Window resolution aautofit problems' in link below:
+# https://wiki.archlinux.org/index.php/VMware/Install_Arch_Linux_as_a_guest
+```
+
+### HiDPI Round 1
 - Create/Edit `~/.Xresources` with the
 ```sh
+# HiDPI
 Xft.dpi: 192
-URxvt.font: xft:FiraMono-Regular:size=10
 Xft.autohint: 0
 Xft.lcdfilter:  lcddefault
 Xft.hintstyle:  hintfull
 Xft.hinting: 1
 Xft.antialias: 1
 Xft.rgba: rgb
+
+URxvt.font: xft:Terminus (TTF):regular:size=12
+URxvt.boldFont: xft:Terminus (TTF):regular:size=12
+URxvt.italicFont: xft:Terminus (TTF):regular:size=12
+URxvt.boldItalicfont: xft:Terminus (TTF):regular:size=12
+
+
 ```
 
-- Create/Edit `~/.profile` with the
+- Create/Edit `~/.xprofile` with the
 ```sh
+# here both '.xprofile' and '.profile' works OK
+
+# HiDPI
 export GDK_SCALE=2
 export GDK_DPI_SCALE=0.5
 export QT_AUTO_SCREEN_SCALE_FACTOR=1
+export ELM_SCALE=1.5
 ```
+
+### Keyboard Layout Round 2
+```sh
+# install xorg-xmodmap
+sudo pacman -Syu xorg-xmodmap
+
+# add below to ~/.xprofile
+
+# Keyboard Layout
+setxkbmap us -variant colemak &
+xmodmap ~/.Xmodmap &
+
+# put below at ~/.Xmodmap
+clear lock
+clear control
+clear mod4
+keycode 66 = Caps_Lock
+keycode 37 = Super_L NoSymbol Super_L
+keycode 133 = Control_L NoSymbol Control_L
+pointer = 1 25 3 4 5 6 7 8 9 10 11 12
+add lock = Caps_Lock
+add control = Control_L Control_R
+add mod4 = Super_L Super_R
+```
+
+### Powerline fonts & WQY
+[Powerline fonts](https://github.com/powerline/fonts) is required for my term setting. For installation:
+```sh
+# wqy
+sudo pacman -Syu wqy-microhei
+
+# clone
+git clone https://github.com/powerline/fonts.git --depth=1
+# install
+cd fonts
+./install.sh
+# clean-up a bit
+cd ..
+rm -rf fonts
+```
+
+### HiDPI Round 2
+- General rule
+```
+# Sans: Keep existing or WenQuanYi Micro Hei 12
+# Mono: Noto Mono for Powerline 12
+# rofi doesn't impact by scale so * 2
+```
+
+- termite
+```sh
+# vim ~/.config/termite/config.i3
+# vim ~/.config/termite/config
+font = Noto Mono for Powerline 12
+```
+
+- .Xresources
+```sh
+# vim ~/.Xresources
+URxvt.font: xft:Noto Mono for Powerline:regular:size=12
+URxvt.boldFont: xft:Noto Mono for Powerline:regular:size=12
+URxvt.italicFont: xft:Noto Mono for Powerline:regular:size=12
+URxvt.boldItalicfont: xft:Noto Mono for Powerline:regular:size=12
+```
+
+- i3-config
+```sh
+# vim ~/.config/i3/config
+
+# set font
+font pango: Noto Sans 10
+
+# autostart
+exec --no-startup-id hsetroot -extend ~/.config/i3/wallpaper.jpg
+
+# comment out about
+# exec --no-startup-id "sleep 3 && /usr/local/bin/about.sh"
+
+# start dmenu (a program launcher)
+bindsym $super+Shift+d exec rofi -config ~/.config/rofi/themes/config.simple -show drun -display-drun 'Apps ' -drun-display-format '{name}' -padding 18 -width 30 -location 0 -lines 10 -columns 2 -show-icons -icon-theme 'Papirus' -font 'Noto Sans 36'
+
+# Misc
+bindsym $super+q exec --no-startup-id "~/.config/rofi/scripts/appsmenu.sh"
+
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $super+Shift+r exec --no-startup-id "hsetroot -extend ~/.config/i3/wallpaper.jpg && restart"
+
+# panel
+bar {
+    ...
+    position top
+}
+```
+
+- dunstrc
+```sh
+# vim ~/.config/dunst/dunstrc.i3
+font = Noto Sans 10
+```
+
+- dmenu
+```sh
+# vim ~/.config/rofi/themes/search-i3.rasi
+# same as font pango but *2
+font: "Noto Sans 20";
+
+# vim ~/.config/rofi/themes/config.simple
+same as dmenu in 13 config
+rofi.font: Noto Mono for Powerline 36
+```
+
+- Misc menus
+```sh
+# *2 for all font char used in this file
+# vim ~/.config/rofi/themes/shared/resolutions/1366x768.rasi
+  text-font:                            "Comfortaa 28";
+  text-font-mono:                       "RobotoMono Nerd Font Regular 28";
+  icon-font:                            "Hurmit Nerd Font Mono 100";
+  icon-font-small:                      "Hurmit Nerd Font Mono 48";
+
+# add space to all symbol char below
+# vim ~/.config/rofi/scripts/powermenu-i3.sh
+# vim ~/.config/rofi/scripts/mpdmenu.sh
+# vim ~/.config/rofi/scripts/appsmenu.sh
+# vim ~/.config/rofi/scripts/scrotmenu.sh
+# vim ~/.config/rofi/scripts/networkmenu.py
+# vim ~/.config/rofi/scripts/i3layoutmenu.sh
+```
+
+- GTK2
+```
+# scssc is required
+sudo pacman -Syu sassc
+
+# set oomox theme
+git clone https://github.com/themix-project/oomox.git --recursive
+cd oomox
+./gui.sh
+
+# pick a theme.
+# shiki-noble-dark
+
+# below is more custom control for gtk2
+vim ~/.gtkrc-2.0.mine
+# https://github.com/vaeyo/dotfiles/blob/master/.themes/blujob/gtk-2.0/gtkrc.hidpi
+# gtk-icon-sizes = "panel-menu=64,64:panel=64,64:gtk-menu=64,64:gtk-dialog=64,64:gtk-dnd=64,64:gtk-button=64,64:gtk-large-toolbar=64,64:gtk-small-toolbar=64,64"
+gtk-icon-sizes = "panel-menu=32,32:panel=32,32:gtk-menu=32,32:gtk-dnd=32,32:gtk-large-toolbar=32,32:gtk-small-toolbar=32,32"
+style "default" {
+#    GtkScrollbar   ::min_slider_length = 36
+#    GtkCheckButton ::indicator_size    = 36
+#    GtkRadioButton ::indicator_size    = 36
+    GtkTreeView    ::expander_size     = 36
+    GtkExpander    ::expander_size     = 36
+#    GtkScale       ::slider-length     = 80                     
+}
+
+class "GtkWidget" style "default"
+class "GtkTreeView" style "default"
+
+```
+
+### Browser
+```sh
+sudo pacman -Syu chromium
+```
+
+### sound
+- disable beep
+```
+# sudo vim /etc/modprobe.d/nobeep.conf
+blacklist pcspkr
+```
+- vmware-sound
+```
+# https://forum.manjaro.org/t/no-audio-in-virtual-machine-manjaro-i3/86458
+sound.autodetect = "TRUE"
+sound.virtualDev = "hdaudio"
+```
+
+### bash
+use OOTB fish for now
+
+### vs code
+```sh
+# https://github.com/microsoft/vscode/issues/80798
+# because of issue above, for now switch window.titleBarStyle=custom after install
+pacman -Syu VSCode
+```
+
+### Locale (optional)
+```sh
+# /etc/locale.gen
+en_US.UTF-8 UTF-8
+zh_CN.UTF-8 UTF-8
+
+# then go to bash
+locale-gen
+
+# ~/.Xprofile
+export LANG=en_US.UTF-8
+export LANGUAGE=en_US:zh_CN
+
+# install CJK font
+git clone https://aur.archlinux.org/nerd-fonts-noto.git
+makepkg -si
+Switch all Fonts to "NotoSansMono Nerd Font"
+
+# https://github.com/ryanoasis/nerd-fonts/issues/254
+# fix nerd font
+sudo pacman -Syu fontforge
+sudo fontforge
+# open /usr/share/fonts/TTF/Noto Sans Mono Condensed Nerd Font Complete.ttf
+# View->Goto->U+fb01
+# clear fb01 and fb02 and save(actually delete all the ff related)
+
+```
+
+### system backup
+timeshift
+
 
 ## MacOS (Catalina)
 
