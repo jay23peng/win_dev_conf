@@ -271,7 +271,11 @@ sound.virtualDev = "hdaudio"
 ```
 
 ### bash
-use OOTB fish for now
+use OOTB fish for now. Install oh-my-fish and agnoster
+```sh
+curl -L https://get.oh-my.fish | fish
+omf install agnoster
+```
 
 ### vs code
 ```sh
@@ -281,6 +285,7 @@ pacman -Syu VSCode
 ```
 
 ### Locale (optional)
+After install CJK, we can display Chinese char correctly. For now treat Locale as optional.
 ```sh
 # /etc/locale.gen
 en_US.UTF-8 UTF-8
