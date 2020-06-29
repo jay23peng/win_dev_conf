@@ -314,6 +314,16 @@ vim ~/.config/fish/config.fish
 alias ls='exa'
 ```
 
+### git
+```sh
+git config --global user.email "pengwenjia@gmail.com"
+git config --global user.name "jesse23"
+git config --global core.editor vim
+
+# fish plugin
+omf install https://github.com/jhillyerd/plugin-git
+```
+
 ### Locale (optional)
 After install CJK, we can display Chinese char correctly. For now treat Locale as optional.
 ```sh
