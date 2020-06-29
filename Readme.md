@@ -275,6 +275,12 @@ use OOTB fish for now. Install oh-my-fish and agnoster
 ```sh
 curl -L https://get.oh-my.fish | fish
 omf install agnoster
+
+# Set theme
+git clone https://github.com/adi1090x/termite-style
+./install
+termite-style
+# pick C 76 gruvbox-dark
 ```
 
 ### vs code
