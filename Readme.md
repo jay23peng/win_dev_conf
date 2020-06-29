@@ -328,6 +328,9 @@ git config --global core.editor vim
 
 # fish plugin
 omf install https://github.com/jhillyerd/plugin-git
+
+# bypass password
+git config credential.helper store
 ```
 
 ### Locale (optional)
