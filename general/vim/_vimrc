@@ -40,53 +40,51 @@ else
       "linux
   " endif
 endif
-let $VundleHome = $HOME.'/.vim'
-set rtp+=$VundleHome/Vundle.vim
-call vundle#begin($VundleHome)
+
+call plug#begin('~/.vim/plugged')
 
 " plugin in Github
-Plugin 'w0rp/ale'
-Plugin 'majutsushi/tagbar'
-Plugin 'bsdelf/bufferhint'
-Plugin 'hsitz/VimOrganizer'
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'scrooloose/nerdtree'
-Plugin 'scrooloose/nerdcommenter'
+Plug 'w0rp/ale'
+Plug 'majutsushi/tagbar'
+Plug 'bsdelf/bufferhint'
+Plug 'hsitz/VimOrganizer'
+Plug 'VundleVim/Vundle.vim'
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'scrooloose/nerdcommenter'
 
 " note: this plugin supports editorConfig already
-Plugin 'maksimr/vim-jsbeautify'
+Plug 'maksimr/vim-jsbeautify'
 
 " fuzzy finder
-Plugin 'junegunn/fzf',  { 'dir': '~/.fzf' }
-Plugin 'junegunn/fzf.vim'
+Plug 'junegunn/fzf',  { 'dir': '~/.fzf', 'do': './install -all' }
+Plug 'junegunn/fzf.vim'
 
 " git
-Plugin 'tpope/vim-fugitive'
-Plugin 'junegunn/gv.vim'
+Plug 'tpope/vim-fugitive'
+Plug 'junegunn/gv.vim'
 
 " syntax highlight
-Plugin 'nblock/vim-dokuwiki'
-Plugin 'pangloss/vim-javascript'
-Plugin 'crusoexia/vim-javascript-lib'
-Plugin 'octol/vim-cpp-enhanced-highlight'
+Plug 'nblock/vim-dokuwiki'
+Plug 'pangloss/vim-javascript'
+Plug 'crusoexia/vim-javascript-lib'
+Plug 'octol/vim-cpp-enhanced-highlight'
 
 " theme
-Plugin 'mbbill/desertEx'
-Plugin 'morhetz/gruvbox'
-Plugin 'ajh17/Spacegray.vim'
-Plugin 'sickill/vim-monokai'
-Plugin 'itchyny/lightline.vim'
-Plugin 'altercation/vim-colors-solarized'
+Plug 'mbbill/desertEx'
+Plug 'morhetz/gruvbox'
+Plug 'ajh17/Spacegray.vim'
+Plug 'sickill/vim-monokai'
+Plug 'itchyny/lightline.vim'
+Plug 'altercation/vim-colors-solarized'
 
 " plugin in http://vim-scripts.org/vim/scripts.html
-Plugin 'utl.vim'
-Plugin 'dbext.vim'
-Plugin 'largeFile'
-Plugin 'revolutions.vim'
+Plug 'vim-scripts/utl.vim'
+Plug 'vim-scripts/dbext.vim'
+Plug 'vim-scripts/largeFile'
+Plug 'vim-scripts/revolutions.vim'
 
 " All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
+call plug#end()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Fonts and Encoding
@@ -97,8 +95,8 @@ set fileencoding=utf-8
 set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
 
 " set ambiwidth=double
-set guifont=Source_Code_Pro_for_Powerline:h14
-set guifontwide=Source_Code_Pro_for_Powerline:h14
+" set guifont=Source_Code_Pro_for_Powerline:h14
+" set guifontwide=Source_Code_Pro_for_Powerline:h14
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Key Remapping

@@ -284,6 +284,36 @@ omf install agnoster
 pacman -Syu VSCode
 ```
 
+### docker
+```sh
+sudo pacman -Syu docker
+
+# add current user to docker group
+sudo gpasswd -a wp docker
+
+# start service
+sudo systemctl enable docker.service
+sudo systemctl start  docker.service
+
+# smoke test after reboot
+docker run -it --rm archlinux bash -c "echo hello world"
+```
+
+### vim
+```sh
+# ripgrep is covered by vscode already
+sudo pacman -Syu gvim fzf fd exa
+cp dev_home/general/_vimrc ~/.vimrc
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+# vim and do PlugInstall
+# note the global shared pased becomes <Ctrl+r>*
+
+# add exa to alias
+vim ~/.config/fish/config.fish
+alias ls='exa'
+```
+
 ### Locale (optional)
 After install CJK, we can display Chinese char correctly. For now treat Locale as optional.
 ```sh
