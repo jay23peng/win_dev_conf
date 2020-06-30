@@ -274,13 +274,17 @@ sound.virtualDev = "hdaudio"
 use OOTB fish for now. Install oh-my-fish and agnoster
 ```sh
 curl -L https://get.oh-my.fish | fish
-omf install agnoster
+omf install agnoster (bobthefish is good too)
+omf install https://github.com/jhillyerd/plugin-git
 
 # Set theme
 git clone https://github.com/adi1090x/termite-style
 ./install
 termite-style
 # pick C 76 gruvbox-dark
+fish-config
+# pick Base16 Eighties
+# https://www.jianshu.com/p/bf03bce60987
 ```
 
 ### vs code
@@ -303,6 +307,15 @@ sudo systemctl start  docker.service
 
 # smoke test after reboot
 docker run -it --rm archlinux bash -c "echo hello world"
+
+# enable network in docker
+# https://stackoverflow.com/questions/20430371/my-docker-container-has-no-internet
+sudo pkill docker
+sudo iptables -t nat -F
+sudo ifconfig docker0 down
+sudo brctl delbr docker0
+sudo systemctl restart docker.service
+# if last command fail reboot the machine
 ```
 
 ### vim
@@ -324,13 +337,21 @@ alias ls='exa'
 ```sh
 git config --global user.email "pengwenjia@gmail.com"
 git config --global user.name "jesse23"
-git config --global core.editor vim
+git config --global core.editor vimt config --global core.editor vim
 
 # fish plugin
 omf install https://github.com/jhillyerd/plugin-git
 
 # bypass password
-git config credential.helper store
+git config --global credential.helper store
+```
+
+### docker container setup
+```sh
+# inside docker the best way to install node is nvm
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
+# then reboot and u can use it
+nvm install 12
 ```
 
 ### Locale (optional)
