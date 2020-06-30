@@ -285,6 +285,10 @@ termite-style
 fish-config
 # pick Base16 Eighties
 # https://www.jianshu.com/p/bf03bce60987
+
+# nvm in fish
+omf install https://github.com/FabioAntunes/fish-nvm
+omf install https://github.com/edc/bass
 ```
 
 ### vs code
@@ -352,6 +356,8 @@ git config --global credential.helper store
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
 # then reboot and u can use it
 nvm install 12
+# set term with colre
+export TERM=xterm-256color
 ```
 
 ### Locale (optional)
