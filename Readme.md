@@ -17,6 +17,14 @@ OOTB UI Experience is more imoprtant:) Manjaro is good but still needs too much 
 setxkbmap us -variant colemak &
 ```
 
+### M4400 wifi
+```sh
+# the default driver is blocking the wifi. Need steps below
+sudo cp ./arch/reset-wifi /usr/bin
+sudo cp ./arch/reset-wifi.service /usr/lib/systemd/system/reset-wifi.service
+sudo systemctl enable reset-wifi.service
+```
+
 ### Update Mirror List
 ```sh
 # https://wiki.archlinux.org/index.php/Mirrors
@@ -341,7 +349,7 @@ alias ls='exa'
 ```sh
 git config --global user.email "pengwenjia@gmail.com"
 git config --global user.name "jesse23"
-git config --global core.editor vimt config --global core.editor vim
+git config --global core.editor vim
 
 # fish plugin
 omf install https://github.com/jhillyerd/plugin-git

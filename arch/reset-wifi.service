@@ -1,0 +1,9 @@
+[Unit]
+Description=Reset wifi driver
+
+[Service]
+ExecStart=/usr/bin/reset-wifi
+Type=idle
+
+[Install]
+WantedBy=multi-user.target
