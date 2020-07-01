@@ -38,6 +38,13 @@ cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
 curl -s "https://www.archlinux.org/mirrorlist/?country=FR&country=GB&protocol=https&use_mirror_status=on" | sed -e 's/^#Server/Server/' -e '/^#/d' | rankmirrors -n 6 -
 
 # then copy the result to /etc/pacman.d/mirror list
+# for detroit they are list below
+Server = https://mirrors.arnoldthebat.co.uk/archlinux/$repo/os/$arch
+Server = https://mirror.netweaver.uk/archlinux/$repo/os/$arch
+Server = https://www.mirrorservice.org/sites/ftp.archlinux.org/$repo/os/$arch
+Server = https://mirrors.celianvdb.fr/archlinux/$repo/os/$arch
+Server = https://mirror.sysa.tech/archlinux/$repo/os/$arch
+Server = https://archlinux.mailtunnel.eu/$repo/os/$arch
 
 # then update
 sudo pacman -Syyu
