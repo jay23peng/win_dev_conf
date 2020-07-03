@@ -239,7 +239,8 @@ vmware-fusion provides docker service. Just do alias properly
 vim ./.config/fish/config.fish
 alias docker=vctl
 ```
-vctl requires pull 1st then run 
+- vctl requires pull 1st then run 
+- port remap requires professional license...
 
 ### MISC
 
@@ -533,7 +534,11 @@ sound.virtualDev = "hdaudio"
 use OOTB fish for now. Install oh-my-fish and agnoster
 ```sh
 curl -L https://get.oh-my.fish | fish
-omf install agnoster (bobthefish is good too)
+omf install bobthefish
+# put line below to config.fish
+set -g theme_color_scheme gruvbox
+
+
 omf install https://github.com/jhillyerd/plugin-git
 
 # Set theme
