@@ -562,7 +562,9 @@ https://github.com/sbmpost/AutoRaise
 ```sh
 # https://github.com/microsoft/vscode/issues/80798
 # because of issue above, for now switch window.titleBarStyle=custom after install
-pacman -Syu VSCode
+# oss version has issue with docker remote, use ms version
+git clone https://aur.archlinux.org/visual-studio-code-bin.git 
+makepkg -si
 ```
 
 ### docker
