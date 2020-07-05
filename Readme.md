@@ -756,6 +756,9 @@ boot2docker has several limitation and so we build one from scratch
 * Reboot
 
 * Edit `/etc/apk/repositories` to enable community repositories.
+  ```
+  https://wiki.alpinelinux.org/wiki/Include:Upgrading_to_latest_release
+  ```
 
 * `apk update` and `apk upgrade`.
 
