@@ -1,0 +1,3 @@
+#!/bin/bash
+exec vmrun start ~/Virtual\ Machines.localized/alpine.vmwarevm/alpine.vmx nogui
+
