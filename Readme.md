@@ -363,13 +363,19 @@ sudo passwd root <- reset password
 sudo passwd cirrus <- reset password
 curl -L https://get.oh-my.fish | fish
 omf install bobthefish
-omf install https://github.com/jhillyerd/plugin-git
 chsh -s /usr/bin/fish
 
 # .config/fish/config.fish
 set -g theme_color_scheme gruvbox
 set DOCKER_MACHINE_NAME flutter-dev
 set -g theme_display_docker_machine yes
+
+# setup git
+omf install https://github.com/jhillyerd/plugin-git
+git config --global user.email "pengwenjia@gmail.com"
+git config --global user.name "jesse23"
+git config --global core.editor vim
+git config --global credential.helper store
 
 # .bashrc
 vim ~/.bashrc

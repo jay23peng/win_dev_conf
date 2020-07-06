@@ -83,6 +83,8 @@ Plug 'vim-scripts/dbext.vim'
 Plug 'vim-scripts/largeFile'
 Plug 'vim-scripts/revolutions.vim'
 
+" Plug 'yuttie/comfortable-motion.vim'
+
 " All of your Plugins must be added before the following line
 call plug#end()
 
@@ -111,27 +113,35 @@ vnoremap <C-[> <Esc>gV
 onoremap <C-[> <Esc>
 inoremap <C-[> <Esc>`^
 
+" Remap <ESC> to <M-[> for MacOS
+nnoremap <M-[> <Esc>
+nnoremap <M-[> <Esc>
+vnoremap <M-[> <Esc>gV
+onoremap <M-[> <Esc>
+inoremap <M-[> <Esc>`^
+
+
 " Remap buffer switch 
-nmap <silent> <C-x>l :wincmd l<CR>
-nmap <silent> <C-x>h :wincmd h<CR>
-nmap <silent> <C-x>k :wincmd k<CR>
-nmap <silent> <C-x>j :wincmd j<CR>
+nmap <silent> <leader>l :wincmd l<CR>
+nmap <silent> <leader>h :wincmd h<CR>
+nmap <silent> <leader>k :wincmd k<CR>
+nmap <silent> <leader>j :wincmd j<CR>
 " nmap <silent> <C-x>t :tabnew<CR>
-nmap <silent> <C-x>0 :hide<CR>
-nmap <silent> <C-x>1 :only<CR>
-nmap <silent> <C-x>2 :sp<CR>
-nmap <silent> <C-x>3 :vsp<CR>
+nmap <silent> <leader>0 :hide<CR>
+nmap <silent> <leader>1 :only<CR>
+nmap <silent> <leader>2 :sp<CR>
+nmap <silent> <leader>3 :vsp<CR>
 
 " Move cursor at input mode
-inoremap <A-h> <C-o>h
-inoremap <A-j> <C-o>j
-inoremap <A-k> <C-o>k
-inoremap <A-l> <C-o>l
-inoremap <A-b> <C-o>b
-inoremap <A-f> <C-o>w
+" inoremap <M-h> <C-o>h
+" inoremap <M-j> <C-o>j
+" inoremap <M-k> <C-o>k
+" inoremap <M-l> <C-o>l
+" inoremap <M-b> <C-o>b
+" inoremap <M-f> <C-o>w
 
-nmap <silent> <C-j> 20j
-nmap <silent> <C-k> 20k
+nmap <silent> J 20j
+nmap <silent> K 20k
 
 " Diable mouse middle button paste
 map <MiddleMouse> <Nop>
@@ -139,14 +149,14 @@ imap <MiddleMouse> <Nop>
 
 " Sync mapping with Firefox
 nnoremap t :tabnew<space>
-" Remap k j for colemak
-" noremap h k
-" noremap k j
-" noremap j h
+
+" redo
+nmap r <c-r>
 
 " copy current path
 nmap <silent> Y :let @+ = expand("%:p")<CR>
-
+" inoremap <Leader>p <ESC>pa
+    
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -240,7 +250,7 @@ let g:LargeFile = 2000
 
 " NERDTree config
 nnoremap <silent> , :NERDTreeToggle<CR>
-map <A-,> :NERDTreeToggle<CR>
+" map <A-,> :NERDTreeToggle<CR>
 " Open nerd tree as side bar and empty main panel
 " autocmd StdinReadPre * let s:std_in=1
 " autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
@@ -261,6 +271,7 @@ set foldlevel=2
 if has("win32")
     let g:org_command_for_emacsclient = 'C:\msys64\usr\bin\emacsclient.exe'
 else
+    " Looks emacs is not required for common use case
     let g:org_command_for_emacsclient = '/usr/bin/emacsclient'
 endif
 let g:org_todo_setup='TODO WAIT | DONE CANCELED'
@@ -432,6 +443,9 @@ set completeopt=longest,menu
 " Disable HL for folded
 hi Folded guibg=NONE ctermbg=NONE
 
+" scroll
+" noremap <silent> <ScrollWheelDown> :call comfortable_motion#flick(20)<CR>
+" noremap <silent> <ScrollWheelUp>   :call comfortable_motion#flick(-20)<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " OOTB Vim config for vimdiff
