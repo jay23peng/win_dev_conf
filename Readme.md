@@ -234,13 +234,13 @@ sudo scutil --set HostName "newname"
    ```
 
 ### docker
-vmware-fusion provides docker service. Just do alias properly
+* vmware-fusion provides docker service but requires professional license
+
+* step below for install docker client only
 ```sh
-vim ./.config/fish/config.fish
-alias docker=vctl
+# https://docs.docker.com/engine/install/binaries/
+# https://docs.docker.com/engine/install/binaries/#install-client-binaries-on-macos
 ```
-- vctl requires pull 1st then run 
-- port remap requires professional license...
 
 ### MISC
 
@@ -248,6 +248,129 @@ alias docker=vctl
 * [kdiff3](http://kdiff3.sourceforge.net/)
 * [macpass](https://github.com/mstarke/MacPass)
 * Wallpaper path: `/System/Library/Desktop Pictures`
+
+## Docker VM
+
+boot2docker has several limitation and so we build one from scratch
+
+### Install
+* Install latest VirtualBox/Vmware.
+
+* Create VM, default memory and disk is fine. Setup proper CPU and system setting, make sure network is bridge so that you can ssh to it
+
+* Download alpine. ( 20200705: latest 3.12 ISO has issue to launch in vmware, 3.9 is working )
+
+* change keyboard layout:
+```sh
+setup-keymap
+```
+
+* password is required otherwise u need other special setting for ssh
+
+* Install by default with `setup-alpine`. Only selection is `sda/sys`. machine name can be `dockervm`.
+
+* Reboot
+
+### setup ssh
+* Setup non root user as [below](#Alpine-Linux). Or just add line below to `/etc/ssh/sshd_config` since it is a simple docker machine:
+```sh
+PermitRootLogin yes
+```
+
+### setup repository
+* Edit `/etc/apk/repositories` to enable community repositories.
+```sh
+http://mirrors.gigenet.com/alpinelinux/latest-stable/main
+http://mirrors.gigenet.com/alpinelinux/latest-stable/community
+```
+
+* `apk update` and `apk upgrade`.
+
+### vm-tools (virtual box)
+* Install [Virtualbox additions](https://wiki.alpinelinux.org/wiki/VirtualBox_shared_folders):
+```sh
+apk add virtualbox-guest-additions virtualbox-guest-modules-virt
+reboot
+modprobe -a vboxsf 
+mount -t vboxsf vbox_shared /mnt/outside
+```
+
+* Edit `/etc/fstab` to mount share folder by default:
+```sh
+# mount it same as wsl so that u can use it seamlessly
+D_DRIVE /mnt/d vboxsf defaults 0 0
+# or do below manually
+# sudo mount -t vboxsf D_DRIVE /mnt/d
+```
+
+### vm-tools (vmware)
+- install is not hard but looks no use in cli env.
+```sh
+apk add open-vm-tools
+rc-update add open-vm-tools
+reboot
+```
+
+### machine name
+```sh
+# https://github.com/home-assistant/docker/issues/23
+apk add avahi dbus
+rc-update add avahi-daemon
+service avahi-daemon start
+# after that u can access the machine name as 'dockervm.local'
+```
+
+### docker
+* Install [docker](https://wiki.alpinelinux.org/wiki/Docker):
+```sh
+apk add docker
+rc-update add docker boot
+service docker start
+docker version
+docker run --rm hello-world
+vim /etc/profile
+export DOCKER_HOST=tcp://0.0.0.0:2375
+```
+
+* Expose docker deamon in `/etc/conf.d/docker`:
+
+```sh
+DOCKER_OPTS="-H tcp://0.0.0.0:2375`
+```
+
+* Reboot and try to connect from host:
+
+```sh
+export DOCKER_HOST=tcp://dockervm.local:2375
+docker ps
+```
+
+* (TBD) docker-compose, it should be installed at WSL, refer to [here](https://nickjanetakis.com/blog/setting-up-docker-for-windows-and-wsl-to-work-flawlessly).
+
+### how to add environment variable
+```sh
+https://stackoverflow.com/questions/35325856/where-to-set-system-default-environment-variables-in-alpine-linux
+```
+
+### flutter-dev image setup
+```sh
+sudo apt-get update
+sudo apt-get install vim
+sudo apt-get install fish
+curl -L https://get.oh-my.fish | fish
+omf install bobthefish
+omf install https://github.com/jhillyerd/plugin-git
+
+# .config/fish/config.fish
+set -g theme_color_scheme gruvbox
+set DOCKER_MACHINE_NAME flutter-dev
+set -g theme_display_docker_machine yes
+
+# nvm
+omf install https://github.com/jorgebucaran/fish-nvm
+# need to restart fish shell or maybe install nvm separately
+nvm use lts
+```
 
 ## adi1090x/CustomArch
 OOTB UI Experience is more imoprtant:) Manjaro is good but still needs too much tunings
@@ -553,6 +676,7 @@ fish-config
 # nvm in fish
 omf install https://github.com/FabioAntunes/fish-nvm
 omf install https://github.com/edc/bass
+
 ```
 
 ### AutoRaise
@@ -662,9 +786,6 @@ sudo fontforge
 timeshift
 
 
-
-
-
 ## Windows 10 (Surface)
 
 ### Windows Update
@@ -740,120 +861,6 @@ Install VPN Client 5.8 and try to launch it in IE11. Note that Edge is not worki
 4. Invoke vim, run ``PluginInstall``.
 
 **NOTE** emacs is not needed for `vimOrganizer` if export to PDF/HTML function is not needed.
-
-## Docker VM
-
-boot2docker has several limitation and so we build one from scratch
-
-### Install
-* Install latest VirtualBox.
-
-* Create VM by `Linux 2.6 / 3.x /4.x (64-bit)`, default memory and disk is fine. Setup proper CPU and system setting, make sure network is bridge so that you can ssh to it
-
-* Download [Alpine ISO For VM](https://wiki.alpinelinux.org/wiki/Install_Alpine_on_VirtualBox).
-
-* change keyboard layout:
-```sh
-setup-keymap
-```
-
-* password is required otherwise u need other special setting for ssh
-
-* Install by default with `setup-alpine`. Only selection is `sda/sys`. machine name can be `wsl-docker`.
-
-* Reboot
-
-### setup ssh
-* Setup non root user as [below](#Alpine-Linux). Or just add line below to `/etc/ssh/sshd_config` since it is a simple docker machine:
-
-  ```bash
-  PermitRootLogin yes
-  ```
-
-
-### setup repository
-
-* Edit `/etc/apk/repositories` to enable community repositories.
-  ```
-  #https://wiki.alpinelinux.org/wiki/Include:Upgrading_to_latest_release
-  http://mirrors.gigenet.com/alpinelinux/latest-stable/main
-  http://mirrors.gigenet.com/alpinelinux/latest-stable/community
-  ```
-
-* `apk update` and `apk upgrade`.
-
-
-
-
-### vm setup
-
-#### virtual box
-
-* Install [Virtualbox additions](https://wiki.alpinelinux.org/wiki/VirtualBox_shared_folders):
-
-  ```bash
-  apk add virtualbox-guest-additions virtualbox-guest-modules-virt
-  reboot
-  modprobe -a vboxsf 
-  mount -t vboxsf vbox_shared /mnt/outside
-  ```
-
-* Edit `/etc/fstab` to mount share folder by default:
-
-  ```bash
-  # mount it same as wsl so that u can use it seamlessly
-  D_DRIVE /mnt/d vboxsf defaults 0 0
-  # or do below manually
-  # sudo mount -t vboxsf D_DRIVE /mnt/d
-  ```
-
-#### vmware
-- install is not hard but looks no use in cli env.
-```sh
-apk add open-vm-tools
-rc-update add open-vm-tools
-```
-
-### docker
-* Install [docker](https://wiki.alpinelinux.org/wiki/Docker):
-
-  ```bash
-  apk add docker
-  rc-update add docker boot
-  service docker start
-  docker version
-  docker run --rm hello-world
-  vim /etc/profile
-  export DOCKER_HOST=tcp://0.0.0.0:2375
-  ```
-
-* Expose docker deamon in `/etc/conf.d/docker`:
-
-  ```bash
-  DOCKER_OPTS="-H tcp://0.0.0.0:2375`
-  ```
-
-* Reboot and try to connect from WSL:
-
-  ```bash
-  export DOCKER_HOST=tcp://wsl-docker:2375
-  docker version
-  ```
-
-* (TBD) docker-compose, it should be installed at WSL, refer to [here](https://nickjanetakis.com/blog/setting-up-docker-for-windows-and-wsl-to-work-flawlessly).
-
-### how to add environment variable
-```sh
-https://stackoverflow.com/questions/35325856/where-to-set-system-default-environment-variables-in-alpine-linux
-```
-
-### machine name
-```sh
-# https://github.com/home-assistant/docker/issues/23
-apk add avahi dbus
-rc-update add avahi-daemon
-service avahi-daemon start
-```
 
 ## Ubuntu-18.04
 
