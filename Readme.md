@@ -9,6 +9,12 @@ Generally, `tumx + vim + zsh` is the best practice for a development environment
 ### Basic setup
 - Install the system correctly.
 
+### path
+```sh
+# vim /etc/path.d/dev_home.public <-- any name should be OK
+/Users/pengw/u/dev_home
+```
+
 ### HomeBrew
 Homebrew will be the only source for 3rd party software
 ```sh

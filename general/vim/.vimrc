@@ -36,6 +36,7 @@ else
   " if s:uname == "Darwin\n"
       " mac terminal
       set rtp+=/usr/local/opt/fzf
+      set ttymouse=xterm2
   " else
       "linux
   " endif
