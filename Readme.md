@@ -357,19 +357,39 @@ https://stackoverflow.com/questions/35325856/where-to-set-system-default-environ
 sudo apt-get update
 sudo apt-get install vim
 sudo apt-get install fish
+sudo apt-get install fzf ripgrep
+sudo apt install fd-find
+sudo passwd root <- reset password
+sudo passwd cirrus <- reset password
 curl -L https://get.oh-my.fish | fish
 omf install bobthefish
 omf install https://github.com/jhillyerd/plugin-git
+chsh -s /usr/bin/fish
 
 # .config/fish/config.fish
 set -g theme_color_scheme gruvbox
 set DOCKER_MACHINE_NAME flutter-dev
 set -g theme_display_docker_machine yes
 
+# .bashrc
+vim ~/.bashrc
+export TERM=xterm-256color
+/usr/bin/fish
+
 # nvm
 omf install https://github.com/jorgebucaran/fish-nvm
 # need to restart fish shell or maybe install nvm separately
 nvm use lts
+
+# vim
+mkdir u
+cd u
+git clone https://github.com/jesse23/dev_home
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+cp ~/u/dev_home/general/vim/_vimrc ~/.vimrc
+vim
+PlugInstall
 ```
 
 ## adi1090x/CustomArch
