@@ -1,3 +1,3 @@
 #!/bin/bash
-exec vmrun suspend ~/Virtual\ Machines.localized/alpine.vmwarevm/alpine.vmx
+exec vmrun suspend ~/Virtual\ Machines.localized/dockervm.vmwarevm/dockervm.vmx
 

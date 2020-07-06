@@ -745,28 +745,49 @@ Install VPN Client 5.8 and try to launch it in IE11. Note that Edge is not worki
 
 boot2docker has several limitation and so we build one from scratch
 
+### Install
 * Install latest VirtualBox.
 
 * Create VM by `Linux 2.6 / 3.x /4.x (64-bit)`, default memory and disk is fine. Setup proper CPU and system setting, make sure network is bridge so that you can ssh to it
 
 * Download [Alpine ISO For VM](https://wiki.alpinelinux.org/wiki/Install_Alpine_on_VirtualBox).
 
+* change keyboard layout:
+```sh
+setup-keymap
+```
+
+* password is required otherwise u need other special setting for ssh
+
 * Install by default with `setup-alpine`. Only selection is `sda/sys`. machine name can be `wsl-docker`.
 
 * Reboot
 
-* Edit `/etc/apk/repositories` to enable community repositories.
-  ```
-  https://wiki.alpinelinux.org/wiki/Include:Upgrading_to_latest_release
-  ```
-
-* `apk update` and `apk upgrade`.
-
+### setup ssh
 * Setup non root user as [below](#Alpine-Linux). Or just add line below to `/etc/ssh/sshd_config` since it is a simple docker machine:
 
   ```bash
   PermitRootLogin yes
   ```
+
+
+### setup repository
+
+* Edit `/etc/apk/repositories` to enable community repositories.
+  ```
+  #https://wiki.alpinelinux.org/wiki/Include:Upgrading_to_latest_release
+  http://mirrors.gigenet.com/alpinelinux/latest-stable/main
+  http://mirrors.gigenet.com/alpinelinux/latest-stable/community
+  ```
+
+* `apk update` and `apk upgrade`.
+
+
+
+
+### vm setup
+
+#### virtual box
 
 * Install [Virtualbox additions](https://wiki.alpinelinux.org/wiki/VirtualBox_shared_folders):
 
@@ -786,6 +807,14 @@ boot2docker has several limitation and so we build one from scratch
   # sudo mount -t vboxsf D_DRIVE /mnt/d
   ```
 
+#### vmware
+- install is not hard but looks no use in cli env.
+```sh
+apk add open-vm-tools
+rc-update add open-vm-tools
+```
+
+### docker
 * Install [docker](https://wiki.alpinelinux.org/wiki/Docker):
 
   ```bash
@@ -794,9 +823,11 @@ boot2docker has several limitation and so we build one from scratch
   service docker start
   docker version
   docker run --rm hello-world
+  vim /etc/profile
+  export DOCKER_HOST=tcp://0.0.0.0:2375
   ```
 
-* Expose docker deamon for WSL in `/etc/conf.d/docker`:
+* Expose docker deamon in `/etc/conf.d/docker`:
 
   ```bash
   DOCKER_OPTS="-H tcp://0.0.0.0:2375`
@@ -811,7 +842,18 @@ boot2docker has several limitation and so we build one from scratch
 
 * (TBD) docker-compose, it should be installed at WSL, refer to [here](https://nickjanetakis.com/blog/setting-up-docker-for-windows-and-wsl-to-work-flawlessly).
 
+### how to add environment variable
+```sh
+https://stackoverflow.com/questions/35325856/where-to-set-system-default-environment-variables-in-alpine-linux
+```
 
+### machine name
+```sh
+# https://github.com/home-assistant/docker/issues/23
+apk add avahi dbus
+rc-update add avahi-daemon
+service avahi-daemon start
+```
 
 ## Ubuntu-18.04
 
