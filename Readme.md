@@ -38,6 +38,33 @@ brew uninstall <package>
   For now I am using VMWare Fusion 11.5.
 
 ### Keyboard Mapping
+#### Requirement
+- Colemak Layout
+- Swap 'Ctrl' with Caplocks
+- GUI First then Terminal
+- No key clashing
+
+#### Principle
+- 'Cmd' key for gui/wm
+- 'Ctrl' + 'Shift' for terminal
+- 'Ctrl' for app
+- Ues leader key if possible
+
+#### 1st class GUI short cut
+- **'Cmd' + Left/Right**  Tile window to left or right screen
+  - on Mac it needs divvy support
+  - on Linux it is achieved(automatically) by i3wm
+- **'Cmd' + Up/Down** Maximize/Minimize the Window, Show WM menu
+- **'Cmd' + Space** input method
+- **'Cmd' + s** Screen cast
+- **'Cmd' + q** Quick app menu
+- **'Cmd' + Number** Switch desktop ( In mac u can use touchpad )
+
+#### 1st class Terminal short cut
+- **'Ctrl' + Shift + c** Copy
+- **'Ctrl' + Shift + v** Paste
+
+#### Approach
 MacOS use `Cmd` key as equivalent setup as `Ctrl` key in windows/linux. It is very inconvenient since it is so different with common dev tool chain.
 
 At this moment, before know any better I approach, the principle I follow is:
@@ -46,7 +73,7 @@ At this moment, before know any better I approach, the principle I follow is:
 - As soon as we don't use ctrl key in vim too much, we can choose to remap that
 
 So:
-#### Mac Side
+##### Mac Side
 - Go to Mac Keyboard setting, do mapping below:
   - Set keyboard layout as Colmak.
   - Change modifier key mapping as:
@@ -56,7 +83,7 @@ Control  => Capslock
 Command  => Control
 ```
 
-#### Windows VM Side
+##### Windows VM Side
 - Go to windows, use software `KeyTweak`:
   - Load preset colmak in my windows keymap setup.
   - Reset the 3 function key, then do:
@@ -65,7 +92,7 @@ LControl => LWindows
 LWindows => LControl
 ```
 
-#### ThinkPad Compact Bluetooth Keyboard
+##### ThinkPad Compact Bluetooth Keyboard
 2 things needs to be resolved: F1-F12 and Mouse Key 3.
 - On Mac, load `tpkb` on start:
 ```bash

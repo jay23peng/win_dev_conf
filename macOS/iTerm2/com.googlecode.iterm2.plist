@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>AllowClipboardAccess</key>
+	<true/>
 	<key>AppleAntiAliasingThreshold</key>
 	<integer>1</integer>
 	<key>ApplePressAndHoldEnabled</key>
@@ -58577,21 +58579,31 @@
 	<string>69D493D1-ED6D-4F16-9602-FA2CEDF1E90F</string>
 	<key>DisableFullscreenTransparency</key>
 	<false/>
+	<key>DisableMetalWhenIdle</key>
+	<true/>
 	<key>EnableAPIServer</key>
 	<false/>
 	<key>EnableDivisionView</key>
+	<true/>
+	<key>EnableProxyIcon</key>
 	<true/>
 	<key>FlashTabBarInFullscreen</key>
 	<false/>
 	<key>GlobalKeyMap</key>
 	<dict>
-		<key>0x20-0x60000</key>
+		<key>0x20-0x100000</key>
 		<dict>
 			<key>Action</key>
-			<integer>25</integer>
+			<integer>24</integer>
 			<key>Text</key>
-			<string>Copy Mode
-Copy Mode</string>
+			<string></string>
+		</dict>
+		<key>0x20-0x40000</key>
+		<dict>
+			<key>Action</key>
+			<integer>22</integer>
+			<key>Text</key>
+			<string></string>
 		</dict>
 		<key>0x43-0x60000</key>
 		<dict>
@@ -58612,7 +58624,7 @@ Paste</string>
 		<key>0x71-0x100000</key>
 		<dict>
 			<key>Action</key>
-			<integer>22</integer>
+			<integer>24</integer>
 			<key>Text</key>
 			<string></string>
 		</dict>
@@ -58623,28 +58635,21 @@ Paste</string>
 			<key>Text</key>
 			<string></string>
 		</dict>
-		<key>0x74-0x100000</key>
+		<key>0x73-0x100000</key>
+		<dict>
+			<key>Action</key>
+			<integer>24</integer>
+			<key>Text</key>
+			<string></string>
+		</dict>
+		<key>0x73-0x40000</key>
 		<dict>
 			<key>Action</key>
 			<integer>22</integer>
 			<key>Text</key>
 			<string></string>
 		</dict>
-		<key>0x74-0x40000</key>
-		<dict>
-			<key>Action</key>
-			<integer>22</integer>
-			<key>Text</key>
-			<string></string>
-		</dict>
-		<key>0x77-0x100000</key>
-		<dict>
-			<key>Action</key>
-			<integer>22</integer>
-			<key>Text</key>
-			<string></string>
-		</dict>
-		<key>0x77-0x40000</key>
+		<key>0xd-0x120000</key>
 		<dict>
 			<key>Action</key>
 			<integer>22</integer>
@@ -58661,7 +58666,7 @@ Paste</string>
 		<key>0xf700-0x300000</key>
 		<dict>
 			<key>Action</key>
-			<integer>13</integer>
+			<integer>24</integer>
 			<key>Text</key>
 			<string></string>
 		</dict>
@@ -58675,7 +58680,7 @@ Paste</string>
 		<key>0xf701-0x300000</key>
 		<dict>
 			<key>Action</key>
-			<integer>13</integer>
+			<integer>24</integer>
 			<key>Text</key>
 			<string></string>
 		</dict>
@@ -58689,7 +58694,7 @@ Paste</string>
 		<key>0xf702-0x300000</key>
 		<dict>
 			<key>Action</key>
-			<integer>13</integer>
+			<integer>24</integer>
 			<key>Text</key>
 			<string></string>
 		</dict>
@@ -58703,7 +58708,7 @@ Paste</string>
 		<key>0xf703-0x300000</key>
 		<dict>
 			<key>Action</key>
-			<integer>13</integer>
+			<integer>24</integer>
 			<key>Text</key>
 			<string></string>
 		</dict>
@@ -58713,13 +58718,21 @@ Paste</string>
 	<key>HideActivityIndicator</key>
 	<false/>
 	<key>HideScrollbar</key>
-	<false/>
+	<true/>
 	<key>HideTab</key>
 	<true/>
 	<key>HideTabNumber</key>
 	<false/>
+	<key>Hotkey</key>
+	<true/>
+	<key>HotkeyChar</key>
+	<integer>13</integer>
+	<key>HotkeyCode</key>
+	<integer>36</integer>
 	<key>HotkeyMigratedFromSingleToMulti</key>
 	<true/>
+	<key>HotkeyModifiers</key>
+	<integer>1179914</integer>
 	<key>IRMemory</key>
 	<integer>4</integer>
 	<key>LeftCommand</key>
@@ -58750,7 +58763,7 @@ Paste</string>
 	dWxs0g0ODxJaTlMub2JqZWN0c1YkY2xhc3OiEBGAAoAKgA3TFA0OFRkdV05TLmtleXOj
 	FhcYgAOABIAFoxobHIAGgAeACIAJWklkZW50aWZpZXJVV2lkdGhWSGlkZGVuUTAjQGjA
 	AAAAAAAI0iUmJyhaJGNsYXNzbmFtZVgkY2xhc3Nlc1xOU0RpY3Rpb25hcnmiJylYTlNP
-	YmplY3TTFA0OKy8doxYXGIADgASABaMwMRyAC4AMgAiACVExI0BzsZ2yLQ5W0iUmNzhe
+	YmplY3TTFA0OKy8doxYXGIADgASABaMwMRyAC4AMgAiACVExI0B0oZ2yLQ5W0iUmNzhe
 	TlNNdXRhYmxlQXJyYXmjNzkpV05TQXJyYXkACAARABoAJAApADIANwBJAEwAUgBUAGMA
 	aQBuAHkAgACDAIUAhwCJAJAAmACcAJ4AoACiAKYAqACqAKwArgC5AL8AxgDIANEA0gDX
 	AOIA6wD4APsBBAELAQ8BEQETARUBGQEbAR0BHwEhASMBLAExAUABRAAAAAAAAAIBAAAA
@@ -58776,9 +58789,9 @@ Paste</string>
 	<key>NSWindow Frame SUUpdateAlert</key>
 	<string>410 363 620 392 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>2720 399 650 478 1440 -180 2560 1057 </string>
+	<string>55 280 650 478 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>0 0 1440 877 0 0 1440 877 </string>
+	<string>1847 73 650 478 1440 -180 2560 1057 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
 	<string>323 357 650 478 0 0 1440 877 </string>
 	<key>New Bookmarks</key>
@@ -58996,6 +59009,8 @@ Paste</string>
 				<key>Red Component</key>
 				<real>0.96744710206985474</real>
 			</dict>
+			<key>Application Keypad Allowed</key>
+			<false/>
 			<key>BM Growl</key>
 			<true/>
 			<key>Background Color</key>
@@ -59027,7 +59042,7 @@ Paste</string>
 				<real>0.7928692102432251</real>
 			</dict>
 			<key>Blinking Cursor</key>
-			<false/>
+			<true/>
 			<key>Blur</key>
 			<false/>
 			<key>Bold Color</key>
@@ -59408,6 +59423,8 @@ Paste</string>
 			<true/>
 			<key>Normal Font</key>
 			<string>SourceCodeProForPowerline-Semibold 14</string>
+			<key>Only The Default BG Color Uses Transparency</key>
+			<false/>
 			<key>Option Key Sends</key>
 			<integer>0</integer>
 			<key>Prompt Before Closing 2</key>
@@ -59476,6 +59493,8 @@ Paste</string>
 			<array/>
 			<key>Terminal Type</key>
 			<string>xterm-256color</string>
+			<key>Thin Strokes</key>
+			<integer>4</integer>
 			<key>Transparency</key>
 			<real>0.0</real>
 			<key>Unlimited Scrollback</key>
@@ -59525,14 +59544,14 @@ Paste</string>
 		<key>screenFrame</key>
 		<string>{{0, 0}, {1440, 900}}</string>
 		<key>topLeft</key>
-		<string>{407, 745}</string>
+		<string>{360, 803}</string>
 	</dict>
 	<key>NoSyncHaveUsedCopyMode</key>
 	<true/>
 	<key>NoSyncInstallationId</key>
 	<string>3239D3FB-C12E-4176-B7E4-CF9A8C1B874E</string>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>57</integer>
+	<integer>101</integer>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
@@ -60265,6 +60284,8 @@ Paste</string>
 	<false/>
 	<key>OpenNoWindowsAtStartup</key>
 	<false/>
+	<key>OpenTmuxWindowsIn</key>
+	<integer>0</integer>
 	<key>PMPrintingExpandedStateForPrint2</key>
 	<false/>
 	<key>PointerActions</key>
@@ -60319,7 +60340,7 @@ Paste</string>
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2020-07-06T02:13:15Z</date>
+	<date>2020-07-08T20:10:12Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SUUpdateGroupIdentifier</key>
@@ -60328,12 +60349,18 @@ Paste</string>
 	<false/>
 	<key>SavePasteHistory</key>
 	<true/>
+	<key>SeparateWindowTitlePerTab</key>
+	<false/>
+	<key>ShowFullScreenTabBar</key>
+	<false/>
 	<key>ShowNewOutputIndicator</key>
 	<true/>
 	<key>SoundForEsc</key>
 	<false/>
 	<key>StatusBarPosition</key>
 	<integer>1</integer>
+	<key>StretchTabsToFillBar</key>
+	<false/>
 	<key>TabStyleWithAutomaticOption</key>
 	<integer>6</integer>
 	<key>TabViewType</key>
@@ -60343,6 +60370,8 @@ Paste</string>
 	<key>UseBorder</key>
 	<false/>
 	<key>UseLionStyleFullscreen</key>
+	<true/>
+	<key>UseTmuxStatusBar</key>
 	<true/>
 	<key>VisualIndicatorForEsc</key>
 	<false/>

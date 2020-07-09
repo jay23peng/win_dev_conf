@@ -108,19 +108,11 @@ set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
 let mapleader = " "
 
 " Remap <ESC> to <C-[>
-nnoremap <C-[> <Esc>
-nnoremap <C-[> <Esc>
-vnoremap <C-[> <Esc>gV
-onoremap <C-[> <Esc>
-inoremap <C-[> <Esc>`^
-
-" Remap <ESC> to <M-[> for MacOS
-nnoremap <M-[> <Esc>
-nnoremap <M-[> <Esc>
-vnoremap <M-[> <Esc>gV
-onoremap <M-[> <Esc>
-inoremap <M-[> <Esc>`^
-
+" nnoremap <C-[> <Esc>
+" nnoremap <C-[> <Esc>
+" vnoremap <C-[> <Esc>gV
+" onoremap <C-[> <Esc>
+" inoremap <C-[> <Esc>`^
 
 " Remap buffer switch 
 nmap <silent> <leader>l :wincmd l<CR>
@@ -134,12 +126,12 @@ nmap <silent> <leader>2 :sp<CR>
 nmap <silent> <leader>3 :vsp<CR>
 
 " Move cursor at input mode
-" inoremap <M-h> <C-o>h
-" inoremap <M-j> <C-o>j
-" inoremap <M-k> <C-o>k
-" inoremap <M-l> <C-o>l
-" inoremap <M-b> <C-o>b
-" inoremap <M-f> <C-o>w
+inoremap <M-h> <C-o>h
+inoremap <M-j> <C-o>j
+inoremap <M-k> <C-o>k
+inoremap <M-l> <C-o>l
+inoremap <M-b> <C-o>b
+inoremap <M-f> <C-o>w
 
 nmap <silent> J 20j
 nmap <silent> K 20k
@@ -152,7 +144,8 @@ imap <MiddleMouse> <Nop>
 nnoremap t :tabnew<space>
 
 " redo
-nmap r <c-r>
+" nnoremap <leader>r r
+" nmap r <c-r>
 
 " copy current path
 nmap <silent> Y :let @+ = expand("%:p")<CR>
@@ -310,6 +303,7 @@ nmap <silent> <C-e> <Plug>(ale_next_wrap)
 "
 " For more info on how this works, see lightline documentation.
 set laststatus=2
+set noshowmode
 let g:lightline = {
       \ 'colorscheme': 'jellybeans',
       \ 'active': {
@@ -414,17 +408,18 @@ if !has("gui_running")
       map [C <RIGHT>
     endif   
 
+"    forget why we need below, maybe is arrow key? it will delay the Esc
+"    nmap <ESC>oA k
+"    nmap <ESC>oB j
+"    nmap <ESC>oC l
+"    nmap <ESC>oD h    
+"
+"    imap <ESC>oA <C-o>k
+"    imap <ESC>oB <C-o>j
+"    imap <ESC>oC <C-o>l
+"    imap <ESC>oD <C-o>h    
+"    vnoremap <ESC><ESC> <ESC>
 
-    nmap <ESC>oA k
-    nmap <ESC>oB j
-    nmap <ESC>oC l
-    nmap <ESC>oD h    
-
-    imap <ESC>oA <C-o>k
-    imap <ESC>oB <C-o>j
-    imap <ESC>oC <C-o>l
-    imap <ESC>oD <C-o>h    
-    vnoremap <ESC><ESC> <ESC>
     inoremap <Char-0x07F> <BS>
     nnoremap <Char-0x07F> <BS>
     set mouse=a
@@ -444,6 +439,44 @@ set completeopt=longest,menu
 " Disable HL for folded
 hi Folded guibg=NONE ctermbg=NONE
 
+" https://stackoverflow.com/questions/6488683/how-do-i-change-the-vim-cursor-in-insert-normal-mode
+" CSI Ps SP q
+"    Set cursor style (DECSCUSR, VT520).
+"    Ps = 0  -> blinking block.
+"    Ps = 1  -> blinking block (default).
+"    Ps = 2  -> steady block.
+"    Ps = 3  -> blinking underline.
+"    Ps = 4  -> steady underline.
+"    Ps = 5  -> blinking bar (xterm).
+"    Ps = 6  -> steady bar (xterm).
+if &term =~? "xterm" || &term =~? "rxvt"
+    " cursor in insert mode
+    let &t_SI = "\e[5 q"
+    let &t_SR = "\e[3 q"
+    let &t_EI = "\e[1 q"
+    " let &t_SI = "\<Esc>[5 q"
+    " let &t_SR = "\<Esc>[3 q"
+    " let &t_EI = "\<Esc>[1 q"
+     
+    " optional reset cursor on start:
+    augroup ResetCursorShape
+    au!
+    " autocmd VimEnter * silent !echo -ne "\e[1 q"
+    autocmd VimEnter * :normal :startinsert :stopinsert 
+    augroup END
+endif
+
+"
+"     "autocmd VimEnter * let &t_me .= "\<Esc>[2 q"
+"     " blinking vertical bar
+"     let &t_SI = "\<Esc>[6 q"
+"     " blinking block
+"     let &t_EI = "\<Esc>[4 q"
+"     " restore cursor
+"     " TODO save instead of hard coding
+"     autocmd VimLeave * let &t_me = "\<Esc>[4 q"
+" endif
+
 " scroll
 " noremap <silent> <ScrollWheelDown> :call comfortable_motion#flick(20)<CR>
 " noremap <silent> <ScrollWheelUp>   :call comfortable_motion#flick(-20)<CR>
@@ -451,29 +484,29 @@ hi Folded guibg=NONE ctermbg=NONE
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " OOTB Vim config for vimdiff
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set diffexpr=MyDiff()
-function MyDiff()
-  let opt = '-a --binary '
-  if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
-  if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
-  let arg1 = v:fname_in
-  if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
-  let arg2 = v:fname_new
-  if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
-  let arg3 = v:fname_out
-  if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
-  let eq = ''
-  if $VIMRUNTIME =~ ' '
-    if &sh =~ '\<cmd'
-      let cmd = '""' . $VIMRUNTIME . '\diff"'
-      let eq = '"'
-    else
-      let cmd = substitute($VIMRUNTIME, ' ', '" ', '') . '\diff"'
-    endif
-  else
-    let cmd = $VIMRUNTIME . '\diff'
-  endif
-  silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3 . eq
-endfunction
-
+" set diffexpr=MyDiff()
+" function MyDiff()
+"   let opt = '-a --binary '
+"   if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
+"   if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
+"   let arg1 = v:fname_in
+"   if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
+"   let arg2 = v:fname_new
+"   if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
+"   let arg3 = v:fname_out
+"   if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
+"   let eq = ''
+"   if $VIMRUNTIME =~ ' '
+"     if &sh =~ '\<cmd'
+"       let cmd = '""' . $VIMRUNTIME . '\diff"'
+"       let eq = '"'
+"     else
+"       let cmd = substitute($VIMRUNTIME, ' ', '" ', '') . '\diff"'
+"     endif
+"   else
+"     let cmd = $VIMRUNTIME . '\diff'
+"   endif
+"   silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3 . eq
+" endfunction
+" 
 
