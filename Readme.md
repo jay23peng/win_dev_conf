@@ -108,7 +108,7 @@ MButton::Return
 Drag mouse speed to max 5. 
 Use command below to set it higher:
 ```
-defaults write -g com.apple.mouse.scaling  12.0
+defaults write -g com.apple.mouse.scaling  20.0
 ```
 
 ### OneDrive
@@ -137,6 +137,7 @@ rm -rf fonts
 Extension.vim_ctrl+r => Cmd + R
 Extension.vim_ctrl+[ => Cmd + [
 ```
+- In mac vscode.vim picks Cmd as Ctrl automatically which is perfect
 
 ### iTerm2
 `iTerm2` is the most public choice in macOS as console emulator. Install it by:
@@ -383,6 +384,12 @@ docker ps
 ### how to add environment variable
 ```sh
 https://stackoverflow.com/questions/35325856/where-to-set-system-default-environment-variables-in-alpine-linux
+```
+
+### file-watch-limit
+```
+# vim /etc/sysctl.d/local.conf
+fs.inotify.max_user_watches=524288
 ```
 
 ### flutter-dev image setup
