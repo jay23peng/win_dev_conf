@@ -283,7 +283,29 @@ sudo scutil --set HostName "newname"
 * [macpass](https://github.com/mstarke/MacPass)
 * Wallpaper path: `/System/Library/Desktop Pictures`
 
-## Docker VM
+## Docker VM ( by Vagrant )
+* Install virtualbox
+```
+brew install virtualbox
+```
+  After installation, go to UI and install extension box
+* Install vagrant
+```
+brew install vagrant vagrant-manager
+cd dev_home/general/vagrant/dockervm
+vagrant up
+```
+* Set DOCKER_HOST on host machine:
+```sh
+# do it in proper rc file
+export DOCKER_HOST=tcp://0.0.0.0:2375
+```
+* Now u can try `docker ps` and `docker run --rm hello-world`.
+* docker-compose needs to be installed separately:
+```
+brew install docker-compose
+```
+## Docker VM ( manually install )
 
 boot2docker has several limitation and so we build one from scratch
 
