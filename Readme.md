@@ -151,6 +151,17 @@ https://github.com/mbadolato/iTerm2-Color-Schemes
 
 Regard to the font use Semibold to get it better in retina
 
+#### use touch id in sudo
+```
+sudo vim /etc/pam.id/sudo
+```
+
+add line below:
+```
+auth sufficient pam_tid.so
+```
+Go to Prefs -> Advanced -> Allow sessions to survive logging out and back in and set value to no.
+
 ### kitty
 kitty cannot handle the Ctrl+Cmd switch correctly....
 
@@ -305,6 +316,33 @@ export DOCKER_HOST=tcp://0.0.0.0:2375
 ```
 brew install docker-compose
 ```
+
+## k3d (kubernates)
+k3d is a simplified version of kubernates.
+https://k3d.io
+```bash
+# docker must be installed as prerequresite
+brew install k3d
+brew install kubectl
+```
+
+### small k3d bootstrap test
+```bash
+# use 30080 as exposd node port
+k3d cluster create mycluster -p "8082:30080@server[0]"
+# get cluster port
+kubectl config view
+# modify server to dockervm.local since our docker setup is inside vm
+kubectl config set-cluster k3d-mycluster --server=dockervm.local:xx
+kubectl create deployment nginx --image=nginx
+kubectl create service nodeport nginx --node-port=30080 --tcp=80
+kubectl delete service/nginx
+kubectl create deployment kubernetes-bootcamp --image=gcr.io/google-samples/kubernetes-bootcamp:v1
+kubectl create service nodeport kubernetes-bootcamp --node-port=30080 --tcp=8080
+kubectl delete service/kubernetes-bootcamp
+k3d cluster delete mycluster
+```
+
 ## Docker VM ( manually install )
 
 boot2docker has several limitation and so we build one from scratch
