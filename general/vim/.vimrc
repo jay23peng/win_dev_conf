@@ -17,6 +17,7 @@ set wrap
 set noundofile
 set expandtab
 set splitbelow
+set splitright
 retab
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -36,7 +37,7 @@ else
   " if s:uname == "Darwin\n"
       " mac terminal
       set rtp+=/usr/local/opt/fzf
-      set ttymouse=xterm2
+      " set ttymouse=xterm2
   " else
       "linux
   " endif
@@ -120,10 +121,10 @@ nmap <silent> <leader>h :wincmd h<CR>
 nmap <silent> <leader>k :wincmd k<CR>
 nmap <silent> <leader>j :wincmd j<CR>
 " nmap <silent> <C-x>t :tabnew<CR>
-nmap <silent> <leader>0 :hide<CR>
-nmap <silent> <leader>1 :only<CR>
-nmap <silent> <leader>2 :sp<CR>
-nmap <silent> <leader>3 :vsp<CR>
+nmap <silent> <leader>wd :hide<CR>
+nmap <silent> <leader>wm :only<CR>
+nmap <silent> <leader>w- :sp<CR>
+nmap <silent> <leader>w/ :vsp<CR>
 
 " Move cursor at input mode
 inoremap <M-h> <C-o>h
