@@ -68,7 +68,8 @@ This function should only modify configuration layer settings."
    ;; `dotspacemacs/user-config'. To use a local version of a package, use the
    ;; `:location' property: '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
-   dotspacemacs-additional-packages '()
+   ;; dotspacemacs-additional-packages '()
+   dotspacemacs-additional-packages '((term-cursor :location (recipe :fetcher github :repo "h0d/term-cursor.el" )))
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -531,6 +532,21 @@ before packages are loaded."
 
   (setq interprogram-cut-function 'paste-to-osx)
   (setq interprogram-paste-function 'copy-from-osx)
+
+  ;; term-cursor.el
+  (setq term-cursor-bar-escape-code        "\e[5 q")
+  (setq term-cursor-underline-escape-code  "\e[3 q")
+  (setq term-cursor-block-escape-code      "\e[1 q")
+  (global-term-cursor-mode)
+
+  ;; org-mode
+  (eval-after-load "org"
+    '(progn
+       ;; Establishing your own keybindings for org-mode.
+       ;; Variable org-mode-map is available only after org.el or org.elc is loaded.
+       (define-key org-mode-map (kbd "<C-return>") 'org-insert-subheading)
+
+     ))
 
   ;; ranger
   ;;(setq-default dotspacemacs-configuration-layers
