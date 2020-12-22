@@ -53,6 +53,7 @@ Plug 'hsitz/VimOrganizer'
 Plug 'VundleVim/Vundle.vim'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'scrooloose/nerdcommenter'
+Plug 'tpope/vim-vinegar'
 
 " note: this plugin supports editorConfig already
 Plug 'maksimr/vim-jsbeautify'

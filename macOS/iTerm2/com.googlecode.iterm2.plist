@@ -59067,7 +59067,7 @@ Paste</string>
 				<real>0.10980392156862745</real>
 			</dict>
 			<key>Custom Command</key>
-			<string>No</string>
+			<string>Yes</string>
 			<key>Custom Directory</key>
 			<string>No</string>
 			<key>Default Bookmark</key>
