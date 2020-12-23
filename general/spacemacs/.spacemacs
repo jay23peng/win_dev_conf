@@ -51,7 +51,7 @@ This function should only modify configuration layer settings."
      org
      vinegar
      themes-megapack
-     ;; (shell :variables
+     ;; (ghell :variables
      ;;        shell-default-height 30
      ;;        shell-default-position 'bottom)
      ;; spell-checking
@@ -390,7 +390,14 @@ It should only modify the values of Spacemacs settings."
    ;;   :size-limit-kb 1000)
    ;; When used in a plist, `visual' takes precedence over `relative'.
    ;; (default nil)
-   dotspacemacs-line-numbers nil
+   dotspacemacs-line-numbers '(:relative nil
+                                         :disabled-for-modes dired-mode
+                                         doc-view-mode
+                                         markdown-mode
+                                         org-mode
+                                         pdf-view-mode
+                                         text-mode
+                                         :size-limit-kb 1000)
 
    ;; Code folding method. Possible values are `evil', `origami' and `vimish'.
    ;; (default 'evil)
@@ -516,12 +523,8 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
-  ;; Enable mouse support
-  (unless window-system
-    (global-set-key (kbd "<mouse-4>") 'scroll-down-line)
-    (global-set-key (kbd "<mouse-5>") 'scroll-up-line))
-  (defun copy-from-osx ()
-    (shell-command-to-string "pbpaste"))
+  ;; https://github.com/olkinn/dotfiles/blob/master/.spacemacs
+  ;; https://github.com/jesse23/dev_home/blob/master/general/spacemacs/.spacemacs_old
 
   ;; system clipboard
   (defun paste-to-osx (text &optional push)
@@ -532,6 +535,15 @@ before packages are loaded."
 
   (setq interprogram-cut-function 'paste-to-osx)
   (setq interprogram-paste-function 'copy-from-osx)
+
+
+  ;; Enable mouse support
+  (unless window-system
+    (global-set-key (kbd "<mouse-4>") 'scroll-down-line)
+    (global-set-key (kbd "<mouse-5>") 'scroll-up-line))
+  (defun copy-from-osx ()
+    (shell-command-to-string "pbpaste"))
+
 
   ;; term-cursor.el
   (setq term-cursor-bar-escape-code        "\e[5 q")
@@ -545,8 +557,30 @@ before packages are loaded."
        ;; Establishing your own keybindings for org-mode.
        ;; Variable org-mode-map is available only after org.el or org.elc is loaded.
        (define-key org-mode-map (kbd "<C-return>") 'org-insert-subheading)
+       (setq org-hide-leading-stars t)
+       ))
 
-     ))
+  ;; line wrap and truncation symbol
+  (defun my-change-window-divider ()
+    (let ((display-table (or buffer-display-table standard-display-table)))
+      (spacemacs/toggle-visual-line-navigation-on)
+      (set-display-table-slot display-table 'wrap ?\u21b5) ;;/u23ce
+      (set-display-table-slot display-table 'truncation ?\u2192) ;;/u21e8
+      (set-window-display-table (selected-window) display-table)))
+
+  (add-hook 'window-configuration-change-hook 'my-change-window-divider)
+
+  ;; truncate lines
+  ;; 20201222 - looks not useful in spacemacs. In spacemacs we can do ':' then:
+  ;; spacemacs/toggle-line-number-on
+  ;; spacemacs/toggle-visual-line-navigation-on
+  ;; 
+  ;; (spacemacs/toggle-truncate-lines-on)
+  ;; virsual lne navigation for textual modes
+  ;; (add-hook 'text-mode-hook 'spacemacs/toogle-line-on)
+  ;; (add-hook 'text-mode-hook 'spacemacs/toogle-visual-line-navigation-on)
+  ;; (setq org-startup-truncated t)
+
 
   ;; ranger
   ;;(setq-default dotspacemacs-configuration-layers
