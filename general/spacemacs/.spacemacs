@@ -216,8 +216,8 @@ It should only modify the values of Spacemacs settings."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press `SPC T n' to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(gruvbox-dark-hard
-                         gruvbox-light-hard)
+   dotspacemacs-themes '(monokai
+                         spacemacs-light)
 
    ;; Set the theme for the Spaceline. Supported themes are `spacemacs',
    ;; `all-the-icons', `custom', `doom', `vim-powerline' and `vanilla'. The
@@ -569,6 +569,21 @@ before packages are loaded."
       (set-window-display-table (selected-window) display-table)))
 
   (add-hook 'window-configuration-change-hook 'my-change-window-divider)
+  (set-background-color "blue")
+
+  ;; half page scroll - not sure why up func is using scroll-down
+  (defun scroll-half-page-up ()
+    "scroll down half the page"
+    (interactive)
+    (scroll-down (/ (window-body-height) 2)))
+
+  (defun scroll-half-page-down ()
+    "scroll up half the page"
+    (interactive)
+    (scroll-up (/ (window-body-height) 2)))
+
+  (define-key evil-normal-state-map (kbd "J") 'scroll-half-page-down)
+  (define-key evil-normal-state-map (kbd "K") 'scroll-half-page-up)
 
   ;; truncate lines
   ;; 20201222 - looks not useful in spacemacs. In spacemacs we can do ':' then:

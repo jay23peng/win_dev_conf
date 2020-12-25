@@ -30,6 +30,7 @@
 // --------------------------------------------------------------------------------
 unmap('S');
 unmap('D');
+unmap('<Space>');
 mapkey('u', '#4Go back in history', function() {
     history.go(-1);
 }, {repeatIgnore: true});
@@ -48,7 +49,14 @@ mapkey('k', '#2Scroll a page up', function() {
 mapkey('j', '#2Scroll a page down', function() {
     Normal.scroll('pageDown');
 }, {repeatIgnore: true});
-map('<Space>', 'j');
+
+mapkey('K', '#2Scroll a page up', function() {
+    Normal.scroll('pageUp');
+}, {repeatIgnore: true});
+
+mapkey('J', '#2Scroll a page down', function() {
+    Normal.scroll('pageDown');
+}, {repeatIgnore: true});
 
 // --------------------------------------------------------------------------------
 // Tab Control
@@ -60,23 +68,25 @@ mapkey('o', '#8Open a URL in current tab', function() {
     Front.openOmnibar({type: "URLs", extra: "getAllSites", tabbed: false});
 });
 
-mapkey('>', 'Choose a tab with omnibar', function() {
-    Front.openOmnibar({type: "Tabs"});
-});
 
 mapkey('.', 'Choose a tab', function() {
     Front.chooseTab();
 });
 
-mapkey(',', '#4Go to last used tab', function() {
+mapkey('<Space>bu', '#4Go to last used tab', function() {
     RUNTIME("goToLastTab");
 });
 
-mapkey('H', '#4Go to last previous tab', function() {
+mapkey('<Space>bb', 'Choose a tab with omnibar', function() {
+    Front.openOmnibar({type: "Tabs"});
+});
+
+
+mapkey('<Space>bp', '#4Go to last previous tab', function() {
     RUNTIME("previousTab");
 });
 
-mapkey('L', '#4Go to last next tab', function() {
+mapkey('<Space>bn', '#4Go to last next tab', function() {
     RUNTIME("nextTab");
 });
 
@@ -97,172 +107,275 @@ mapkey('Y', "#7Copy current page's URL", function() {
     Clipboard.write(window.location.href);
 });
 
+mapkey('p', "Open the clipboard's URL in the current tab", function() {
+    Clipboard.read(function(response) {
+        return () => window.open(response.data, '_blank')
+    });
+});
+
 // --------------------------------------------------------------------------------
 // General
 // --------------------------------------------------------------------------------
 Hints.characters = 'barstdqwfpgzxcv';
 settings.smoothScroll=false;
 settings.tabsThreshold = 18;
+settings.omnibarPosition = 'bottom'
+settings.blacklist = {
+  'https://calendar.google.com': 1,
+  'https://sheets.google.com': 1
+}
 
 // --------------------------------------------------------------------------------
-// Dracula Theme
+// Monokai Theme
+// https://github.com/Foldex/surfingkeys-config
 // https://gist.github.com/emraher/2c071182ce0f04f3c69f6680de335029
 // --------------------------------------------------------------------------------
-Hints.style('border: solid 1px #ff79c6; color:#44475a; background: #f1fa8c; background-color: #f1fa8c; font-size: 10pt; font-family: "Fira Code"');
-Hints.style('border: solid 8px #ff79c6;padding: 1px;background: #f1fa8c; font-family: "Fira Code"', "text");
 
-// Change search marks and cursor
-Visual.style('marks', 'background-color: #f1fa8c;');
-Visual.style('cursor', 'background-color: #6272a4; color: #f8f8f2');
+// ---- Hints ----
+// Hints have to be defined separately
+// Uncomment to enable
+Hints.style('border: solid 2px #2D2E2E; color:#F92660; background: initial; background-color: #272822;');
+Hints.style("border: solid 2px #2D2E2E !important; padding: 1px !important; color: #A6E22E !important; background: #272822 !important;", "text");
+Visual.style('marks', 'background-color: #A6E22E99;');
+Visual.style('cursor', 'background-color: #F92660;');
 
-// Change theme, fonts and colors
 settings.theme = `
-.sk_theme input {
-    font-family: "Fira Code";
+/* Edit these variables for easy theme making */
+:root {
+  /* Font */
+  --font: 'Source Code Pro', Ubuntu, Monaco, sans;
+  --font-size: 12;
+  --font-weight: bold;
+
+  --fg: #F8F8F2;
+  --bg: #272822;
+  --bg-dark: #1D1E19;
+  --border: #2D2E2E;
+  --main-fg: #F92660;
+  --accent-fg: #E6DB74;
+  --info-fg: #A6E22E;
+  --select: #556172;
+
+  /* Unused Alternate Colors */
+  /* --red: #E74C3C; */
+  /* --orange: #FD971F; */
+  /* --blue: #268BD2; */
+  /* --violet: #9C91E4; */
+  /* --cyan: #66D9EF; */
 }
-.sk_theme .url {
-    font-size: 10px;
-}
-#sk_omnibarSearchResult li div.url {
-    font-weight: normal;
-}
-.sk_theme .omnibar_timestamp {
-    font-size: 11px;
-    font-weight: bold;
-}
-.sk_theme .omnibar_visitcount {
-    font-size: 11px;
-    font-weight: bold;
-}
-body {
-    font-family: "Fira Code", Consolas, "Liberation Mono", Menlo, Courier, monospace;
-    font-size: 14px;
-}
-kbd {
-    font: 11px "Fira Code", Consolas, "Liberation Mono", Menlo, Courier, monospace;
-}
-#sk_omnibarSearchArea .prompt, #sk_omnibarSearchArea .resultPage {
-    font-size: 12px;
-}
+
+/* ---------- Generic ---------- */
 .sk_theme {
-    background: #282a36;
-    color: #f8f8f2;
+background: var(--bg);
+color: var(--fg);
+  background-color: var(--bg);
+  border-color: var(--border);
+  font-family: var(--font);
+  font-size: var(--font-size);
+  font-weight: var(--font-weight);
 }
+
+input {
+  font-family: var(--font);
+  font-weight: var(--font-weight);
+}
+
 .sk_theme tbody {
-    color: #ff5555;
+  color: var(--fg);
 }
+
 .sk_theme input {
-    color: #ffb86c;
+  color: var(--fg);
 }
+
+/* Hints */
+#sk_hints .begin {
+  color: var(--accent-fg) !important;
+}
+#sk_tabs .sk_tab {
+  background: var(--bg-dark);
+  border: 1px solid var(--border);
+}
+#sk_tabs .sk_tab_hint {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  color: var(--accent-fg);
+}
+#sk_tabs .sk_tab_title {
+  color: var(--fg);
+}
+#sk_tabs .sk_tab_url {
+  color: var(--main-fg);
+}
+.sk_theme #sk_frame {
+  background: var(--bg);
+  opacity: 0.2;
+  color: var(--accent-fg);
+}
+
+/* ---------- Omnibar ---------- */
+/* Uncomment this and use settings.omnibarPosition = 'bottom' for Pentadactyl/Tridactyl style bottom bar */
+.sk_theme#sk_omnibar {
+  width: 100%;
+  left: 0;
+} 
+
+.sk_theme .title {
+  color: var(--accent-fg);
+}
+
 .sk_theme .url {
-    color: #6272a4;
+  color: var(--main-fg);
 }
-#sk_omnibarSearchResult>ul>li {
-    background: #282a36;
-}
-#sk_omnibarSearchResult>ul>li:nth-child(odd) {
-    background: #282a36;
-}
+
 .sk_theme .annotation {
-    color: #6272a4;
+  color: var(--accent-fg);
 }
-.sk_theme .focused {
-    background: #44475a !important;
-}
-.sk_theme kbd {
-    background: #f8f8f2;
-    color: #44475a;
-}
-.sk_theme .frame {
-    background: #8178DE9E;
-}
+
 .sk_theme .omnibar_highlight {
-    color: #8be9fd;
+  color: var(--accent-fg);
 }
-.sk_theme .omnibar_folder {
-    color: #ff79c6;
-}
+
 .sk_theme .omnibar_timestamp {
-    color: #bd93f9;
+  color: var(--info-fg);
 }
+
 .sk_theme .omnibar_visitcount {
-    color: #f1fa8c;
+  color: var(--accent-fg);
 }
-.sk_theme #sk_omnibarSearchResult>ul>li:nth-child(odd) {
-    background: #282a36;
+
+.sk_theme #sk_omnibarSearchResult ul li:nth-child(odd) {
+  background: var(--bg-dark);
 }
-.sk_theme .prompt, .sk_theme .resultPage {
-    color: #50fa7b;
+
+.sk_theme #sk_omnibarSearchResult ul li.focused {
+  background: var(--border);
 }
-.sk_theme .feature_name {
-    color: #ff5555;
+
+.sk_theme #sk_omnibarSearchArea {
+  border-top-color: var(--border);
+  border-bottom-color: var(--border);
 }
-.sk_omnibar_middle #sk_omnibarSearchArea {
-    border-bottom: 1px solid #282a36;
+
+.sk_theme #sk_omnibarSearchArea input,
+.sk_theme #sk_omnibarSearchArea span {
+  font-size: var(--font-size);
 }
-#sk_status {
-    border: 1px solid #282a36;
+
+.sk_theme .separator {
+  color: var(--accent-fg);
 }
-#sk_richKeystroke {
-    background: #282a36;
-    box-shadow: 0px 2px 10px rgba(40, 42, 54, 0.8);
-}
-#sk_richKeystroke kbd>.candidates {
-    color: #ff5555;
-}
-#sk_keystroke {
-    background-color: #282a36;
-    color: #f8f8f2;
-}
-kbd {
-    border: solid 1px #f8f8f2;
-    border-bottom-color: #f8f8f2;
-    box-shadow: inset 0 -1px 0 #f8f8f2;
-}
-#sk_frame {
-    border: 4px solid #ff5555;
-    background: #8178DE9E;
-    box-shadow: 0px 0px 10px #DA3C0DCC;
-}
+
+/* ---------- Popup Notification Banner ---------- */
 #sk_banner {
-    border: 1px solid #282a36;
-    background: rgb(68, 71, 90);
+  font-family: var(--font);
+  font-size: var(--font-size);
+  font-weight: var(--font-weight);
+  background: var(--bg);
+  border-color: var(--border);
+  color: var(--fg);
+  opacity: 0.9;
 }
-div.sk_tabs_bg {
-    background: #f8f8f2;
+
+/* ---------- Popup Keys ---------- */
+#sk_keystroke {
+  background-color: var(--bg);
 }
-div.sk_tab {
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#6272a4), color-stop(100%,#44475a));
+
+.sk_theme kbd .candidates {
+  color: var(--info-fg);
 }
-div.sk_tab_title {
-    color: #f8f8f2;
+
+.sk_theme span.annotation {
+  color: var(--accent-fg);
 }
-div.sk_tab_url {
-    color: #8be9fd;
-}
-div.sk_tab_hint {
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f1fa8c), color-stop(100%,#ffb86c));
-    color: #282a36;
-    border: solid 1px #282a36;
-}
+
+/* ---------- Popup Translation Bubble ---------- */
 #sk_bubble {
-    border: 1px solid #f8f8f2;
-    color: #282a36;
-    background-color: #f8f8f2;
+  background-color: var(--bg) !important;
+  color: var(--fg) !important;
+  border-color: var(--border) !important;
 }
+
 #sk_bubble * {
-    color: #282a36 !important;
+  color: var(--fg) !important;
 }
-div.sk_arrow[dir=down]>div:nth-of-type(1) {
-    border-top: 12px solid #f8f8f2;
+
+#sk_bubble div.sk_arrow div:nth-of-type(1) {
+  border-top-color: var(--border) !important;
+  border-bottom-color: var(--border) !important;
 }
-div.sk_arrow[dir=up]>div:nth-of-type(1) {
-    border-bottom: 12px solid #f8f8f2;
+
+#sk_bubble div.sk_arrow div:nth-of-type(2) {
+  border-top-color: var(--bg) !important;
+  border-bottom-color: var(--bg) !important;
 }
-div.sk_arrow[dir=down]>div:nth-of-type(2) {
-    border-top: 10px solid #f8f8f2;
+
+/* ---------- Search ---------- */
+#sk_status,
+#sk_find {
+  font-size: var(--font-size);
+  border-color: var(--border);
 }
-div.sk_arrow[dir=up]>div:nth-of-type(2) {
-    border-bottom: 10px solid #f8f8f2;
+
+.sk_theme kbd {
+  background: var(--bg-dark);
+  border-color: var(--border);
+  box-shadow: none;
+  color: var(--fg);
 }
-}`
+
+.sk_theme .feature_name span {
+  color: var(--main-fg);
+}
+
+/* ---------- ACE Editor ---------- */
+#sk_editor {
+  background: var(--bg-dark) !important;
+  height: 50% !important;
+  /* Remove this to restore the default editor size */
+}
+
+.ace_dialog-bottom {
+  border-top: 1px solid var(--bg) !important;
+}
+
+.ace-chrome .ace_print-margin,
+.ace_gutter,
+.ace_gutter-cell,
+.ace_dialog {
+  background: var(--bg) !important;
+}
+
+.ace-chrome {
+  color: var(--fg) !important;
+}
+
+.ace_gutter,
+.ace_dialog {
+  color: var(--fg) !important;
+}
+
+.ace_cursor {
+  color: var(--fg) !important;
+}
+
+.normal-mode .ace_cursor {
+  background-color: var(--fg) !important;
+  border: var(--fg) !important;
+  opacity: 0.7 !important;
+}
+
+.ace_marker-layer .ace_selection {
+  background: var(--select) !important;
+}
+
+.ace_editor,
+.ace_dialog span,
+.ace_dialog input {
+  font-family: var(--font);
+  font-size: var(--font-size);
+  font-weight: var(--font-weight);
+}
+`;
+

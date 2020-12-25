@@ -76,9 +76,11 @@ Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'mbbill/desertEx'
 Plug 'morhetz/gruvbox'
 Plug 'ajh17/Spacegray.vim'
-Plug 'sickill/vim-monokai'
+Plug 'tomasr/molokai'
+Plug 'phanviet/vim-monokai-pro'
 Plug 'itchyny/lightline.vim'
 Plug 'altercation/vim-colors-solarized'
+Plug 'dracula/vim'
 
 " plugin in http://vim-scripts.org/vim/scripts.html
 Plug 'vim-scripts/utl.vim'
@@ -307,7 +309,7 @@ nmap <silent> <C-e> <Plug>(ale_next_wrap)
 set laststatus=2
 set noshowmode
 let g:lightline = {
-      \ 'colorscheme': 'jellybeans',
+      \ 'colorscheme': 'wombat',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ],
@@ -432,7 +434,10 @@ set nu
 let g:spacegray_italicize_comments = 1
 set bg=dark
 let g:gruvbox_contrast_dark='hard'
-colorscheme gruvbox
+colorscheme molokai
+" hi Normal ctermfg=252 ctermbg=234 guifg=#ebdbb2 guibg=#1B1D1E
+hi Normal ctermfg=252 ctermbg=234  guifg=#F8F8F2 guibg=#1c1c1c
+hi Visual term=reverse ctermbg=238 guibg=#686868
 
 " auto-complete
 set completeopt=longest,menu
