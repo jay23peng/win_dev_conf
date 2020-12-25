@@ -24,8 +24,16 @@ each other.
 
 -- Donald Knuth
 #+end_quote
-
+what is verse?
 #+begin_verse
 Everything should be made as simple as possible,
 but not any simpler. -- Albert Einstein
 #+end_verse
+this is code:
+#+BEGIN_SRC sh
+   git add *
+   git add -u
+   git commit
+   git push
+   git pull
+#+END_SRC
