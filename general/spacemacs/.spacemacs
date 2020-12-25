@@ -235,8 +235,8 @@ It should only modify the values of Spacemacs settings."
    ;; Default font or prioritized list of fonts. The `:size' can be specified as
    ;; a non-negative integer (pixel size), or a floating-point (point size).
    ;; Point size is recommended, because it's device independent. (default 10.0)
-   dotspacemacs-default-font '("Source Code Pro"
-                               :size 10.0
+   dotspacemacs-default-font '("FiraMono Nerd Font"
+                               :size 15.0
                                :weight normal
                                :width normal)
 
@@ -584,6 +584,7 @@ before packages are loaded."
 
   (define-key evil-normal-state-map (kbd "J") 'scroll-half-page-down)
   (define-key evil-normal-state-map (kbd "K") 'scroll-half-page-up)
+  (define-key evil-normal-state-map (kbd "zR") 'evil-open-folds)
 
   ;; truncate lines
   ;; 20201222 - looks not useful in spacemacs. In spacemacs we can do ':' then:

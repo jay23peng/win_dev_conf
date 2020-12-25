@@ -143,7 +143,7 @@ settings.theme = `
 /* Edit these variables for easy theme making */
 :root {
   /* Font */
-  --font: 'Source Code Pro', Ubuntu, Monaco, sans;
+  --font: 'FiraMono Nerd Font', Ubuntu, Monaco, sans;
   --font-size: 12;
   --font-weight: bold;
 

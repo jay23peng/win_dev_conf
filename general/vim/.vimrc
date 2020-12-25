@@ -102,8 +102,8 @@ set fileencoding=utf-8
 set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
 
 " set ambiwidth=double
-set guifont=Source_Code_Pro_for_Powerline:h15
-set guifontwide=Source_Code_Pro_for_Powerline:h15
+set guifont=FiraMono_Nerd_Font:h16
+set guifontwide=FiraMono_Nerd_Font:h16
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Key Remapping
