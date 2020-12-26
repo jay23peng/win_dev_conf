@@ -84,6 +84,7 @@
     # vim /etc/path.d/dev.public <-- any name should be OK
     /Users/jesse23/u/dev/macOS/bin
     /Users/jesse23/u/dex/bin
+  #+end_src
 ** Fish shell
    #+begin_src sh
      brew install fish
