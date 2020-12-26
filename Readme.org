@@ -94,6 +94,34 @@
    #+end_src
 *** monokai theme
     clone the [[https://github.com/benmarten/Monokai_Fish_OSX][repo]] and run ~fish set_colors.fish~.
+*** omf
+    #+begin_src sh
+      # install omf
+      curl -L https://get.oh-my.fish | fish
+      omf install bobthefish
+
+      # .config/fish/config.fish
+      # set -g theme_color_scheme gruvbox
+      # set -g -x DOCKER_HOST tcp://localhost:2375
+      # set -g -x FZF_DEFAULT_COMMAND='fd -a -j 4'
+      test -e {$HOME}/.iterm2_shell_integration.fish ; and source {$HOME}/.iterm2_shell_integration.fish ; or true
+
+      # setup git
+      omf install https://github.com/jhillyerd/plugin-git
+      git config --global user.email "jsp23@qq.com"
+      git config --global user.name "jesse23"
+      git config --global core.editor vim
+      git config --global credential.helper store
+
+      # nvm
+      omf install https://github.com/jorgebucaran/fish-nvm
+      # need to restart fish shell or maybe install nvm separately
+      nvm use lts
+    #+end_src
+*** k8s support
+    https://ieevee.com/tech/2018/12/17/fish-kubectl-completions.html
+
+    
 ** Kitty shell
    kitty cannot handle the Ctrl+Cmd switch correctly....
   #+end_src
