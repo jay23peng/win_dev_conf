@@ -6,7 +6,7 @@
    #+begin_src sh
      # vim /etc/path.d/dev_home.public <-- any name should be OK
          /Users/jesse23/u/dev/macOS/bin
-     /Users/jesse23/u/dex/bin
+/Users/jesse23/u/dex/bin
    #+end_src
     This is a L2 desc.
     \\
