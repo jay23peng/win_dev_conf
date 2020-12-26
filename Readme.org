@@ -1,13 +1,28 @@
 #+OPTIONS: \n:t
 # Note: Above OPTION is not working on site like github
 * MacOS (Catalina)
-  Hi this is new Readme!
+** Basic setup
+   - basic setup like keyboard, click, mouse...
+** HomeBrew
+  Mac Setup start from install home brew:
+#+begin_src sh
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+#+end_src
+  Common homebrew command:
+  #+begin_src sh
+brew list
+brew cask list
+brew install <package>
+brew uninstall <package>
+  #+end_src
+** Terminal and VIM
+   ~~iTerm2~~is the most popular chice in macOS as Terminal Emulater. Install it through ~~brew install item2~~.
 ** Add $PATH
-   #+begin_src sh
-     # vim /etc/path.d/dev_home.public <-- any name should be OK
-         /Users/jesse23/u/dev/macOS/bin
-/Users/jesse23/u/dex/bin
-   #+end_src
+#+begin_src sh
+  # vim /etc/path.d/dev.public <-- any name should be OK
+  /Users/jesse23/u/dev/macOS/bin
+  /Users/jesse23/u/dex/bin
+#+end_src
     This is a L2 desc.
     \\
     Try if CR works fine
