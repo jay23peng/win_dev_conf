@@ -3,31 +3,99 @@
 * MacOS (Catalina)
 ** Basic setup
    - basic setup like keyboard, click, mouse...
+   - Use [[https://colemak.com/][Colemak]] for keyboard layout
+*** GUI Shortcut
+    - ~Cmd + Left/Right~ => Tile window to left/right screen
+      - on Mac it needs divvy support
+      - on Linux i3wm has similar layout
+    - ~Cmd + Up~ => Maximize window
+    - ~Cmd + Down~ => Show Tile management menu
+    - ~Cmd + Space~ => Input method
+    - ~Cmd + s~ => Screen Snapshot
+    - ~Cmd + q~ => Quick app menu
+    - ~Ctrl + Cmd + Left/Right~ => Switch desktop/workspace
+*** Terminal Shortcut
+    - ~Ctrl + Shift + c~ => Copy
+    - ~Ctrl + Shift + v~ => Paste
+** Modifier Key Remap
+   MacOS uses ~Cmd~ key as ~Ctrl~ on windows/linux. Also vscode follows the same practice that use ~Cmd~ to replace ~Ctrl~ as main function key on Mac. Based on that, the approach we can take:
+   - Swap ~Capslock~ with ~Cmd~ instead of using ~Ctrl~ on windows/linux.
+   - Pick a terminal that can swap ~cmd~ and ~Ctrl~ so that all the terminal based tools can still use the same physical ~Capslock~ as main function key.
+   The tradeoff is some GUI software which rely on ~Ctrl~ will be different with the major MacOS software practice. Mostly those software are 'legacy' tool like vim and emacs, and we can use terminal version.
+   #+begin_quote
+     Capslock => Cmd
+     Ctrl     => Capslock
+     Cmd      => Ctrl
+   #+end_quote
+*** Modifer Key Definition Principle
+    - ~Cmd~      => GUI/WM
+    - ~Ctrl+Cmd~ => Terminal
+    - ~Ctrl~     => App (Try to use the combination not coverd by ~Cmd~ at GUI layer)
+    - Use vi mode + leader key if possible
 ** HomeBrew
   Mac Setup start from install home brew:
-#+begin_src sh
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-#+end_src
+  #+begin_src sh
+    /usr/bin/ruby -e "$(curl -fsSL arch/ ttps://raw.githubusercontent.com/Homebrew/install/master/install)"
+  #+end_src
   Common homebrew command:
   #+begin_src sh
-brew list
-brew cask list
-brew install <package>
-brew uninstall <package>
+    brew list
+    brew cask list
+    brew install <package>
+    brew uninstall <package>
+  #+end_src
+** Fonts
+  [[https://github.com/ryanoasis/nerd-fonts][nerd-fonts]] is required in the toolchain, for now use approach 3 to install it:
+  #+begin_src sh
+    brew tap homebrew/cask-fonts
+    brew install --cask font-fira-mono-nerd-font
   #+end_src
 ** Terminal and VIM
-   ~iTerm2~ is the most popular chice in macOS as Terminal Emulater. Install it through ~brew install item2~.
+   - ~iTerm2~ is the most popular chice in macOS as Terminal Emulater. Install it through ~brew install item2~.
+     - iterm2 provide options to map the Ctrl and Cmd back so that vim and emacs still get the correct key mapping. But for other short cut like Ctrl+t, Ctrl+q, they needs to be tuned correctly for no clash.
+     - If u have saved the configuration in git repo u can just load it in iTerm2 preference directly. (~iTerm2->Preference->Load Preferences from a custom folder or URL~)
+     - Get iterm2 colors in below (if needed):
+       https://github.com/mbadolato/iTerm2-Color-Schemes
+   - For ~vim~ [[https://github.com/junegunn/vim-plug][vim-plug]] is required:
+     #+begin_src sh
+       curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+           https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+     #+end_src
+     after that copy the .vimrc to ~~/~ then run ~PlugInstall~ in vim.
+** Use touch id in sudo
+   - ~subo vim /etc/pam.d/sudo~ then add line below:
+     #+begin_src sh
+       auth sufficient pam_tid.so
+     #+end_src
+   - Go to Prefs -> Advanced -> Allow sessions to survive logging out and back in and set value to no.
+** ThinkPad Compact Bluetooth Keyboard
+   - Ues ~karabiner-elements~ to skip mouse-3:
+     #+begin_src sh
+       brew install karabiner-elements
+     #+end_src
+     Then map ~button-3~ to ~button32~. 
+   - Use [[https://pilotmoon.com/scrollreverser/][Scroll Reverser]] to differenciate the scroll direction for trackpoint.
+   - Change trackpoint speed by command below: (since it exceed the max UI value)
+     #+begin_src sh
+       defaults write -g com.apple.mouse.scaling  20.0
+     #+end_src
 ** Add $PATH
-#+begin_src sh
-  # vim /etc/path.d/dev.public <-- any name should be OK
-  /Users/jesse23/u/dev/macOS/bin
-  /Users/jesse23/u/dex/bin
-#+end_src
-    This is a L2 desc.
-    \\
-    Try if CR works fine
-   
- Hello!
+  #+begin_src sh
+    # vim /etc/path.d/dev.public <-- any name should be OK
+    /Users/jesse23/u/dev/macOS/bin
+    /Users/jesse23/u/dex/bin
+** Fish shell
+   #+begin_src sh
+     brew install fish
+     # sudo vim /etc/shells
+     # add /usr/local/bin/fish to it
+     chsh -s /usr/local/bin/fish
+   #+end_src
+*** monokai theme
+    clone the [[https://github.com/benmarten/Monokai_Fish_OSX][repo]] and run ~fish set_colors.fish~.
+** Kitty shell
+   kitty cannot handle the Ctrl+Cmd switch correctly....
+  #+end_src
 * Github org mode support
   - https://github.com/fniessen/refcard-org-mode
   - https://github.com/novoid/github-orgmode-tests/blob/master/README.org
