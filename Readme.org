@@ -1,13 +1,23 @@
 #+OPTIONS: \n:t
-* Dev Setup
+# Note: Above OPTION is not working on site like github
+* MacOS (Catalina)
   Hi this is new Readme!
-** L2
-   This is a L2 desc.
-   \\
-   Try if CR works fine
+** Add $PATH
+   #+begin_src sh
+     # vim /etc/path.d/dev_home.public <-- any name should be OK
+         /Users/jesse23/u/dev/macOS/bin
+     /Users/jesse23/u/dex/bin
+   #+end_src
+    This is a L2 desc.
+    \\
+    Try if CR works fine
    
-Hello!
+ Hello!
+* Github org mode support
+  - https://github.com/fniessen/refcard-org-mode
+  - https://github.com/novoid/github-orgmode-tests/blob/master/README.org
 
+* Test
 #+begin_quote
 Let us change our traditional attitude to the construction of programs:
 Instead of imagining that our main task is to instruct a computer what to do,
