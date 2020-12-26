@@ -16,7 +16,7 @@ brew install <package>
 brew uninstall <package>
   #+end_src
 ** Terminal and VIM
-   ~~iTerm2~~is the most popular chice in macOS as Terminal Emulater. Install it through ~~brew install item2~~.
+   ~iTerm2~ is the most popular chice in macOS as Terminal Emulater. Install it through ~brew install item2~.
 ** Add $PATH
 #+begin_src sh
   # vim /etc/path.d/dev.public <-- any name should be OK
