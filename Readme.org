@@ -49,6 +49,11 @@
     #+begin_src 
     /System/Library/Desktop Pictures
     #+end_src
+*** Misc Utilities
+    - [[https://qspace.awehunt.com/en-us/index.html][qspace]]
+    - [[https://github.com/mstarke/MacPass][mappass]]
+    - [[http://kdiff3.sourceforge.net/][kdiff3]]
+    - [[https://github.com/ianyh/Amethyst][ametheyst]]
 ** Browser
    [[https://vivaldi.com][vivaldi]] is a browser that:
    - chrome based, compatible with moset of the site
@@ -232,10 +237,24 @@
     vagrant up
     #+end_src
 
+    Set DOCKER_HOST correctly in your master machine rc file:
+    #+begin_src sh
+    # export DOCKER_HOST=tcp://0.0.0.0:2375
+    set -g -x DOCKER_HOST tcp://localhost:2375
+    #+end_src
+
     - If u want to build it manually , refer to the configuration inside the Vagrantfile.
     - If u need to expose/bind extra ports, do it by modifying Vagrantfile directly and then provision in Vagrant.
 *** Docker Client
     https://docs.docker.com/engine/install/binaries/#install-client-binaries-on-macos
+*** Docker Compose
+    #+begin_src sh
+    brew install docker-compose
+    #+end_src
+*** Docker bootstrap test
+    #+begin_src sh
+    docker run --rm hello-world
+    #+end_src
 ** Kubenates
    [[https://k3d.io][k3d]] is a light-weight kubernates setup based on docker.
 *** Installation
@@ -275,6 +294,21 @@ brew install kubectl
    
     #+end_src
     
+** Tmux
+   TBD
+** Windows VM
+   No requirement for now. If needed, can try to use boxes on [[https://app.vagrantup.com/boxes/search?order=desc&page=1&provider=&q=windows&sort=created&utf8=%E2%9C%93][Vagrant Cloud]], or build from scratch based on underlying vm software.
+*** Key Mapping
+    Ues [[https://chocolatey.org/packages/keytweak][KeyTweak]] for:
+    - Colemak keyboard for windows.
+    - Modifer key remap as below: (since we mapped it on mac layer)
+      #+begin_src
+      LControl => LWindows
+      LWindows => LControl
+      #+end_src
+** Special note for OneDrive
+   If u are using default APFS disk format u can ignore this.
+   OneDrive on MAC is not compatible with case sensitive partition. An extra partition is needed through `Disk Utility` for using oneDrive if your main drive is case sensitive APFS.
 * Github org mode support
   - https://github.com/fniessen/refcard-org-mode
   - https://github.com/novoid/github-orgmode-tests/blob/master/README.org
