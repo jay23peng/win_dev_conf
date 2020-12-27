@@ -5,6 +5,12 @@
 ** System
    - basic setup like keyboard, click, mouse...
    - Use [[https://colemak.com/][Colemak]] for keyboard layout
+*** Change Machine Name
+    #+begin_src 
+    sudo scutil --set ComputerName "newname"
+    sudo scutil --set LocalHostName "newname"
+    sudo scutil --set HostName "newname"
+    #+end_src
 *** Modifier Key Remap
    MacOS uses ~Cmd~ key as ~Ctrl~ on windows/linux. Also vscode follows the same practice that use ~Cmd~ to replace ~Ctrl~ as main function key on Mac. Based on that, the approach we can take:
    - Swap ~Capslock~ with ~Cmd~ instead of using ~Ctrl~ on windows/linux.
@@ -18,6 +24,7 @@
 *** Modifer Key Definition Principle
     - Disable the unused shortcut as much as possible
     - Use vi mode + leader key if possible
+    - Remove unused shortcut as much as possible
    #+begin_src
     Cmd        => System preserved like copy/paste
     Ctrl       => System shortcut (physical Cmd button)
@@ -99,7 +106,7 @@
     Ctrl + Cmd + / => split on right
     Ctrl + Cmd + - => split on bottom
    #+end_quote
-** VIM      
+** Vim
    - For ~vim~, install MacVim through homebrew:
      #+begin_src sh
        brew install macvim
@@ -109,13 +116,10 @@
        curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
            https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
      #+end_src
-
-     #+RESULTS:
-
      after that copy the .vimrc to ~~/~ then run ~PlugInstall~ in vim.
    - VIM has ~VimOrganizer~ for org-mode already but it is abandened. For basic usage it is suffcient
 ** Use touch id in sudo
-   - ~subo vim /etc/pam.d/sudo~ then add line below:
+   - ~sudo vim /etc/pam.d/sudo~ then add line below:
      #+begin_src sh
        auth sufficient pam_tid.so
      #+end_src
@@ -177,37 +181,13 @@
 *** k8s support
     https://ieevee.com/tech/2018/12/17/fish-kubectl-completions.html
 ** Emacs
+   #+begin_src sh
+   # cui version only, for gui run brew cask install
+   brew install emacs
+   # spacemacs
+   git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
+   #+end_src
+   Then copy customized ~.spacemacs~ and launch it through ~em~.
 * Github org mode support
   - https://github.com/fniessen/refcard-org-mode
   - https://github.com/novoid/github-orgmode-tests/blob/master/README.org
-
-* Test
-#+begin_quote
-Let us change our traditional attitude to the construction of programs:
-Instead of imagining that our main task is to instruct a computer what to do,
-let us concentrate rather on explaining to human beings what we want a
-computer to do.
-
-The practitioner of literate programming can be regarded as an essayist, whose
-main concern is with exposition and excellence of style. Such an author, with
-thesaurus in hand, chooses the names of variables carefully and explains what
-each variable means. He or she strives for a program that is comprehensible
-because its concepts have been introduced in an order that is best for human
-understanding, using a mixture of formal and informal methods that reinforce
-each other.
-
--- Donald Knuth
-#+end_quote
-what is verse?
-#+begin_verse
-Everything should be made as simple as possible,
-but not any simpler. -- Albert Einstein
-#+end_verse
-this is code:
-#+BEGIN_SRC sh
-   git add *
-   git add -u
-   git commit
-   git push
-   git pull
-#+END_SRC
