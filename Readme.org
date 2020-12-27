@@ -311,7 +311,6 @@ brew install kubectl
    If u are using default APFS disk format u can ignore this.
    OneDrive on MAC is not compatible with case sensitive partition. An extra partition is needed through `Disk Utility` for using oneDrive if your main drive is case sensitive APFS.
 ** Theme
-  +---------+------------------------------+---------------------------+-------------------------+
   |         | gruvbox-dark-hard            | monokai                   | comments                |
   |---------+------------------------------+---------------------------+-------------------------|
   | Chrome  | [[https://chrome.google.com/webstore/detail/gruvbox-theme/ihennfdbghdiflogeancnalflhgmanop?hl=en-GB][gruvbox theme]]                | [[https://chrome.google.com/webstore/detail/material-simple-dark-grey/ookepigabmicjpgfnmncjiplegcacdbm][Material Simple Dark Grey]] |                         |
@@ -326,7 +325,6 @@ brew install kubectl
   |         |                              |                           |                         |
   |         |                              |                           |                         |
   |         |                              |                           |                         |
-  +---------+------------------------------+---------------------------+-------------------------+
    
 * Github org mode support
   - https://github.com/fniessen/refcard-org-mode
