@@ -45,6 +45,10 @@
     Ctrl + Cmd + Up          => Show desktop/workspace manager
     Ctrl + Cmd + Left/Right => Switch desktop/workspace
    #+end_src
+*** Mac Wallpaper Path
+    #+begin_src 
+    /System/Library/Desktop Pictures
+    #+end_src
 ** Browser
    [[https://vivaldi.com][vivaldi]] is a browser that:
    - chrome based, compatible with moset of the site
@@ -221,10 +225,56 @@
     #+begin_src sh
     # Install VirtualBox
     brew install virtualbox
-    
-    
     # Install Vagrant
+    brew install vagrant
+    brew install vagrant vagrant-manager
+    export VAGRANT_VAGRANTFILE=u/dev/general/vagrant/dockervm/Vagrantfile
+    vagrant up
     #+end_src
+
+    - If u want to build it manually , refer to the configuration inside the Vagrantfile.
+    - If u need to expose/bind extra ports, do it by modifying Vagrantfile directly and then provision in Vagrant.
+*** Docker Client
+    https://docs.docker.com/engine/install/binaries/#install-client-binaries-on-macos
+** Kubenates
+   [[https://k3d.io][k3d]] is a light-weight kubernates setup based on docker.
+*** Installation
+    #+begin_src sh
+    # docker must be installed as prerequresite
+    brew install k3d kubectl
+    #+end_src
+*** k3d bootstrap test
+    #+begin_src sh
+    # setup - use 30080 as exposd node port
+    k3d cluster create mycluster -p "8082:30080@server[0]"
+    # get cluster port (different for every cluster create), usually will be the https://0.0.0.0:5xxxx
+    kubectl config view | grep server
+    # modify server to dockervm.local if the docker setup is insde vm.
+    # Or u can use vagrant port map to map the port to your master machine.
+    kubectl config set-cluster k3d-mycluster --server=https://dockervm.local:5xxxx
+
+    # test
+    kubectl create deployment nginx --image=nginx
+    kubectl create service nodeport nginx --node-port=30080 --tcp=80
+    # pod:80 => cluster:30080 => docker_host:8082
+    curl http://dockervm.local:8082
+    kubectl delete service/nginx
+
+    # another test ( optional )
+    kubectl create deployment kubernetes-bootcamp --image=gcr.io/google-samples/kubernetes-bootcamp:v1
+    kubectl create service nodeport kubernetes-bootcamp --node-port=30080 --tcp=8080
+    # pod:8080 => cluster:30080 => docker_host:8082
+    curl http://dockervm.local:8082
+    kubectl delete service/kubernetes-bootcamp
+
+    # clean up
+    k3d cluster delete mycluster
+    #+end_src
+brew install k3d
+brew install kubectl
+   
+    #+end_src
+    
 * Github org mode support
   - https://github.com/fniessen/refcard-org-mode
   - https://github.com/novoid/github-orgmode-tests/blob/master/README.org
