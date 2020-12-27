@@ -25,7 +25,7 @@
     Ctrl       => CUI App, (pyhsical Ctrl button remapped by terminal)
         (Try to use the combination not coverd by 'Cmd' at GUI layer)
     #+end_src
-*** GUI Shortcut
+*** System Shortcut
    #+begin_src
     Ctrl + Left/Right        => Tile window to left/right screen
       - on Mac it needs divvy support
@@ -45,6 +45,7 @@
    - works fine with vi key bindng using [[https://github.com/brookhong/Surfingkeys][Surfingkeys]].
    - Setup sync.
 *** browser hack
+    - Login and sync setting back
     - https://forum.vivaldi.net/topic/10549/modding-vivaldi
     - Then point to ~dev/general/vivaldi~ to resolve the active tab issue
 *** Surfingkeys
@@ -52,15 +53,17 @@
 *** Midnight Lizard
     In mac not sure why, we need to set the toggle shortcut to ~Ctrl+Cmd+m~ in global to get it work. (~browser preference/extensions/shortcut~)
     For color schemee use ~Invertable Light~ for now.
-*** browser shortcut
-    #+begin_quote
-     Ctrl + Cmd + t   => move current tab to new window
-     Ctrl + Cmd + m   => Switch dark/light mode on current page (Midnight Lizard)
-     Ctrl + Cmd + b   => Toggle bookmark panel
-     Ctrl + Cmd + h   => Toggle history panel
-     Ctrl + Cmd + .   => Toggle Window Panel
-     Ctrl + Shift + p => quick command
-    #+end_quote
+*** Browser shortcut
+    #+begin_src
+     Cmd + Ctrl + .   => Toggle Window Panel
+     Cmd + Ctrl + b   => Toggle bookmark panel
+     Cmd + Ctrl + h   => Toggle history panel
+     Cmd + Ctrl + t   => move current tab to new window
+     Cmd + Ctrl + m   => Switch dark/light mode on current page (Midnight Lizard)
+     Cmd + Shift + p  => quick command
+     Cmd + b          => toggle side bar
+     Cmd + r          => history forward ('Ctrl+r', need to set it in browser not Surfingkeys)
+    #+end_src
 ** VSCode
    - All you need to to is install and sync.
    - In mac vscode.vim picks Cmd as Ctrl automatically which is perfect
