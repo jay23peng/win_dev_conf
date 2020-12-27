@@ -1,0 +1,14 @@
+/* Active tab */
+/**
+  \2B24: solid circle
+  \039F: empty circle
+  \261B: solid right finger
+  \261E: empty right finger
+  \25BA: Black Right-Pointing Pointer
+  \25B6: Black Right-Pointing Small Triangle
+  \279c: Heavy Round-Tipped Rightwards Arrow
+  \21E8: Rightwards White Arrow
+*/
+#window-panel .tree-row .title.active:before  {position: absolute; content: '\279C';margin-left: -45px;}
+#window-panel .tree-row:not([data-selected]) .title.active{background-color: var(--colorAccentBorder); border-radius: var(--radius); padding: 0 5px;color:#1c1c1c;}
+#window-panel .tree-row[data-selected] .title.active{padding: 0 5px;}

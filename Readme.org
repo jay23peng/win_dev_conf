@@ -1,37 +1,69 @@
+#+STARTUP: overview
 #+OPTIONS: \n:t
 # Note: Above OPTION is not working on site like github
 * MacOS (Catalina)
-** Basic setup
+** System Preference
    - basic setup like keyboard, click, mouse...
    - Use [[https://colemak.com/][Colemak]] for keyboard layout
-*** GUI Shortcut
-    - ~Cmd + Left/Right~ => Tile window to left/right screen
-      - on Mac it needs divvy support
-      - on Linux i3wm has similar layout
-    - ~Cmd + Up~ => Maximize window
-    - ~Cmd + Down~ => Show Tile management menu
-    - ~Cmd + Space~ => Input method
-    - ~Cmd + s~ => Screen Snapshot
-    - ~Cmd + q~ => Quick app menu
-    - ~Ctrl + Cmd + Left/Right~ => Switch desktop/workspace
-*** Terminal Shortcut
-    - ~Ctrl + Shift + c~ => Copy
-    - ~Ctrl + Shift + v~ => Paste
-** Modifier Key Remap
+*** Modifier Key Remap
    MacOS uses ~Cmd~ key as ~Ctrl~ on windows/linux. Also vscode follows the same practice that use ~Cmd~ to replace ~Ctrl~ as main function key on Mac. Based on that, the approach we can take:
    - Swap ~Capslock~ with ~Cmd~ instead of using ~Ctrl~ on windows/linux.
    - Pick a terminal that can swap ~cmd~ and ~Ctrl~ so that all the terminal based tools can still use the same physical ~Capslock~ as main function key.
    The tradeoff is some GUI software which rely on ~Ctrl~ will be different with the major MacOS software practice. Mostly those software are 'legacy' tool like vim and emacs, and we can use terminal version.
    #+begin_quote
-     Capslock => Cmd
-     Ctrl     => Capslock
-     Cmd      => Ctrl
+    Capslock => Cmd
+    Ctrl     => Capslock
+    Cmd      => Ctrl
    #+end_quote
 *** Modifer Key Definition Principle
-    - ~Cmd~      => GUI/WM
-    - ~Ctrl+Cmd~ => Terminal
-    - ~Ctrl~     => App (Try to use the combination not coverd by ~Cmd~ at GUI layer)
+    - Disable the unused shortcut as much as possible
     - Use vi mode + leader key if possible
+   #+begin_quote
+    Cmd        => System preserved like copy/paste
+    Ctrl       => System shortcut (physical Cmd button)
+    Ctrl + Cmd => GUI App include terminal
+    Ctrl       => CUI App, (pyhsical Ctrl button remapped by terminal)
+        (Try to use the combination not coverd by 'Cmd' at GUI layer)
+    #+end_quote
+*** GUI Shortcut
+   #+begin_quote
+    Ctrl + Left/Right        => Tile window to left/right screen
+      - on Mac it needs divvy support
+      - on Linux i3wm has similar layout
+    Ctrl + Up                => Maximize window
+    Ctrl + Down              => Show Tile management menu
+    Ctrl + Space             => Input method
+    Ctrl + s                 => Screen Snapshot
+    Ctrl + q                 => Quick app menu
+    Ctrl + Cmd + Up          => Show desktop/workspace manager
+    Ctrl + Cmd + Left/Right => Switch desktop/workspace
+   #+end_quote
+** Browser
+   [[https://vivaldi.com][vivaldi]] is a browser that:
+   - chrome based, compatible with moset of the site
+   - vertical tab and tab group supported, basic tree-style-tab functionality
+   - works fine with vi key bindng using [[https://github.com/brookhong/Surfingkeys][Surfingkeys]].
+   - Setup sync.
+*** browser hack
+    - https://forum.vivaldi.net/topic/10549/modding-vivaldi
+    - Then point to ~dev/general/vivaldi~ to resolve the active tab issue
+*** Surfingkeys
+    After install extension, load the config from ~dev/general/surfingkeys~
+*** Midnight Lizard
+    In mac not sure why, we need to set the toggle shortcut to ~Ctrl+Cmd+m~ in global to get it work. (~browser preference/extensions/shortcut~)
+    For color schemee use ~Invertable Light~ for now.
+*** browser shortcut
+    #+begin_quote
+     Ctrl + Cmd + t   => move current tab to new window
+     Ctrl + Cmd + m   => Switch dark/light mode on current page (Midnight Lizard)
+     Ctrl + Cmd + b   => Toggle bookmark panel
+     Ctrl + Cmd + h   => Toggle history panel
+     Ctrl + Cmd + .   => Toggle Window Panel
+     Ctrl + Shift + p => quick command
+    #+end_quote
+** VSCode
+   - All you need to to is install and sync.
+   - In mac vscode.vim picks Cmd as Ctrl automatically which is perfect
 ** HomeBrew
   Mac Setup start from install home brew:
   #+begin_src sh
@@ -50,18 +82,35 @@
     brew tap homebrew/cask-fonts
     brew install --cask font-fira-mono-nerd-font
   #+end_src
-** Terminal and VIM
+** Terminal
    - ~iTerm2~ is the most popular chice in macOS as Terminal Emulater. Install it through ~brew install item2~.
      - iterm2 provide options to map the Ctrl and Cmd back so that vim and emacs still get the correct key mapping. But for other short cut like Ctrl+t, Ctrl+q, they needs to be tuned correctly for no clash.
      - If u have saved the configuration in git repo u can just load it in iTerm2 preference directly. (~iTerm2->Preference->Load Preferences from a custom folder or URL~)
      - Get iterm2 colors in below (if needed):
        https://github.com/mbadolato/iTerm2-Color-Schemes
-   - For ~vim~ [[https://github.com/junegunn/vim-plug][vim-plug]] is required:
+*** Terminal Shortcut
+   #+begin_quote
+    Ctrl + Shift + c => Copy
+    Ctrl + Shift + v => Paste
+    Ctrl + Cmd + t => new tab
+    Ctrl + Cmd + / => split on right
+    Ctrl + Cmd + - => split on bottom
+   #+end_quote
+** VIM      
+   - For ~vim~, install MacVim through homebrew:
+     #+begin_src sh
+       brew install macvim
+     #+end_src
+   - [[https://github.com/junegunn/vim-plug][vim-plug]] is required:
      #+begin_src sh
        curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
            https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
      #+end_src
+
+     #+RESULTS:
+
      after that copy the .vimrc to ~~/~ then run ~PlugInstall~ in vim.
+   - VIM has ~VimOrganizer~ for org-mode already but it is abandened. For basic usage it is suffcient
 ** Use touch id in sudo
    - ~subo vim /etc/pam.d/sudo~ then add line below:
      #+begin_src sh
@@ -100,12 +149,15 @@
       curl -L https://get.oh-my.fish | fish
       omf install bobthefish
 
+      # bobthefish monokai
+      # https://github.com/oh-my-fish/theme-bobthefish/wiki/Base16-Monokai-custom-color-scheme      
+
       # .config/fish/config.fish
       # set -g theme_color_scheme gruvbox
       # set -g -x DOCKER_HOST tcp://localhost:2375
       # set -g -x FZF_DEFAULT_COMMAND='fd -a -j 4'
       test -e {$HOME}/.iterm2_shell_integration.fish ; and source {$HOME}/.iterm2_shell_integration.fish ; or true
-
+      
       # setup git
       omf install https://github.com/jhillyerd/plugin-git
       git config --global user.email "jsp23@qq.com"
@@ -118,13 +170,10 @@
       # need to restart fish shell or maybe install nvm separately
       nvm use lts
     #+end_src
+
 *** k8s support
     https://ieevee.com/tech/2018/12/17/fish-kubectl-completions.html
-
-    
-** Kitty shell
-   kitty cannot handle the Ctrl+Cmd switch correctly....
-  #+end_src
+** Emacs
 * Github org mode support
   - https://github.com/fniessen/refcard-org-mode
   - https://github.com/novoid/github-orgmode-tests/blob/master/README.org
