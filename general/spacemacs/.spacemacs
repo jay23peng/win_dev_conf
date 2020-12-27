@@ -43,17 +43,21 @@ This function should only modify configuration layer settings."
      ;; auto-completion
      ;; better-defaults
      emacs-lisp
-     ;; git
-     helm
-     ;; lsp
+     git
+     ;; helm
+     ;; ivy
+     lsp
      markdown
      multiple-cursors
      org
      vinegar
      themes-megapack
-     ;; (ghell :variables
-     ;;        shell-default-height 30
-     ;;        shell-default-position 'bottom)
+     (shell :variables
+             shell-default-height 30
+             shell-default-position 'bottom
+             shell-default-shell 'eshell
+             ;; shell-default-term-shell "/bin/bash"
+     )
      ;; spell-checking
      ;; syntax-checking
      ;; version-control
@@ -529,7 +533,7 @@ before packages are loaded."
   ;; system clipboard
   (defun paste-to-osx (text &optional push)
     (let ((process-connection-type nil))
-      (let ((proc (start-process "pbcopy" "*Messages*" "pbcopy")))
+       (let ((proc (start-process "pbcopy" "*Messages*" "pbcopy")))
         (process-send-string proc text)
         (process-send-eof proc))))
 
@@ -552,12 +556,21 @@ before packages are loaded."
   (global-term-cursor-mode)
 
   ;; org-mode
+  ;; ;; https://github.com/syl20bnr/spacemacs/issues/11798
+  ;; (when (version<= "9.2" (org-version))
+  ;;   (require 'org-tempo))
+
+  ;; redefine key
   (eval-after-load "org"
     '(progn
        ;; Establishing your own keybindings for org-mode.
        ;; Variable org-mode-map is available only after org.el or org.elc is loaded.
        (define-key org-mode-map (kbd "<C-return>") 'org-insert-subheading)
+       (define-key evil-insert-state-map (kbd "TAB") 'tab-to-tab-stop)
        (setq org-hide-leading-stars t)
+       ;; disable tab to autocomplte in inline src, u can still do it by ",'" to launch
+       ;; special edit
+       (setq org-src-tab-acts-natively nil)
        ))
 
   ;; line wrap and truncation symbol
@@ -585,6 +598,7 @@ before packages are loaded."
   (define-key evil-normal-state-map (kbd "J") 'scroll-half-page-down)
   (define-key evil-normal-state-map (kbd "K") 'scroll-half-page-up)
   (define-key evil-normal-state-map (kbd "zR") 'evil-open-folds)
+  (define-key global (kbd "mouse-2") 'undefined)
 
   ;; truncate lines
   ;; 20201222 - looks not useful in spacemacs. In spacemacs we can do ':' then:
