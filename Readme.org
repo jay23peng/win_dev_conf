@@ -71,12 +71,13 @@
     For color schemee use ~Invertable Light~ for now.
 *** Browser shortcut
     #+begin_src
-     Cmd + Ctrl + .   => Toggle Window Panel
-     Cmd + Ctrl + b   => Toggle bookmark panel
-     Cmd + Ctrl + h   => Toggle history panel
-     Cmd + Ctrl + t   => move current tab to new window
-     Cmd + Ctrl + m   => Switch dark/light mode on current page (Midnight Lizard)
+     Cmd + Shift + .   => Toggle Window Panel
+     Cmd + Shift + b   => Toggle bookmark panel
+     Cmd + Shift + h   => Toggle history panel
+     Cmd + Shift + t   => move current tab to new window
+     Cmd + Shift + m  => Switch dark/light mode on current page (Midnight Lizard)
      Cmd + Shift + p  => quick command
+     Cmd + Shift + d  => close other tabs
      Cmd + b          => toggle side bar
      Cmd + r          => history forward ('Ctrl+r', need to set it in browser not Surfingkeys)
     #+end_src
@@ -310,17 +311,22 @@ brew install kubectl
    If u are using default APFS disk format u can ignore this.
    OneDrive on MAC is not compatible with case sensitive partition. An extra partition is needed through `Disk Utility` for using oneDrive if your main drive is case sensitive APFS.
 ** Theme
-  |   | gruvbox-dark-hard | monokai | comments |
-  |---+-------------------+---------+----------|
-  |   |                   |         |          |
-  |   |                   |         |          |
-  |   |                   |         |          |
-  |   |                   |         |          |
-  |   |                   |         |          |
-  |   |                   |         |          |
-  |   |                   |         |          |
-  |   |                   |         |          |
-  |   |                   |         |          |
+  +---------+------------------------------+---------------------------+-------------------------+
+  |         | gruvbox-dark-hard            | monokai                   | comments                |
+  |---------+------------------------------+---------------------------+-------------------------|
+  | Chrome  | [[https://chrome.google.com/webstore/detail/gruvbox-theme/ihennfdbghdiflogeancnalflhgmanop?hl=en-GB][gruvbox theme]]                | [[https://chrome.google.com/webstore/detail/material-simple-dark-grey/ookepigabmicjpgfnmncjiplegcacdbm][Material Simple Dark Grey]] |                         |
+  |         | [[https://chrome.google.com/webstore/detail/devtools-theme-gruvbox-da/njcgdakjdifgccdgnoiphpnihcfopcmj][DevTools Theme: Gruvbox Dark]] | [[https://chrome.google.com/webstore/detail/monokai-for-chrome/ebanajomahnlhgbljngocmccmpelnaam][Monokai for chrome]]        |                         |
+  |---------+------------------------------+---------------------------+-------------------------|
+  | Vivaldi | Customize in prefernce       | Customize in prefernce    | Don't forget custom css |
+  |         | [[https://chrome.google.com/webstore/detail/devtools-theme-gruvbox-da/njcgdakjdifgccdgnoiphpnihcfopcmj][DevTools Theme: Gruvbox Dark]] | [[https://chrome.google.com/webstore/detail/monokai-for-chrome/ebanajomahnlhgbljngocmccmpelnaam][Monokai for chrome]]        |                         |
+  |         |                              |                           |                         |
+  |---------+------------------------------+---------------------------+-------------------------|
+  |         |                              |                           |                         |
+  |         |                              |                           |                         |
+  |         |                              |                           |                         |
+  |         |                              |                           |                         |
+  |         |                              |                           |                         |
+  +---------+------------------------------+---------------------------+-------------------------+
    
 * Github org mode support
   - https://github.com/fniessen/refcard-org-mode
