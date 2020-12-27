@@ -73,7 +73,10 @@ This function should only modify configuration layer settings."
    ;; `:location' property: '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
    ;; dotspacemacs-additional-packages '()
-   dotspacemacs-additional-packages '((term-cursor :location (recipe :fetcher github :repo "h0d/term-cursor.el" )))
+   dotspacemacs-additional-packages '(
+                                      (term-cursor :location (recipe :fetcher github :repo "h0d/term-cursor.el" ))
+                                      xclip
+                                      )
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -531,22 +534,28 @@ before packages are loaded."
   ;; https://github.com/jesse23/dev_home/blob/master/general/spacemacs/.spacemacs_old
 
   ;; system clipboard
-  (defun paste-to-osx (text &optional push)
-    (let ((process-connection-type nil))
-       (let ((proc (start-process "pbcopy" "*Messages*" "pbcopy")))
-        (process-send-string proc text)
-        (process-send-eof proc))))
+  (xclip-mode 1)
 
-  (setq interprogram-cut-function 'paste-to-osx)
-  (setq interprogram-paste-function 'copy-from-osx)
-
+  (defun silence ()
+    (interactive))
 
   ;; Enable mouse support
   (unless window-system
+    ;; (global-unset-key [mouse-2])
+    (global-set-key (kbd "<mouse-2>") 'silence)
+    ;; evil needs separate map definitions
+    (define-key evil-normal-state-map (kbd "<mouse-2>") 'silence)
+    (define-key evil-insert-state-map (kbd "<mouse-2>") 'silence)
     (global-set-key (kbd "<mouse-4>") 'scroll-down-line)
-    (global-set-key (kbd "<mouse-5>") 'scroll-up-line))
-  (defun copy-from-osx ()
-    (shell-command-to-string "pbpaste"))
+    (global-set-key (kbd "<mouse-5>") 'scroll-up-line)
+    )
+
+  ;; [mouse-2] on link needs special processing:
+  ;; https://github.com/jwiegley/emacs-release/blob/master/lisp/net/goto-addr.el#L40
+  (setq goto-address-highlight-keymap
+    (let ((m (make-sparse-keymap)))
+      (define-key m [S-mouse-2] 'goto-address-at-point)
+      m))
 
 
   ;; term-cursor.el
@@ -567,6 +576,7 @@ before packages are loaded."
        ;; Variable org-mode-map is available only after org.el or org.elc is loaded.
        (define-key org-mode-map (kbd "<C-return>") 'org-insert-subheading)
        (define-key evil-insert-state-map (kbd "TAB") 'tab-to-tab-stop)
+       (define-key org-mouse-map (kbd "<mouse-2>") 'silence)
        (setq org-hide-leading-stars t)
        ;; disable tab to autocomplte in inline src, u can still do it by ",'" to launch
        ;; special edit
@@ -598,7 +608,6 @@ before packages are loaded."
   (define-key evil-normal-state-map (kbd "J") 'scroll-half-page-down)
   (define-key evil-normal-state-map (kbd "K") 'scroll-half-page-up)
   (define-key evil-normal-state-map (kbd "zR") 'evil-open-folds)
-  (define-key global (kbd "mouse-2") 'undefined)
 
   ;; truncate lines
   ;; 20201222 - looks not useful in spacemacs. In spacemacs we can do ':' then:

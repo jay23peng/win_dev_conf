@@ -180,6 +180,28 @@
 
 *** k8s support
     https://ieevee.com/tech/2018/12/17/fish-kubectl-completions.html
+** Cli Utils
+*** Fzf
+    #+begin_src sh 
+    brew install fd fzf
+    #+end_src
+    Then add setting below to bash config:
+    #+begin_src sh
+    # export FZF_DEFAULT_COMMAND='fd -a -j 4'
+    set -g -x FZF_DEFAULT_COMMAND='fd -a -j 4'
+    #+end_src
+*** Ripgrep
+    #+begin_src
+    brew install rg
+    #+end_src
+*** Exa
+    #+begin_src
+    brew install exa
+    #+end_src
+    Then add it to alias:
+    #+begin_src
+    alias ls="exa"
+    #+end_src
 ** Emacs
    #+begin_src sh
    # cui version only, for gui run brew cask install
@@ -188,6 +210,21 @@
    git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
    #+end_src
    Then copy customized ~.spacemacs~ and launch it through ~em~.
+** Docker
+*** Docker Server
+    Docker Server has mutiple approaches:
+    - Virtualization (Parallel Desktop, VMWare Fusion, VirtualBox)
+      - PD has best performance, VBox is free.
+    - Native Docker OSX (OOTB Apple Virtualization Solution)
+    
+    Approach below is based on [[https://www.vagrantup.com/][Vagrant]] with VBox, should work for PD and VMWare too.
+    #+begin_src sh
+    # Install VirtualBox
+    brew install virtualbox
+    
+    
+    # Install Vagrant
+    #+end_src
 * Github org mode support
   - https://github.com/fniessen/refcard-org-mode
   - https://github.com/novoid/github-orgmode-tests/blob/master/README.org
