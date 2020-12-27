@@ -2,7 +2,7 @@
 #+OPTIONS: \n:t
 # Note: Above OPTION is not working on site like github
 * MacOS (Catalina)
-** System Preference
+** System
    - basic setup like keyboard, click, mouse...
    - Use [[https://colemak.com/][Colemak]] for keyboard layout
 *** Modifier Key Remap
