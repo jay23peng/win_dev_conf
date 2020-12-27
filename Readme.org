@@ -10,23 +10,23 @@
    - Swap ~Capslock~ with ~Cmd~ instead of using ~Ctrl~ on windows/linux.
    - Pick a terminal that can swap ~cmd~ and ~Ctrl~ so that all the terminal based tools can still use the same physical ~Capslock~ as main function key.
    The tradeoff is some GUI software which rely on ~Ctrl~ will be different with the major MacOS software practice. Mostly those software are 'legacy' tool like vim and emacs, and we can use terminal version.
-   #+begin_quote
+   #+begin_src
     Capslock => Cmd
     Ctrl     => Capslock
     Cmd      => Ctrl
-   #+end_quote
+   #+end_src
 *** Modifer Key Definition Principle
     - Disable the unused shortcut as much as possible
     - Use vi mode + leader key if possible
-   #+begin_quote
+   #+begin_src
     Cmd        => System preserved like copy/paste
     Ctrl       => System shortcut (physical Cmd button)
     Ctrl + Cmd => GUI App include terminal
     Ctrl       => CUI App, (pyhsical Ctrl button remapped by terminal)
         (Try to use the combination not coverd by 'Cmd' at GUI layer)
-    #+end_quote
+    #+end_src
 *** GUI Shortcut
-   #+begin_quote
+   #+begin_src
     Ctrl + Left/Right        => Tile window to left/right screen
       - on Mac it needs divvy support
       - on Linux i3wm has similar layout
@@ -37,7 +37,7 @@
     Ctrl + q                 => Quick app menu
     Ctrl + Cmd + Up          => Show desktop/workspace manager
     Ctrl + Cmd + Left/Right => Switch desktop/workspace
-   #+end_quote
+   #+end_src
 ** Browser
    [[https://vivaldi.com][vivaldi]] is a browser that:
    - chrome based, compatible with moset of the site
