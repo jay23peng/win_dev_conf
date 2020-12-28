@@ -562,7 +562,6 @@ before packages are loaded."
       (define-key m [S-mouse-2] 'goto-address-at-point)
       m))
 
-  ;; magit
 
   ;; term-cursor.el
   (setq term-cursor-bar-escape-code        "\e[5 q")
@@ -589,11 +588,18 @@ before packages are loaded."
        (setq org-src-tab-acts-natively nil)
        ))
 
+  ;; magit
   (eval-after-load "magit"
     '(progn
        (magit-add-section-hook 'magit-status-sections-hook
                                'magit-insert-modules
-                               'magit-insert-unpulled-from-pushremote)
+                               'magit-insert-unpulled-from-pushremote
+                               ;; looks option above will IGNORE status when case happen
+                               ;;'magit-insert-unpushed-from-pushremote
+                               ;;'magit-insert-modules-unpulled-from-pushremote
+                               ;;'magit-insert-modules-unpushed-to-pushremote
+                               )
+       (setq magit-module-sections-nested nil)
 
        )
     )
