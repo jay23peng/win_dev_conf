@@ -127,7 +127,7 @@ settings.blacklist = {
 // --------------------------------------------------------------------------------
 // Ominibar
 // --------------------------------------------------------------------------------
-settings.omnibarPosition = 'bottom'
+// settings.omnibarPosition = 'bottom'
 cmap('<ArrowDown>', '<Shift-Tab>');
 cmap('<ArrowUp>', '<Tab>');
 
