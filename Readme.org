@@ -270,7 +270,9 @@
     - If u want to build it manually , refer to the configuration inside the Vagrantfile.
     - If u need to expose/bind extra ports, do it by modifying Vagrantfile directly and then provision in Vagrant.
 *** Docker Client
-    https://docs.docker.com/engine/install/binaries/#install-client-binaries-on-macos
+    - Install it by following:
+      https://docs.docker.com/engine/install/binaries/#install-client-binaries-on-macos
+    - Dcokerhub has an anonymous limitaion from Nov 2020, run ~docker login~ with valid account if hits the limit. 
 *** Docker Compose
     #+begin_src sh
     brew install docker-compose
