@@ -43,6 +43,7 @@ This function should only modify configuration layer settings."
      ;; auto-completion
      ;; better-defaults
      emacs-lisp
+     ;; https://develop.spacemacs.org/doc/LAYERS.html#use-package-init-and-config
      git
      ;; helm
      ;; ivy
@@ -66,7 +67,9 @@ This function should only modify configuration layer settings."
      ;; spell-checking
      ;; syntax-checking
      ;; version-control
-     treemacs)
+     (treemacs :variables
+               treemacs-use-filewatch-mode t )
+   )
 
 
    ;; List of additional packages that will be installed without being wrapped
@@ -596,9 +599,8 @@ before packages are loaded."
                                'magit-insert-modules
                                'magit-insert-unpulled-from-pushremote
                                ;; looks option above will IGNORE status when case happen
-                               ;;'magit-insert-unpushed-from-pushremote
-                               ;;'magit-insert-modules-unpulled-from-pushremote
-                               ;;'magit-insert-modules-unpushed-to-pushremote 
+                               ;; 'magit-insert-modules-unpulled-from-pushremote
+                               ;; 'magit-insert-modules-unpushed-to-pushremote 
        )
 
 ;;       (magit-add-section-hook 'magit-status-sections-hook
