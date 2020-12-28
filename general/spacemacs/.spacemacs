@@ -531,7 +531,7 @@ configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
   ;; https://github.com/olkinn/dotfiles/blob/master/.spacemacs
-  ;; https://github.com/jesse23/dev_home/blob/master/general/spacemacs/.spacemacs_old
+  ;; https://github.com/jesse23/dev/blob/master/general/spacemacs/.spacemacs_old
 
   ;; system clipboard
   (xclip-mode 1)
