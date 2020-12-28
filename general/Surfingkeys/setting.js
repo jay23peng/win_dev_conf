@@ -35,9 +35,11 @@ mapkey('u', '#4Go back in history', function() {
     history.go(-1);
 }, {repeatIgnore: true});
 
+/*
 mapkey('<Ctrl-r>', '#4Go forward in history', function() {
     history.go(1);
 }, {repeatIgnore: true});
+*/
 
 // --------------------------------------------------------------------------------
 // Page navigation
@@ -150,7 +152,7 @@ settings.theme = `
 :root {
   /* Font */
   --font: 'FiraMono Nerd Font', Ubuntu, Monaco, sans;
-  --font-size: 12;
+  --font-size: 14;
   --font-weight: bold;
 
   --fg: #F8F8F2;
@@ -227,7 +229,7 @@ input {
 } 
 
 .sk_theme .title {
-  color: var(--accent-fg);
+  color: var(--fg);
 }
 
 .sk_theme .url {

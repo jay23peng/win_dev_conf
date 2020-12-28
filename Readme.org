@@ -74,7 +74,7 @@
       #+begin_src
       Background: #1C1C1C
       Button:     #FD971F
-      Text:       #F8F8F2    #E69F66
+      Text:       #F8F8F2    #F92672
       Link:       #66D9EF    #AE81FF
       Border:     #404338
       Scrollbar:  #4E4E4E
@@ -225,6 +225,15 @@
     Then add it to alias:
     #+begin_src
     alias ls="exa"
+    #+end_src
+*** fnm
+    [[https://github.com/Schniz/fnm][fnm]] is a nodejs manager compatible with fish shell
+    #+begin_src 
+    curl -fsSL https://fnm.vercel.app/install | bash
+    #+end_src
+    Add alias:
+     #+begin_src
+    alias nvm="fnm"
     #+end_src
 ** Emacs
    #+begin_src sh

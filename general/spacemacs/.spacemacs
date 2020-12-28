@@ -53,11 +53,16 @@ This function should only modify configuration layer settings."
      vinegar
      themes-megapack
      (shell :variables
-             shell-default-height 30
-             shell-default-position 'bottom
-             shell-default-shell 'eshell
-             ;; shell-default-term-shell "/bin/bash"
+        shell-default-height 30
+        shell-default-position 'bottom
+        shell-default-shell 'eshell
+        ;; shell-default-term-shell "/bin/bash"
      )
+     (typescript :variables
+        typescript-fmt-tool 'prettier
+        typescript-linter   'tslint
+        typescript-backend  'lsp
+      )
      ;; spell-checking
      ;; syntax-checking
      ;; version-control
@@ -557,6 +562,7 @@ before packages are loaded."
       (define-key m [S-mouse-2] 'goto-address-at-point)
       m))
 
+  ;; magit
 
   ;; term-cursor.el
   (setq term-cursor-bar-escape-code        "\e[5 q")
@@ -582,6 +588,15 @@ before packages are loaded."
        ;; special edit
        (setq org-src-tab-acts-natively nil)
        ))
+
+  (eval-after-load "magit"
+    '(progn
+       (magit-add-section-hook 'magit-status-sections-hook
+                               'magit-insert-modules
+                               'magit-insert-unpulled-from-pushremote)
+
+       )
+    )
 
   ;; line wrap and truncation symbol
   (defun my-change-window-divider ()
