@@ -591,17 +591,35 @@ before packages are loaded."
   ;; magit
   (eval-after-load "magit"
     '(progn
+       (setq magit-module-sections-nested nil)
        (magit-add-section-hook 'magit-status-sections-hook
                                'magit-insert-modules
                                'magit-insert-unpulled-from-pushremote
                                ;; looks option above will IGNORE status when case happen
                                ;;'magit-insert-unpushed-from-pushremote
                                ;;'magit-insert-modules-unpulled-from-pushremote
-                               ;;'magit-insert-modules-unpushed-to-pushremote
-                               )
-       (setq magit-module-sections-nested nil)
+                               ;;'magit-insert-modules-unpushed-to-pushremote 
+       )
+
+;;       (magit-add-section-hook 'magit-status-sections-hook
+;;                               'magit-insert-modules-unpulled-from-upstream
+;;                               'magit-insert-unpulled-from-upstream)
+;;       (magit-add-section-hook 'magit-status-sections-hook
+;;                               'magit-insert-modules-unpulled-from-pushremote
+;;                               'magit-insert-unpulled-from-upstream)
+;;       (magit-add-section-hook 'magit-status-sections-hook
+;;                               'magit-insert-modules-unpushed-to-upstream
+;;                               'magit-insert-unpulled-from-upstream)
+;;       (magit-add-section-hook 'magit-status-sections-hook
+;;                               'magit-insert-modules-unpushed-to-pushremote
+;;                               'magit-insert-unpulled-from-upstream)
+;;       (magit-add-section-hook 'magit-status-sections-hook
+;;                               ;; 'magit-insert-submodules
+;;                               'magit-insert-unpulled-from-upstream)
+
 
        )
+
     )
 
   ;; line wrap and truncation symbol
