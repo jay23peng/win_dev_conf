@@ -52,6 +52,7 @@
 *** Misc Utilities
     - [[https://qspace.awehunt.com/en-us/index.html][qspace]]
     - [[https://github.com/mstarke/MacPass][mappass]]
+    - [[https://github.com/sbmpost/AutoRaise][AutoRaise]]
     - [[http://kdiff3.sourceforge.net/][kdiff3]]
     - [[https://github.com/ianyh/Amethyst][ametheyst]]
 ** Browser
