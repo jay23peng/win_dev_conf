@@ -119,11 +119,17 @@ mapkey('p', "Open the clipboard's URL in the current tab", function() {
 Hints.characters = 'barstdqwfpgzxcv';
 settings.smoothScroll=false;
 settings.tabsThreshold = 18;
-settings.omnibarPosition = 'bottom'
 settings.blacklist = {
   'https://calendar.google.com': 1,
   'https://sheets.google.com': 1
 }
+
+// --------------------------------------------------------------------------------
+// Ominibar
+// --------------------------------------------------------------------------------
+settings.omnibarPosition = 'bottom'
+cmap('<ArrowDown>', '<Shift-Tab>');
+cmap('<ArrowUp>', '<Tab>');
 
 // --------------------------------------------------------------------------------
 // Monokai Theme

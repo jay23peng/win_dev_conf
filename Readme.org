@@ -64,12 +64,23 @@
     - Login and sync setting back
     - https://forum.vivaldi.net/topic/10549/modding-vivaldi
     - Then point to ~dev/general/vivaldi~ to resolve the active tab issue
-*** Surfingkeys
-    After install extension, load the config from ~dev/general/surfingkeys~
+
+*** browser theme
+    Vivladi supports cuctomize theme color directly in system preference
 *** Midnight Lizard
-    In mac not sure why, we need to set the toggle shortcut to ~Ctrl+Cmd+m~ in global to get it work. (~browser preference/extensions/shortcut~)
-    For color schemee use ~Invertable Light~ for now.
+    - Set toggle shortcut at menu ~Vivladi/preference/extensions/shortcut~.
+    - Midnight Lizard suppots customize based on color code. For Monokai:
+      #+begin_src
+      Background: #1C1C1C
+      Button:     #FD971F
+      Text:       #F8F8F2    #E69F66
+      Link:       #66D9EF    #AE81FF
+      Border:     #404338
+      Scrollbar:  #4E4E4E
+      #+end_src
+      Save it as ~Monokai Dark~ and set it as default.
 *** Browser shortcut
+    Try to use browser shortcut as much as possible then go to Surfingkeys
     #+begin_src
      Cmd + Shift + .   => Toggle Window Panel
      Cmd + Shift + b   => Toggle bookmark panel
@@ -81,6 +92,8 @@
      Cmd + b          => toggle side bar
      Cmd + r          => history forward ('Ctrl+r', need to set it in browser not Surfingkeys)
     #+end_src
+*** Surfingkeys
+    After install extension, load the config from ~dev/general/surfingkeys~
 ** VSCode
    - All you need to to is install and sync.
    - In mac vscode.vim picks Cmd as Ctrl automatically which is perfect
@@ -311,20 +324,33 @@ brew install kubectl
    If u are using default APFS disk format u can ignore this.
    OneDrive on MAC is not compatible with case sensitive partition. An extra partition is needed through `Disk Utility` for using oneDrive if your main drive is case sensitive APFS.
 ** Theme
-  |         | gruvbox-dark-hard            | monokai                     | comments                |
-  |---------+------------------------------+-----------------------------+-------------------------|
-  | Chrome  | [[https://chrome.google.com/webstore/detail/gruvbox-theme/ihennfdbghdiflogeancnalflhgmanop?hl=en-GB][gruvbox theme]] \              | [[https://chrome.google.com/webstore/detail/material-simple-dark-grey/ookepigabmicjpgfnmncjiplegcacdbm][Material Simple Dark Grey]] \ |                         |
-  |         | [[https://chrome.google.com/webstore/detail/devtools-theme-gruvbox-da/njcgdakjdifgccdgnoiphpnihcfopcmj][DevTools Theme: Gruvbox Dark]] | [[https://chrome.google.com/webstore/detail/monokai-for-chrome/ebanajomahnlhgbljngocmccmpelnaam][Monokai for chrome]]          |                         |
-  |---------+------------------------------+-----------------------------+-------------------------|
-  | Vivaldi | Customize in prefernce       | Customize in prefernce      | Don't forget custom css |
-  |         | [[https://chrome.google.com/webstore/detail/devtools-theme-gruvbox-da/njcgdakjdifgccdgnoiphpnihcfopcmj][DevTools Theme: Gruvbox Dark]] | [[https://chrome.google.com/webstore/detail/monokai-for-chrome/ebanajomahnlhgbljngocmccmpelnaam][Monokai for chrome]]          |                         |
-  |         |                              |                             |                         |
-  |---------+------------------------------+-----------------------------+-------------------------|
-  |         |                              |                             |                         |
-  |         |                              |                             |                         |
-  |         |                              |                             |                         |
-  |         |                              |                             |                         |
-  |         |                              |                             |                         |
+  |                 | gruvbox-dark-hard                 | monokai                     |
+  |-----------------+-----------------------------------+-----------------------------|
+  | Chrome          | [[https://chrome.google.com/webstore/detail/gruvbox-theme/ihennfdbghdiflogeancnalflhgmanop?hl=en-GB][gruvbox theme]]                     | [[https://chrome.google.com/webstore/detail/material-simple-dark-grey/ookepigabmicjpgfnmncjiplegcacdbm][Material Simple Dark Grey]]   |
+  |                 | [[https://chrome.google.com/webstore/detail/devtools-theme-gruvbox-da/njcgdakjdifgccdgnoiphpnihcfopcmj][DevTools Theme: Gruvbox Dark]]      | [[https://chrome.google.com/webstore/detail/monokai-for-chrome/ebanajomahnlhgbljngocmccmpelnaam][Monokai for chrome]]          |
+  |-----------------+-----------------------------------+-----------------------------|
+  | Vivaldi         | Customize in prefernce            | Customize in prefernce      |
+  |                 | [[https://chrome.google.com/webstore/detail/devtools-theme-gruvbox-da/njcgdakjdifgccdgnoiphpnihcfopcmj][DevTools Theme: Gruvbox Dark]]      | [[https://chrome.google.com/webstore/detail/monokai-for-chrome/ebanajomahnlhgbljngocmccmpelnaam][Monokai for chrome]]          |
+  |                 |                                   |                             |
+  |-----------------+-----------------------------------+-----------------------------|
+  | Midnight Lizard | Customize in extension            | Customize in extension      |
+  |-----------------+-----------------------------------+-----------------------------|
+  | Slack           | Customize in prefernce            | Customize in prefernce      |
+  |-----------------+-----------------------------------+-----------------------------|
+  | VSCode          | [[https://marketplace.visualstudio.com/items?itemName=tomphilbin.gruvbox-themes][Gruvbox Dark Hard]]                 | [[https://marketplace.visualstudio.com/items?itemName=fabiospampinato.vscode-monokai-night][Monokai-Night-Theme/Monokai]] |
+  |-----------------+-----------------------------------+-----------------------------|
+  | iTerm2          | [[https://github.com/mbadolato/iTerm2-Color-Schemes][Gruvbox]]                           | [[https://github.com/mbadolato/iTerm2-Color-Schemes][Monokai]]                     |
+  |-----------------+-----------------------------------+-----------------------------|
+  | Alacritty       | [[https://github.com/mbadolato/iTerm2-Color-Schemes][Gruvbox]]                           | [[https://github.com/mbadolato/iTerm2-Color-Schemes][Monokai]]                     |
+  |-----------------+-----------------------------------+-----------------------------|
+  | Fish Shell      | fish_config                       | [[https://github.com/benmarten/Monokai_Fish_OSX][Monokai]]                     |
+  |-----------------+-----------------------------------+-----------------------------|
+  | bobthefish      | [[https://github.com/oh-my-fish/theme-bobthefish][theme-bobthefish]]                  | [[https://github.com/oh-my-fish/theme-bobthefish/wiki/Base16-Monokai-custom-color-scheme][bobthefish-monokai]]          |
+  |-----------------+-----------------------------------+-----------------------------|
+  | vim             | [[https://github.com/morhetz/gruvbox][morhetz/gruvbox]]                   | [[https://github.com/tomasr/molokai][tomasr/molokai]]              |
+  |                 | [[https://github.com/itchyny/lightline.vim/blob/master/colorscheme.md#jellybeans][lightline/jellybeans]]              | [[https://github.com/itchyny/lightline.vim/blob/master/colorscheme.md#molokai][lightline/molokai]]           |
+  |-----------------+-----------------------------------+-----------------------------|
+  | emacs           | [[https://github.com/syl20bnr/spacemacs/tree/master/layers/%2Bthemes/themes-megapack][themes-meagpack/gruvbox-dark-hard]] | [[https://github.com/syl20bnr/spacemacs/tree/master/layers/%2Bthemes/themes-megapack][themes-megapack/monokai]]     |
    
 * Github org mode support
   - https://github.com/fniessen/refcard-org-mode
