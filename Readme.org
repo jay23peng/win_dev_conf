@@ -161,8 +161,8 @@
 ** Add $PATH
   #+begin_src sh
     # vim /etc/path.d/dev.public <-- any name should be OK
-    /Users/jesse23/u/dev/macOS/bin
     /Users/jesse23/u/dex/bin
+    /Users/jesse23/u/dex/dev/macOS/bin
   #+end_src
 ** Fish shell
    #+begin_src sh
@@ -247,7 +247,7 @@
     # Install Vagrant
     brew install vagrant
     brew install vagrant vagrant-manager
-    export VAGRANT_VAGRANTFILE=u/dev/general/vagrant/dockervm/Vagrantfile
+    export VAGRANT_VAGRANTFILE=u/dex/dev/general/vagrant/dockervm/Vagrantfile
     vagrant up
     #+end_src
 
