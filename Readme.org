@@ -331,7 +331,6 @@ brew install kubectl
   |-----------------+-----------------------------------+-----------------------------|
   | Vivaldi         | Customize in prefernce            | Customize in prefernce      |
   |                 | [[https://chrome.google.com/webstore/detail/devtools-theme-gruvbox-da/njcgdakjdifgccdgnoiphpnihcfopcmj][DevTools Theme: Gruvbox Dark]]      | [[https://chrome.google.com/webstore/detail/monokai-for-chrome/ebanajomahnlhgbljngocmccmpelnaam][Monokai for chrome]]          |
-  |                 |                                   |                             |
   |-----------------+-----------------------------------+-----------------------------|
   | Midnight Lizard | Customize in extension            | Customize in extension      |
   |-----------------+-----------------------------------+-----------------------------|
