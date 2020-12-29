@@ -86,8 +86,7 @@
 (map! :after evil-org
       :map evil-org-mode-map
       :ni "C-RET" #'org-insert-subheading
-      ;; shift not working in 
-      ;; :ni "S-RET" #'+org/insert-item-below
+      :ni "S-RET" #'+org/insert-item-below
       :ni [C-return] #'org-insert-subheading
       :ni [S-return] #'+org/insert-item-below
 )
