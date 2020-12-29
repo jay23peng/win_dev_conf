@@ -101,7 +101,7 @@
 ** HomeBrew
   Mac Setup start from install home brew:
   #+begin_src sh
-    /usr/bin/ruby -e "$(curl -fsSL arch/ ttps://raw.githubusercontent.com/Homebrew/install/master/install)"
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   #+end_src
   Common homebrew command:
   #+begin_src sh

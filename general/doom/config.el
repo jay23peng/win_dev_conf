@@ -59,7 +59,9 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;; personal setup
-;;
+;; good example: 
+;; https://github.com/dangirsh
+;;  https://zzamboni.org/post/my-doom-emacs-configuration-with-commentary/
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; background color
 (custom-set-faces
@@ -96,10 +98,46 @@
       [mouse-2] #'silence
 )
 
-;;(map! :after evil-org
-;;      :map evil-insert-state-map
-;;      :n "C-RET" #'org-insert-subheading
-;;      :n "S-RET" #'+org/insert-item-below
-;;      :n [C-return] #'org-insert-subheading
-;;      :n [S-return] #'+org/insert-item-below
-;;)
+;; magit
+
+(use-package! magit
+  :config
+  (set-default 'magit-stage-all-confirm nil)
+  (set-default 'magit-unstage-all-confirm nil)
+
+  (remove-hook 'magit-mode-hook 'turn-on-magit-gitflow)
+
+  ;; Restores "normal" behavior in branch view (when hitting RET)
+  (setq magit-visit-ref-behavior '(create-branch checkout-any focus-on-ref))
+
+  (setq git-commit-finish-query-functions nil)
+  (setq magit-visit-ref-create 1)
+  (setq magit-revision-show-gravatars nil)
+  (setq magit-module-sections-nested nil)
+       (magit-add-section-hook 'magit-status-sections-hook
+                               'magit-insert-modules
+                               'magit-insert-unpulled-from-pushremote
+                               ;; looks option above will IGNORE status when case happen
+                               ;; 'magit-insert-modules-unpulled-from-pushremote
+                               ;; 'magit-insert-modules-unpushed-to-pushremote 
+       )
+)
+
+;; magit
+;; (after! magit
+;;   (setq zz/repolist
+;;         "~/.elvish/package-data/elvish-themes/chain-summary-repos.json")
+;;   (defadvice! +zz/load-magit-repositories ()
+;;     :before #'magit-list-repositories
+;;     (setq magit-repository-directories
+;;           (seq-map (lambda (e) (cons e 0)) (json-read-file zz/repolist))))
+;;   (setq magit-repolist-columns
+;;         '(("Name" 25 magit-repolist-column-ident nil)
+;;           ("Status" 7 magit-repolist-column-flag nil)
+;;           ("B<U" 3 magit-repolist-column-unpulled-from-upstream
+;;            ((:right-align t)
+;;             (:help-echo "Upstream changes not in branch")))
+;;           ("B>U" 3 magit-repolist-column-unpushed-to-upstream
+;;            ((:right-align t)
+;;             (:help-echo "Local changes not in upstream")))
+;;           ("Path" 99 magit-repolist-column-path nil))))
