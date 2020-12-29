@@ -60,14 +60,34 @@
 ;;
 ;; personal setup
 ;; good example: 
-;; https://github.com/dangirsh
-;;  https://zzamboni.org/post/my-doom-emacs-configuration-with-commentary/
+;; https://github.com/dangirsh/.doom.d
+;; https://zzamboni.org/post/my-doom-emacs-configuration-with-commentary/
+;; https://github.com/rougier/elegant-emacs/issues/4
+;; https://www.gtrun.org/custom/config.html
+;; https://ladicle.com/post/config/#configuration
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; background color
 (custom-set-faces
   '(default ((t (:background "#1c1c1c"))))
   '(hl-line ((t (:background "#1c1c1c"))))
 )
+
+;; fonts
+(setq doom-font (font-spec :family "FiraMono Nerd Font" :size 16)
+      ;; doom-variable-pitch-font (font-spec :family "Libre Baskerville")
+      ;; doom-serif-font (font-spec :family "Libre Baskerville")
+)
+
+;; (when (file-exists-p "~/.doom.d/banners")
+;;   (setq +doom-dashboard-banner-padding '(0 . 2)
+;;        +doom-dashboard-banner-file "deepfield-window.png"
+;;        +doom-dashboard-banner-dir "~/.doom.d/banners"))
+
+;; (setq display-line-numbers-type nil)
+
+;; Thin grey line separating windows
+;; (set-face-background 'vertical-border "grey")
+;; (set-face-foreground 'vertical-border (face-background 'vertical-border))
 
 ;; dummy function for doing nothing
 (defun silence () (interactive))
@@ -105,8 +125,6 @@
   (set-default 'magit-stage-all-confirm nil)
   (set-default 'magit-unstage-all-confirm nil)
 
-  (remove-hook 'magit-mode-hook 'turn-on-magit-gitflow)
-
   ;; Restores "normal" behavior in branch view (when hitting RET)
   (setq magit-visit-ref-behavior '(create-branch checkout-any focus-on-ref))
 
@@ -141,3 +159,18 @@
 ;;            ((:right-align t)
 ;;             (:help-echo "Local changes not in upstream")))
 ;;           ("Path" 99 magit-repolist-column-path nil))))
+
+
+;; line wrap and truncation symbol
+;; Or add a hook for the mode you are using (add-hook! <your-mode> visual-line-mode)
+(global-visual-line-mode t)
+(defun my-change-window-divider ()
+  (let ((display-table (or buffer-display-table standard-display-table)))
+    (set-display-table-slot display-table 'wrap ?\u21b5) ;;/u23ce
+    (set-display-table-slot display-table 'truncation ?\u2192) ;;/u21e8
+   ; (set-display-table-slot display-table 'vertical-border (make-glyph-code ?│)) ; or ┃ │
+    (let ((windows (doom-visible-windows)))
+      (dolist (w windows)
+        (set-window-display-table w display-table)))))
+(add-hook 'window-configuration-change-hook 'my-change-window-divider)
+
