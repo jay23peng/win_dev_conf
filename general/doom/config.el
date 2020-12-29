@@ -91,6 +91,11 @@
       :ni [S-return] #'+org/insert-item-below
 )
 
+(map! :after evil-org
+      :map org-mouse-map
+      [mouse-2] #'silence
+)
+
 ;;(map! :after evil-org
 ;;      :map evil-insert-state-map
 ;;      :n "C-RET" #'org-insert-subheading
