@@ -65,6 +65,7 @@
 ;; https://github.com/rougier/elegant-emacs/issues/4
 ;; https://www.gtrun.org/custom/config.html
 ;; https://ladicle.com/post/config/#configuration
+;; https://github.com/fuxialexander/doom-emacs-private-xfu/blob/122fc444f3d564124df7fbf8e2be034a0d136317/%2Bbindings.el
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; background color
 (custom-set-faces
@@ -77,6 +78,8 @@
       ;; doom-variable-pitch-font (font-spec :family "Libre Baskerville")
       ;; doom-serif-font (font-spec :family "Libre Baskerville")
 )
+
+(setq mac-command-modifier 'control)
 
 ;; (when (file-exists-p "~/.doom.d/banners")
 ;;   (setq +doom-dashboard-banner-padding '(0 . 2)
@@ -117,6 +120,8 @@
       :map org-mouse-map
       [mouse-2] #'silence
 )
+
+(add-hook! 'org-mode-hook #'doom-disable-line-numbers-h)
 
 ;; magit
 
@@ -165,12 +170,55 @@
 ;; Or add a hook for the mode you are using (add-hook! <your-mode> visual-line-mode)
 (global-visual-line-mode t)
 (defun my-change-window-divider ()
-  (let ((display-table (or buffer-display-table standard-display-table)))
-    (set-display-table-slot display-table 'wrap ?\u21b5) ;;/u23ce
-    (set-display-table-slot display-table 'truncation ?\u2192) ;;/u21e8
-   ; (set-display-table-slot display-table 'vertical-border (make-glyph-code ?│)) ; or ┃ │
+    (set-display-table-slot standard-display-table 'wrap ?\u21b5) ;;/u23ce
+    (set-display-table-slot standard-display-table 'truncation ?\u2192) ;;/u21e8
+    (set-display-table-slot standard-display-table 'vertical-border (make-glyph-code ?│)) ; or ┃ │
     (let ((windows (doom-visible-windows)))
       (dolist (w windows)
-        (set-window-display-table w display-table)))))
+        (set-window-display-table w standard-display-table))))
 (add-hook 'window-configuration-change-hook 'my-change-window-divider)
 
+;; (defun my-change-window-divider ()
+;;   (let ((display-table (or buffer-display-table standard-display-table)))
+;;     (set-display-table-slot display-table 'wrap ?\u21b5) ;;/u23ce
+;;     (set-display-table-slot display-table 'truncation ?\u2192) ;;/u21e8
+;;     (set-display-table-slot display-table 'vertical-border (make-glyph-code ?│)) ; or ┃ │
+;;     (let ((windows (doom-visible-windows)))
+;;       (dolist (w windows)
+;;         (set-window-display-table w display-table)))))
+;; (add-hook 'window-configuration-change-hook 'my-change-window-divider)
+
+;; xwidget-webkit
+(map!   (
+          :leader
+          :desc "Open URL in emacs-webkit"
+          "o w" #'xwidget-webkit-browse-url
+        )
+        :i "<M-return>" nil
+;;      (:after evil-org
+;;       :map (evil-org-mode-map)
+;;       :nvime [M-return] #'org-meta-return
+;;       :ni [C-return] #'org-insert-todo-heading
+;;       :ni [C-S-return] #'org-insert-todo-subheading
+;;       (:when IS-MAC
+;;        [s-return]   nil
+;;        [s-S-return] nil
+;;        [s-M-return] nil))
+;;      (:after xwidget
+;;       :map xwidget-webkit-mode-map
+;;       :n "q" #'quit-window
+;;       :n "r" #'xwidget-webkit-reload
+;;       :n "y" #'xwidget-webkit-copy-selection-as-kill
+;;       :n "s-c" #'xwidget-webkit-copy-selection-as-kill
+;;       :n "t" #'xwidget-webkit-browse-url
+;;       :n "n" #'xwidget-webkit-forward
+;;       :n "p" #'xwidget-webkit-back
+;;       :n "G" #'xwidget-webkit-scroll-bottom
+;;       :n "gg" #'xwidget-webkit-scroll-top
+;;       :n "C-d" #'xwidget-webkit-scroll-down
+;;       :n "C-u" #'xwidget-webkit-scroll-up
+;;       :n "M-=" #'xwidget-webkit-zoom-in
+;;       :n "M--" #'xwidget-webkit-zoom-out
+;;       :n "j" #'xwidget-webkit-scroll-up-line
+;;       :n "k" #'xwidget-webkit-scroll-down-line)
+)
