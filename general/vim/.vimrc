@@ -36,11 +36,51 @@ else
   " let s:uname = system("uname -s")
   " if s:uname == "Darwin\n"
       " mac terminal
-      set rtp+=/usr/local/opt/fzf
+      set rtp+=/usr/localsopt/fzf
       " set ttymouse=xterm2
   " else
       "linux
   " endif
+endif
+
+" gui special
+if has("gui_running")
+  " Gvim
+  if has("gui_gtk2") || has("gui_gtk3")
+    " Linux GUI
+  elseif has("gui_win32")
+    " Win32/64 GVim
+  elseif has("gui_macvim")
+    " MacVim
+    " https://stackoverflow.com/questions/2842078/how-do-i-detect-os-x-in-my-vimrc-file-so-certain-configurations-will-only-appl
+    nnoremap <D-r> <C-r>
+    nnoremap <D-[> <Esc>
+    nnoremap <D-w> <C-w>
+    nnoremap <D-p> <C-p>
+    nnoremap <D-e> <C-e>
+    nnoremap <D-u> <C-u>
+    nnoremap <D-d> <C-d>
+    
+    inoremap <D-r> <C-r>
+    inoremap <D-[> <Esc>
+    inoremap <D-w> <C-w>
+    inoremap <D-p> <C-p>
+    inoremap <D-e> <C-e>
+    inoremap <D-u> <C-u>
+    inoremap <D-d> <C-d>
+    
+    vnoremap <D-r> <C-r>
+    vnoremap <D-[> <Esc>
+    vnoremap <D-w> <C-w>
+    vnoremap <D-p> <C-p>
+    vnoremap <D-e> <C-e>
+    vnoremap <D-u> <C-u>
+    vnoremap <D-d> <C-d>
+  else
+    echo "Unknown GUI system!!!!"
+  endif
+else
+  " Terminal vim
 endif
 
 call plug#begin('~/.vim/plugged')
@@ -111,31 +151,34 @@ set guifontwide=FiraMono_Nerd_Font:h16
 " leader key
 let mapleader = " "
 
+
+
+
 " Remap <ESC> to <C-[>
-" nnoremap <C-[> <Esc>
+"nnoremap <C-[> <Esc>
 " nnoremap <C-[> <Esc>
 " vnoremap <C-[> <Esc>gV
 " onoremap <C-[> <Esc>
 " inoremap <C-[> <Esc>`^
 
 " Remap buffer switch 
-nmap <silent> <leader>l :wincmd l<CR>
-nmap <silent> <leader>h :wincmd h<CR>
-nmap <silent> <leader>k :wincmd k<CR>
-nmap <silent> <leader>j :wincmd j<CR>
+" nmap <silent> <leader>l :wincmd l<CR>
+" nmap <silent> <leader>h :wincmd h<CR>
+" nmap <silent> <leader>k :wincmd k<CR>
+" nmap <silent> <leader>j :wincmd j<CR>
 " nmap <silent> <C-x>t :tabnew<CR>
 nmap <silent> <leader>wd :hide<CR>
 nmap <silent> <leader>wm :only<CR>
-nmap <silent> <leader>w- :sp<CR>
-nmap <silent> <leader>w/ :vsp<CR>
+nmap <silent> <leader>ws :sp<CR>
+nmap <silent> <leader>wv :vsp<CR>
 
 " Move cursor at input mode
-inoremap <M-h> <C-o>h
-inoremap <M-j> <C-o>j
-inoremap <M-k> <C-o>k
-inoremap <M-l> <C-o>l
-inoremap <M-b> <C-o>b
-inoremap <M-f> <C-o>w
+" inoremap <M-h> <C-o>h
+" inoremap <M-j> <C-o>j
+" inoremap <M-k> <C-o>k
+" inoremap <M-l> <C-o>l
+" inoremap <M-b> <C-o>b
+" inoremap <M-f> <C-o>w
 
 nmap <silent> J 20j
 nmap <silent> K 20k

@@ -48,17 +48,3 @@
 ;(unpin! pinned-package another-pinned-package)
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;(unpin! t)
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
-;; personal setup
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(package! monokai-theme)
-
-;; (package! example :recipe
-;;   (:host github
-;;    :repo "akirakyle/emacs-webkit"
-;;    :branch "main"
-;;    :files (:defaults "*.js" "*.css" "*.so")
-;;    :build ("make")))

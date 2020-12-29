@@ -97,7 +97,129 @@
     After install extension, load the config from ~dev/general/surfingkeys~
 ** VSCode
    - All you need to to is install and sync.
-   - In mac vscode.vim picks Cmd as Ctrl automatically which is perfect
+*** VSCode Vim Mode
+   vs code vim mode require separate mapping to map ~Cmd~ to ~Ctrl~:
+    #+begin_src json
+    {
+      {
+          "key": "cmd+r",
+          "command": "extension.vim_ctrl+r",
+          "when": "editorTextFocus && vim.active && vim.use<C-r> && !inDebugRepl"
+  	  },
+      {
+          "key": "cmd+[",
+          "command": "extension.vim_ctrl+[",
+          "when": "editorTextFocus && vim.active && vim.use<C-[> && !inDebugRepl"
+  	  },
+      {
+          "key": "cmd+w",
+          "command": "extension.vim_ctrl+w",
+          "when": "editorTextFocus && vim.active && vim.use<C-w> && !inDebugRepl"
+  	  },
+      {
+          "key": "cmd+u",
+          "command": "extension.vim_ctrl+u",
+          "when": "editorTextFocus && vim.active && vim.use<C-u> && !inDebugRepl"
+  	  },
+      {
+          "key": "cmd+d",
+          "command": "extension.vim_ctrl+d",
+          "when": "editorTextFocus && vim.active && vim.use<C-d> && !inDebugRepl"
+  	  },
+      {
+          "key": "ctrl+[",
+          "command": "-extension.vim_ctrl+[",
+          "when": "editorTextFocus && vim.active && vim.use<C-[> && !inDebugRepl"
+      },
+      {}
+    }
+    #+end_src
+*** VSCode Terminal
+    We can follow this [[https://github.com/xtermjs/xterm.js/blob/0e45909c7e79c83452493d2cd46d99c0a0bb585f/src/common/data/EscapeSequences.ts][Esacpe Sequence List]] to mimic Linux Terminal behavior:
+    #+begin_src json
+    {
+    	{
+    		"key": "shift+cmd+c",
+    		"command": "workbench.action.terminal.copySelection",
+    		"when": "terminalFocus && terminalProcessSupported && terminalTextSelected"
+    	},
+    	{
+    		"key": "shift+cmd+v",
+    		"command": "workbench.action.terminal.paste",
+    		"when": "terminalFocus && terminalProcessSupported"
+    	},
+    	{
+    		"key": "shift+ctrl+c",
+    		"command": "workbench.action.terminal.copySelection",
+    		"when": "terminalFocus && terminalProcessSupported && terminalTextSelected"
+    	},
+    	{
+    		"key": "shift+ctrl+v",
+    		"command": "workbench.action.terminal.paste",
+    		"when": "terminalFocus && terminalProcessSupported"
+    	},
+      {
+            "key": "cmd+c",
+            "command": "workbench.action.terminal.sendSequence",
+            "args": { "text": "\u0003" },
+            "when": "terminalFocus && terminalProcessSupported"
+    	},
+      {
+            "key": "cmd+a",
+            "command": "workbench.action.terminal.sendSequence",
+            "args": { "text": "\u0001" },
+            "when": "terminalFocus && terminalProcessSupported"
+    	},
+      {
+            "key": "cmd+e",
+            "command": "workbench.action.terminal.sendSequence",
+            "args": { "text": "\u0005" },
+            "when": "terminalFocus && terminalProcessSupported"
+    	},
+      {
+            "key": "cmd+w",
+            "command": "workbench.action.terminal.sendSequence",
+            "args": { "text": "\u0017" },
+            "when": "terminalFocus && terminalProcessSupported"
+    	},
+      {
+            "key": "cmd+k",
+            "command": "workbench.action.terminal.sendSequence",
+            "args": { "text": "\u000b" },
+            "when": "terminalFocus && terminalProcessSupported"
+    	},
+      {
+            "key": "cmd+u",
+            "command": "workbench.action.terminal.sendSequence",
+            "args": { "text": "\u0015" },
+            "when": "terminalFocus && terminalProcessSupported"
+    	},
+      {
+            "key": "cmd+y",
+            "command": "workbench.action.terminal.sendSequence",
+            "args": { "text": "\u0019" },
+            "when": "terminalFocus && terminalProcessSupported"
+    	},
+      {
+            "key": "cmd+r",
+            "command": "workbench.action.terminal.sendSequence",
+            "args": { "text": "\u0012" },
+            "when": "terminalFocus && terminalProcessSupported"
+    	},
+      {
+            "key": "cmd+[",
+            "command": "workbench.action.terminal.sendSequence",
+            "args": { "text": "\u001b" },
+            "when": "terminalFocus && terminalProcessSupported"
+    	},
+      {
+            "key": "cmd+d",
+            "command": "workbench.action.terminal.sendSequence",
+            "args": { "text": "\u0004" },
+            "when": "terminalFocus && terminalProcessSupported"
+    	},
+    }
+    #+end_src
 ** HomeBrew
   Mac Setup start from install home brew:
   #+begin_src sh
@@ -140,7 +262,10 @@
        curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
            https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
      #+end_src
-     after that copy the .vimrc to ~~/~ then run ~PlugInstall~ in vim.
+     after that link the .vimrc to ~~/~ then run ~PlugInstall~ in vim.
+     #+begin_src sh
+     ln -s ~/u/dex/dev/general/vim/.vimrc ~/.vimrc
+     #+end_src
    - VIM has ~VimOrganizer~ for org-mode already but it is abandened. For basic usage it is suffcient
 ** Use touch id in sudo
    - ~sudo vim /etc/pam.d/sudo~ then add line below:
