@@ -159,6 +159,12 @@
      #+begin_src sh
        defaults write -g com.apple.mouse.scaling  20.0
      #+end_src
+** Envrionment Variable
+   #+begin_src sh
+   # /etc/profile -> add below at the buttom
+   export DOCKER_HOST=tcp://localhost:2375
+   export FZF_DEFAULT_COMMAND='fd -a -j 4'
+   #+end_src
 ** Add $PATH
   #+begin_src sh
     # vim /etc/path.d/dev.public <-- any name should be OK
@@ -235,7 +241,26 @@
      #+begin_src
     alias nvm="fnm"
     #+end_src
-** Emacs
+** Emacs (doom emacs)
+   - Install emacs-plus 
+   #+begin_src sh
+   brew tap d12frosted/emacs-plus
+   # 20201228 - @28.0.50
+   # https://github.com/d12frosted/homebrew-emacs-plus
+   brew install emacs-plus@28 --with-native-comp --with-xwidgets --with-modern-black-variant-icon --with-ctags --with-mailutils
+   ln -s /usr/local/opt/emacs-plus@28/Emacs.app /Applications/Emacs.app
+   #+end_src
+   - Install [[https://github.com/hlissner/doom-emacs][DOOM Emacs]]:
+   #+begin_src sh
+   git clone --depth 1 https://github.com/hlissner/doom-emacs ~/.emacs.d
+   ~/.emacs.d/bin/doom install
+   # remove the default config
+   rm -rf ~/.doom.d
+   # link customize config
+   ln -s ~/u/dex/dev/general/doom ~/.config/doom
+   #+end_src
+
+** Emacs (spacemacs)
    #+begin_src sh
    # cui version only, for gui run brew cask install
    brew install emacs
