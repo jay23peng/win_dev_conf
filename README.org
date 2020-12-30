@@ -264,7 +264,7 @@
      #+end_src
      after that link the .vimrc to ~~/~ then run ~PlugInstall~ in vim.
      #+begin_src sh
-     ln -s ~/u/dex/dev/general/vim/.vimrc ~/.vimrc
+     ln -s ~/u/dex/config/opt/vim/.vimrc ~/.vimrc
      #+end_src
    - VIM has ~VimOrganizer~ for org-mode already but it is abandened. For basic usage it is suffcient
 ** Use touch id in sudo
@@ -294,7 +294,8 @@
   #+begin_src sh
     # vim /etc/path.d/dev.public <-- any name should be OK
     /Users/jesse23/u/dex/bin
-    /Users/jesse23/u/dex/dev/macOS/bin
+    /Users/jesse23/u/dex/config/mac/bin
+    /Users/jesse23/.emacs.d/bin
   #+end_src
 ** Fish shell
    #+begin_src sh
@@ -387,7 +388,8 @@
    # remove the default config
    rm -rf ~/.doom.d
    # link customize config
-   ln -s ~/u/dex/dev/general/doom ~/.config/doom
+   ln -s ~/u/dex/config/opt/doom ~/.config/doom
+   # add ~/.emacs.d/bin to $PATH
    #+end_src
 
 ** Emacs (spacemacs)
