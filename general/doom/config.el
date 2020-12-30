@@ -63,8 +63,10 @@
 ;; https://github.com/rougier/elegant-emacs/issues/4
 ;; https://www.gtrun.org/custom/config.html
 ;; https://ladicle.com/post/config/#configuration
-;; https://github.com/fuxialexander/doom-emacs-private-xfu/blob/122fc444f3d564124df7fbf8e2be034a0d136317/%2Bbindings.el
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; dummy function for doing nothing
+(defun silence () (interactive))
+
 ;; background color
 (custom-set-faces
   '(default ((t (:background "#1c1c1c"))))
@@ -77,21 +79,8 @@
       ;; doom-serif-font (font-spec :family "Libre Baskerville")
 )
 
+;; ctrl -> cmd
 (setq mac-command-modifier 'control)
-
-;; (when (file-exists-p "~/.doom.d/banners")
-;;   (setq +doom-dashboard-banner-padding '(0 . 2)
-;;        +doom-dashboard-banner-file "deepfield-window.png"
-;;        +doom-dashboard-banner-dir "~/.doom.d/banners"))
-
-;; (setq display-line-numbers-type nil)
-
-;; Thin grey line separating windows
-;; (set-face-background 'vertical-border "grey")
-;; (set-face-foreground 'vertical-border (face-background 'vertical-border))
-
-;; dummy function for doing nothing
-(defun silence () (interactive))
 
 ;; mouse config
 (unless window-system
@@ -104,25 +93,23 @@
   (global-set-key (kbd "<mouse-5>") 'scroll-up-line)
 )
 
+;; (when (file-exists-p "~/.doom.d/banners")
+;;   (setq +doom-dashboard-banner-padding '(0 . 2)
+;;        +doom-dashboard-banner-file "deepfield-window.png"
+;;        +doom-dashboard-banner-dir "~/.doom.d/banners"))
+
+;; (setq display-line-numbers-type nil)
+
+;; Thin grey line separating windows
+;; (set-face-background 'vertical-border "grey")
+;; (set-face-foreground 'vertical-border (face-background 'vertical-border))
+
+(when window-system (set-frame-size (selected-frame) 80 24))
 
 ;; org-mode
-(map! :after evil-org
-      :map evil-org-mode-map
-      :ni "C-RET" #'org-insert-subheading
-      :ni "S-RET" #'+org/insert-item-below
-      :ni [C-return] #'org-insert-subheading
-      :ni [S-return] #'+org/insert-item-below
-)
-
-(map! :after evil-org
-      :map org-mouse-map
-      [mouse-2] #'silence
-)
-
 (add-hook! 'org-mode-hook #'doom-disable-line-numbers-h)
 
 ;; magit
-
 (use-package! magit
   :config
   (set-default 'magit-stage-all-confirm nil)
@@ -187,12 +174,25 @@
 ;; (add-hook 'window-configuration-change-hook 'my-change-window-divider)
 
 ;; xwidget-webkit
-(map!   (
-          :leader
-          :desc "Open URL in emacs-webkit"
-          "o w" #'xwidget-webkit-browse-url
-        )
-        :i "<M-return>" nil
+;; https://github.com/fuxialexander/doom-emacs-private-xfu/blob/122fc444f3d564124df7fbf8e2be034a0d136317/%2Bbindings.el
+
+
+
+(map! 
+  ;; vinegar like behavior
+  :n "-" #'dired-jump
+  ;; xwidget-webit-browser entry
+  (:leader
+   :desc "Open URL in emacs-webkit"
+   "o w" #'xwidget-webkit-browse-url)
+  ;; org
+  (:after evil-org
+   (:map evil-org-mode-map
+    :ni "C-RET" #'org-insert-subheading
+    :ni "S-RET" #'+org/insert-item-below
+    :ni [C-return] #'org-insert-subheading
+    :ni [S-return] #'+org/insert-item-below)
+   (:map org-mouse-map [mouse-2] #'silence))
 ;;      (:after evil-org
 ;;       :map (evil-org-mode-map)
 ;;       :nvime [M-return] #'org-meta-return
@@ -220,3 +220,45 @@
 ;;       :n "j" #'xwidget-webkit-scroll-up-line
 ;;       :n "k" #'xwidget-webkit-scroll-down-line)
 )
+
+;;  ;; half page scroll - not sure why up func is using scroll-down
+;;  (defun scroll-half-page-up ()
+;;    "scroll down half the page"
+;;    (interactive)
+;;    (scroll-down (/ (window-body-height) 2)))
+;;
+;;  (defun scroll-half-page-down ()
+;;    "scroll up half the page"
+;;    (interactive)
+;;    (scroll-up (/ (window-body-height) 2)))
+;;
+;;  (define-key evil-normal-state-map (kbd "J") 'scroll-half-page-down)
+;;  (define-key evil-normal-state-map (kbd "K") 'scroll-half-page-up)
+
+;; dired setup for mac
+;; https://stackoverflow.com/questions/25125200/emacs-error-ls-does-not-support-dired
+(when (string= system-type "darwin")
+  (setq dired-use-ls-dired t
+        insert-directory-program "/usr/local/bin/gls"
+        dired-listing-switches "-aBhl --group-directories-first"))
+
+
+;; Persist Emacs’ initial frame position, dimensions and/or full-screen state across sessions
+(when-let (dims (doom-store-get 'last-frame-size))
+  (cl-destructuring-bind ((left . top) width height fullscreen) dims
+    (setq initial-frame-alist
+          (append initial-frame-alist
+                  `((left . ,left)
+                    (top . ,top)
+                    (width . ,width)
+                    (height . ,height)
+                    (fullscreen . ,fullscreen))))))
+
+(defun save-frame-dimensions ()
+  (doom-store-put 'last-frame-size
+                  (list (frame-position)
+                        (frame-width)
+                        (frame-height)
+                        (frame-parameter nil 'fullscreen))))
+
+(add-hook 'kill-emacs-hook #'save-frame-dimensions)

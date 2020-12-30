@@ -367,6 +367,11 @@
     alias nvm="fnm"
     #+end_src
 ** Emacs (doom emacs)
+   - Install core dependency
+   #+begin_src sh
+   brew install git ripgrep coreutils fd
+   xcode-select --install
+   #+end_src
    - Install emacs-plus 
    #+begin_src sh
    brew tap d12frosted/emacs-plus

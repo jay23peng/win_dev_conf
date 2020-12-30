@@ -1,4 +1,5 @@
 #!appleScript
+# https://apple.stackexchange.com/questions/104021/how-can-i-create-custom-right-click-context-menu-items-in-macos
 on run {input, parameters}
 	tell application "Finder"
 		set finderSelList to selection as alias list
