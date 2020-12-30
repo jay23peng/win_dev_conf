@@ -392,14 +392,6 @@
    # add ~/.emacs.d/bin to $PATH
    #+end_src
 
-** Emacs (spacemacs)
-   #+begin_src sh
-   # cui version only, for gui run brew cask install
-   brew install emacs
-   # spacemacs
-   git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
-   #+end_src
-   Then copy customized ~.spacemacs~ and launch it through ~em~.
 ** Docker
 *** Docker Server
     Docker Server has mutiple approaches:
@@ -414,7 +406,9 @@
     # Install Vagrant
     brew install vagrant
     brew install vagrant vagrant-manager
-    export VAGRANT_VAGRANTFILE=u/dex/dev/general/vagrant/dockervm/Vagrantfile
+    # looks vagrant has issue to handle VAGRANT_VAGRANTFILE, need to investigate. For now use cd
+    # export VAGRANT_VAGRANTFILE=~/u/dex/opt/vagrant/dockervm/Vagrantfile
+    cd ~/u/dex/opt/vagrant/dockervm
     vagrant up
     #+end_src
 
@@ -426,6 +420,11 @@
 
     - If u want to build it manually , refer to the configuration inside the Vagrantfile.
     - If u need to expose/bind extra ports, do it by modifying Vagrantfile directly and then provision in Vagrant.
+
+    - If any exception happens, remove vm and space from vbox directly the run:
+    #+begin_src sh
+    vagrant global-status --prune
+    #+end_src
 *** Docker Client
     - Install it by following:
       https://docs.docker.com/engine/install/binaries/#install-client-binaries-on-macos
