@@ -10,5 +10,5 @@
   \21E8: Rightwards White Arrow
 */
 #window-panel .tree-row .title.active:before  {position: absolute; content: '\279C';margin-left: -45px;}
-#window-panel .tree-row:not([data-selected]) .title.active{background-color: var(--colorAccentBorder); border-radius: var(--radius); padding: 0 5px;color:#1c1c1c;}
+#window-panel .tree-row:not([data-selected]) .title.active{background-color: var(--colorAccentBorder); border-radius: var(--radius); padding: 0 5px;color:#282C34;}
 #window-panel .tree-row[data-selected] .title.active{padding: 0 5px;}

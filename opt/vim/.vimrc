@@ -121,6 +121,7 @@ Plug 'phanviet/vim-monokai-pro'
 Plug 'itchyny/lightline.vim'
 Plug 'altercation/vim-colors-solarized'
 Plug 'dracula/vim'
+Plug 'joshdick/onedark.vim'
 
 " plugin in http://vim-scripts.org/vim/scripts.html
 Plug 'vim-scripts/utl.vim'
@@ -150,7 +151,6 @@ set guifontwide=FiraMono_Nerd_Font:h16
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " leader key
 let mapleader = " "
-
 
 
 
@@ -476,11 +476,12 @@ set nu
 " let g:spacegray_underline_search = 1
 let g:spacegray_italicize_comments = 1
 set bg=dark
-let g:gruvbox_contrast_dark='hard'
-colorscheme molokai
+colorscheme onedark
+" unsued color config
+" let g:gruvbox_contrast_dark='hard'
 " hi Normal ctermfg=252 ctermbg=234 guifg=#ebdbb2 guibg=#1B1D1E
-hi Normal ctermfg=252 ctermbg=234  guifg=#F8F8F2 guibg=#1c1c1c
-hi Visual term=reverse ctermbg=238 guibg=#686868
+" hi Normal ctermfg=252 ctermbg=234  guifg=#F8F8F2 guibg=#1c1c1c
+" hi Visual term=reverse ctermbg=238 guibg=#686868
 
 " auto-complete
 set completeopt=longest,menu

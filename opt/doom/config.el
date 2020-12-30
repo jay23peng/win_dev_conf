@@ -25,7 +25,7 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'monokai)
+(setq doom-theme 'doom-one)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -68,10 +68,10 @@
 (defun silence () (interactive))
 
 ;; background color
-(custom-set-faces
-  '(default ((t (:background "#1c1c1c"))))
-  '(hl-line ((t (:background "#1c1c1c"))))
-)
+;;(custom-set-faces
+;;  '(default ((t (:background "#1c1c1c"))))
+;;  '(hl-line ((t (:background "#1c1c1c"))))
+;;)
 
 ;; fonts
 (setq doom-font (font-spec :family "FiraMono Nerd Font" :size 16)
@@ -264,8 +264,8 @@
 (add-hook 'kill-emacs-hook #'save-frame-dimensions)
 
 ;; doom-modeline height in gui 
-(use-package doom-modeline
-  :custom-face
-  (mode-line ((t (:height 0.9))))
-  (mode-line-inactive ((t (:height 0.9))))
-)
+;;(use-package doom-modeline
+;;  :custom-face
+;;  (mode-line ((t (:height 0.9))))
+;;  (mode-line-inactive ((t (:height 0.9))))
+;;)
