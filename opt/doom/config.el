@@ -262,3 +262,10 @@
                         (frame-parameter nil 'fullscreen))))
 
 (add-hook 'kill-emacs-hook #'save-frame-dimensions)
+
+;; doom-modeline height in gui 
+(use-package doom-modeline
+  :custom-face
+  (mode-line ((t (:height 0.9))))
+  (mode-line-inactive ((t (:height 0.9))))
+)
