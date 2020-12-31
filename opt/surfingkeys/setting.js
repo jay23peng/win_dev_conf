@@ -141,8 +141,8 @@ cmap('<ArrowUp>', '<Tab>');
 
 // ---- Hints ----
 // Hints have to be defined separately
-Hints.style('border: solid 2px #282C34; color:#98be65; background: initial; background-color: #2E3440;');
-Hints.style("border: solid 2px #282C34 !important; padding: 1px !important; color: #51AFEF !important; background: #2E3440 !important;", "text");
+Hints.style('border: solid 2px #E3C07B; color:#282C34; background: initial; background-color: #E3C07B;');
+Hints.style("border: solid 2px #E3C07B !important; padding: 1px !important; color: #282C34 !important; background: #E3C07B !important;", "text");
 Visual.style('marks', 'background-color: #98be6599;');
 Visual.style('cursor', 'background-color: #51AFEF;');
 
