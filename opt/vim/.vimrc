@@ -352,7 +352,7 @@ nmap <silent> <C-e> <Plug>(ale_next_wrap)
 set laststatus=2
 set noshowmode
 let g:lightline = {
-      \ 'colorscheme': 'molokai',
+      \ 'colorscheme': 'srcery_drk',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ],
@@ -480,6 +480,7 @@ colorscheme onedark
 " unsued color config
 " let g:gruvbox_contrast_dark='hard'
 " hi Normal ctermfg=252 ctermbg=234 guifg=#ebdbb2 guibg=#1B1D1E
+hi Normal ctermfg=none ctermbg=none guifg=#ABB2BF guibg=#282C34
 " hi Normal ctermfg=252 ctermbg=234  guifg=#F8F8F2 guibg=#1c1c1c
 " hi Visual term=reverse ctermbg=238 guibg=#686868
 

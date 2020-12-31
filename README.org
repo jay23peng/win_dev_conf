@@ -69,16 +69,16 @@
     Vivladi supports cuctomize theme color directly in system preference
 *** Midnight Lizard
     - Set toggle shortcut at menu ~Vivladi/preference/extensions/shortcut~.
-    - Midnight Lizard suppots customize based on color code. For Monokai:
+    - Midnight Lizard suppots customize based on color code. For One Dark:
       #+begin_src
       Background: #282C34
-      Button:     #FD971F
-      Text:       #F8F8F2    #F92672
-      Link:       #66D9EF    #AE81FF
-      Border:     #404338
-      Scrollbar:  #4E4E4E
+      Button:     #E5C07B
+      Text:       #ABB2BF    #405163
+      Link:       #61AFEF    #C678DD
+      Border:     #E5C07B
+      Scrollbar:  #405163
       #+end_src
-      Save it as ~Monokai Dark~ and set it as default.
+      Save it as ~One Dark~ and set it as default. Note that it is based on a hue theroy and cannot be 100% same to origin theme design.
 *** Browser shortcut
     Try to use browser shortcut as much as possible then go to Surfingkeys
     #+begin_src
@@ -493,28 +493,28 @@ brew install kubectl
 ** Theme
   |                 | gruvbox-dark-hard                 | monokai                     | one-dark               |
   |-----------------+-----------------------------------+-----------------------------+------------------------|
-  | Chrome          | [[https://chrome.google.com/webstore/detail/gruvbox-theme/ihennfdbghdiflogeancnalflhgmanop?hl=en-GB][gruvbox theme]]                     | [[https://chrome.google.com/webstore/detail/material-simple-dark-grey/ookepigabmicjpgfnmncjiplegcacdbm][Material Simple Dark Grey]]   |                        |
-  |                 | [[https://chrome.google.com/webstore/detail/devtools-theme-gruvbox-da/njcgdakjdifgccdgnoiphpnihcfopcmj][DevTools Theme: Gruvbox Dark]]      | [[https://chrome.google.com/webstore/detail/monokai-for-chrome/ebanajomahnlhgbljngocmccmpelnaam][Monokai for chrome]]          |                        |
+  | Chrome          | [[https://chrome.google.com/webstore/detail/gruvbox-theme/ihennfdbghdiflogeancnalflhgmanop?hl=en-GB][gruvbox theme]]                     | [[https://chrome.google.com/webstore/detail/material-simple-dark-grey/ookepigabmicjpgfnmncjiplegcacdbm][Material Simple Dark Grey]]   | [[https://chrome.google.com/webstore/detail/atom-one-dark-theme/obfjhhknlilnfgfakanjeimidgocmkim][Atom One Dark Theme]]    |
+  |                 | [[https://chrome.google.com/webstore/detail/devtools-theme-gruvbox-da/njcgdakjdifgccdgnoiphpnihcfopcmj][DevTools Theme: Gruvbox Dark]]      | [[https://chrome.google.com/webstore/detail/monokai-for-chrome/ebanajomahnlhgbljngocmccmpelnaam][Monokai for chrome]]          | [[https://github.com/jesse23/config/tree/master/opt/chrome/one-dark-devtools][Atom One Dark]]          |
   |-----------------+-----------------------------------+-----------------------------+------------------------|
   | Vivaldi         | Customize in prefernce            | Customize in prefernce      | Customize in prefernce |
-  |                 | [[https://chrome.google.com/webstore/detail/devtools-theme-gruvbox-da/njcgdakjdifgccdgnoiphpnihcfopcmj][DevTools Theme: Gruvbox Dark]]      | [[https://chrome.google.com/webstore/detail/monokai-for-chrome/ebanajomahnlhgbljngocmccmpelnaam][Monokai for chrome]]          |                        |
+  |                 | [[https://chrome.google.com/webstore/detail/devtools-theme-gruvbox-da/njcgdakjdifgccdgnoiphpnihcfopcmj][DevTools Theme: Gruvbox Dark]]      | [[https://chrome.google.com/webstore/detail/monokai-for-chrome/ebanajomahnlhgbljngocmccmpelnaam][Monokai for chrome]]          | [[https://github.com/jesse23/config/tree/master/opt/chrome/one-dark-devtools][Atom One Dark]]          |
   |-----------------+-----------------------------------+-----------------------------+------------------------|
-  | Midnight Lizard | Customize in extension            | Customize in extension      |                        |
+  | Midnight Lizard | Customize in extension            | Customize in extension      | Customize in extension |
   |-----------------+-----------------------------------+-----------------------------+------------------------|
   | Slack           | Customize in prefernce            | Customize in prefernce      | [[https://slackthemes.net/#/aubergine][One Dark]]               |
   |-----------------+-----------------------------------+-----------------------------+------------------------|
   | VSCode          | [[https://marketplace.visualstudio.com/items?itemName=tomphilbin.gruvbox-themes][Gruvbox Dark Hard]]                 | [[https://marketplace.visualstudio.com/items?itemName=fabiospampinato.vscode-monokai-night][Monokai-Night-Theme/Monokai]] | [[https://marketplace.visualstudio.com/items?itemName=zhuangtongfa.Material-theme][One Dark Pro]]           |
   |-----------------+-----------------------------------+-----------------------------+------------------------|
-  | iTerm2          | [[https://github.com/mbadolato/iTerm2-Color-Schemes][Gruvbox]]                           | [[https://github.com/mbadolato/iTerm2-Color-Schemes][Monokai]]                     |                        |
+  | iTerm2          | [[https://github.com/mbadolato/iTerm2-Color-Schemes][Gruvbox]]                           | [[https://github.com/mbadolato/iTerm2-Color-Schemes][Monokai]]                     | [[https://github.com/mbadolato/iTerm2-Color-Schemes][DoomOne]]                |
   |-----------------+-----------------------------------+-----------------------------+------------------------|
   | Alacritty       | [[https://github.com/mbadolato/iTerm2-Color-Schemes][Gruvbox]]                           | [[https://github.com/mbadolato/iTerm2-Color-Schemes][Monokai]]                     |                        |
   |-----------------+-----------------------------------+-----------------------------+------------------------|
-  | Fish Shell      | fish_config                       | [[https://github.com/benmarten/Monokai_Fish_OSX][Monokai]]                     |                        |
+  | Fish Shell      | fish_config                       | [[https://github.com/benmarten/Monokai_Fish_OSX][Monokai]]                     | [[https://github.com/rkbk60/onedark-fish][rkbk60/onedark-fish]]    |
   |-----------------+-----------------------------------+-----------------------------+------------------------|
-  | bobthefish      | [[https://github.com/oh-my-fish/theme-bobthefish][theme-bobthefish]]                  | [[https://github.com/oh-my-fish/theme-bobthefish/wiki/Base16-Monokai-custom-color-scheme][bobthefish-monokai]]          |                        |
+  | bobthefish      | [[https://github.com/oh-my-fish/theme-bobthefish][theme-bobthefish]]                  | [[https://github.com/oh-my-fish/theme-bobthefish/wiki/Base16-Monokai-custom-color-scheme][bobthefish-monokai]]          | [[https://github.com/oh-my-fish/theme-bobthefish/wiki/Custom-color-schemes][bobthefish_colors.fish]] |
   |-----------------+-----------------------------------+-----------------------------+------------------------|
   | vim             | [[https://github.com/morhetz/gruvbox][morhetz/gruvbox]]                   | [[https://github.com/tomasr/molokai][tomasr/molokai]]              | [[joshdick/onedark.vim][joshdick/onedark.vim]]   |
-  |                 | [[https://github.com/itchyny/lightline.vim/blob/master/colorscheme.md#jellybeans][lightline/jellybeans]]              | [[https://github.com/itchyny/lightline.vim/blob/master/colorscheme.md#molokai][lightline/molokai]]           |                        |
+  |                 | [[https://github.com/itchyny/lightline.vim/blob/master/colorscheme.md#jellybeans][lightline/jellybeans]]              | [[https://github.com/itchyny/lightline.vim/blob/master/colorscheme.md#molokai][lightline/molokai]]           | [[https://github.com/itchyny/lightline.vim/blob/master/colorscheme.md#molokai][lightline/srcery_drk]]   |
   |-----------------+-----------------------------------+-----------------------------+------------------------|
   | emacs           | [[https://github.com/syl20bnr/spacemacs/tree/master/layers/%2Bthemes/themes-megapack][themes-meagpack/gruvbox-dark-hard]] | [[https://github.com/syl20bnr/spacemacs/tree/master/layers/%2Bthemes/themes-megapack][themes-megapack/monokai]]     | [[https://github.com/hlissner/emacs-doom-themes][doom-one]]               |
 

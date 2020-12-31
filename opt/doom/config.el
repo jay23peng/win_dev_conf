@@ -67,11 +67,33 @@
 ;; dummy function for doing nothing
 (defun silence () (interactive))
 
-;; background color
-;;(custom-set-faces
-;;  '(default ((t (:background "#1c1c1c"))))
-;;  '(hl-line ((t (:background "#1c1c1c"))))
-;;)
+ ;; background color
+ (custom-set-faces
+;;   '(default ((t (:background "#1c1c1c"))))
+   '(hl-line ((t (:background "#282c34"))))
+   '(minibuffer-prompt-inactive ((t (:background "282c34"))))
+   '(mode-line-inactive ((t (:background "#282c34"))))
+ )
+
+ 
+;; (add-hook 'minibuffer-setup-hook
+;;      (lambda ()
+;;        (make-local-variable 'face-remapping-alist)
+;;        (add-to-list 'face-remapping-alist '(default (:background "red")))))
+
+;;(set-face-background 'minibuffer-prompt "red")
+
+;; igonre bg on terminal
+;; (defun on-after-init ()
+;;   (unless (display-graphic-p (selected-frame))
+;;     (set-face-background 'default "unspecified-bg" (selected-frame))
+;;     (set-face-background 'hl-line "unspecified-bg" (selected-frame))
+;;   ))
+;;
+;; (add-hook 'window-setup-hook 'on-after-init)
+
+
+;; (unless window-system (set-frame-size (selected-frame) 80 24))
 
 ;; fonts
 (setq doom-font (font-spec :family "FiraMono Nerd Font" :size 16)
@@ -269,3 +291,4 @@
 ;;  (mode-line ((t (:height 0.9))))
 ;;  (mode-line-inactive ((t (:height 0.9))))
 ;;)
+;;
