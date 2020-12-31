@@ -1,0 +1,3 @@
+[submodule "opt/tmux"]
+	path = opt/tmux
+	url = https://github.com/jesse23/tmux
