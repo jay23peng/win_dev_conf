@@ -12,6 +12,7 @@
 #window-panel .tree-row .title.active:before  {position: absolute; content: '\279C';margin-left: -45px; color:var(--colorAccentBorder)}
 #window-panel .tree-row .title.active {color:var(--colorAccentBorder);}
 #window-panel .tree-row[data-selected]{background-color: #2E323A; color:#abb2bf}
+/*#window-panel .tree-row .title.active:before  {position: absolute; content: '\279C';margin-left: -50px; padding: 0px 5px; background-color:var(--colorAccentBorder); color: #282C34}*/
 /*#window-panel .tree-row:not([data-selected]) .title.active{background-color: var(--colorAccentBorder); border-radius: var(--radius); padding: 0 5px;color:#282C34;}*/
 /* #window-panel .tree-row[data-selected] .title.active{background-color: var(--colorAccentBorder);color:#282C34;padding: 0 5px;} */
 
