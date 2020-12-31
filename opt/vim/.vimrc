@@ -168,7 +168,7 @@ let mapleader = " "
 " nmap <silent> <leader>j :wincmd j<CR>
 " nmap <silent> <C-x>t :tabnew<CR>
 nmap <silent> <leader>wd :hide<CR>
-nmap <silent> <leader>wm :only<CR>
+nmap <silent> <leader>wz :only<CR>
 nmap <silent> <leader>ws :sp<CR>
 nmap <silent> <leader>w- :sp<CR>
 nmap <silent> <leader>wv :vsp<CR>

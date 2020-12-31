@@ -83,6 +83,9 @@ mapkey('<Space>bb', 'Choose a tab with omnibar', function() {
     Front.openOmnibar({type: "Tabs"});
 });
 
+mapkey('<Space>bd', '#3Close current tab', function() {
+    RUNTIME("closeTab");
+});
 
 mapkey('<Space>bp', '#4Go to last previous tab', function() {
     RUNTIME("previousTab");
@@ -90,6 +93,10 @@ mapkey('<Space>bp', '#4Go to last previous tab', function() {
 
 mapkey('<Space>bn', '#4Go to last next tab', function() {
     RUNTIME("nextTab");
+});
+
+mapkey('<Space>bx', '#3Close all tabs except current one', function() {
+    RUNTIME("tabOnly");
 });
 
 // --------------------------------------------------------------------------------

@@ -45,6 +45,7 @@
     Ctrl + Cmd + Up          => Show desktop/workspace manager
     Ctrl + Cmd + Left/Right => Switch desktop/workspace
    #+end_src
+
 *** Mac Wallpaper Path
     #+begin_src 
     /System/Library/Desktop Pictures
@@ -61,6 +62,13 @@
    - vertical tab and tab group supported, basic tree-style-tab functionality
    - works fine with vi key bindng using [[https://github.com/brookhong/Surfingkeys][Surfingkeys]].
    - Setup sync.
+*** Set shortcut at system level
+    Sometimes shortcut like ~Cmd+Shift+r~ cannot be overwritten at app level. In that case:
+    - Put ~Untile Tabs~ to menu in app preference.
+    - Add specific command to menu (like vivaldi/Untile Tabs, if the app doesn't support that and the function u need is not on menu)
+    - Go to System Preference/Keyboard.
+    - GO to Shortcuts/App Shortcuts
+    - Add your app and the menu name you want to overwrite (~Untile Tabs~), give a new value.
 *** browser hack
     - Login and sync setting back
     - https://forum.vivaldi.net/topic/10549/modding-vivaldi
@@ -82,26 +90,15 @@
 *** Browser shortcut
     Try to use browser shortcut as much as possible then go to Surfingkeys
     #+begin_src
-    # split window
-    Cmd + Shift + '   => Tile Vertically (Left and Right)
-    Cmd + Shift + -   => Tile Horizontally (Up and Down)
-    Cmd + Shift + m  => Untile window (max current selected window)
-
-    # panel
-    Cmd + b          => toggle side bar
-    Cmd + Shift + .   => Toggle Window Panel
-    Cmd + Shift + b   => Toggle bookmark panel
-    Cmd + Shift + h   => Toggle history panel
-
     # cmd
+    Cmd + b          => toggle side bar
     Cmd + Shift + p  => quick command
-    Cmd + Shift + d  => close other tabs
-    Cmd + Shift + n   => move current tab to new window
+    Cmd + Ctrl  + m  => Switch dark/light mode on current page (Midnight Lizard)
     Cmd + r          => history forward ('Ctrl+r', need to set it in browser not Surfingkeys)
-    Cmd + Ctrl + m  => Switch dark/light mode on current page (Midnight Lizard)
+    # split command  => quick command with 'tile'
     #+end_src
 *** Surfingkeys
-    After install extension, load the config from ~dev/general/surfingkeys~
+    After install extension, load the config from ~dex/config/opt/surfingkeys~
 ** VSCode
    - All you need to to is install and sync.
 *** VSCode Vim Mode
@@ -494,6 +491,14 @@
   ln -s ~/u/dex/config/opt/tmux/.tmux.conf ~/.tmux.conf
   ln -s ~/u/dex/config/opt/tmux/.tmux.conf.local ~/.tmux.conf.local
   #+end_src
+*** Customize short cut:
+  #+begin_src
+  C-b ' Split vertically (left-right)
+  C-b - Split Horizontally (top-down)
+  C-b n Split Horizontally (top-down)
+  C-b z Maximize current split pane (toggle on/off)
+  #+end_src
+
 ** Windows VM
    No requirement for now. If needed, can try to use boxes on [[https://app.vagrantup.com/boxes/search?order=desc&page=1&provider=&q=windows&sort=created&utf8=%E2%9C%93][Vagrant Cloud]], or build from scratch based on underlying vm software.
 *** Key Mapping
@@ -538,14 +543,47 @@
 * Github org mode support
   - https://github.com/fniessen/refcard-org-mode
   - https://github.com/novoid/github-orgmode-tests/blob/master/README.org
-* rst
-** v2
-*** v3
-**** v4
-***** v5
-****** v6
-******* v7
-******** v8
-********* v9
-********** v10
-rstrst
+* Shortcut design
+** Basic Layout Concept
+   - tmux  => session > window > pane
+   - vim   => process > buffer > window
+   - emacs => process > buffer > window
+*** tmux shortcut origin
+**** pane
+   - split pane right         => C-b "
+   - split pane bottom        => C-b %
+
+   - switch pane              => C-b o
+   - switch pane by number    => C-b q <num>
+
+   - toggle maximize pane     => C-b z
+   - kill pane               => C-b x
+
+   - move pane to window      => C-b +
+   - restore pane from window => C-b -
+
+**** window
+   - create window        => C-b c
+   - list window          => C-b w
+   - next window          => C-b n
+   - last window          => C-b p
+   - find window          => C-b f
+   - name window          => C-b ,
+   - kill window          => C-b &
+
+**** session
+   - new session          => :new<CR>
+   - list session         => s
+   - name session         => $
+   - detach session       => d
+
+**** copy mode
+   - enter copy mode      => C-b Return
+
+*** vim shortcut origin
+**** window
+   - split window right   => C-w v
+   - split window bottom  => C-w s
+
+   - maximize window      -> C-w T
+   - max win => normal    -> C-w S
