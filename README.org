@@ -470,13 +470,13 @@
     # clean up
     k3d cluster delete mycluster
     #+end_src
-brew install k3d
-brew install kubectl
-   
-    #+end_src
-    
 ** Tmux
-- install through homebrew...
+- install:
+  #+begin_src sh
+  brew install tmux
+  ln -s ~/u/dex/config/opt/tmux/.tmux.conf ~/.tmux.conf
+  ln -s ~/u/dex/config/opt/tmux/.tmux.conf.local ~/.tmux.conf.local
+  #+end_src
 ** Windows VM
    No requirement for now. If needed, can try to use boxes on [[https://app.vagrantup.com/boxes/search?order=desc&page=1&provider=&q=windows&sort=created&utf8=%E2%9C%93][Vagrant Cloud]], or build from scratch based on underlying vm software.
 *** Key Mapping
