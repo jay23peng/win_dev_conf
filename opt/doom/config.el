@@ -207,6 +207,12 @@
   (:leader
    :desc "Open URL in emacs-webkit"
    "o w" #'xwidget-webkit-browse-url)
+  (:leader
+   :desc "Open URL in emacs-webkit"
+   "w -" #'evil-window-split) 
+  (:leader
+   :desc "Open URL in emacs-webkit"
+   "w '" #'evil-window-vsplit) 
   ;; org
   (:after evil-org
    (:map evil-org-mode-map

@@ -82,15 +82,23 @@
 *** Browser shortcut
     Try to use browser shortcut as much as possible then go to Surfingkeys
     #+begin_src
-     Cmd + Shift + .   => Toggle Window Panel
-     Cmd + Shift + b   => Toggle bookmark panel
-     Cmd + Shift + h   => Toggle history panel
-     Cmd + Shift + t   => move current tab to new window
-     Cmd + Shift + m  => Switch dark/light mode on current page (Midnight Lizard)
-     Cmd + Shift + p  => quick command
-     Cmd + Shift + d  => close other tabs
-     Cmd + b          => toggle side bar
-     Cmd + r          => history forward ('Ctrl+r', need to set it in browser not Surfingkeys)
+    # split window
+    Cmd + Shift + '   => Tile Vertically (Left and Right)
+    Cmd + Shift + '   => Tile Horizontally (Up and Down)
+    Cmd + Shift + m  => Untile window (max current selected window)
+
+    # panel
+    Cmd + b          => toggle side bar
+    Cmd + Shift + .   => Toggle Window Panel
+    Cmd + Shift + b   => Toggle bookmark panel
+    Cmd + Shift + h   => Toggle history panel
+
+    # cmd
+    Cmd + Shift + p  => quick command
+    Cmd + Shift + d  => close other tabs
+    Cmd + Shift + c  => Switch dark/light mode on current page (Midnight Lizard)
+    Cmd + Shift + n   => move current tab to new window
+    Cmd + r          => history forward ('Ctrl+r', need to set it in browser not Surfingkeys)
     #+end_src
 *** Surfingkeys
     After install extension, load the config from ~dev/general/surfingkeys~

@@ -170,7 +170,9 @@ let mapleader = " "
 nmap <silent> <leader>wd :hide<CR>
 nmap <silent> <leader>wm :only<CR>
 nmap <silent> <leader>ws :sp<CR>
+nmap <silent> <leader>w- :sp<CR>
 nmap <silent> <leader>wv :vsp<CR>
+nmap <silent> <leader>w' :vsp<CR>
 
 " Move cursor at input mode
 " inoremap <M-h> <C-o>h
@@ -502,10 +504,10 @@ hi Folded guibg=NONE ctermbg=NONE
 "    Ps = 5  -> blinking bar (xterm).
 "    Ps = 6  -> steady bar (xterm).
 if &term =~? "xterm" || &term =~? "rxvt"
-    " cursor in insert mode
     let &t_SI = "\e[5 q"
     let &t_SR = "\e[3 q"
     let &t_EI = "\e[1 q"
+
     " let &t_SI = "\<Esc>[5 q"
     " let &t_SR = "\<Esc>[3 q"
     " let &t_EI = "\<Esc>[1 q"
