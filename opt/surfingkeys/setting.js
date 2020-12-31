@@ -141,11 +141,10 @@ cmap('<ArrowUp>', '<Tab>');
 
 // ---- Hints ----
 // Hints have to be defined separately
-// Uncomment to enable
-Hints.style('border: solid 2px #2D2E2E; color:#F92660; background: initial; background-color: #272822;');
-Hints.style("border: solid 2px #2D2E2E !important; padding: 1px !important; color: #A6E22E !important; background: #272822 !important;", "text");
-Visual.style('marks', 'background-color: #A6E22E99;');
-Visual.style('cursor', 'background-color: #F92660;');
+Hints.style('border: solid 2px #282C34; color:#98be65; background: initial; background-color: #2E3440;');
+Hints.style("border: solid 2px #282C34 !important; padding: 1px !important; color: #51AFEF !important; background: #2E3440 !important;", "text");
+Visual.style('marks', 'background-color: #98be6599;');
+Visual.style('cursor', 'background-color: #51AFEF;');
 
 settings.theme = `
 /* Edit these variables for easy theme making */
@@ -155,14 +154,15 @@ settings.theme = `
   --font-size: 14;
   --font-weight: bold;
 
-  --fg: #F8F8F2;
-  --bg: #272822;
-  --bg-dark: #1D1E19;
-  --border: #2D2E2E;
-  --main-fg: #F92660;
-  --accent-fg: #E6DB74;
-  --info-fg: #A6E22E;
-  --select: #556172;
+  --fg: #ABB2BF;
+  --bg: #282C34;
+  --bg-dark: #2E3440;
+  --border: #405163;
+  --main-fg: #51AFEF;
+  --accent-fg: #98be65;
+  --info-fg: #C678DD;
+  --select: #4C566A;
+
 
   /* Unused Alternate Colors */
   /* --red: #E74C3C; */
