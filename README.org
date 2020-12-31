@@ -84,7 +84,7 @@
     #+begin_src
     # split window
     Cmd + Shift + '   => Tile Vertically (Left and Right)
-    Cmd + Shift + '   => Tile Horizontally (Up and Down)
+    Cmd + Shift + -   => Tile Horizontally (Up and Down)
     Cmd + Shift + m  => Untile window (max current selected window)
 
     # panel
@@ -96,9 +96,9 @@
     # cmd
     Cmd + Shift + p  => quick command
     Cmd + Shift + d  => close other tabs
-    Cmd + Shift + c  => Switch dark/light mode on current page (Midnight Lizard)
     Cmd + Shift + n   => move current tab to new window
     Cmd + r          => history forward ('Ctrl+r', need to set it in browser not Surfingkeys)
+    Cmd + Ctrl + m  => Switch dark/light mode on current page (Midnight Lizard)
     #+end_src
 *** Surfingkeys
     After install extension, load the config from ~dev/general/surfingkeys~
@@ -245,20 +245,29 @@
     brew tap homebrew/cask-fonts
     brew install --cask font-fira-mono-nerd-font
   #+end_src
-** Terminal
-   - ~iTerm2~ is the most popular chice in macOS as Terminal Emulater. Install it through ~brew install item2~.
+** alacritty
+    - yes ~brew install alacritty~
+    - link config:
+   #+begin_src
+     ln -s ~/u/dex/config/opt/alacritty ~/.config/alacritty
+   #+end_src
+*** Terminal Shortcut
+   - Different with iTerm2, there is almost no terminal level function so no short cut needed
+** iTerm2
+   - Install it through ~brew install item2~.
      - iterm2 provide options to map the Ctrl and Cmd back so that vim and emacs still get the correct key mapping. But for other short cut like Ctrl+t, Ctrl+q, they needs to be tuned correctly for no clash.
      - If u have saved the configuration in git repo u can just load it in iTerm2 preference directly. (~iTerm2->Preference->Load Preferences from a custom folder or URL~)
      - Get iterm2 colors in below (if needed):
        https://github.com/mbadolato/iTerm2-Color-Schemes
 *** Terminal Shortcut
-   #+begin_quote
+   #+begin_src
     Ctrl + Shift + c => Copy
     Ctrl + Shift + v => Paste
     Ctrl + Cmd + t => new tab
-    Ctrl + Cmd + / => split on right
+    Ctrl + Cmd + ' => split on right
     Ctrl + Cmd + - => split on bottom
-   #+end_quote
+    Ctrl + Cmd + n => move current window to new tab
+   #+end_src
 ** Vim
    - For ~vim~, install MacVim through homebrew:
      #+begin_src sh
