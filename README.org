@@ -544,20 +544,34 @@
   - https://github.com/fniessen/refcard-org-mode
   - https://github.com/novoid/github-orgmode-tests/blob/master/README.org
 * Shortcut design
+** Notes
+   - Try do design aligned new mapping but not break existing mapping.
+   - tmux has several annoying bindng like s, d, o, z which will be hard for no-break remap. 
+*** approach
+   - hjkl => switch pane (tmux) / window (vim,emacs,vscode)
+   - HJKL => move pane (tmux) / window (vim,emacs,vscode)
+
+   - %    => split vertically
+   - "    => split horizontally
+   - x    => kill pane (tmux) / window (vim,emacs,vscode)
+   - ,    => rename window (tmux) / buffer (vim,emacs,vscode)
+   - m    => maximize pane (tmux) / window (vim,emacs,vscode)
+   - N    => move pane (tmux) / window (vim,emacs,vscode) to new window (tmux) / process (vim,emacs,vscode)
 ** Basic Layout Concept
    - tmux  => session > window > pane
    - vim   => process > buffer > window
    - emacs => process > buffer > window
 *** tmux shortcut origin
 **** pane
-   - split pane right         => C-b "
-   - split pane bottom        => C-b %
+   - split pane horizontally  => C-b "
+   - split pane vertically    => C-b %
 
    - switch pane              => C-b o
    - switch pane by number    => C-b q <num>
+   - move between pane        => C-b {}<>
 
    - toggle maximize pane     => C-b z
-   - kill pane               => C-b x
+   - kill pane                => C-b x
 
    - move pane to window      => C-b +
    - restore pane from window => C-b -
@@ -584,6 +598,42 @@
 **** window
    - split window right   => C-w v
    - split window bottom  => C-w s
+   - jump between windows => C-w hjkl or arrow
+   - move windows         => C-w HJKL
 
-   - maximize window      -> C-w T
-   - max win => normal    -> C-w S
+   - maximize window      => C-w T
+   - max win => normal    => C-w S
+   - cancel split window  => C-w q or just :q
+**** buffer
+   - create buffer        => :tabnew
+   - delete buffer        => :bd
+   - next buffer          => :bn
+   - last buffer          => :bp
+   - rename buffer        => :file newname (actually rename a file)
+   - find buffer          => :b <part of file name> (or number)
+
+**** other util 
+   - fzf                  => C-p
+   - quit                 => C-z
+
+*** doom emacs
+**** window
+   - new window *new*     => SPC-w-n
+   - split window right   => SPC-w-s
+   - split window bottom  => SPC-w-v
+   - jump between windows => SPC-w-hjkl
+   - move windows         => SPC-w-HJKL
+
+   - maximize-window      => SPC-w-m-m
+   - largen-window        => SPC-w-o (doomwindow/enlargen??)
+   - quit window          => SPC-w-q
+   - delete window        => SPC-w-d
+
+**** creat buffer
+   - create buffer        => SPC-b-N
+   - delete buffer        => :bd or SPC-b-d
+   - next buffer          => :bn or SPC-b-n
+   - last buffer          => :bp or SPN-b-p
+   - find buffer          => :b <first char of file name> (or number)
+                             SPC-b-B SPC-b-i
+

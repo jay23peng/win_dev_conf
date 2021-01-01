@@ -482,9 +482,12 @@ colorscheme onedark
 " unsued color config
 " let g:gruvbox_contrast_dark='hard'
 " hi Normal ctermfg=252 ctermbg=234 guifg=#ebdbb2 guibg=#1B1D1E
-hi Normal ctermfg=none ctermbg=none guifg=#ABB2BF guibg=#282C34
-" hi Normal ctermfg=252 ctermbg=234  guifg=#F8F8F2 guibg=#1c1c1c
 " hi Visual term=reverse ctermbg=238 guibg=#686868
+if exists('+termguicolors')
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+  set termguicolors
+endif
 
 " auto-complete
 set completeopt=longest,menu
