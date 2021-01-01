@@ -404,7 +404,8 @@
    ln -s ~/u/dex/config/opt/doom ~/.config/doom
    # add ~/.emacs.d/bin to $PATH
    #+end_src
-
+*** still showing star when open org file in cmd line directly
+    Seems a bug, rerun ~:org-mode~ to reload can fix the issue.
 ** Docker
 *** Docker Server
     Docker Server has mutiple approaches:
