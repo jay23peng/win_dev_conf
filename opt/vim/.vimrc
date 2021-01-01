@@ -122,6 +122,7 @@ Plug 'itchyny/lightline.vim'
 Plug 'altercation/vim-colors-solarized'
 Plug 'dracula/vim'
 Plug 'joshdick/onedark.vim'
+Plug 'romgrk/doom-one.vim'
 
 " plugin in http://vim-scripts.org/vim/scripts.html
 Plug 'vim-scripts/utl.vim'
@@ -478,7 +479,7 @@ set nu
 " let g:spacegray_underline_search = 1
 let g:spacegray_italicize_comments = 1
 set bg=dark
-colorscheme onedark
+colorscheme doom-one
 " unsued color config
 " let g:gruvbox_contrast_dark='hard'
 " hi Normal ctermfg=252 ctermbg=234 guifg=#ebdbb2 guibg=#1B1D1E
