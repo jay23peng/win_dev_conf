@@ -544,17 +544,18 @@
 * Github org mode support
   - https://github.com/fniessen/refcard-org-mode
   - https://github.com/novoid/github-orgmode-tests/blob/master/README.org
-* Shortcut design
+* Universal Key Map
 ** Notes
    - Try do design aligned new mapping but not break existing mapping.
    - tmux has several annoying bindng like s, d, o, z which will be hard for no-break remap. 
+   - buffer is not exactly same thing as tmux window. It is more like 'model' when vim window means 'view'.
 *** approach
    - hjkl => switch pane (tmux) / window (vim,emacs,vscode)
    - HJKL => move pane (tmux) / window (vim,emacs,vscode)
-
    - %    => split vertically
    - "    => split horizontally
    - x    => kill pane (tmux) / window (vim,emacs,vscode)
+   - X    => kill other panes (tumx) / kill other buffer (vim/emacs)
    - ,    => rename window (tmux) / buffer (vim,emacs,vscode)
    - m    => maximize pane (tmux) / window (vim,emacs,vscode)
    - N    => move pane (tmux) / window (vim,emacs,vscode) to new window (tmux) / process (vim,emacs,vscode)
@@ -615,7 +616,7 @@
 
 **** other util 
    - fzf                  => C-p
-   - quit                 => C-z
+   - suspend program     => C-z  -> go to shell, fg come back. exit will leave an alive vim process
 
 *** doom emacs
 **** window

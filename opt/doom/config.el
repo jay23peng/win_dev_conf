@@ -207,12 +207,29 @@
   (:leader
    :desc "Open URL in emacs-webkit"
    "o w" #'xwidget-webkit-browse-url)
+  ;; window
   (:leader
-   :desc "Open URL in emacs-webkit"
-   "w -" #'evil-window-split) 
+   :desc "Split window down (horizontally)"
+   "w \"" #'evil-window-split) 
   (:leader
-   :desc "Open URL in emacs-webkit"
-   "w '" #'evil-window-vsplit) 
+   :desc "Split window right (vertically)"
+   "w %" #'evil-window-vsplit) 
+  (:leader
+   :desc "Close Window"
+   "w x" #'evil-window-delete) 
+  ;; buffer
+  (:leader
+   :desc "Kill Buffer"
+   "b x" #'kill-current-buffer) 
+  (:leader
+   :desc "Kill all buffers"
+   "b X" #'doom/kill-all-buffers) 
+  (:leader
+   :desc "Pop up scratch buffer"
+   "b *" #'doom/open-scratch-buffer) 
+  (:leader
+   :desc "Rename buffer"
+   "b ," #'rename-buffer) 
   ;; org
   (:after evil-org
    (:map evil-org-mode-map
