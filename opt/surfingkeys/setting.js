@@ -75,16 +75,8 @@ mapkey('.', 'Choose a tab', function() {
     Front.chooseTab();
 });
 
-mapkey('<Space>bu', '#4Go to last used tab', function() {
+mapkey('<Space>bh', '#4Go to last used tab', function() {
     RUNTIME("goToLastTab");
-});
-
-mapkey('<Space>bb', 'Choose a tab with omnibar', function() {
-    Front.openOmnibar({type: "Tabs"});
-});
-
-mapkey('<Space>bd', '#3Close current tab', function() {
-    RUNTIME("closeTab");
 });
 
 mapkey('<Space>bp', '#4Go to last previous tab', function() {
@@ -95,7 +87,15 @@ mapkey('<Space>bn', '#4Go to last next tab', function() {
     RUNTIME("nextTab");
 });
 
-mapkey('<Space>bx', '#3Close all tabs except current one', function() {
+mapkey('<Space>bb', 'Choose a tab with omnibar', function() {
+    Front.openOmnibar({type: "Tabs"});
+});
+
+mapkey('<Space>bx', '#3Close current tab', function() {
+    RUNTIME("closeTab");
+});
+
+mapkey('<Space>bX', '#3Close all tabs except current one', function() {
     RUNTIME("tabOnly");
 });
 

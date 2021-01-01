@@ -552,6 +552,8 @@
 *** approach
    - hjkl => switch pane (tmux) / window (vim,emacs,vscode)
    - HJKL => move pane (tmux) / window (vim,emacs,vscode)
+   - pn   => go to preview and next window(tmux) / buffer (vim,emacs,vscode)
+   - h    => go to last used window(tmux) / buffer (vim,emacs,vscode)
    - %    => split vertically
    - "    => split horizontally
    - x    => kill pane (tmux) / window (vim,emacs,vscode)
