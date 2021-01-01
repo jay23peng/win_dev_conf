@@ -222,17 +222,21 @@
    :desc "Kill Buffer"
    "b x" #'kill-current-buffer) 
   (:leader
-   :desc "Switch to last buffer"
-   "b h" #'evil-switch-to-windows-last-buffer) 
-  (:leader
    :desc "Kill other buffers"
    "b X" #'doom/kill-other-buffers) 
+  (:leader
+   :desc "Switch to last buffer"
+   "b u" #'evil-switch-to-windows-last-buffer) 
   (:leader
    :desc "Pop up scratch buffer"
    "b *" #'doom/open-scratch-buffer) 
   (:leader
    :desc "Rename buffer"
    "b ," #'rename-buffer) 
+  (:leader
+   :desc "Save buffer as root"
+   "b #" #'doom/sudo-save-buffer
+  )
   ;; org
   (:after evil-org
    (:map evil-org-mode-map

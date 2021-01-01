@@ -549,11 +549,13 @@
    - Try do design aligned new mapping but not break existing mapping.
    - tmux has several annoying bindng like s, d, o, z which will be hard for no-break remap. 
    - buffer is not exactly same thing as tmux window. It is more like 'model' when vim window means 'view'.
+   - Tmux only has one level leader key but needs to cover 3 level use case.
+   - Browser like tmux doesn't have leader key for browser level short cut. Need to consider that and avoid conflict
 *** approach
    - hjkl => switch pane (tmux) / window (vim,emacs,vscode)
    - HJKL => move pane (tmux) / window (vim,emacs,vscode)
    - pn   => go to preview and next window(tmux) / buffer (vim,emacs,vscode)
-   - h    => go to last used window(tmux) / buffer (vim,emacs,vscode)
+   - u    => go to last used window(tmux) / buffer (vim,emacs,vscode)
    - %    => split vertically
    - "    => split horizontally
    - x    => kill pane (tmux) / window (vim,emacs,vscode)
