@@ -75,7 +75,7 @@ mapkey('.', 'Choose a tab', function() {
     Front.chooseTab();
 });
 
-mapkey('<Space>bh', '#4Go to last used tab', function() {
+mapkey('<Space>bu', '#4Go to last used tab', function() {
     RUNTIME("goToLastTab");
 });
 
@@ -84,14 +84,6 @@ mapkey('<Space>bp', '#4Go to last previous tab', function() {
 });
 
 mapkey('<Space>bn', '#4Go to last next tab', function() {
-    RUNTIME("nextTab");
-});
-
-mapkey('<Space>bk', '#4Go to last previous tab', function() {
-    RUNTIME("previousTab");
-});
-
-mapkey('<Space>bj', '#4Go to last next tab', function() {
     RUNTIME("nextTab");
 });
 
