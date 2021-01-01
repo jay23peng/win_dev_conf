@@ -87,6 +87,14 @@ mapkey('<Space>bn', '#4Go to last next tab', function() {
     RUNTIME("nextTab");
 });
 
+mapkey('<Space>bk', '#4Go to last previous tab', function() {
+    RUNTIME("previousTab");
+});
+
+mapkey('<Space>bj', '#4Go to last next tab', function() {
+    RUNTIME("nextTab");
+});
+
 mapkey('<Space>bb', 'Choose a tab with omnibar', function() {
     Front.openOmnibar({type: "Tabs"});
 });

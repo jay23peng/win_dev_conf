@@ -222,8 +222,11 @@
    :desc "Kill Buffer"
    "b x" #'kill-current-buffer) 
   (:leader
-   :desc "Kill all buffers"
-   "b X" #'doom/kill-all-buffers) 
+   :desc "Switch to last buffer"
+   "b h" #'evil-switch-to-windows-last-buffer) 
+  (:leader
+   :desc "Kill other buffers"
+   "b X" #'doom/kill-other-buffers) 
   (:leader
    :desc "Pop up scratch buffer"
    "b *" #'doom/open-scratch-buffer) 
