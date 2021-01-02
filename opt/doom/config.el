@@ -67,6 +67,11 @@
 ;; dummy function for doing nothing
 (defun silence () (interactive))
 
+
+;;(setq doom-leader-key ","
+;;  doom-localleader-key ", m")
+(setq doom-localleader-key ",")
+
  ;; background color
  (custom-set-faces
 ;;   '(default ((t (:background "#1c1c1c"))))
@@ -129,7 +134,12 @@
 (when window-system (set-frame-size (selected-frame) 80 24))
 
 ;; org-mode
+;; https://github.com/hlissner/doom-emacs/issues/2405
 (add-hook! 'org-mode-hook #'doom-disable-line-numbers-h)
+(setq org-startup-folded t)
+(after! evil-org
+  (remove-hook 'org-tab-first-hook #'+org-cycle-only-current-subtree-h)
+)
 
 ;; magit
 (use-package! magit
@@ -198,7 +208,7 @@
 ;; xwidget-webkit
 ;; https://github.com/fuxialexander/doom-emacs-private-xfu/blob/122fc444f3d564124df7fbf8e2be034a0d136317/%2Bbindings.el
 
-
+;; (define-key ivy-minibuffer-map (kbd "TAB") 'ivy-partial)
 
 (map! 
   ;; vinegar like behavior
@@ -245,6 +255,10 @@
     :ni [C-return] #'org-insert-subheading
     :ni [S-return] #'+org/insert-item-below)
    (:map org-mouse-map [mouse-2] #'silence))
+  (:map ivy-minibuffer-map
+   "TAB" #'ivy-next-line)
+  (:map ivy-minibuffer-map
+   "<backtab>" #'ivy-previous-line)
 ;;      (:after evil-org
 ;;       :map (evil-org-mode-map)
 ;;       :nvime [M-return] #'org-meta-return

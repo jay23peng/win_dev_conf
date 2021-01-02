@@ -643,3 +643,9 @@
    - find buffer          => :b <first char of file name> (or number)
                              SPC-b-B SPC-b-i
 
+* org mode tmp note
+** only show two level in STARTUP
+https://www.reddit.com/r/emacs/comments/5hsmbp/how_can_i_show_only_two_levels_at_startup_in_org/
+;;; Local Variables:
+;;; eval: (org-content 2)
+;;; End:

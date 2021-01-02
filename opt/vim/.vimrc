@@ -163,17 +163,27 @@ let mapleader = " "
 " inoremap <C-[> <Esc>`^
 
 " Remap buffer switch 
-" nmap <silent> <leader>l :wincmd l<CR>
-" nmap <silent> <leader>h :wincmd h<CR>
-" nmap <silent> <leader>k :wincmd k<CR>
-" nmap <silent> <leader>j :wincmd j<CR>
 " nmap <silent> <C-x>t :tabnew<CR>
+
+" Universal Key Map
 nmap <silent> <leader>wd :hide<CR>
-nmap <silent> <leader>wz :only<CR>
+nmap <silent> <leader>wx :hide<CR>
+nmap <silent> <leader>wm :only<CR>
+nmap <silent> <leader>w" :sp<CR>
+nmap <silent> <leader>w% :vsp<CR>
 nmap <silent> <leader>ws :sp<CR>
-nmap <silent> <leader>w- :sp<CR>
 nmap <silent> <leader>wv :vsp<CR>
-nmap <silent> <leader>w' :vsp<CR>
+nmap <silent> <leader>wl :wincmd l<CR>
+nmap <silent> <leader>wh :wincmd h<CR>
+nmap <silent> <leader>wk :wincmd k<CR>
+nmap <silent> <leader>wj :wincmd j<CR>
+
+
+nmap <silent> <leader>bn :bn<CR>
+nmap <silent> <leader>bp :bp<CR>
+nmap <silent> <leader>bx :bd<CR>
+nmap <silent> <leader>bX :%bd\|e#<cr>
+
 
 " Move cursor at input mode
 " inoremap <M-h> <C-o>h
