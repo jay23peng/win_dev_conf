@@ -372,10 +372,19 @@
 
 (add-hook 'kill-emacs-hook #'save-frame-dimensions)
 
-;; doom-modeline height in gui 
+;; special fix for yaml ??
+;; detect filenames compatible with Ansible's recommended layout.
+;; http://docs.ansible.com/playbooks_best_practices.html#directory-layout
+;; (setq spacemacs--ansible-filename-re
+;;       ".*\\(main\.yml\\|site\.yml\\|encrypted\.yml\\|roles/.+\.yml\\|group_vars/.+\\|host_vars/.+\\)")
+
+;; doom-modeline height in gui - not working well 
 ;;(use-package doom-modeline
 ;;  :custom-face
 ;;  (mode-line ((t (:height 0.9))))
 ;;  (mode-line-inactive ((t (:height 0.9))))
 ;;)
 ;;
+
+;; fix evil copy issue, no need in doom-emacs 
+;; (fset 'evil-visual-update-x-selection 'ignore)

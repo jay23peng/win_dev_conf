@@ -54,7 +54,9 @@
 ;; personal setup
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(package! monokai-theme)
+;; js2-refactor has conflict with evil
+;; https://www.zhihu.com/question/35171849
+(package! js2-refactor :disable t)
 
 ;; (package! example :recipe
 ;;   (:host github
