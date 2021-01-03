@@ -80,6 +80,42 @@
    '(mode-line-inactive ((t (:background "#282c34"))))
  )
 
+;; neo tree
+;; https://github.com/hlissner/emacs-doom-themes/issues/180
+;; (doom-themes-treemacs-config)
+(setq custom-safe-themes t)
+
+;; doom theme enable
+ (use-package doom-themes
+   :config
+   ;; Global settings (defaults)
+   (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
+         doom-themes-enable-italic t) ; if nil, italics is universally disabled
+   ;; Enable flashing mode-line on errors
+   (doom-themes-visual-bell-config)
+
+   (if (display-graphic-p)
+       (progn
+         ;; Enable custom neotree theme (all-the-icons must be installed!)
+         (doom-themes-neotree-config)
+         ;; or for treemacs users
+         (setq doom-themes-treemacs-theme "doom-colors") ; use the colorful treemacs theme
+         (doom-themes-treemacs-config)
+         ))
+
+   ;; Corrects (and improves) org-mode's native fontification.
+   (doom-themes-org-config))
+
+;; nerd-icons
+;;(add-to-list 'load-path (expand-file-name "~/.emacs.d/site-lisp/nerd-icons"))
+;;(require 'nerd-icons)
+
+;; modeline
+ (use-package doom-modeline
+   :ensure t
+   :hook (after-init . doom-modeline-mode))
+
+ (set-face-background 'mode-line nil)
  
 ;; (add-hook 'minibuffer-setup-hook
 ;;      (lambda ()
@@ -213,6 +249,7 @@
 (map! 
   ;; vinegar like behavior
   :n "-" #'dired-jump
+  :n "C-b" #'+treemacs/toggle
   ;; xwidget-webit-browser entry
   (:leader
    :desc "Open URL in emacs-webkit"
@@ -227,9 +264,15 @@
   (:leader
    :desc "Close Window"
    "w x" #'evil-window-delete) 
+  (:leader
+   :desc "Kill other buffers & Close other windows"
+   "w X" #'doom/kill-other-buffers)
+  (:leader
+   :desc "Kill other buffers & Close other windows"
+   "w N" #'tear-off-window)
   ;; buffer
   (:leader
-   :desc "Kill Buffer"
+   :desc "Kill buffer"
    "b x" #'kill-current-buffer) 
   (:leader
    :desc "Kill other buffers"

@@ -102,7 +102,7 @@ mapkey('<Space>bX', '#3Close all tabs except current one', function() {
 // --------------------------------------------------------------------------------
 // Copy/Paste
 // --------------------------------------------------------------------------------
-mapkey('yy', '#8Yank Selected Text', function() {
+mapkey('yy', '#8Yank selected text', function() {
     var text = "";
     if (window.getSelection) {
         text = window.getSelection().toString();
@@ -112,15 +112,17 @@ mapkey('yy', '#8Yank Selected Text', function() {
     Clipboard.write(text);
 }, {repeatIgnore: true});
 
-mapkey('Y', "#7Copy current page's URL", function() {
+mapkey('<Space>fy', "#7Copy current page's URL", function() {
     Clipboard.write(window.location.href);
 });
 
+/*
 mapkey('p', "Open the clipboard's URL in the current tab", function() {
     Clipboard.read(function(response) {
         return () => window.open(response.data, '_blank')
     });
 });
+*/
 
 // --------------------------------------------------------------------------------
 // General

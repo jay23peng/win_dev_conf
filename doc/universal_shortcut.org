@@ -1,24 +1,66 @@
-#+TITLE: Universal_shortcut
+#+TITLE: Universal Shortcut
 #+STARTUP: overview
 #+OPTIONS: \n:t
+* Concept
+For all the applicatons use lot of shortcuts, we can try to set same shortcut to get consistent experience. Especially for the cli toobox which has similar mechanism.
+* Principle
+- Align with vi principle for 'edit mode' and 'easy motion'.
+  - Align with vim shortcut as much as possible
+- Try not to break existing critical heavily used shortcut across the application.
+  - For example, [C-b d] in tmux is detach but in vi it is delete, it is good to not change it.
+* Matrix
+| Category | Key         | vivaldi                | tmux                    | emacs              | vim                | vscode              |                                                                                                   |
+|----------+-------------+------------------------+-------------------------+--------------------+--------------------+---------------------+---------------------------------------------------------------------------------------------------|
+| Normal   |             |                        |                         |                    |                    |                     |                                                                                                   |
+|          | hjkl        | scroll                 | scroll                  | scroll             | scroll             | scroll              |                                                                                                   |
+|          | <C-u/d>     | page-scroll            | page-scroll             | page scroll        | page scroll        | page scroll         |                                                                                                   |
+|          | <SPC-f-y>   | yank URL               | /                       | yank file name     | yank file name     | yank file name      | vscode has more options                                                                           |
+|          | <C-b>       | Toggle panel           | Toggle Menu             | /                  | Nerd tree          | Toggle Sidebar      | Occupied by tmux, for tmux it is <C-b b>, for cli tool it is <C-b C-b>                            |
+|----------+-------------+------------------------+-------------------------+--------------------+--------------------+---------------------+---------------------------------------------------------------------------------------------------|
+| Insert   | TBD         | TBD                    | TBD                     | TBD                | TBD                | TBD                 | TBD                                                                                               |
+|----------+-------------+------------------------+-------------------------+--------------------+--------------------+---------------------+---------------------------------------------------------------------------------------------------|
+| Visual   |             |                        |                         |                    |                    |                     |                                                                                                   |
+|          | v           | start mode             | start mode              | start mode         | start mode         | start mode          | vivaldi and tmux need 2 'v' for start mode and selection                                          |
+|          | hjkl        | scroll                 | scroll                  | scroll             | scroll             | scroll              |                                                                                                   |
+|          | <C-u/d>     | TBD                    | page-scroll             | page scroll        | page scroll        | page scroll         | Not workking for vivaldi when start selection                                                     |
+|          | y           | copy                   | copy                    | copy               | copy               | copy                |                                                                                                   |
+|----------+-------------+------------------------+-------------------------+--------------------+--------------------+---------------------+---------------------------------------------------------------------------------------------------|
+| Command  |             |                        |                         |                    |                    |                     |                                                                                                   |
+|          | :           | start mode             | start mode              | start mode         | start mode         | start mode          | vivaldi and tmux need 2 'v' for start mode and selection                                          |
+|          | <C-p>       | quick command          | TBD                     | TBD                | find file          | find file           | not sure yet...                                                                                   |
+|          | <TAB/S-TAB> | /                      | switch selection        | switch selection   | switch selection   | switch selection    | not working in vivaldi, use arrow and pgUp/Down                                                   |
+|----------+-------------+------------------------+-------------------------+--------------------+--------------------+---------------------+---------------------------------------------------------------------------------------------------|
+| Buffer   |             |                        |                         |                    |                    |                     | 'window' in tmux, 'tab' in vivaldi/vscode, 'buffer' in vim/emacs                                  |
+|          | pn          | switch tab             | switch window           | switch buffer      | switch buffer      | switch tab          | vivaldi: <C-S->, tmux: <C-b >, vivaldi/vim/emacs/vscode: <SPC-b->, same for all below             |
+|          | u           | goto last tab          | goto last window        | goto last buffer   | goto last buffer   | goto last tab       | see above                                                                                         |
+|          | x           | close tab              | /                       | kill buffer        | kill buffer        | close tab           | only set this up for 'pane' in tmux to redue complexity and possible mistake                      |
+|          | X           | close other tab        | /                       | kill other buffers | kill buffer        | close tab           | <C-X> not working in thinkpad bluetooth keyboard (after swap modifier's key) pysically, use <C-D> |
+|          | ,           | /                      | rename window           | rename buffer      | rename buffer      | /                   | not supported by vscode and tmux, for vim it is actually rename current file(without saving)      |
+|          | *           | note panel             | /                       | scratch buffer     | scratch buffer     | scratch buffer      | In vim and vscode it just create a new tab                                                        |
+|----------+-------------+------------------------+-------------------------+--------------------+--------------------+---------------------+---------------------------------------------------------------------------------------------------|
+| Window   |             |                        |                         |                    |                    |                     | 'pane' in tmux, 'tile' in vivaldi, 'window' in vim/emacs/vscode                                   |
+|          | %           | tile vertically        | split vertically        | split vertically   | split vertically   | split vertically    | vivaldi: <C-S->, tmux: <C-b >, vivaldi/vim/emacs/vscode: <SPC-w->, same for all below             |
+|          | "           | tile horizontally      | split horizontally      | split horizontally | split horizontally | split horizontally  | see above                                                                                         |
+|          | hjkl        | /                      | switch pane             | switch window      | switch window      | switch window       | vivaldi use case is too simple - use mouse directly                                               |
+|          | HJKL        | /                      | move pane               | move window        | move window        | move window         | vivaldi use case is too simple - use mouse directly                                               |
+|          | m           | untile tabs            | zoom the active pane    | maximaze buffer    | :only              | combine all buffers | toggle function in tmux/emacs                                                                     |
+|          | x           | /                      | close pane              | close window       | close window       | close window        |                                                                                                   |
+|          | X           | /                      | close other panes       | kill other buffers | kill other buffers | close other windows | emacs/vim's approach can be improved later                                                        |
+|          | N           | move tab to new window | move pane to new window | tearoff window     | /                  | /                   | gui only for emacs                                                                                |
+
 * Notes
-   - Try do design aligned new mapping but not break existing mapping.
-   - tmux has several annoying bindng like s, d, o, z which will be hard for no-break remap.
-   - buffer is not exactly same thing as tmux window. It is more like 'model' when vim window means 'view'.
-   - Tmux only has one level leader key but needs to cover 3 level use case.
-   - Browser like tmux doesn't have leader key for browser level short cut. Need to consider that and avoid conflict
 ** approach
-   - hjkl => switch pane (tmux) / window (vim,emacs,vscode)
-   - HJKL => move pane (tmux) / window (vim,emacs,vscode)
-   - pn   => go to preview and next window(tmux) / buffer (vim,emacs,vscode)
-   - u    => go to last used window(tmux) / buffer (vim,emacs,vscode)
-   - %    => split vertically
-   - "    => split horizontally
-   - x    => kill pane (tmux) / window (vim,emacs,vscode)
-   - X    => kill other panes (tumx) / kill other buffer (vim/emacs)
-   - ,    => rename window (tmux) / buffer (vim,emacs,vscode)
-   - m    => maximize pane (tmux) / window (vim,emacs,vscode)
-   - N    => move pane (tmux) / window (vim,emacs,vscode) to new window (tmux) / process (vim,emacs,vscode)
+- hjkl => switch pane (tmux) / window (vim,emacs,vscode)
+- HJKL => move pane (tmux) / window (vim,emacs,vscode)
+- pn   => go to preview and next window(tmux) / buffer (vim,emacs,vscode)
+- u    => go to last used window(tmux) / buffer (vim,emacs,vscode)
+- %    => split vertically
+- "    => split horizontally
+- x    => kill pane (tmux) / window (vim,emacs,vscode)
+- X    => kill other panes (tumx) / kill other buffer (vim/emacs)
+- ,    => rename window (tmux) / buffer (vim,emacs,vscode)
+- m    => maximize pane (tmux) / window (vim,emacs,vscode)
+- N    => move pane (tmux) / window (vim,emacs,vscode) to new window (tmux) / process (vim,emacs,vscode)
 * Basic Layout Concept
    - tmux  => session > window > pane
    - vim   => process > buffer > window
@@ -98,3 +140,9 @@
    - last buffer          => :bp or SPN-b-p
    - find buffer          => :b <first char of file name> (or number)
                              S
+
+* Side Notes
+- tmux has several annoying bindng like s, d, o, z which will be hard for no-break remap.
+- buffer is not exactly same thing as tmux window. It is more like 'model' when vim window means 'view'.
+- Tmux only has one level leader key but needs to cover 3 level use case.
+  - Browser like tmux doesn't have leader key for browser level short cut. Need to consider that and avoid conflict

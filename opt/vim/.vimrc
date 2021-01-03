@@ -37,7 +37,6 @@ else
   " if s:uname == "Darwin\n"
       " mac terminal
       set rtp+=/usr/localsopt/fzf
-      " set ttymouse=xterm2
   " else
       "linux
   " endif
@@ -168,6 +167,7 @@ let mapleader = " "
 " Universal Key Map
 nmap <silent> <leader>wd :hide<CR>
 nmap <silent> <leader>wx :hide<CR>
+nmap <silent> <leader>wX :%bd\|e#<cr>
 nmap <silent> <leader>wm :only<CR>
 nmap <silent> <leader>w" :sp<CR>
 nmap <silent> <leader>w% :vsp<CR>
@@ -183,6 +183,9 @@ nmap <silent> <leader>bn :bn<CR>
 nmap <silent> <leader>bp :bp<CR>
 nmap <silent> <leader>bx :bd<CR>
 nmap <silent> <leader>bX :%bd\|e#<cr>
+nmap <silent> <leader>b* :sp *Scratch*<cr>
+" https://vi.stackexchange.com/questions/6029/how-to-wait-for-user-input-in-the-middle-of-a-mapping/6030#6030
+noremap <expr> <leader>b, ":f " . input("Rename buffer (to new name): ") . "<CR>"
 
 
 " Move cursor at input mode
@@ -193,8 +196,8 @@ nmap <silent> <leader>bX :%bd\|e#<cr>
 " inoremap <M-b> <C-o>b
 " inoremap <M-f> <C-o>w
 
-nmap <silent> J 20j
-nmap <silent> K 20k
+" nmap <silent> J 20j
+" nmap <silent> K 20k
 
 " Diable mouse middle button paste
 map <MiddleMouse> <Nop>
@@ -208,7 +211,7 @@ nnoremap t :tabnew<space>
 " nmap r <c-r>
 
 " copy current path
-nmap <silent> Y :let @+ = expand("%:p")<CR>
+nmap <silent> <leader>fy :let @+ = expand("%:p")<CR>
 " inoremap <Leader>p <ESC>pa
     
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -303,7 +306,8 @@ let g:cpp_experimental_template_highlight = 1
 let g:LargeFile = 2000
 
 " NERDTree config
-nnoremap <silent> , :NERDTreeToggle<CR>
+nnoremap <silent> <C-b> :NERDTreeToggle<CR>
+" nnoremap <silent> , :NERDTreeToggle<CR>
 " map <A-,> :NERDTreeToggle<CR>
 " Open nerd tree as side bar and empty main panel
 " autocmd StdinReadPre * let s:std_in=1
@@ -482,6 +486,7 @@ if !has("gui_running")
 
     inoremap <Char-0x07F> <BS>
     nnoremap <Char-0x07F> <BS>
+    set ttymouse=xterm2
     set mouse=a
 endif
 
