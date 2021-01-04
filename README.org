@@ -326,20 +326,24 @@
       omf install bobthefish
 
       # bobthefish monokai
-      # https://github.com/oh-my-fish/theme-bobthefish/wiki/Base16-Monokai-custom-color-scheme      
+      # https://github.com/oh-my-fish/theme-bobthefish/wiki/Base16-Monokai-custom-color-scheme
 
       # .config/fish/config.fish
       # set -g theme_color_scheme gruvbox
       # set -g -x DOCKER_HOST tcp://localhost:2375
       # set -g -x FZF_DEFAULT_COMMAND='fd -a -j 4'
       test -e {$HOME}/.iterm2_shell_integration.fish ; and source {$HOME}/.iterm2_shell_integration.fish ; or true
-      
+
       # setup git
       omf install https://github.com/jhillyerd/plugin-git
       git config --global user.email "jsp23@qq.com"
       git config --global user.name "jesse23"
       git config --global core.editor vim
       git config --global credential.helper store
+
+      # git local command
+      git config user.email "jsp23@qq.com"
+      git config user.name "jesse23"
 
       # nvm
       omf install https://github.com/jorgebucaran/fish-nvm
