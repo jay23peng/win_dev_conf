@@ -530,7 +530,7 @@
   |-----------------+-----------------------------------+-----------------------------+---------------------------|
   | Slack           | Customize in prefernce            | Customize in prefernce      | [[https://slackthemes.net/#/aubergine][One Dark]]                  |
   |-----------------+-----------------------------------+-----------------------------+---------------------------|
-  | VSCode          | [[https://marketplace.visualstudio.com/items?itemName=tomphilbin.gruvbox-themes][Gruvbox Dark Hard]]                 | [[https://marketplace.visualstudio.com/items?itemName=fabiospampinato.vscode-monokai-night][Monokai-Night-Theme/Monokai]] | [[https://marketplace.visualstudio.com/items?itemName=zhuangtongfa.Material-theme][One Dark Pro]]              |
+  | VSCode          | [[https://marketplace.visualstudio.com/items?itemName=tomphilbin.gruvbox-themes][Gruvbox Dark Hard]]                 | [[https://marketplace.visualstudio.com/items?itemName=fabiospampinato.vscode-monokai-night][Monokai-Night-Theme/Monokai]] | [[https://marketplace.visualstudio.com/items?itemName=marioterron.one-dark-bimbo][One Dark Bimbo]]            |
   |-----------------+-----------------------------------+-----------------------------+---------------------------|
   | iTerm2          | [[https://github.com/mbadolato/iTerm2-Color-Schemes][Gruvbox]]                           | [[https://github.com/mbadolato/iTerm2-Color-Schemes][Monokai]]                     | [[https://github.com/mbadolato/iTerm2-Color-Schemes][DoomOne]]                   |
   |-----------------+-----------------------------------+-----------------------------+---------------------------|
