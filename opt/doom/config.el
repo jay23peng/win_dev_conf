@@ -77,7 +77,8 @@
 ;;   '(default ((t (:background "#1c1c1c"))))
    '(hl-line ((t (:background "#282c34"))))
    '(minibuffer-prompt-inactive ((t (:background "282c34"))))
-   '(mode-line-inactive ((t (:background "#282c34"))))
+   ;; enable below mode-line will be in same color as background
+   ;; '(mode-line-inactive ((t (:background "#282c34"))))
  )
 
 ;; neo tree
