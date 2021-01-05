@@ -10,6 +10,8 @@
 	<false/>
 	<key>Control</key>
 	<integer>7</integer>
+	<key>CopySelection</key>
+	<false/>
 	<key>Custom Color Presets</key>
 	<dict>
 		<key>3024 Day</key>
@@ -58599,24 +58601,6 @@
 			<key>Text</key>
 			<string></string>
 		</dict>
-		<key>0x27-0x140000-0x27</key>
-		<dict>
-			<key>Action</key>
-			<integer>29</integer>
-			<key>Label</key>
-			<string></string>
-			<key>Text</key>
-			<string>69D493D1-ED6D-4F16-9602-FA2CEDF1E90F</string>
-		</dict>
-		<key>0x2d-0x140000-0x1b</key>
-		<dict>
-			<key>Action</key>
-			<integer>28</integer>
-			<key>Label</key>
-			<string></string>
-			<key>Text</key>
-			<string>69D493D1-ED6D-4F16-9602-FA2CEDF1E90F</string>
-		</dict>
 		<key>0x43-0x60000</key>
 		<dict>
 			<key>Action</key>
@@ -58632,42 +58616,6 @@ Copy</string>
 			<key>Text</key>
 			<string>Paste
 Paste</string>
-		</dict>
-		<key>0x68-0x140000-0x4</key>
-		<dict>
-			<key>Action</key>
-			<integer>18</integer>
-			<key>Label</key>
-			<string></string>
-			<key>Text</key>
-			<string></string>
-		</dict>
-		<key>0x6a-0x140000-0x10</key>
-		<dict>
-			<key>Action</key>
-			<integer>21</integer>
-			<key>Label</key>
-			<string></string>
-			<key>Text</key>
-			<string></string>
-		</dict>
-		<key>0x6b-0x140000-0x2d</key>
-		<dict>
-			<key>Action</key>
-			<integer>20</integer>
-			<key>Label</key>
-			<string></string>
-			<key>Text</key>
-			<string></string>
-		</dict>
-		<key>0x6c-0x140000-0x20</key>
-		<dict>
-			<key>Action</key>
-			<integer>19</integer>
-			<key>Label</key>
-			<string></string>
-			<key>Text</key>
-			<string></string>
 		</dict>
 		<key>0x71-0x100000</key>
 		<dict>
@@ -58774,11 +58722,11 @@ Paste</string>
 	<key>HideScrollbar</key>
 	<true/>
 	<key>HideTab</key>
-	<false/>
+	<true/>
 	<key>HideTabNumber</key>
 	<false/>
 	<key>Hotkey</key>
-	<true/>
+	<false/>
 	<key>HotkeyChar</key>
 	<integer>13</integer>
 	<key>HotkeyCode</key>
@@ -58829,26 +58777,26 @@ Paste</string>
 				<key>Alpha Component</key>
 				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.45882352941176469</real>
+				<real>0.396078431372549</real>
 				<key>Color Space</key>
 				<string>sRGB</string>
 				<key>Green Component</key>
-				<real>0.8784313725490196</real>
+				<real>0.74509803921568629</real>
 				<key>Red Component</key>
-				<real>0.6470588235294118</real>
+				<real>0.59607843137254901</real>
 			</dict>
 			<key>Ansi 11 Color</key>
 			<dict>
 				<key>Alpha Component</key>
 				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.36470588235294116</real>
+				<real>0.4823529411764706</real>
 				<key>Color Space</key>
 				<string>sRGB</string>
 				<key>Green Component</key>
-				<real>0.64313725490196083</real>
+				<real>0.74509803921568629</real>
 				<key>Red Component</key>
-				<real>0.94117647058823528</real>
+				<real>0.92549019607843142</real>
 			</dict>
 			<key>Ansi 12 Color</key>
 			<dict>
@@ -58920,13 +58868,13 @@ Paste</string>
 				<key>Alpha Component</key>
 				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.32156862745098042</real>
+				<real>0.4823529411764706</real>
 				<key>Color Space</key>
 				<string>sRGB</string>
 				<key>Green Component</key>
-				<real>0.5607843137254902</real>
+				<real>0.74509803921568629</real>
 				<key>Red Component</key>
-				<real>0.81960784313725488</real>
+				<real>0.92549019607843142</real>
 			</dict>
 			<key>Ansi 4 Color</key>
 			<dict>
@@ -60264,6 +60212,8 @@ Paste</string>
 	<false/>
 	<key>OpenTmuxWindowsIn</key>
 	<integer>0</integer>
+	<key>OptionClickMovesCursor</key>
+	<false/>
 	<key>PMPrintingExpandedStateForPrint2</key>
 	<false/>
 	<key>PointerActions</key>
@@ -60339,6 +60289,8 @@ Paste</string>
 	<true/>
 	<key>TmuxUsesDedicatedProfile</key>
 	<true/>
+	<key>TmuxWarnBeforePausing</key>
+	<false/>
 	<key>UseBorder</key>
 	<false/>
 	<key>UseLionStyleFullscreen</key>
@@ -60349,6 +60301,8 @@ Paste</string>
 	<true/>
 	<key>disableMetalWhenUnplugged</key>
 	<true/>
+	<key>findMode_iTerm</key>
+	<integer>0</integer>
 	<key>kCPKSelectionViewPreferredModeKey</key>
 	<integer>0</integer>
 	<key>kCPKSelectionViewShowHSBTextFieldsKey</key>

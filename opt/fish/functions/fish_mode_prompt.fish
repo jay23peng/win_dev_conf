@@ -10,10 +10,14 @@ function fish_mode_prompt --description 'Displays the current mode'
                 set_color --bold 282C34
                 set_color --background green
                 echo " I "
-            case replace-one
+            case replace_one
+                set_color --bold 282C34
+                set_color --background magenta
+                echo " r "
+            case replace
                 set_color --bold 282C34
                 set_color --background red
-                echo " R "
+                echo " R "               
             case visual
                 set_color --bold 282C34
                 set_color --background yellow
