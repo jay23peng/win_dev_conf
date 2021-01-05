@@ -8,6 +8,17 @@ set -g -x EDITOR '/Users/jesse.peng/u/dex/config/mac/bin/em'
 # https://emacs.stackexchange.com/questions/50485/copy-or-paste-between-terminal-emacs-26-and-mac-apps
 # set -x LC_ALL "en_US.UTF-8"
 
+# bobthefish
+# set -g theme_display_vagrant yes
+# set -g theme_display_k8s_context yes
+# set -g theme_display_k8s_namespace yes
+# set -g theme_title_display_path yes
+# set -g theme_title_use_abbreviated_path no 
+set -g theme_newline_cursor yes
+set -g theme_newline_prompt '➜ '
+set -g fish_prompt_pwd_dir_length 0
+
+
 alias ls="exa"
 alias nvm="fnm"
 

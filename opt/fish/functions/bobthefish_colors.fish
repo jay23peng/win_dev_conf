@@ -37,17 +37,17 @@ function bobthefish_colors -S -d 'Define a custom bobthefish color scheme'
   set -x color_path_nowrite             $base02 $base09
   set -x color_path_nowrite_basename    $base02 $base09 --bold
 
-  set -x color_repo                     $base0B $colorfg
-  set -x color_repo_work_tree           $base02 $colorfg --bold
-  set -x color_repo_dirty               $base08 $base05
-  set -x color_repo_staged              $base09 $colorfg
+  set -x color_repo                     $base0B $base00
+  set -x color_repo_work_tree           $base02 $base00 --bold
+  set -x color_repo_dirty               $base08 $base00
+  set -x color_repo_staged              $base09 $base00
 
   set -x color_vi_mode_default          $base03 $base05 --bold
   set -x color_vi_mode_insert           $base0B $colorfg --bold
   set -x color_vi_mode_visual           $base09 $colorfg --bold
 
   set -x color_vagrant                  $base0C $colorfg --bold
-  set -x color_k8s                      $base08 $base05 --bold
+  set -x color_k8s                      $base08 $base00 --bold
   set -x color_aws_vault                $base0D $colorfg --bold
   set -x color_aws_vault_expired        $base0D $base08 --bold
   set -x color_username                 $base02 $base0D --bold

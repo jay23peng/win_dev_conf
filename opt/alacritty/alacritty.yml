@@ -352,6 +352,9 @@ shell:
 # 20201231 - below map is for Cmd<->Ctrl swap on macOS - for linux we might ned to change all Command below to Ctrl
 #
 # https://git.picodevelopment.nl/hendrikpeter/alacritty/-/blob/5009566ea5c46a85fa243b18ce4b7fe8e0b89b62/src/config.rs
+mouse_bindings:
+  - { mouse: Middle, action: None }
+
 key_bindings:
   # function
   - { key: V,        mods: Command|Shift,    action: Paste               }
@@ -362,6 +365,8 @@ key_bindings:
   #- { key: Grave, mods: Command, chars: "\x60" } <-- `
   - { key: Grave, mods: Command, chars: "test" } 
   - { key: Right, mods: Command, chars: "test" }
+
+
 
   # https://github.com/xtermjs/xterm.js/blob/0e45909c7e79c83452493d2cd46d99c0a0bb585f/src/common/data/EscapeSequences.ts
   # - { key: Space,      mods: Command, chars: "\x00" }
@@ -415,6 +420,9 @@ key_bindings:
   - { key: 'Down',  mods: Shift|Command, chars: "\x1b[1;6B" }
   - { key: 'Right', mods: Shift|Command, chars: "\x1b[1;6C" }
   - { key: 'Left',  mods: Shift|Command, chars: "\x1b[1;6D" }
+
+  # - { key: [ALPHA_KEY],        mods: Alt,     chars: "\x1b[ALPHA_KEY]" 
+  - { key: 'X',        mods: Alt,     chars: "\x1bx" }
 
 
   ## Looks alacritty can handle this correctly
