@@ -18,7 +18,12 @@ set -g theme_newline_cursor yes
 set -g theme_newline_prompt '➜ '
 set -g fish_prompt_pwd_dir_length 0
 
+# vi key binding
+fish_vi_key_bindings
+bind -M insert \cl forward-char
+bind -M insert \c\[ "if commandline -P; commandline -f cancel; else; set fish_bind_mode default; commandline -f backward-char force-repaint; end"
 
+# alias
 alias ls="exa"
 alias nvm="fnm"
 
