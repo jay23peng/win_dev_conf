@@ -6,7 +6,9 @@
 " General Setting
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set nocompatible
-source $VIMRUNTIME/vimrc_example.vim
+if !has('nvim')
+    source $VIMRUNTIME/vimrc_example.vim
+endif
 set clipboard+=unnamed
 set nobackup
 set tabstop=4
@@ -163,7 +165,6 @@ let mapleader = " "
 
 " Remap buffer switch 
 " nmap <silent> <C-x>t :tabnew<CR>
-
 " Universal Key Map
 nmap <silent> <leader>wd :hide<CR>
 nmap <silent> <leader>wx :hide<CR>
@@ -486,7 +487,9 @@ if !has("gui_running")
 
     inoremap <Char-0x07F> <BS>
     nnoremap <Char-0x07F> <BS>
-    set ttymouse=xterm2
+    if !has('nvim')
+        set ttymouse=xterm2
+    endif
     set mouse=a
 endif
 

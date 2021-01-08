@@ -11,7 +11,26 @@
     sudo scutil --set LocalHostName "newname"
     sudo scutil --set HostName "newname"
     #+end_src
-*** Modifier Key Remap
+*** HomeBrew
+  Mac Setup start from install home brew:
+  #+begin_src sh
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  #+end_src
+  Common homebrew command:
+  #+begin_src sh
+    brew list
+    brew cask list
+    brew install <package>
+    brew uninstall <package>
+  #+end_src
+*** Key Mapping
+~Karabiner~ is a key util for core key mapping.
+#+begin_src sh
+brew install karabiner-elements
+# link to exisitng karabiner setup
+ln -s ~/u/dex/config/mac/karabiner ~/.config/karabiner
+#+end_src
+**** Modifier Key Remap (not used after using karabiner)
    MacOS uses ~Cmd~ key as ~Ctrl~ on windows/linux. Also vscode follows the same practice that use ~Cmd~ to replace ~Ctrl~ as main function key on Mac. Based on that, the approach we can take:
    - Swap ~Capslock~ with ~Cmd~ instead of using ~Ctrl~ on windows/linux.
    - Pick a terminal that can swap ~cmd~ and ~Ctrl~ so that all the terminal based tools can still use the same physical ~Capslock~ as main function key.
@@ -21,7 +40,7 @@
     Ctrl     => Capslock
     Cmd      => Ctrl
    #+end_src
-*** Modifer Key Definition Principle
+**** Modifer Key Definition Principle
     - Disable the unused shortcut as much as possible
     - Use vi mode + leader key if possible
     - Remove unused shortcut as much as possible
@@ -224,18 +243,13 @@
     	},
     }
     #+end_src
-** HomeBrew
-  Mac Setup start from install home brew:
-  #+begin_src sh
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-  #+end_src
-  Common homebrew command:
-  #+begin_src sh
-    brew list
-    brew cask list
-    brew install <package>
-    brew uninstall <package>
-  #+end_src
+*** VSCode Terminal as tab
+#+begin_src sh
+git clone https://github.com/mmis1000/Vscode-terminal-tab
+npm run compile
+npx vsce package
+
+#+end_src
 ** Fonts
   [[https://github.com/ryanoasis/nerd-fonts][nerd-fonts]] is required in the toolchain, for now use approach 3 to install it:
   #+begin_src sh
@@ -280,6 +294,14 @@
      ln -s ~/u/dex/config/opt/vim/.vimrc ~/.vimrc
      #+end_src
    - VIM has ~VimOrganizer~ for org-mode already but it is abandened. For basic usage it is suffcient
+*** nvim
+#+begin_src sh
+brew install nvim
+mkdir -p ~/.local/share/nvim/site
+ln -s ~/.local/share/nvim/site ~/.vim
+ln -s .config/nvim/init.vim .vimrc
+#+end_src
+Then add ~nvim~ as alias of ~vim~ in ur bash
 ** Use touch id in sudo
    - ~sudo vim /etc/pam.d/sudo~ then add line below:
      #+begin_src sh
@@ -287,11 +309,8 @@
      #+end_src
    - Go to Prefs -> Advanced -> Allow sessions to survive logging out and back in and set value to no.
 ** ThinkPad Compact Bluetooth Keyboard
-   - Ues ~karabiner-elements~ to skip mouse-3:
-     #+begin_src sh
-       brew install karabiner-elements
-     #+end_src
-     Then map ~button-3~ to ~button32~. 
+
+     Then map ~button-3~ to ~undefined~.
    - Use [[https://pilotmoon.com/scrollreverser/][Scroll Reverser]] to differenciate the scroll direction for trackpoint.
    - Change trackpoint speed by command below: (since it exceed the max UI value)
      #+begin_src sh

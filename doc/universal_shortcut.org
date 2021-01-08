@@ -48,6 +48,23 @@ For all the applicatons use lot of shortcuts, we can try to set same shortcut to
 |          | X           | /                      | close other panes       | kill other buffers | kill other buffers | close other windows | emacs/vim's approach can be improved later                                                        |
 |          | N           | move tab to new window | move pane to new window | tearoff window     | /                  | /                   | gui only for emacs                                                                                |
 
+* macOS specific
+macOS use ~cmd~ key to majorly replace ~ctrl~ key it cause lot of troubles crossing different context when use legacy command line tool.
+
+For now we use global setup in karabiner to map a set of short cut globally - that means all the ~cmd+~ combination will be disabled for these keys:
+#+begin_src
+cmd+[
+cmd+r
+cmd+w
+cmd+u
+cmd+b
+cmd+d
+cmd+p
+cmd+n
+cmd+l
+cmd+shift+c
+cmd+shift+v
+#+end_src
 * Notes
 ** approach
 - hjkl => switch pane (tmux) / window (vim,emacs,vscode)

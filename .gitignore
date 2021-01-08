@@ -25,6 +25,9 @@ $RECYCLE.BIN/
 # tag file
 tags
 
+# karabiner
+*/karabiner/automatic_backups/
+
 # =========================
 # Operating System Files
 # =========================

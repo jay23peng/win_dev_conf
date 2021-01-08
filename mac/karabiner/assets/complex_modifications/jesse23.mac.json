@@ -1,0 +1,179 @@
+{
+    "title": "jesse23 complex mapping for macOS",
+    "rules": [
+      {
+        "description": "global vim key",
+        "manipulators": [
+          {
+            "type": "basic",
+            "from": {
+              "key_code": "open_bracket",
+              "modifiers": {
+                "mandatory": ["left_command"]
+              }
+            },
+            "to": [
+              {
+                "key_code": "escape"
+              }
+            ]
+          },
+          {
+            "type": "basic",
+            "from": {
+              "key_code": "w",
+              "modifiers": {
+                "mandatory": ["left_command"]
+              }
+            },
+            "to": [
+              {
+                "key_code": "w",
+                "modifiers": ["left_control"]
+              }
+            ]
+          },
+          {
+            "type": "basic",
+            "from": {
+              "key_code": "j",
+              "modifiers": {
+                "mandatory": ["left_command"]
+              }
+            },
+            "to": [
+              {
+                "key_code": "j",
+                "modifiers": ["left_control"]
+              }
+            ]
+          },
+          {
+            "type": "basic",
+            "from": {
+              "key_code": "r",
+              "modifiers": {
+                "mandatory": ["left_command"]
+              }
+            },
+            "to": [
+              {
+                "key_code": "r",
+                "modifiers": ["left_control"]
+              }
+            ]
+          },
+          {
+            "type": "basic",
+            "from": {
+              "key_code": "i",
+              "modifiers": {
+                "mandatory": ["left_command"]
+              }
+            },
+            "to": [
+              {
+                "key_code": "i",
+                "modifiers": ["left_control"]
+              }
+            ]
+          },
+          {
+            "type": "basic",
+            "from": {
+              "key_code": "g",
+              "modifiers": {
+                "mandatory": ["left_command"]
+              }
+            },
+            "to": [
+              {
+                "key_code": "g",
+                "modifiers": ["left_control"]
+              }
+            ]
+          },
+          {
+            "type": "basic",
+            "from": {
+              "key_code": "s",
+              "modifiers": {
+                "mandatory": ["left_command"]
+              }
+            },
+            "to": [
+              {
+                "key_code": "s",
+                "modifiers": ["left_control"]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "description": "global terminal key",
+        "manipulators": [
+          {
+            "type": "basic",
+            "from": {
+            "key_code": "u",
+              "modifiers": {
+                "mandatory": ["left_command"]
+              }
+            },
+            "to": [
+              {
+                "key_code": "u",
+                "modifiers": ["left_control"]
+              }
+            ]
+          },
+          {
+            "type": "basic",
+            "from": {
+            "key_code": "b",
+              "modifiers": {
+                "mandatory": ["left_command"]
+              }
+            },
+            "to": [
+              {
+                "key_code": "b",
+                "modifiers": ["left_control"]
+              }
+            ]
+          },
+          {
+            "type": "basic",
+            "from": {
+              "key_code": "c",
+              "modifiers": {
+                "mandatory": ["left_command", "left_shift"]
+              }
+            },
+            "to": [
+              {
+                "key_code": "c",
+                "modifiers": ["left_control", "left_shift"]
+              }
+            ]
+          },
+          {
+            "type": "basic",
+            "from": {
+              "key_code": "v",
+              "modifiers": {
+                "mandatory": ["left_command", "left_shift"]
+              }
+            },
+            "to": [
+              {
+                "key_code": "v",
+                "modifiers": ["left_control", "left_shift"]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+}

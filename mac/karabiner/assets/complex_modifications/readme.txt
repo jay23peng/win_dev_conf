@@ -1,0 +1,11 @@
+- Refer to https://github.com/pqrs-org/Karabiner-Elements/issues/1225
+- Karabiner DOESN'T RECOGNIZE MAC SYSTEM LEVEL Remap, Including layout and modifier's key
+  - So for our remapping, if we use colmak, we need to:
+    - cmd+w -> ctrl+w  (actual ctrl+w)
+    - cmd+j -> ctrl+j  (actual ctrl+n)
+    - cmd+r -> ctrl+r  (actual ctrl+p)
+    - cmd+i -> ctrl+i  (actual ctrl+u)
+    - cmd+g -> ctrl+g  (actual ctrl+d)
+    - cmd+s -> ctrl+s  (actual ctrl+r)  
+    - cmd+u -> ctrl+u  (actual ctrl+u)
+    - cmd+b -> ctrl+b  (actual ctrl+b)

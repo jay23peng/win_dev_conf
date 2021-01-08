@@ -5,6 +5,7 @@ add_newline = false
 [character]                            # The name of the module we are configuring is "character"
 success_symbol = "[➜](bold yellow)"     # The "success_symbol" segment is being set to "➜" with the color "bold green"
 error_symbol = "[✗](bold red) "
+vicmd_symbol = "[➜](bold green) "
 
 # Disable the package module, hiding it from the prompt completely
 [package]
@@ -12,4 +13,5 @@ disabled = true
 
 [directory]
 truncation_length = 0
-truncate_to_repo = false
+truncate_to_repo = true
+
