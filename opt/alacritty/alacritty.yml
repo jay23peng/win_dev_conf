@@ -357,8 +357,8 @@ mouse_bindings:
 
 key_bindings:
   # function
-  - { key: V,        mods: Command|Shift,    action: Paste               }
-  - { key: C,        mods: Command|Shift,    action: Copy                }
+  - { key: V,        mods: Control|Shift,    action: Paste               }
+  - { key: C,        mods: Control|Shift,    action: Copy                }
   # - { key: T,        mods: Control|Shift|Command, command: { program: "open", args: ["-n", "/Applications/Alacritty.app"] } }
 
   # remap cmd -> ctrl. Common terminal doesn't support cmd 
