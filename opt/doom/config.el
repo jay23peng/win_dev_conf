@@ -7,7 +7,7 @@
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets.
 (setq user-full-name "Jesse Peng"
-      user-mail-address "jsp23@qq.com")
+      user-mail-address "vijcp@outlook.com")
 
 ;; Doom exposes five (optional) variables for controlling fonts in Doom. Here
 ;; are the three important ones:
@@ -424,9 +424,29 @@
 (defun xterm-title-update ()
   (interactive)
   (unless window-system
-  (send-string-to-terminal (concat "\033]1; " (buffer-name) "\007"))
-  (if buffer-file-name
-      (send-string-to-terminal (concat "\033]2; " (file-name-nondirectory (buffer-file-name)) "\007"))
-      (send-string-to-terminal (concat "\033]2; " (buffer-name) "\007")))))
- 
+    (send-string-to-terminal (concat "\033]1; " (buffer-name) "\007"))
+    (if buffer-file-name
+        (send-string-to-terminal (concat "\033]2; " (file-name-nondirectory (buffer-file-name)) "\007"))
+        (send-string-to-terminal (concat "\033]2; " (buffer-name) "\007")))))
+   
 (add-hook 'post-command-hook 'xterm-title-update)
+
+;; patch to emacs@28.0.50
+;; https://www.reddit.com/r/emacs/comments/kqd9wi/changes_in_emacshead2828050_break_many_packages/
+(defmacro define-obsolete-function-alias ( obsolete-name current-name
+                                           &optional when docstring)
+  "Set OBSOLETE-NAME's function definition to CURRENT-NAME and mark it obsolete.
+\(define-obsolete-function-alias \\='old-fun \\='new-fun \"22.1\" \"old-fun's doc.\")
+is equivalent to the following two lines of code:
+\(defalias \\='old-fun \\='new-fun \"old-fun's doc.\")
+\(make-obsolete \\='old-fun \\='new-fun \"22.1\")
+WHEN should be a string indicating when the function was first
+made obsolete, for example a date or a release number.
+See the docstrings of `defalias' and `make-obsolete' for more details."
+  (declare (doc-string 4)
+           (advertised-calling-convention
+           ;; New code should always provide the `when' argument
+           (obsolete-name current-name when &optional docstring) "23.1"))
+  `(progn
+     (defalias ,obsolete-name ,current-name ,docstring)
+     (make-obsolete ,obsolete-name ,current-name ,when)))
