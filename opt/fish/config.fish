@@ -24,18 +24,18 @@ set -g fish_prompt_pwd_dir_length 0
 set -g theme_newline_cursor yes
 # not working in vscode-term-tab
 # set -g theme_newline_prompt '➜ '
-set -g theme_newline_prompt '\xE2\x9E\x9C '
+# https://misc.flogisoft.com/bash/tip_colors_and_formatting
+set -g theme_newline_prompt '\x1b[33m \xE2\x9E\x9C '
 # set -g theme_newline_prompt '$ '
 
 # vi key binding
 fish_vi_key_bindings
 bind -M insert \cl forward-char
-bind -M insert \c\[ "if commandline -P; commandline -f cancel; else; set fish_bind_mode default; commandline -f backward-char force-repaint; end"
-bind -M insert \cd 
+# bind -M insert \c\[ "if commandline -P; commandline -f cancel; else; set fish_bind_mode default; commandline -f backward-char force-repaint; end"
 
 # vi cursor for all terminal
-## https://github.com/fish-shell/fish-shell/issues/1403
-## will be resolved globally in 3.2.0
+# https://github.com/fish-shell/fish-shell/issues/1403
+# will be resolved globally in 3.2.0
 ## function fish_vi_cursor_wa --on-variable fish_bind_mode
 ##     switch $fish_bind_mode
 ##         case replace_one
