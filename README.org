@@ -250,8 +250,9 @@ sudo ln -s ~/OneDrive/Pictures/dynamic_wallpapers/ /Library/Desktop\ Pictures
 git clone https://github.com/mmis1000/Vscode-terminal-tab
 npm run compile
 npx vsce package
-
 #+end_src
+*** VSCode Terminal laggy issue
+https://github.com/microsoft/vscode/issues/108590#issuecomment-745503151
 ** Fonts
   [[https://github.com/ryanoasis/nerd-fonts][nerd-fonts]] is required in the toolchain, for now use approach 3 to install it:
   #+begin_src sh
