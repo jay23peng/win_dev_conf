@@ -5,23 +5,23 @@ function fish_mode_prompt --description 'Displays the current mode'
             case default
                 set_color --bold 282C34
                 set_color --background blue
-                echo " N "
+                echo " "
             case insert
                 set_color --bold 282C34
                 set_color --background green
-                echo " I "
+                echo " "
             case replace_one
                 set_color --bold 282C34
                 set_color --background magenta
-                echo " r "
+                echo " "
             case replace
                 set_color --bold 282C34
                 set_color --background red
-                echo " R "               
+                echo " "               
             case visual
                 set_color --bold 282C34
                 set_color --background yellow
-                echo " V "
+                echo " "
         end
     end
 end

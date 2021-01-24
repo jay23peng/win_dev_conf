@@ -20,8 +20,8 @@ set -g -x EDITOR '/Users/jesse.peng/u/dex/config/mac/bin/em'
 # set -g theme_display_vagrant yes
 
 # enable new line mode by enable below and disable theme_use_abbreviated_branch_name. For now has issues with vi cursor
-set -g fish_prompt_pwd_dir_length 0
 set -g theme_newline_cursor yes
+set -g theme_display_vi no
 # not working in vscode-term-tab
 # set -g theme_newline_prompt '➜ '
 # https://misc.flogisoft.com/bash/tip_colors_and_formatting
@@ -51,3 +51,4 @@ bind -M insert \cl forward-char
 ##     end
 ## end
 ## fish_vi_cursor_wa
+#

@@ -84,14 +84,20 @@ function __bobthefish_git_branch -S -d 'Get the current git branch (or commitish
         or set -l theme_git_default_branches master main
 
         [ "$theme_display_git_master_branch" != 'yes' -a "$theme_display_git_default_branch" != 'yes' ]
-        and contains $branch $theme_git_default_branches
+        and contains $branch $theme_git_default_branches 
+        # or test $COLUMNS -lt 50
         and echo $branch_glyph
         and return
 
         # truncate the middle of the branch name, but only if it's 25+ characters
         set -l truncname $branch
-        [ "$theme_use_abbreviated_branch_name" = 'yes' ]
-        and set truncname (string replace -r '^(.{17}).{3,}(.{5})$' "\$1…\$2" $branch)
+        if test $COLUMNS -lt 50
+            set truncname '>'
+ 
+        else 
+           [ "$theme_use_abbreviated_branch_name" = 'yes' ]
+            and set truncname (string replace -r '^(.{17}).{3,}(.{5})$' "\$1…\$2" $branch)
+        end 
 
         echo $branch_glyph $truncname
         and return
@@ -1088,6 +1094,14 @@ end
 function fish_prompt -d 'bobthefish, a fish theme optimized for awesome'
     # Save the last status for later (do this before anything else)
     set -l last_status $status
+
+     if test $COLUMNS -lt 125
+        set fish_prompt_pwd_dir_length 1
+        set theme_use_abbreviated_branch_name yes
+    else 
+        set fish_prompt_pwd_dir_length 0
+        set theme_use_abbreviated_branch_name no
+    end
 
     # Use a simple prompt on dumb terminals.
     if [ "$TERM" = "dumb" ]
