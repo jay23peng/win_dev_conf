@@ -253,6 +253,8 @@ npx vsce package
 #+end_src
 *** VSCode Terminal laggy issue
 https://github.com/microsoft/vscode/issues/108590#issuecomment-745503151
+*** Legacy VsCode Extension
+https://www.vsixhub.com/vsix/34037/
 ** Fonts
   [[https://github.com/ryanoasis/nerd-fonts][nerd-fonts]] is required in the toolchain, for now use approach 3 to install it:
   #+begin_src sh
@@ -406,6 +408,13 @@ Then add ~nvim~ as alias of ~vim~ in ur bash
      #+begin_src
     alias nvm="fnm"
     #+end_src
+*** moreutils
+http://joeyh.name/code/moreutils/
+https://unix.stackexchange.com/questions/26728/prepending-a-timestamp-to-each-line-of-output-from-a-command
+#+begin_src sh
+brew install moreutils
+ls | ts -s '(%H:%M:%.S)]' | ts '[%Y-%m-%d %H:%M:%S'
+#+end_src
 ** Emacs (doom emacs)
    - Install core dependency
    #+begin_src sh
