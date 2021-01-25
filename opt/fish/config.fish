@@ -31,6 +31,11 @@ set -g theme_newline_prompt '\x1b[33m \xE2\x9E\x9C '
 # vi key binding
 fish_vi_key_bindings
 bind -M insert \cl forward-char
+bind  -M insert \cp up-or-search
+bind  -M insert \cn down-or-search
+bind -M default \cl forward-char
+bind  -M default \cp up-or-search
+bind  -M default \cn down-or-search
 # bind -M insert \c\[ "if commandline -P; commandline -f cancel; else; set fish_bind_mode default; commandline -f backward-char force-repaint; end"
 
 # vi cursor for all terminal
