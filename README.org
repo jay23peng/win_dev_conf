@@ -502,7 +502,7 @@ ls | ts -s '(%H:%M:%.S)]' | ts '[%Y-%m-%d %H:%M:%S'
     kubectl config view | grep server
     # modify server to dockervm.local if the docker setup is insde vm.
     # Or u can use vagrant port map to map the port to your master machine.
-    kubectl config set-cluster k3d-mycluster --server=https://dockervm.local:5xxxx
+    kubectl config set-cluster k3d-mycluster --server=https://dockervm.local:56235
 
     # test
     kubectl create deployment nginx --image=nginx
