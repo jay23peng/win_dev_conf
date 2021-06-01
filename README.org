@@ -120,6 +120,18 @@ sudo ln -s ~/OneDrive/Pictures/dynamic_wallpapers/ /Library/Desktop\ Pictures
     #+end_src
 *** Surfingkeys
     After install extension, load the config from ~dex/config/opt/surfingkeys~
+** Browser(Firefox)
+Firefox is not as stable as chrome, we might need to reset profile when it is corrupt or having issues
+- Install firefox.
+- Install Surfingkeys. Load github config.
+- Sync
+- link chrome folder: (profile folder info is in menu/help/More Troubleshooting Information)
+  #+begin_src sh
+  ln -s ~/u/dex/config/opt/firefox/chrome /Users/<ur-username>/Library/Application Support/Firefox/Profiles/k8rfcoit.default-release/chrome
+  #+end_src
+  Enable config =toolkit.legacyUserProfileCustomizations.stylesheets= in =about:config=.
+- Move switch side bar to tab bar.
+- Reload and see the effect.
 ** VSCode
    - All you need to to is install and sync.
 *** VSCode Vim Mode
