@@ -8,10 +8,10 @@
       color: transparent;   
   }
 
-  /* Hide nav-bar */
+  /* Hide nav-bar - use 34px if tab-bar has icon, 20px if no icon */
   #navigator-toolbox {
       overflow: hidden;
-      max-height: 34px;
+      max-height: 20px; 
       transition: all 1s;
   }
   #navigator-toolbox:hover {
