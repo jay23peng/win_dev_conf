@@ -127,7 +127,7 @@ Firefox is not as stable as chrome, we might need to reset profile when it is co
 - Sync
 - link chrome folder: (profile folder info is in menu/help/More Troubleshooting Information)
   #+begin_src sh
-  ln -s ~/u/dex/config/opt/firefox/chrome /Users/<ur-username>/Library/Application Support/Firefox/Profiles/k8rfcoit.default-release/chrome
+  ln -s ~/u/dex/config/opt/firefox/chrome ~/Library/Application\ Support/Firefox/Profiles/ycqax19j.default-release/chrome
   #+end_src
   Enable config =toolkit.legacyUserProfileCustomizations.stylesheets= in =about:config=.
 - Move switch side bar to tab bar.

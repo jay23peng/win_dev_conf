@@ -10,18 +10,31 @@
 
   /* Hide nav-bar */
   #navigator-toolbox {
-      position: relative;
-      z-index: 1;
       overflow: hidden;
-      max-height: 28px;
-      transition: max-height 0.2s ease-out;
+      max-height: 34px;
+      transition: all 1s;
   }
   #navigator-toolbox:hover {
-      overflow: show;
-      transition: 0.2s; 
-      max-height: 100px;
-      transition: max-height 0.2s ease-in;
+      overflow: inherit;
+      max-height: 500px;
+      transition: all 1s;
   }
-}
 
+  #navigator-toolbox:focus-within {
+      overflow: inherit;
+      max-height: 400px;
+      transition: all 1s;
+  }
+
+  /* Hide nav-bar - another approach as backup */
+  /*
+  #main-window:not([customizing]) #navigator-toolbox:not(:hover) #nav-bar:not(:focus-within) {
+    opacity: 0;
+    margin-top: -41px;
+  }
+  #main-window:not([customizing]) #nav-bar{
+    transition: margin-top 700ms ease-in-out;
+  }
+  */
+}
 
