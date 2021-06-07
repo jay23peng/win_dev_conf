@@ -588,7 +588,13 @@ ls | ts -s '(%H:%M:%.S)]' | ts '[%Y-%m-%d %H:%M:%S'
   |                 | [[https://github.com/itchyny/lightline.vim/blob/master/colorscheme.md#jellybeans][lightline/jellybeans]]              | [[https://github.com/itchyny/lightline.vim/blob/master/colorscheme.md#molokai][lightline/molokai]]           | [[https://github.com/itchyny/lightline.vim/blob/master/colorscheme.md#molokai][lightline/srcery_drk]]      |
   |-----------------+-----------------------------------+-----------------------------+---------------------------|
   | emacs           | [[https://github.com/syl20bnr/spacemacs/tree/master/layers/%2Bthemes/themes-megapack][themes-meagpack/gruvbox-dark-hard]] | [[https://github.com/syl20bnr/spacemacs/tree/master/layers/%2Bthemes/themes-megapack][themes-megapack/monokai]]     | [[https://github.com/hlissner/emacs-doom-themes][doom-one]]                  |
-
+* BOOX Nova3
+** bootstrap
+- factory reset with cache partition clean.
+- install magisk.
+- patch boot.img for corresponding firmware.
+- adb reboot bootloader
+- fastboot boot ./magisk_patched-23000_YjOSI.img
 * Github org mode support
   - https://github.com/fniessen/refcard-org-mode
   - https://github.com/novoid/github-orgmode-tests/blob/master/README.org

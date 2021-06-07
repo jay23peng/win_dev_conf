@@ -140,7 +140,9 @@ settings.blacklist = {
 // --------------------------------------------------------------------------------
 settings.omnibarPosition = 'bottom'
 cmap('<ArrowDown>', '<Shift-Tab>');
+cmap('<Ctrl-n>', '<Shift-Tab>');
 cmap('<ArrowUp>', '<Tab>');
+cmap('<Ctrl-p>', '<Tab>');
 
 // --------------------------------------------------------------------------------
 // Monokai Theme
